@@ -1,0 +1,119 @@
+\input ctustyle3
+\worktype [D/EN]
+\faculty {F3}
+\department {Department of Radioelectronics}
+\title {Radio Detection of Electromagnetic Phenomena in the Atmosphere}
+\subtitle {Integrating Advanced Instrumentation and UAVs for Enhanced Atmospheric Research}
+\titleCZ {Rádiová detekce elektromagnetických jevů v atmosféře}
+\subtitleCZ {Implementace pokročilé instrumentace a bezpilotních prostředků pro atmosférický výzkum}
+\author {Jakub Kákona}
+\date {Jun 2024}
+\abstractEN {This dissertation explores the use of radio detection for studying electromagnetic phenomena in the atmosphere, focusing on the development and integration of advanced radio receivers,  meteorological instruments, mobile measurement platforms,  telemetry systems, and unmanned aerial vehicles (UAVs). It presents a comprehensive approach to capturing and analyzing atmospheric data, offering insights into the complex dynamics of storms and electromagnetic events. Through a series of experiments, including atmospheric flights and ground-based measurements, the research demonstrates the potential of novel technologies to enhance the understanding of atmospheric processes, contributing significantly to the field of atmospheric sciences.}
+\abstractCZ {Tato disertační práce se zaměřuje na využití rádiové detekce pro zkoumání elektromagnetických jevů v atmosféře. Hlavní pozornost je věnována integraci nových meteorologických přístrojů, radiových přijímačů, telemetrických systémů a bezpilotních prostředků (UAV) do výzkumu atmosférických jevů. Práce přináší detailní analýzu atmosférických dat získaných prostřednictvím leteckých a pozemních měření. Jejich přímé využití je potom nasměrováno k hlubšímu pochopení dynamiky bouří a atmosférických elektromagnetických událostí. Popisované experimenty demonstrují, jak aplikace pokročilých měřících technologií  může zlepšit pochopení specifických atmosférických jevů.}
+\declaration {      % Use main language here
+   Prohlašuji, že jsem předloženou práci vypracoval
+   samostatně a že jsem uvedl veškeré použité informační zdroje v~souladu
+   s~Metodickým pokynem o~dodržování etických principů při přípravě
+   vysokoškolských závěrečných prací.
+
+   V Praze dne 26. 6. 2024 % !!! Attention, you have to change this item.
+   \signature % makes dots
+}
+
+
+\draft
+
+\makefront
+
+
+I had decided to write the relatively wide introduction part, because I hope that form should explain the context required to understand some tradeoffs created during the entire work. It also allows a reader to capture the broad spectrum of activities which without the explanation could seem unrelated. 
+Therefore at the beginning of my research I had worked on the Bolidozor network. The Bolidozor is a type of forward scattering radio meteor detection network, which uses the signal from french military radar GRAVES (https://spp.fas.org/military/program/track/graves.pdf) non cooperatively.  That means the signal transmitted by the GRAVES is scattered by meteor trails in the atmosphere and is really easy to receive the reflections on broad parts of Europe even with using a simple ground plane antenna.  
+There are a few motives to deal with that. The first, the most obvious one, the radar observation of  meteors are weather and daytime independent in contrast to yet widely known visual based observation using the cameras. That radio observation should fix that limitation where visual based observation networks have impaired sensitivity for a significant portion of the time. Another motivation is the possibility to enhance precision of velocity estimation of the meteoroid, because there is a significant effect of doppler transition observed on the reflected signal. 
+The existence of a doppler shifted “head echo” on meteor reflection was the core handle, because I had planned to use it to estimate the meteor trajectory from signals received by multiple stations.  That seems to be feasible, because there were successful attempts (M. A. Vallejo, ea4eoz, 2016 et. al.) to calculate a meteor vector in the atmosphere based on these doppler shifted signals. 
+
+\rfc{Tady musím doplnit obrázek obrázek detekce meteorů z více stanic}
+
+The trouble begins with the fact that there is no easy way to verify that the calculated trajectory is correct or incorrect. 
+The one issue roots in the situation that radio signals received by Bolidozor network have a detected meteor every few seconds which complicates clear assignment of the specific visual observation to the calculated trajectory. Especially in cases where a digital video camera occasionally has a few seconds latency or inaccuracy. The second issue is caused by the situation that  GRAVES radar guaranteedly lightens only a relatively small fraction of the atmosphere, but there are also side radiation lobes. The primary enlightened part is located above south europe where there were little video detection networks at that time. 
+The GRAVES radar also has a side transmission from its antenna, but these transmissions are not stable and also there is not exactly known enlightened area. 
+
+\rfc{Tady musím doplnit obrazek odrazů od starlinku}
+
+That results in a very few meteor events, which could be used for trajectory verification by using the local video based meteor detection networks here in the Czech Republic. 
+To resolve this problem I had decided to switch from GRAVES radar transmission to the local transmitters which are more suitable for local meteor detection.  I had selected the VOR beacons for airplane navigation. These beacons have definitely reduced transmission power compared to GRAVES, but according to the numerical model I constructed the meteor radar based on that transmitters could be feasible with the use of state-of-the-art radio components.
+
+
+\rfc{Tady musím doplnit obrázek}
+Figure: Reflection from airplanes clearly visible at the received signal from the VOR transmitter (Prague OKL). The doppler shift curves are related to the airplane trajectories. 
+
+Unfortunately that new approach requires a complete redesign of the signal processing and construction of the new receiver. That receiver should be capable of reception of multiple VOR transmitters at once, because the frequencies of VOR transmitters are allocated in such a way that neighboring transmitters have significantly different frequencies to enhance the airplane navigation safety and reliability. That results in the requirement of processing the 10MHz of signal bandwidth instead of the previous 192 kHz including a wide dynamic range of signal input, because this bandwidth will be likely affected by the strong nearby signals like reflection from the airplanes visible in fig \ref[VOR_signals].  
+These requirements on the receiver redesign were way beyond the initial project funding available; it is also beyond my alone manpower. Therefore I had steppily realized that the newly developed instruments needed to have commercial applications to avoid reliance on unreliable and discontinuous systems of scientific founding. As a result I had to search for possible commercial applications that required the new instruments. That also explains why the majority of the newly developed instruments described in section \ref[Proposed instrumentation] are currently commercially available. For the case of the new radio receiver I found following areas of possible applications: 
+
+\begitems
+ \item - Meteor trail detection and localisation
+ \item - LEO satellites down-link ground station
+ \item - Atmospheric electrical and ionization events observation
+\enditems
+
+Luckily there arise an opportunity to cooperate at CRREAT project which main aim was study of high-energy atmospheric events, where electromagnetic events in atmosphere (electrometeors) observations fits well and at the same time are vital requirement. In the frame of that project I had designed the new receiver (described in chapter \ref[UHF signal receiver]) concept with all mentioned applications in mind. That allows that construction of the receiver could be implemented with significant assistance of other members of the CRREAT team or external collaborators and with the use of CRREAT funding.
+But at the same time, there is a threat that the observation of lightning has the similar issues as the Bolidozor’s radio meteor observation, because computing an location of lightning occurrence is definitely possible, but there is non trivial task to verify that the result is relevant. 
+The requirement to build the ability to verify the calculated results, branched out in the broad range of different work packages, which needs to be solved to gather relevant information about lightning or more generally atmospheric electricity from multiple sources. I describe ground based, airborne and remote sensing instruments in detail in the chapter \ref[Proposed instrumentation]. But for the overview of the tasks, firstly the lightning should be detected, the antenna should be calibrated, and the electric field needs to be measured at the same time. The lightning also needs to be simultaneously captured on high-speed cameras for geometric triangulation etc. 
+That is why I need to design and operate the multiple measurement systems carried by car on ground and also in airborne vehicles presented and used in the following thesis. 
+
+
+
+
+\chap Introduction
+
+The activity of storms is associated with many phenomena whose nature is not yet fully understood or clarified. This includes the process of thundercloud electrification and the subsequent electric discharges, which are the most prominent manifestation of thunderstorms. As a result, weather forecasting and nowcasting of storm activity and related dangers are often very unreliable.
+
+As one of many related phenomena, storm activity is also associated with the generation of ionizing radiation. It is assumed that the source of this radiation is bremsstrahlung generated by electrons accelerated by an electric field in the thunderclouds. These electrons that are accelerated to relativistic velocities are called relativistic runaway electron avalanches (RREAs), which are then interacting with the atmosphere \cite{Dwyer_2003}_\cite{Gurevich_Milikh_Roussel-Dupre_1992}. This causes a phenomenon that is to be often called terrestrial gamma-ray flash (TGF) \cite{Fishman_Bhat_Mallozzi_Horack_Koshut_Kouveliotou_Pendleton_Meegan_Wilson_Paciesas_et al._1994} or other phenomenon like thunderstorm ground enhancement (TGE) \cite{Chilingarian_2013}_\cite{Torii_Takeishi_Hosono_2002}. For both, the source of the radiation is thought to be somewhat associated with the RREA; the main difference is the time span in which they occurs \cite{Dwyer_2003}_\cite{Gurevich_Milikh_Roussel-Dupre_1992}. Although it has not been experimentally proven. Furthermore, recent experimental results show that there is evidence of other ionizing radiation manifestations generated by the thunderstorms. For example, there has been experimental evidence of the interaction of high-energy photons with the atmosphere causing nuclear reactions \cite{Enoto_Wada_Furuta_Nakazawa_Yuasa_Okuda_Makishima_Sato_Sato_Nakano_et al._2017}. 
+The ionizing radiation that is thought to be associated with storm activity was measured using satellites in orbit around the Earth (e.g. \cite{Østgaard_Neubert_Reglero_Ullaland_Yang_Genov_Marisaldi_Mezentsev_Kochkin_Lehtinen_et al._2019} ), aircrafts flying inside or in the vicinity of storm clouds \cite{Kochkin_van Deursen_Marisaldi_Ursi_de Boer_Bardet_Allasia_Boissin_Flourens_Østgaard_2017}_\cite{McCarthy_Parks_1985}_\cite{Parks_Mauk_Spiger_Chin_1981} or high mountain observatories e.g. \cite{Chilingarian_Hovsepyan_Hovhannisyan_2011}_\cite{Chum_Langer_Baše_Kollárik_Strhárský_Diendorfer_Rusz_2020}_\cite{Tsuchiya_Enoto_Torii_Nakazawa_Yuasa_Torii_Fukuyama_Yamaguchi_Kato_Okano_et al._2009}. Currently, there are only a few measurements that could confirm the existence of ionizing radiation at lower altitudes, except for special storms that occur during the winter season in Japan, where storm clouds emerge low above the ground \cite{Michimoto_2007}.
+
+One of the most interesting measurements performed until now is the combination of radio signal and ionizing radiation. That experiment includes the mapping of a radio signal emitted by lightning \cite{Rison_Thomas_Krehbiel_Hamlin_Harlin_1999} \cite{Wu_Wang_Takagi_2018}.
+There also exist TGF observations with a simultaneous lightning mapping using radio signals \cite{Abbasi_Abu-Zayyad_Allen_Barcikowski_Belz_Bergman_Blake_Byrne_Cady_Cheon_et al._2018}. Despite these very detailed observations, the exact location of the source of the ionizing radiation emergence as a result of electric fields within the storm cloud remains unknown (Belz, J. W., et al. "Observations of the origin of downward terrestrial gamma‐ray flashes." Journal of Geophysical Research: Atmospheres 125.23 (2020): e2019JD031940.). 
+
+Moreover, the TGFs were only rarely successfully measured at the ground level (https://doi.org/10.1029/2021JD036130, Dwyer, J. R., et al. "Observation of a gamma‐ray flash at ground level in association with a cloud‐to‐ground lightning return stroke." Journal of Geophysical Research: Space Physics 117.A10 (2012)., Wada, Yuuki, et al. "Downward terrestrial gamma-ray flash observed in a winter thunderstorm." Physical Review Letters 123.6 (2019): 061103.).
+
+There also should be noted that lightning phenomena manifest not only in the familiar forms that could be observed from ground-level but extend into near-Earth space, presenting phenomena such as sprites, elves, gigantic jets, and also TGFs. All of these are powered by the intense electromagnetic and quasi-electrostatic fields related to lightning discharges. However, the specific properties of lightning discharges that lead to these high-altitude phenomena remain a subject of ongoing research, with studies leveraging both ground- and satellite-based observations to map global occurrence rates (Inan, 2015)1.
+At the ground level the lightning discharges that could be observed, are classified into negative, positive, and bipolar. (Rakov, n.d.). The taxonomy of lightning includes a range of discharges: cloud flashes (intracloud, intercloud, and cloud-to-air) and cloud-to-ground (CG) discharges, the latter accounting for about 25% of global lightning activity. CGs predominantly consist of negative downward lightning, where a negative charge is transported from the cloud to the ground (Rakov, 2016)2.
+Observations in tropical regions have introduced further classifications, including intra-cloud discharges, cloud-to-cloud, cloud-to-air, and express the polarity of lightning by ground-to-cloud, and cloud-to-ground discharges, noting the significant damage and disturbances caused especially by cloud-to-ground and ground-to-cloud flashes (Mehranzamir et al., 2014)3.
+Research into specific phenomena like ball lightning, sprite lightning reveals the versatility and is out of scope of this thesis, opening possibilities for further exploration of these rare and unique events (Horvath, 2014)4.
+While the general mechanics of lightning—its initiation and propagation—have been linked to specific atmospheric conditions such as the presence of graupel, ice, and hail, highlighting the relationship between lightning types and the microphysical characteristics of the convective regions, many aspects, including the differential occurrence rates and damaging potential of positive versus negative discharges, still invite further investigation (Ribaud et al., 2016).
+
+
+Intracloud lightning discharges are known for their characteristic radio pulses, which consist of a uniform burst pattern. These bursts are described as a distinctive waveform characterized by a fast, large amplitude pulse followed by a smaller, slowly varying overshoot. The full width at half maximum of these pulses measures 0.75 μs, with inter-pulse intervals of 5 μs (Krider, Radda, & Noggle, 1975)1.
+The "compact intracloud lightning discharge" (CID), a particular type of intracloud lightning, is described as a bouncing-wave phenomenon. This involves multiple reflections occurring at both ends of the radiating channel, contributing to its fine structure and accompanying high-frequency (HF) and very high-frequency (VHF) radiation bursts (Nag & Rakov, 2009)2.
+An interesting characteristic of radio frequency emissions during thunderstorms is their nature compared to weaker emissions. The strongest pulses typically occur in isolation or at the beginning of leader progression. These pulses are sometimes associated with rapid electric charge relaxation and are not necessarily accompanied by visible light emissions. In instances where these pulses initiate, they are followed by an upward-progressing leader (Jacobson, 2003)3.
+The study of lightning-induced radio pulses has been also expanded by observations from the satellites, which identifies additional characteristics in these emissions. Some exhibit steep roll-offs of power within certain frequency ranges, while others demonstrate flat-spectrum behavior. This distinction indicates the somewhat varied nature of lightning’s electromagnetic emissions (Jacobson, Knox, Franz, & Enemark, 1999)4.
+For cloud-to-ground (CG) flashes, the structure typically includes a sudden start with a stepped leader, in contrast to cloud-to-cloud (CC) flashes that initially showcase a slower train of noise pulses. These RF radiation patterns from lightning display a distinct structure based on the type of lightning flash, differentiating between the abruptness of CG flashes and the gradual initialization of CC flashes (LeVine, 1978).
+
+\sec Key radio signatures of lightning events
+
+\subsec K-changes
+
+K-changes, or K-complexes, refer to a specific pattern of rapid waveform change observed in VLF (Very Low Frequency) and LF (Low Frequency) radio signals from lightning. They indicate a sudden change in the current flow or channel geometry within cloud-to-ground or intracloud lightning discharges. These signals are characterized by abrupt, intense alterations in amplitude.
+
+\subsec Narrow Bipolar Events (NBEs)
+
+NBEs are distinct, intense radio pulses with a very short duration, typically a few microseconds, and are considered the most powerful natural VHF (Very High Frequency) sources in the Earth's atmosphere. They exhibit a remarkably narrow bipolar pulse shape and are believed to result from a rapid discharge process within thunderclouds, possibly associated with the initiation stages of lightning.
+
+\subsec Sferics
+
+"Sferics" is short for atmospherics, the term used for radio waves emitted by lightning discharges. These signals, spanning a broad range of frequencies but most commonly observed in VLF and LF bands, represent the electromagnetic signature of distant lightning's return stroke. Sferics carry distinctive timing information, making them valuable for long range lightning detection and location systems.
+
+\sec Scope of the thesis
+
+The objectives of this dissertation are to address and clarify several unresolved phenomena related to thunderstorms, particularly the initiation and development of lightning. This research aims to develop and utilize new tools for the detection and scientific observation of lightning events within thunderstorms. The focus will be on understanding the relationship between ionizing radiation and lightning, as well as developing innovative mobile instruments required for detailed storm observation. The specific tasks to be undertaken are as follows:
+
+\begitems
+\item - {\bf Development and Implementation of Lightning Detection Apparatus}: Mobile experimental apparatus capable of radio detection and localization of lightning events and ionizing radiation, considering the expected spatial scales, will be designed and deployed. Data will be collected using radio detectors, high-speed cameras, and ground-based electric field measurements.
+\item - {\bf Analysis of Spatial and Temporal Characteristics of Lightning Discharges}: The propagation of lightning, emitted radio signals, and associated electric fields will be studied. Methods for visualizing lightning discharges that avoid misinterpretation as ground strikes and more accurately reflect the physical principles of lightning development and radio signal emissions will be developed.
+\item - {\bf Enhancement of Measurement Techniques with in-situ atmospheric monitoring}: New instruments such as stratospheric balloons and unmanned aerial vehicles (UAVs) (especially unmanned autogyro) for in-situ measurements of electric fields and ionizing radiation will be developed. The new electric field mill and a semiconductor-based ionizing radiation detector will be integrated into the UAV.
+\enditems
+
+The results of this research are expected to provide a deeper understanding of lightning initiation and propagation. At the same time it offers improved detection and observation techniques that can inform future studies, about relation to ionizing radiation with direct practical applications in meteorology and atmospheric physics.
+
+\sec Myšlenka
+Další text.
+\bye
