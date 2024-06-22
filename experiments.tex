@@ -1,0 +1,197 @@
+After initial processing of storm activity records with the described instruments, it became apparent that some observations are difficult to explain solely with the data obtained so far. For instance, the finding of the extensive spatial and temporal scale of lightning discharges described in section \ref[lightning_triggerring_method] raised questions about the distribution of charges within storm clouds that the lightning connects. Similarly, ambiguities arose regarding ionizing radiation. The uncertainty lies in whether ground measurements missed ionizing radiation because the detectors were too far from the radiation source or because the radiation was emitted in a direction undetectable by ground-based detectors situated directly under the storm cell. To resolve these issues, spatial data on charge distribution and the radiation field are necessary, prompting the proposal of additional supportive experiments, which allows direct in-situ measurements in the atmosphere.
+
+\sec Stratospheric Balloon Flights
+
+Stratospheric balloon flights are conducted for several reasons related to the research of electromagnetic phenomena in the atmosphere associated with storm activity. They allow for the testing of instruments under various adverse conditions, enable the testing of data transmission methods over relatively long distances and in unfavorable weather, and provide a platform to lift additional instruments in the atmosphere. For example, they offer insights into the behavior of ionizing radiation in the upper layers of the atmosphere, where particles of primary cosmic radiation with sufficient energy interact and generate showers of secondary cosmic radiation. This phenomenon causes the situation, that with increasing depth of the atmosphere the intensity of primary radiation decreases whereas the secondary component intensity increases. 
+At an altitude of about 20 km the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum [Pfotzer, 1936; Regener, 1933; Regener and Pfotzer, 1935]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level [Bazilevskaya and Svirzhevskaya, 1998]. 
+Due to that physical phenomenon Stratospheric balloons are a useful tool for the investigation of the cosmic radiation at high altitudes (around and above the Regener-Pfotzer maximum region).
+
+Since the composition of the radiation field varies with altitude [Reitz, G. (1993), Radiation environment in the stratosphere, Radiat. Prot. Dosim., 48, 5–20.] various radiation detectors types should be used to measure the vertical profile of cosmic radiation in the atmosphere. 
+
+However, the radiation measuring instruments need to be supplemented by other sensors measuring temperature, pressure, humidity, altitude, acceleration, etc.  All these sensors should be continuously monitored during the launch and the flight of the balloon to verify their proper function and their values have to be recorded for further processing of all obtained data. 
+
+Therefore I proposed the development of the TF-ATMON \urlnote{https://www.thunderfly.cz/tf-atmon.html} system, based on the use of existing tools of the open-source PX4 autopilot and supplemented with the new TFSIK01 telemetry transmitter. That enables on ground monitoring of sensors and recording of data during the flight and at the same time real-time tracking of the balloon. This methodology was firstly used in full scale on stratospheric balloon flight FIK-6 \ref[FIK-6_setup]  and then improved in FIK-9 flight. 
+
+I have participated in the launch of  multiple stratospheric balloons, the overview of flights is summarized in Table 1. At the beginning (until FIK6 flight) the construction of balloon gondolas was designed for specific instruments used for particular flight. Balloon avionics was therefore built around the chosen detectors from scratch.
+
+This concept led to a situation when every new flight meant a significant amount of work despite the fact that many components were recycled every year and used for the next one. The reason was the need to adapt the avionics to the updated version of the detectors.
+
+Due to a relatively high value of payload and measurement relied only on board data recording it was necessary to ensure the recovery of the gondola after every flight. Therefore the main criteria for construction of balloon experiment were as follows:
+
+\begitems
+* Reliable transmission of information about the geographical location of the gondola 
+* Good resistance to impact
+* Ensuring the function in temperatures far below zero
+\enditems
+
+Despite the generally successful nature of all fights and the fact that the gondolas were always found, different technologies were tried to eliminate the partial shortcomings which emerged during the previous balloon flights. For example, the initially used GSM based telemetry system was replaced by a significantly more robust IoT LoRa transmitter, making it possible to transmit the data necessary for tracing the gondola directly to the TheThingsNetwork. This step enables a high reliability of finding the gondola and at the same time a basic recording of the experiment data transmitted to the ground. For the case of more advanced detectors, it was also necessary that the 3D flight trajectory including the orientation to be recorded synchronously with the supplementary quantities. That is also ensured with the incorporation of the TF-ATMON system, which relies on PX4 autopilot firmware running on Pixhawk hardware equipped with IMU sensors. As can be seen from table T, flights conducted since FIK-5 implemented avionics using UAV technology. It is realized by the use of the Pixhawk based autopilot hardware with PX4 firmware. Telemetry was implemented by a very reliable combination of LoRa modem and SiK modem. 
+
+\rfc{Tady je potřeba vložit barevnou tabulku s lety FIK, nebo ji dát do přílohy}
+
+Apart from technologies used directly in balloon  gondolas a number of supplementary tools on ground have undergone intensive development. For example, in order to find the balloon it was necessary to have an accurate real-time map of its position together with a prediction of the next stage of the flight and the location of touch down. For that case of the flights since the FIK-5 use the habhub \urlnote{https://tracker.habhub.org/} (lately the \urlnote{https://amateur.sondehub.org/}) was used to track and predict the movement of stratospheric balloons in real-time. In fact at the beginning the HabHub was used to manually run the prediction of flight, but real-time calculation of trajectory predictions introduced in FIK-3 based on live telemetry data significantly decreases the time required for gondola recovery. 
+
+\secc The design of universal avionics
+
+Based on the described experiences the concept of a universal avionics called TF-ATMON emerged. That technology makes it possible to connect different types of payloads and carry out various atmospheric measurements. Furthermore, it provides basic services such as power supply, time, position and 3D orientation information to the payload instruments. That data is recorded in parallel with quantities that affect many types of measurements, including temperature, pressure, humidity, magnetic field and acceleration. At the same time flight computer provide services for payload to record data from experiments in a common log file. 
+Therefore the TF-ATMON onboard stratospheric balloons has become an extremely useful tool for testing instruments like cosmic radiation detectors and dosimeters at high-altitude.
+
+The schematic diagram of the avionics hardware summarized in the figure \ref[avionics_schematics].
+
+\medskip
+\label[avionics_schematics]
+\picw=15cm \cinspic ./img/avionics_block_schematics.pdf
+\caption/f The schematic diagram of the new avionics concept used in FIK flights. 
+\medskip
+
+The concept, where the balloon specific avionics are almost completely separated from the experiment set of detectors, simplified the realization of next balloon flights. It reduced the complexity of connecting different types of detectors and at the same time it improved the integrity of supplementary data measurements. Overall, the new features can be summarized as follows:
+
+\begitems
+* Easy implementation of different payloads
+* Redundant telemetry links
+* Gondola orientation and spatial position tracking and logging
+* Reliable IMU sensor processing and calibration
+* Possible use of relatively high-power consumption payloads
+* Pre-flight continuous charging as an option
+* Power monitoring and uptime calculation relevant to actual temperature and available energy level
+* Real-time pre-flight payload diagnostic
+\enditems
+
+The detailed documentation of used electronics blocks can be found under the following names TFGPS01, TFSIK01, TFHT01, TFLORA01. There should be noted that TFSIK modem has been actually designed after the long use of MLAB electronic module ISM01, which has been its predecessor. In both cases the SiK firmware used on the balloon has been altered to one-way (downlink) communication (therefore the modem on the balloon is not able to receive) for safety reasons. 
+
+\secc Instrument payload
+
+In the case of FIK-5 and FIK-6 flights that served as the test flights for the novel approach using TF-ATMON technology the payload was not fully relied on yet. All the detectors thus had their own SD cards for data recording and some even had their own power supply, therefore the payload weight was higher than theoretically required in case of full use of TF-ATMON and some lift was wasted. This situation originated in conservative flight plan, which required successful log and function of payload even in failure of the new method.
+
+\secc Atmospheric phenomena Detectors 
+
+The payload for example FIK-6 flight contained TF-ATMON and three different types of ionizing radiation detectors already mentioned in \ref[proposed_instrumentation] section: SPACEDOS with silicon PIN diode sensor, AIRDOS-C with scintillation crystal and silicon photomultiplier and a G-M tube. The total payload mass was 2 kg.
+
+SPACEDOS is a lightweight dosimeter intended for space applications and measurements on board spacecraft. The detector has been described in \cite[SPACEDOS]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[AIRDOS-C]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included, because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
+
+\medskip
+\label[FIK-6_setup]
+\picw=15cm \cinspic ./img/FIK-6_experiment_setup.png
+\caption/f FIK-6 experiment setup using the Hwoyee Weather Balloon 1600. 
+\medskip
+
+\secc Results from the balloon flights 
+
+The flight FIK-6 took place on December 18th, 2020 and lasted 1 hour and 40 minutes. The balloon was launched from Příbram airport (LKPM) which is located around latitude 50$^{\circ}$ N. The balloon flight path continued in eastern direction for about 80km. 
+
+The system TF-ATMON recorded temperature, air pressure, humidity and radiation characteristics as histograms of deposited energy of radiation events from all three radiation sensors in the gondola see Figure \ref[FIK-6_RAW_data]. The barometric altitude was calculated using the International Standard Atmosphere model 1976 \cite[standard_atmosphere]. 
+
+\medskip
+\label[FIK-6_RAW_data]
+\picw=15cm \cinspic ./img/FIK-6_RAW_data.png
+\caption/f Raw data measured during the flight. From top to bottom: temperature near scintillation crystal, air pressure inside the box of crystal, temperature inside the gondola, relative humidity inside the gondola, counts of radiation events per 10 seconds counted by scintillator, silicon detector, and  G-M counter, barometric altitude, and altitude from GNSS.
+\medskip
+
+\medskip
+\label[FIK-6_telemetry]
+\picw=15cm \cinspic ./img/FIK-6_metadada.png
+\caption/f Acceleration and Angular Speed in axis perpendicular to the ground combined with ionizing radiation flux measured by the silicon PIN diode detector.
+\medskip
+
+The figure \ref[FIK-6_telemetry] demonstrates the importance of telemetry data from the TF-ATMON system during measurements processing. The graphs show an increase in the response of the silicon ionizing radiation detector at the times of take off, burst and landing, when there was a rapid increase in mechanical stress. The effect is caused by the microphone effect of the silicon detector circuit. At the same time, it can be seen there are considerable vibrations, rapid changes in acceleration and gondola rotation during the balloon descent. The increase in humidity is also observable in fig \ref[FIK-6_RAW_data], which can even freeze on the instruments during some parts of the flight. All of them may affect the measurement of atmospheric quantities and for some types of instruments they have to be compensated.
+
+The graphs show that the maximum reached altitude was approximately 33 km above sea level. During the flight the balloon passed the Regener-Pfotzer maximum twice. The rescue team followed the balloon along the whole flight trajectory. The precision of tracking allowed some participants of the rescue team to actually see the gondola touchdown visually. Therefore the gondola was successfully rescued within a few minutes after touchdown (Figure \ref[FIK-6_rescue_team]).
+
+\medskip
+\label[FIK-6_rescue_team]
+\picw=8cm \cinspic ./img/FIK-6_rescue_team.png
+\caption/f A screenshot from HabHub tracker. The CRREAT measurement vehicles, serving as stratospheric balloon chase cars, are equipped with telemetry receivers at the landing site. They are prepared for immediate gondola recovery, thanks to precise touchdown location predictions.
+\medskip
+
+By processing the data a graph of detected altitude fig. \ref[R-P_maximum] was obtained. It shows that the measured altitude of the Regener-Pfotzer maximum was for all detector types around 19 km above sea level. 
+As the measured data show in Fig \ref[R-P_maximum], there is a very noticeable difference between a number of data points measured during the flight upwards and during the descent. This difference is mainly caused by the different values of vertical speed. In the future balloon flights, this problem is planned to be overcome by a controlled descent, during which the rate of descent can be decreased in some phases of the flight so that it can be more comparable with the speed of the ascent.
+
+\secc Outcome of stratospheric balloon flights
+
+FIK flights were  used to test different types of ionizing radiation detectors with use of the Regener-Pfotzer maximum phenomenon. 
+
+The telemetric system TF-ATMON has been verified. It enables data recording, pre-flight instruments check and their monitoring during flight. Thanks to the availability of different communication interfaces  to the avionics, the use of various payload detectors is simplified. The technology at the same time improves the possibilities of  the fast localization of a balloon gondola after its landing. It is therefore possible to carry out even experiments requiring a short time till recovering the gondola after the flight. 
+
+As can be seen from the Tab. \ref[Flight_reliability], the last unsolved problem with the stratospheric balloon flights is the control of descent. Therefore, in the future balloon flights and thunderstorm exploration there exists a requirement to use the autopilot contained in TF-ATMON to control descent trajectory.
+
+The descent should be controlled by using an airframe carrying a payload. Thus it would be possible to choose the landing site and reduce the possible risk of creating dangerous situations and at the same time with a possibility to control the descent rate and trajectory. 
+Another unresolved challenge for use of the balloons for thunderstorm research, is the difficulty of launching them in strong winds, which are nearly always present near storms, especially at times where the measurements are most critical \ref[balloon_wind_takeoff].
+For these reasons, it became necessary to shift to other carrier platforms to be used for practical storm activity measurements. The logical alternative for this step is to employ \glref{UAS}.
+
+\medskip
+\label[balloon_wind_takeoff]
+\picw=15cm \cinspic ./img/balloon_wind_takeoff.jpg
+\caption/f The experimental stratospheric balloon takeoff (FIK-2) under increased wind conditions. The takeoff was partially successful; however, the gondola impacted me and then the ground, causing damage to the internal power supply and telemetry antenna.
+\medskip
+
+\sec Autogyro Thunderstorm Flights
+\label[Autogyro_thunderstorm]
+
+Despite widespread efforts which could be found in the literature \cite[https://doi.org/10.1029/2006JD007242,TELEXTheThunderstormElectrificationandLightningExperiment,  ScientificInsightsfromFourGenerationsofLagrangianSmartBalloonsinAtmosphericResearch, ABalloonBorneInstrumentforMeasuringtheChargeandSizeofPrecipitationParticlesinsideThunderstorms] to deploy measurement balloons into thunderstorms with various sensors, these attempts were often unsafe, and the results are sporadic because the balloon flight path is uncontrolled or control is very limited \urlnote{https://windbornesystems.com/}. Therefore that technique seems to be outdated in comparison with the current \glref{UAV} technology. This fact led to the exploration of using \glref{UAV}s instead. Moreover, due to the spatial extent of lightning structures (see section \ref[Results] for details), it's required to do the experiment at multiple coordinated locations simultaneously, which is practically unattainable with uncontrolled balloons.  Therefore better understanding of the phenomena can very likely be achieved by using special equipped \glref{UAS}, which enables measurement directly in or nearby the thunderstorms. 
+\glref{UAS} offer additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of \glref{LCL} for example. The obvious requirement is to use a new unmanned airframe using TF-ATMON described in section \ref[balloon_flights] and employ the integrated flight controller take control over the measurement procedure in the atmosphere.
+
+\medskip
+\label[TF-G2_fly_clouds]
+\picw=15cm \cinspic ./img/TF-G2_fly_clouds.jpg
+\caption/f TF-G2 autogyro under the clouds, during one of many test flights. 
+\medskip
+
+
+The described idea resulted in the attempt to use an unmanned autogyro to carry measuring instruments to the vicinity of thunderstorms \ref[TF-G2_fly_clouds]. The main goal of this experiment was to measure and locate the ionizing radiation presence together with the electric field and resolve the uncertainty of source and direction of ionizing radiation produced in thunderstorms. 
+For the investigation of thunderstorm activity, an autogyro presents several key advantages over other types of UAVs such as multicopters or fixed-wing aircraft, primarily due to its unique aerodynamic properties and operational capabilities. Autogyros, or gyroplanes, leverage autorotation of their main rotor to stay airborne, which allows for safe flight at low speeds and in turbulent atmospheric conditions often encountered near thunderstorms.
+Compared to multicopters, autogyros are more efficient in terms of energy consumption for longer flight tracks, as they do not require power and control to spin multiple rotors for lift, relying instead on forward motion or wind. This efficiency is advantageous for conducting high-altitude atmospheric research missions that demand sustained presence in targeted areas to gather comprehensive data.
+Moreover, unlike fixed-wing aircraft that require higher speeds and runways for safety, autogyros can perform take-offs and landings in confined spaces, making them ideal for deployment in varied terrains and closer proximity to storm activities. Their inherent stability, even in gusty conditions, allows for more reliable data collection of meteorological parameters.
+
+\secc Autogyro airframe
+
+Because there was not commercially available a suitable unmanned autogyro to perform atmospheric measurement in stormy conditions. The situation resulted in the design of TF-G2 autogyro which I developed in cooperation with the ThunderFly team. This step represents a significant advancement in the design and application of UAV technology for atmospheric research, specifically targeting the challenging conditions presented by thunderstorms. 
+The TF-G2 autogyro's airframe utilizes a lightweight yet robust and high impact strength 3D printed material for airframe and unique rotor design, which enable rotor blade shape modification. This technological decision gives the ability to easily replace parts, which is useful to quickly resolve damages as flights near thunderclouds often result in mishaps. 
+Internal components are protected from the weather by a waterproof fabric cover, which enables easy service access and supports equipment variability with its shape adaptability. Furthermore, that airframe's design allows easy access to onboard instruments and maintenance. This capability is achieved by rack-style mount options, where the payload could be easily fixed to a grid of screw holes which can be seen in figure \ref[TF-G2_hangar].
+
+\medskip
+\label[TF-G2_hangar]
+\picw=15cm \cinspic ./img/TF-G2_hangar.png
+\caption/f A development version of TF-G2 autogyro, waterproof fabric cover removed. The 3D printed parts could be seen according to the grid of screw holes used for mounting of the experimental equipment. 
+\medskip
+
+The avionics design is largely identical to the avionics used in already described stratospheric balloon flights, with differences primarily in the power supply, because the autogyro includes components for propulsion, such as an electric motor and its \glref{ESC}. To ensure robust pre-flight control, the ESC provides status information, including energy drawn from batteries via the UAVCAN bus. Another distinction is the use of special sensors, like an airspeed sensor, half-duplex telemetry system and specific sensors used directly for atmospheric measurements.
+
+\secc Airspeed sensing
+
+In the case of autogyros, similar to airplanes, it is required to measure the \glref{IAS} to safely perform takeoffs and in-flight maneuvers. Despite the fact that autogyros cannot be stalled in the traditional sense, because their lift is generated by the rotor's rotational speed rather than directly by airspeed, they exhibit unique behavior. At insufficient forward airspeed, a gyrocopter begins to settle until it potentially impacts the ground — a scenario that can be considered a survivable landing. Conversely, when the airspeed is excessively high, the rotor can easily exceed its critical \glref{RPM}, leading to potential rotor disintegration. To mitigate these risks, the TF-G2 autogyro is equipped with an \glref{IAS}  sensor to accurately monitor and control airspeed, thus ensuring operational safety under varying flight conditions.
+Initially, a conventional Pitot tube was used for that purpose, but it proved very sensitive to clogging by snow, ice, or mud after complicated landings, necessitating disassembly and thorough cleaning. Thus, I proposed a solution named TFSLOT01, utilizing the Venturi effect. Where the velocity and pressure of the fluid are required to meet Bernoulli’s principle.
+
+$$ \frac{1}{2}\rho{v_\infty}^{2} + p_\infty = \frac{1}{2}\rho{v}^{2} + p $$
+
+Then the velocities are in relation to cross sections in the plane of pressure measurement ports
+
+$$ \frac{v}{v_\infty} = \frac{A_D}{A_d} $$
+
+Therefore equations for pressure difference and airspeed velocity could be derived.
+
+$$ \Delta p = \frac{1}{2}\rho{v_\infty}^{2}\left[\left(\frac{v}{v_\infty}\right)^2-1\right] \Rightarrow v_\infty = \sqrt{\frac{2\Delta p}{\rho\left[\left(\frac{A_D}{A_d}\right)^2-1\right]}} $$
+
+Where
+
+\begitems
+* $\Delta p$: Measured pressure difference
+* $\rho$: Air density
+* $v_\infty$: Free air velocity e.g. measured airspeed
+* $v$: The velocity of air running through the sensor
+* $A_D$: Cross-section area at the position of the outer pressure port
+* $A_d$: Cross-section area at the position of internal pressure port
+\enditems
+
+There is also should be noted that sensor utilizing that principle is theoretically more sensitive (e.g. has a higher measurable pressure difference at the same airspeed) than the pitot-static tube (at the same air density) in geometric configuration where the following equation is valid
+
+$$ \frac{A_D}{A_d}>\sqrt{2} $$
+
+The advantage of the higher sensitivity results in increased drag, but it should be negligible at low airspeeds. Therefore the best use case of the sensor is the integration of the sensing device into the relatively massive fuselage or other suitable airframe structure. In the case of TF-G2 autogyro it is resolved by integration of the TFSLOT01 sensor directly to the rotor head, just below the rotor hub as could be seen in fig \ref[TF-G2_hangar]. The figure \ref[TFSLOT01] shows detail of the TFSLOT01 sensor. 
+
+\medskip
+\label[TFSLOT01]
+\picw=15cm \cinspic ./img/TFSLOT01.jpg
+\caption/f The photograph showcases a close-up of TFSLOT01, where the front part features the entry aperture AD. The narrow aperture Ad is slightly deeper into the structure. In the rear of the photo is visible the I2C cable, used to connect  the sensor to the flight controller. 
+\medskip
+
+\secc Telemetry system
+

@@ -9,7 +9,7 @@ That simple solution is not suitable to detect lightning in generic electromagne
 Initially I investigated the lightning triggering device based on AMS AS3935 integrated circuit and using a coil antenna. The device meets the requirements of mobility, and low power consumption. For measurements coincidence between ionizing radiation and lightning on aboard aircraft as example, the compact physical size of the device is also a considerable advantage, therefore the solution seems to be promising.
 Then I compared the performance and reliability of the detector with the Blitzortung lightning detection network. I choose Blitzortung as a network which has a good deployment in central Europe where the mobile measurements were performed.
 Therefore two detection systems were selected for atmospheric discharge detection in this study: the device based on the AMS AS3935 integrated circuit and a coil antenna and the Blitzortung lightning detection network [12]. Both these lightning detection systems use radio emission reception at VLF frequencies. The devices differ in the design and realization of the antennas and implementation of the lightning detection algorithm.
-The device equipped by AMS AS3935 uses LIGHTNING01A  MLAB module with a coreless coil antenna connected as a resonant LC circuit (Figure 1).  The resonant frequency of the coil antenna (MA5532-AE) with temperature insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5 %. The receiver for the signal from the antenna is integrated in the circuit [13] manufactured by AMS company. In fact this strict matching requirement is required by the IC datasheet and is quite constraining and effectively limits the possible application of the circuit.
+The device equipped by AMS AS3935 uses LIGHTNING01A  MLAB module with a coreless coil antenna connected as a resonant LC circuit (Figure 1).  The resonant frequency of the coil antenna (MA5532-AE) with temperature insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5 \%. The receiver for the signal from the antenna is integrated in the circuit [13] manufactured by AMS company. In fact this strict matching requirement is required by the IC datasheet and is quite constraining and effectively limits the possible application of the circuit.
 According to manufacturer description the integrated circuit processes signals based on the signal level threshold detected by a comparator. If the comparator triggers, the proprietary signal processing unit algorithmically analyzes the signal. The output of the signal processing algorithm implemented in the AS3935 circuit consists of a classification of signal relevance: lightning discharge (8), artificial disturbance (4) or high noise level (1). The algorithm also determines the approximate distance and the estimated energy of the lightning discharge based on signal shape.
 The internal registers configuration for a measurement described below was set to “outdoor mode” by AFE_GB control register. All other registers are kept with implicit values.
 The circuit diagram including the AS3935 is shown in figure 2. The integrated circuit is powered by a 3.6 V from one primary lithium-thionyl chloride cell without usage of an integrated LDO (low drop-out) stabilizer. An I2C (Inter-Integrated Circuit) bus is used for communication with a data logger that also records data from pressure and temperature sensors. A GPS (Global Positioning System) receiver is used for logging of the precise time. The data is stored on a SDcard in a module [14].
@@ -72,15 +72,15 @@ The timestamp of lightning detected by LIGHTNING01A was recorded with a 1 s accu
 \medskip
 
 \midinsert \clabel[t1]{Table of coincidence rates among detectors.}
-\ctable{lrrrrr}{
+\ctable{ccccrrcrc}{
 \hfil  & Count & BLITZ5 & BLITZ10 & BLITZ20 & BLITZ30 & DIVIS48 & DIVIS4 & DIVIS8 \crl \tskip1pt
-\textbf{BLITZ5}  & 19  & 1.000 & 1.000 & 1.000 & 1.000 & 0.947 & 0.895 & 0.368  \cr
-\textbf{BLITZ10} & 78  & 0.462 & 1.000 & 1.000 & 1.000 & 0.872 & 0.846 & 0.141  \cr
-\textbf{BLITZ20} & 109 & 0.358 & 0.844 & 1.000 & 1.000 & 0.798 & 0.734 & 0.147  \cr
-\textbf{BLITZ30} & 123 & 0.317 & 0.756 & 0.894 & 1.000 & 0.797 & 0.732 & 0.138  \cr
-\textbf{DIVIS48} & 128 & 0.164 & 0.453 & 0.492 & 0.539 & 1.000 & 0.875 & 0.156  \cr
-\textbf{DIVIS4}  & 110 & 0.173 & 0.491 & 0.527 & 0.573 & 1.000 & 1.000 & 0.018  \cr
-\textbf{DIVIS8}  & 18  & 0.111 & 0.222 & 0.278 & 0.333 & 1.000 & 0.111 & 1.000 \cr
+{\bf BLITZ5}  & 19  & 1.000 & 1.000 & 1.000 & 1.000 & 0.947 & 0.895 & 0.368  \cr
+{\bf BLITZ10} & 78  & 0.462 & 1.000 & 1.000 & 1.000 & 0.872 & 0.846 & 0.141  \cr
+{\bf BLITZ20} & 109 & 0.358 & 0.844 & 1.000 & 1.000 & 0.798 & 0.734 & 0.147  \cr
+{\bf BLITZ30} & 123 & 0.317 & 0.756 & 0.894 & 1.000 & 0.797 & 0.732 & 0.138  \cr
+{\bf DIVIS48} & 128 & 0.164 & 0.453 & 0.492 & 0.539 & 1.000 & 0.875 & 0.156  \cr
+{\bf DIVIS4}  & 110 & 0.173 & 0.491 & 0.527 & 0.573 & 1.000 & 1.000 & 0.018  \cr
+{\bf DIVIS8}  & 18  & 0.111 & 0.222 & 0.278 & 0.333 & 1.000 & 0.111 & 1.000 \cr
 }
 \caption/t Table of coincidence rates among detectors. The presented values are the proportion of detections in the row-labeled detector for which there is at least one coincident detection of the column-labeled detector. The Blitzortung network is represented by virtual detectors BLITZ5, BLITZ10, BLITZ20 and BLITZ30, which are considered triggered upon a registered lightning in a 5 km, 10 km, 20 km and 30 km radius respectively around the LIGHTNING01A deployment. DIVIS48, DIVIS4 and DIVIS8 is the LIGHTNING01A detector with different filtering of candidate detections, DIVIS48 having the most lenient filtering. Count represents the absolute number of events measured for detector/conditions in each row.
 \endinsert
@@ -116,6 +116,7 @@ Since the previously mentioned method using existing commercially available solu
 From the signal detection theory, if the signal is known and determined, the signal can be detected by using signal replication and correlation method or the matched filter method. However the lightning signal is time-space random and mostly uncertain (see typical lightning pulse description in Introductory chapter). Therefore there is only option to use the energy detection to detect the lightning signal. That approach is examined in the following paragraphs.
 
 \secc Using the oscilloscope to generate recording trigger
+\label[lightning_triggerring_method]
 
 Because, the initial use of a VLF antenna or magnetic loop seemed to be suitable for capturing lightning signals in required quality. The additional search for trigger method was focused on the suitable signal analyzing methods. 
 
