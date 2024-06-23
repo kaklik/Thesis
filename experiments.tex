@@ -70,7 +70,7 @@ SPACEDOS is a lightweight dosimeter intended for space applications and measurem
 
 \medskip
 \label[FIK-6_setup]
-\picw=15cm \cinspic ./img/FIK-6_experiment_setup.png
+\picw=8cm \cinspic ./img/FIK-6_experiment_setup.png
 \caption/f FIK-6 experiment setup using the Hwoyee Weather Balloon 1600. 
 \medskip
 
@@ -194,4 +194,71 @@ The advantage of the higher sensitivity results in increased drag, but it should
 \medskip
 
 \secc Telemetry system
+
+
+The telemetry system used in the TF-G2 autogyro is significantly improved, but still based on the technology previously tested on stratospheric balloon's telemetry link. Unlike the one-way radio communication utilized in the balloon experiments, the TF-G2 employs a bidirectional half-duplex, TDM radio system. The modem still operates at a frequency of 433MHz, but with improved RF front-end to ensure more reliable communication link due to the demanding environmental conditions of the TF-G2 flight. The modem firmware is again based on modified SiK firmware, which incorporates integration to the new hardware capable of supporting antenna diversity, specifically a 2x2 MIMO configuration. This arrangement allows for the connection of two external antennas, each of which can be utilized for both transmitting and receiving signals. The optimal antenna is selected based on RSSI metric on received packet preamble before each transmission of the next packet. This dual-antenna setup significantly improves signal resilience against interference from multipath fading and is also robust against mechanical damage to one of the antennas—a critical improvement over the previous single-antenna modems used on balloon flights, where the damage actually happens (see the table \ref[FIK_flights]). It is also quite a common failure model of the antenna on UAVs, caused by prolonged exposure to vibrations during flights.
+
+\medskip
+\label[TFSIK01]
+\picw=15cm \cinspic ./img/TFSIK01.jpg
+\caption/f TFSIK PCB without an electromagnetic shielding and 3D printed housing. The RF input and output with impedance matching network, RF switch, band-pass filter and LNA is in the left of the photo. 
+\medskip
+
+
+Furthermore, the improved system benefits from the versatility in antenna configurations at the ground station side, where a combination of the two antennas (directional and omnidirectional antenna) ensures optimal communication over varying distances. This dual-antenna approach at the ground station seamlessly switches between short-range and long-range communication modes without user intervention, offering a reliable link irrespective of the TF-G2's distance from the ground station.
+
+\secc Carried sensors
+
+Key innovation in the TF-G2's design is the tight integration of specialized sensors for measuring electric field and ionizing radiation. These sensors are mounted in a way to minimize interference from the airframe by maximizing the benefits of the autogyro construction. The placement of an electric field mill is directly under the rotor, exploiting the UAV rotor's characteristic of being unpowered, thus avoiding significant electromagnetic interaction with the measured values. See the figure \ref[E_mill_rotor]. The only additional requirement on the airframe is that the rotary disk of EFM be electrically connected to the measuring electronics. That is achieved through a conductive connection of the rotor's bearing.
+For detection of ionizing radiation the UAV has been equipped with a semiconductor detector, AIRDOS03 (UAVDOS), previously tested during balloon flights. It is situated in the UAV's fuselage under a waterproof fabric cover and connected to the TF-ATMON system via serial link similarly as were described in the \ref[balloon_flights] section. The avionics system manages sensor readout, synchronizing data collection with the TF-G2's flight path and with data from other sensors (EFM, humidity, etc.), see the fig. \ref[E_mill_data] for example of that data. That onboard data processing together with telemetry link enable real-time preliminary analysis, aiding in the assessment of collected data during the flight.
+
+\medskip
+\label[E_mill_data]
+\picw=15cm \cinspic ./img/E_mill_data.png
+\caption/f Electric field measurement data along with environmental humidity and temperature, aligned with flight parameters during flight in a fair weather. 
+\medskip
+
+\medskip
+\label[E_mill_rotor]
+\picw=15cm \cinspic ./img/E_mill_rotor.png
+\caption/f Close up view of electric field mill (THUNDERMILL01) mounted into the autogyro rotor head. The sensing electrodes are below the rotating grounded disk. Part of one sensing electrode is visible in the left side of the E-mill’s rotor disk opening.  
+\medskip
+
+\secc Takeoff technique 
+
+Since the unmanned autogyro TF-G2 (like other autogyros) requires the rotor to be spun up to a flight RPM value to allow its operation during the flight, it is necessary to inject rotational energy to the rotor before takeoff (in the case of TF-G2 the required energy range is something between 100 to 200 J, depending on the actual weight and rotor configuration). One of the simplest ways to achieve this spin up is by ensuring airflow through the rotor, which is firstly pre-spun to a minimum RPM by directly applying a rotation force to the rotor. Subsequently, these rotations increase to flight speed through forward motion. The required minimum forward speed needed to increase RPM to flight value is in the range of a few meters per second. In the case of those conditions, the autogyro becomes airborne within a few tens of meters, after that the internal autopilot is able to automatically climb to a stable flight.
+To ensure this procedure to be feasible during approaching thunderstorms, it was necessary to develop a range of supportive devices, such as a launch platform and visualization of the gyrocopter's status on the car roof. The takeoff from the car roof platform is the advantage for the safety and time saving.
+The resulting design of the takeoff platform is visible in Figure \ref[autogyro_takeoff_platform], where the autogyro is secured in an inclined launch position, allowing to increase the airflow through the rotor. In this position, the gyrocopter's rotor is locked by a mechanism contained in the platform until takeoff. At the beginning of this assisted takeoff the platform unlocks the rotor, which is then spun to minimum speed by weights connected to the rotor by pulleys. At this minimum RPM speed, aerodynamic forces enable further rotor acceleration due to the incoming airflow.
+However, since the launch platform is mounted on the roof of the vehicle, the crew in the vehicle (pilot and driver) cannot directly see the procedure. Therefore, it is mandatory for the vehicle's crew to receive adequate and high-quality data to semi-automatically carry out the launch procedure. The TF-G2's autopilot is programmed to automatically transition between the different phases of takeoff once predefined criteria are met. Therefore the crew only needs to monitor key decision variables such as IAS and rotor RPM, to be able to respond adequately to a non-standard situation. These values are therefore required to be displayed with low latency and in a format that enables the car driver to determine whether to speed up, slow down, or maintain the current speed. This is facilitated by a set of displays, as seen in Figure \ref[takeoff_display], which have been added to the measurement vehicle.
+Additionally the overall status is visible through an analog camera, which provides both the driver and the operator the view on the autogyro, mounted in the takeoff platform. However, this display is limited by the camera's frame rate and the resolution of the analog camera (a digital camera cannot be used due to typically high latency in the image encoder and decoder). The driver and operator also have access to auditory and visual signals indicating the platform and takeoff status via a shared handheld controller, which can be used to abort the takeoff procedure in the event of an unforeseen issue.
+
+\medskip
+\label[takeoff_display]
+\picw=15cm \cinspic ./img/takeoff_display.png
+\caption/f Measuring CAR2 was equipped with special instruments required to operate the unmanned autogyro TF-G2.  In the center is an autogyro status display with rotor RPM and IAS indicators, bottom is video from the roof camera and on the right there is a UAV operator’s laptop.
+\medskip
+
+The takeoff platform device is removably integrated into the assembly of magnetic VLF receiving antennas, as seen in Figure \ref[takeoff_platform]. This platform is connected to the ground control station mounted inside the trunk of the car and is controlled by the autogyro's autopilot states via previously described TFSIK01 telemetry modems. The platform's firmware responds to commands sent by the TF-G2 using the commands on the MAVLink 2 protocol.
+The mentioned handheld controller for the driver and operator is directly connected to the microcontroller managing the platform, allowing the platform's internal state to be overridden despite commands from the TF-G2. That takeoff solution is designed primarily to achieve overall safety before and during the thunderstorm measurement attempt. 
+
+\medskip
+\label[autogyro_takeoff_platform]
+\picw=15cm \cinspic ./img/autogyro_takeoff_platform.png
+\caption/f Measuring CAR2 was equipped with a roof platform used to carry the TF-G2 autogyro to the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during actual takeoff and housing the weights used to prerotate the rotor to minimum RPMs.
+\medskip
+
+\secc Test flights
+
+Throughout the development phase of the unmanned autogyro, extensive test flights were conducted to evaluate various modifications and enhancements to the UAVs design, the firmware of the autopilot, and the ground equipment adjustments. One of these could be seen in the figure \ref[lift_drag].  Among these development verification, there were tests on detectors in certain scenarios. These are experiments usually conducted outside of the main thunderstorm session. 
+
+\medskip
+\label[lift_drag]
+\picw=15cm \cinspic ./img/lift_drag.png
+\caption/f Measuring CAR2 was equipped with a roof lift and drag measuring platform used to carry on-ground testing procedures. 
+\medskip
+
+Two notable supportive experiments emerged from these testing flights. The first significant experiment involved testing the UAV's flight capabilities under strong wind conditions alongside measuring floating dust concentrations (Floating dust is associated with the development of storm activity and the electrification of cloudiness). For this experiment, New Year's Eve fireworks were used as a modeling source of floating dust. The measurements were significant, as expected, because the instrument convincingly detected at least a two-fold increase in the concentrations of floating dust in hours following the fireworks display.
+The second experiment was focused on verifying the directional homogeneity of the signal received by a Quadrifilar Helix (QFH) antenna (see the figure \ref[QFH_antenna_sensitivity]). Leveraging the close frequency proximity of the telemetry transmission band from the UAV (433 MHz) to the observational band for lightning discharges, this experiment was conducted by having the UAV fly in circles around a measuring vehicle. The signal level was manually monitored on the receiver. This experiment was used for verification of the QFH antenna's effectiveness in maintaining homogenous sensitivity.
+In addition to the mentioned experiments, numerous routine flights and experiments were conducted near storm clouds. These experiments were carried out simultaneously with ground measurements, which were in the primary focus. The success of these attempts varied greatly; however, system failures often occurred, preventing the intended use of the collected data.
+
 

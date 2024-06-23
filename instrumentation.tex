@@ -95,7 +95,7 @@ The UHF receiver operates approximately in the 370-406 MHz band, exact tuning de
 
 \medskip
 \label[UHF-QFH_receiver]
-\picw=15cm \cinspic ./img/UHF-QFH_Receiver.png
+\picw=10cm \cinspic ./img/UHF-QFH_Receiver.png
 \caption/f The platform mount of a QFH receiver antenna is shown in the top left corner. Detailed pictures of the antenna can be seen at the bottom and the receiver is in the top right.
 \medskip
 
@@ -111,7 +111,7 @@ The phase difference of QFH antenna is extensively exploited in the UHF receiver
 
 \medskip
 \label[QFHMIX_block_schematics]
-\picw=15cm \cinspic ./img/QFHMIX_block_schematics.png
+\picw=13cm \cinspic ./img/QFHMIX_block_schematics.png
 \caption/f Block diagram of active antenna RF-front end. In the left part the phase shifted terminals of the QFH antenna are connected, followed by the analogue branches for processing I and Q signals.
 \medskip
 
@@ -134,7 +134,7 @@ The frontend outputs IQ signals, local oscillator signal and power supply are co
 
 \medskip
 \label[QFHMIX01E_PCB]
-\picw=15cm \cinspic ./img/QFHMIX01E_top.jpg
+\picw=10cm \cinspic ./img/QFHMIX01E_top.jpg
 \caption/f  Because the design of the QFHMIX01 is optimized for high dynamic range and low noise figure, these tradeoffs result in relatively high power dissipation. The PCB must therefore be equipped with a fan to provide cooling for the analog RF part.
 \medskip
 
@@ -144,6 +144,10 @@ It is worth to note that most of the available RF components were chosen to ensu
 \sec Ionizing radiation detectors 
 
 During the research, scintillation and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kákona_Ambrožová_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200 keV to 40 MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15 s integration of events is provided.
+
+Newly derived scintillation detectors GEODOS01 and GEODOS02 had scintillation crystals with a diameter of approximately 18 mm and a length of 30 mm. In addition to these newly developed detectors, the commercial RT-56 detectors were also operated on vehicles for a short period. However, due to their internal and unknown autocalibration, which is unsuitable for mobile measurements, they were subsequently moved to static observation sites. The identical construction of GEODOS01 detectors was then used at static observatories, similarly to the RT detectors. All these described types of detectors at static locations detected ionizing radiation related to thunderstorm activity. Specifically, the observation sites were Poledník and the Lomnický Štít observatory.
+
+
 Unfortunately, the mobile deployment of these detectors in the measuring cars, does not provide any significant detections of ionizing radiation, therefore the system was widened by use of  SPACEDOS with another silicon PIN diode to increase sensitivity.  The G-M tube described in subsequent balloon experiments was also used for a short time period, but none of these sensors were able to indisputably detect ionizing radiation associated with storm activity. The causes of this situation will be discussed in the \ref [results_conclusion]  section, but one of the most obvious possibilities that could have been eliminated during the research was the fact that the NaI(Tl) crystal with SiPM and preamplifier were shielded in a metallic box made of steel sheet with a wall thickness of about 0.5 mm. Additionally, all these ionizing radiation detectors were placed inside a car, which also had a steel roof with a thickness of about one millimeter. This shielding was chosen out of concern that the detectors would be affected by electromagnetic or even acoustic manifestations of storm activity (as the ionizing radiation detectors are known to have significant microphonic effect). On the other hand, such an approach could partially shield the ionizing radiation or worsen its detectability. For example, the interaction of gamma rays with metal parts could create electrons that might not have been detectable in background noise due to their relatively low energies.
 Towards the end of the research, this approach was reassessed, leading to the design of another ionizing radiation detector. In this latest design, a larger NaI(Tl) crystal was optically coupled with a USTSIPM01 module, whose electrical signal output is connected via a balun transformer to a spare ADC channel of the previously described VLF receiver. The result is a device capable of recording individual ionizing radiation interactions in the NaI(Tl) crystal around the lightning discharge trigger. The maximum recording length is identical to the length of the recorded VLF signal fragment and it is also time aligned.
 The image (fig scintillator_pulse) shows an example pulse resulting from cosmic radiation outside of storm activity. Unfortunately, this approach was implemented towards the end of the measurement season, during which cars were available. Consequently, there is very little experimental data, therefore this potential improvement of sensitivity was not adequately examined. 
@@ -205,8 +209,8 @@ In response to these challenges, the (DISDROMETER01)\urlnote{https://github.com/
 
 \medskip
 \label[tipping_bucket_limitation]
-\picw=15cm \cinspic ./img/DISDROMETER01_hydrometeors.png
-\caption/f  The image shows the difference between various types of precipitation, specifically illustrating the difference between rain and hail. The top image is a detailed view of the impact of a single hailstone and bellow a single raindrop.
+\picw=10cm \cinspic ./img/DISDROMETER01_hydrometeors.png
+\caption/f  The graphs shows the difference of signal responses between various types of precipitation, specifically illustrating the difference between rain and hail. The top image is a detailed view of the impact of a single hailstone and bellow a single raindrop.
 \medskip
 
 Technically the disdrometer captures sound waves generated by the impact of precipitation particles on the plastic enclosure, providing insights into the characteristics of rainfall during time.
