@@ -118,6 +118,12 @@ The phase difference of QFH antenna is extensively exploited in the UHF receiver
 From that perspective, the QHA antenna itself functions the same as an IQ demodulator. The signal on each port has a 90° signal phase shift in relation to the next port and QFHMIX01 is actually UHF analog front-end. The internally has two signal lines, one for I and Q signals. Each line contains LNA, mixer, and ADC buffer. The front-end also contains a local oscillator amplifier (clock buffer) and power stabilizers. 
 In total the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end is depicted in fig.\ref[QFHMIX_block_schematics].
 
+\medskip
+\label[QFH_antenna_radiation_pattern]
+\picw=13cm \cinspic ./img/QFH_antenna_radiation_pattern.png
+\caption/f Calculated vertical radiation pattern of the single QFH antenna in two perpendicular cross-sections (normalised).
+\medskip
+
 The LNA structure contains the blocks concatenated from antenna input port to IQ demodulator input in this way: first BPF, gain block, second BPF, second gain block. First BPF is the filter, whose purpose is to cut out the signals outside of the band of interest, and thereby protect the first gain block from overdriving to a nonlinear regime. The filter passband is depicted in figure \ref[input_RF_filter]. 
 
 \rfc{TODO: vložit spočítanou frekvenční charakteristiku vstupního filtru}
