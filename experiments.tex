@@ -1,6 +1,6 @@
-After initial processing of storm activity records with the described instruments, it became apparent that some observations are difficult to explain solely with the data obtained so far. For instance, the finding of the extensive spatial and temporal scale of lightning discharges described in section \ref[lightning_triggerring_method] raised questions about the distribution of charges within storm clouds that the lightning connects. Similarly, ambiguities arose regarding ionizing radiation. The uncertainty lies in whether ground measurements missed ionizing radiation because the detectors were too far from the radiation source or because the radiation was emitted in a direction undetectable by ground-based detectors situated directly under the storm cell. To resolve these issues, spatial data on charge distribution and the radiation field are necessary, prompting the proposal of additional supportive experiments, which allows direct in-situ measurements in the atmosphere.
+After initial processing of storm activity records with the described instruments, it became apparent that some observations are difficult to explain solely with the data obtained so far. For instance, the finding of the extensive spatial and temporal scale of lightning discharges described in section \ref[triggered_recording] raised questions about the distribution of charges within storm clouds that the lightning connects. Similarly, ambiguities arose regarding ionizing radiation. The uncertainty lies in whether ground measurements missed ionizing radiation because the detectors were too far from the radiation source or because the radiation was emitted in a direction undetectable by ground-based detectors situated directly under the storm cell. To resolve these issues, spatial data on charge distribution and the radiation field are necessary, prompting the proposal of additional supportive experiments, which allows direct in-situ measurements in the atmosphere.
 
-\sec Stratospheric Balloon Flights
+\sec[balloon_flights] Stratospheric Balloon Flights
 
 Stratospheric balloon flights are conducted for several reasons related to the research of electromagnetic phenomena in the atmosphere associated with storm activity. They allow for the testing of instruments under various adverse conditions, enable the testing of data transmission methods over relatively long distances and in unfavorable weather, and provide a platform to lift additional instruments in the atmosphere. For example, they offer insights into the behavior of ionizing radiation in the upper layers of the atmosphere, where particles of primary cosmic radiation with sufficient energy interact and generate showers of secondary cosmic radiation. This phenomenon causes the situation, that with increasing depth of the atmosphere the intensity of primary radiation decreases whereas the secondary component intensity increases. 
 At an altitude of about 20 km the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum [Pfotzer, 1936; Regener, 1933; Regener and Pfotzer, 1935]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level [Bazilevskaya and Svirzhevskaya, 1998]. 
@@ -64,7 +64,7 @@ In the case of FIK-5 and FIK-6 flights that served as the test flights for the n
 
 \secc Atmospheric phenomena Detectors 
 
-The payload for example FIK-6 flight contained TF-ATMON and three different types of ionizing radiation detectors already mentioned in \ref[proposed_instrumentation] section: SPACEDOS with silicon PIN diode sensor, AIRDOS-C with scintillation crystal and silicon photomultiplier and a G-M tube. The total payload mass was 2 kg.
+The payload for example FIK-6 flight contained TF-ATMON and three different types of ionizing radiation detectors already mentioned in \ref[instrumentation] section: SPACEDOS with silicon PIN diode sensor, AIRDOS-C with scintillation crystal and silicon photomultiplier and a G-M tube. The total payload mass was 2 kg.
 
 SPACEDOS is a lightweight dosimeter intended for space applications and measurements on board spacecraft. The detector has been described in \cite[SPACEDOS]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[AIRDOS-C]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included, because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
 
@@ -105,13 +105,21 @@ The graphs show that the maximum reached altitude was approximately 33 km above 
 By processing the data a graph of detected altitude fig. \ref[R-P_maximum] was obtained. It shows that the measured altitude of the Regener-Pfotzer maximum was for all detector types around 19 km above sea level. 
 As the measured data show in Fig \ref[R-P_maximum], there is a very noticeable difference between a number of data points measured during the flight upwards and during the descent. This difference is mainly caused by the different values of vertical speed. In the future balloon flights, this problem is planned to be overcome by a controlled descent, during which the rate of descent can be decreased in some phases of the flight so that it can be more comparable with the speed of the ascent.
 
+\medskip
+\label[R-P_maximum]
+\picw=8cm \cinspic ./img/FIK-6_R-P_maximum.png
+\caption/f Log-norm fit of ionising radiation measured data with calculated Regener-Pfotzer maxima for different detectors (G-M tube, NaI(Tl) scintillator and silicon PIN diode). Measured data are depicted with gray color as mean from 5 minutes of measurement with 2$\sigma$ standard errors.
+\medskip
+
+
+
 \secc Outcome of stratospheric balloon flights
 
 FIK flights were  used to test different types of ionizing radiation detectors with use of the Regener-Pfotzer maximum phenomenon. 
 
 The telemetric system TF-ATMON has been verified. It enables data recording, pre-flight instruments check and their monitoring during flight. Thanks to the availability of different communication interfaces  to the avionics, the use of various payload detectors is simplified. The technology at the same time improves the possibilities of  the fast localization of a balloon gondola after its landing. It is therefore possible to carry out even experiments requiring a short time till recovering the gondola after the flight. 
 
-As can be seen from the Tab. \ref[Flight_reliability], the last unsolved problem with the stratospheric balloon flights is the control of descent. Therefore, in the future balloon flights and thunderstorm exploration there exists a requirement to use the autopilot contained in TF-ATMON to control descent trajectory.
+As can be seen from the Tab. \ref[FIK_flights], the last unsolved problem with the stratospheric balloon flights is the control of descent. Therefore, in the future balloon flights and thunderstorm exploration there exists a requirement to use the autopilot contained in TF-ATMON to control descent trajectory.
 
 The descent should be controlled by using an airframe carrying a payload. Thus it would be possible to choose the landing site and reduce the possible risk of creating dangerous situations and at the same time with a possibility to control the descent rate and trajectory. 
 Another unresolved challenge for use of the balloons for thunderstorm research, is the difficulty of launching them in strong winds, which are nearly always present near storms, especially at times where the measurements are most critical \ref[balloon_wind_takeoff].
@@ -123,10 +131,9 @@ For these reasons, it became necessary to shift to other carrier platforms to be
 \caption/f The experimental stratospheric balloon takeoff (FIK-2) under increased wind conditions. The takeoff was partially successful; however, the gondola impacted me and then the ground, causing damage to the internal power supply and telemetry antenna.
 \medskip
 
-\sec Autogyro Thunderstorm Flights
-\label[Autogyro_thunderstorm]
+\sec[autogyro_thunderstorm] Autogyro Thunderstorm Flights
 
-Despite widespread efforts which could be found in the literature \cite[https://doi.org/10.1029/2006JD007242,TELEXTheThunderstormElectrificationandLightningExperiment,  ScientificInsightsfromFourGenerationsofLagrangianSmartBalloonsinAtmosphericResearch, ABalloonBorneInstrumentforMeasuringtheChargeandSizeofPrecipitationParticlesinsideThunderstorms] to deploy measurement balloons into thunderstorms with various sensors, these attempts were often unsafe, and the results are sporadic because the balloon flight path is uncontrolled or control is very limited \urlnote{https://windbornesystems.com/}. Therefore that technique seems to be outdated in comparison with the current \glref{UAV} technology. This fact led to the exploration of using \glref{UAV}s instead. Moreover, due to the spatial extent of lightning structures (see section \ref[Results] for details), it's required to do the experiment at multiple coordinated locations simultaneously, which is practically unattainable with uncontrolled balloons.  Therefore better understanding of the phenomena can very likely be achieved by using special equipped \glref{UAS}, which enables measurement directly in or nearby the thunderstorms. 
+Despite widespread efforts which could be found in the literature \cite[https://doi.org/10.1029/2006JD007242,TELEXTheThunderstormElectrificationandLightningExperiment,  ScientificInsightsfromFourGenerationsofLagrangianSmartBalloonsinAtmosphericResearch, ABalloonBorneInstrumentforMeasuringtheChargeandSizeofPrecipitationParticlesinsideThunderstorms] to deploy measurement balloons into thunderstorms with various sensors, these attempts were often unsafe, and the results are sporadic because the balloon flight path is uncontrolled or control is very limited \urlnote{https://windbornesystems.com/}. Therefore that technique seems to be outdated in comparison with the current \glref{UAV} technology. This fact led to the exploration of using \glref{UAV}s instead. Moreover, due to the spatial extent of lightning structures (see section \ref[results] for details), it's required to do the experiment at multiple coordinated locations simultaneously, which is practically unattainable with uncontrolled balloons.  Therefore better understanding of the phenomena can very likely be achieved by using special equipped \glref{UAS}, which enables measurement directly in or nearby the thunderstorms. 
 \glref{UAS} offer additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of \glref{LCL} for example. The obvious requirement is to use a new unmanned airframe using TF-ATMON described in section \ref[balloon_flights] and employ the integrated flight controller take control over the measurement procedure in the atmosphere.
 
 \medskip
@@ -242,7 +249,7 @@ Additionally the overall status is visible through an analog camera, which provi
 \caption/f Measuring CAR2 was equipped with special instruments required to operate the unmanned autogyro TF-G2.  In the center is an autogyro status display with rotor RPM and IAS indicators, bottom is video from the roof camera and on the right there is a UAV operator’s laptop.
 \medskip
 
-The takeoff platform device is removably integrated into the assembly of magnetic VLF receiving antennas, as seen in Figure \ref[takeoff_platform]. This platform is connected to the ground control station mounted inside the trunk of the car and is controlled by the autogyro's autopilot states via previously described TFSIK01 telemetry modems. The platform's firmware responds to commands sent by the TF-G2 using the commands on the MAVLink 2 protocol.
+The takeoff platform device is removably integrated into the assembly of magnetic VLF receiving antennas, as seen in Figure \ref[autogyro_takeoff_platform]. This platform is connected to the ground control station mounted inside the trunk of the car and is controlled by the autogyro's autopilot states via previously described TFSIK01 telemetry modems. The platform's firmware responds to commands sent by the TF-G2 using the commands on the MAVLink 2 protocol.
 The mentioned handheld controller for the driver and operator is directly connected to the microcontroller managing the platform, allowing the platform's internal state to be overridden despite commands from the TF-G2. That takeoff solution is designed primarily to achieve overall safety before and during the thunderstorm measurement attempt. 
 
 \medskip
@@ -261,7 +268,7 @@ Throughout the development phase of the unmanned autogyro, extensive test flight
 \caption/f Measuring CAR2 was equipped with a roof lift and drag measuring platform used to carry on-ground testing procedures. 
 \medskip
 
-Two notable supportive experiments emerged from these testing flights. The first significant experiment involved testing the UAV's flight capabilities under strong wind conditions alongside measuring floating dust concentrations (Floating dust is associated with the development of storm activity and the electrification of cloudiness). For this experiment, New Year's Eve fireworks were used as a modeling source of floating dust. The measurements were significant, as expected, because the instrument convincingly detected at least a two-fold increase in the concentrations of floating dust in hours following the fireworks display.
+Two notable supportive experiments emerged from these testing flights. The first significant experiment involved testing the UAV's flight capabilities under strong wind conditions alongside measuring floating dust concentrations (Floating dust is associated with the development of storm activity and the electrification of cloudiness \cite[7735367]). For this experiment, New Year's Eve fireworks were used as a modeling source of floating dust. The measurements were significant, as expected, because the instrument convincingly detected at least a two-fold increase in the concentrations of floating dust in hours following the fireworks display.
 The second experiment was focused on verifying the directional homogeneity of the signal received by a Quadrifilar Helix (QFH) antenna (see the figure \ref[QFH_antenna_radiation_pattern]). Leveraging the close frequency proximity of the telemetry transmission band from the UAV (433 MHz) to the observational band for lightning discharges, this experiment was conducted by having the UAV fly in circles around a measuring vehicle. The signal level was manually monitored on the receiver. This experiment was used for verification of the QFH antenna's effectiveness in maintaining homogenous sensitivity.
 In addition to the mentioned experiments, numerous routine flights and experiments were conducted near storm clouds. These experiments were carried out simultaneously with ground measurements, which were in the primary focus. The success of these attempts varied greatly; however, system failures often occurred, preventing the intended use of the collected data.
 
@@ -274,7 +281,7 @@ Because the average duration of monitoring a single storm's development is appro
 Throughout the campaign, the reliability of the instruments, the methods of their calibration (as example dark frame and flat-field of cameras), and the challenges posed by software errors were gradually identified as the critical barriers to conduct the research. Each of these elements significantly influenced the outcome of the measurements and, in turn, the insights that could be collected from storm activity. This reality unexpectedly highlights the intrinsic complexity of atmospheric measurements, when attempting to capture the transient nature of thunderstorms phenomena.
 Recognizing these challenges, during the multiple summer storm seasons, many measuring expeditions were carried out in the Czech Republic and Slovakia with the equipment described. This allowed the measurement of electrostatic, magnetic, electromagnetic, and optical manifestations of storms, including monitoring ionizing radiation. By comparing the different obtained lightning recordings with each other, individual phases of lightning can be reconstructed.
 
-Observations were carried out with a gradually improving strategy with the aim of getting the measuring car (especially the ones equipped with radiation detectors) as close to the storm cell or under the cell if possible. The position of the storm cell was monitored by services using data from third-party networks \ref[windy,Blitzortung].
+Observations were carried out with a gradually improving strategy with the aim of getting the measuring car (especially the ones equipped with radiation detectors) as close to the storm cell or under the cell if possible. The position of the storm cell was monitored by services using data from third-party networks \cite[windy,Blitzortung].
 
 \secc Measuring Cars Infrastructure
 
@@ -307,7 +314,7 @@ The trigger signal was initially distributed to the camera via the Ethernet netw
 
 A significant challenge was caused by the time needed to record the data measured by individual detectors resulting from the long time interval needed to store the recording from the operational memory of devices. The deadtime was gradually reduced by optimizing the settings and improving software and firmware, but it still remains as the main limit preventing the gathering of data from more lightning events in case of successful expeditions.  
 
-\par Timing and Position tracking
+\label[timing_position]
 
 For high-quality data collection on storm activity, most of the described instruments require accurate information about time and position to compare the recorded data with external data sources.
 GNSS receivers were mainly used for this purpose. The evolution of position tracking for the vehicle initially utilized a simple solution with a GPS receiver for coordinate logging and a manually targeted compass to determine car orientation. However, this method proved imprecise and unfeasible in the context of various operational tasks, as it was often neglected or not performed accurately.
@@ -322,7 +329,7 @@ This feature of the receiver not only enabled precise positioning but was partic
 
 It was initially assumed that the suboptimal results (even below the manufacturer's specifications) were due to poor-quality GNSS antennas. Basic patch active antennas were used, all oriented in the same direction according to the application note, to prevent phase shifts from different directions. However, changing the antenna type to a QFH antenna, which has significantly better parameters compared to the patch antenna, did not result in any noticeable improvement in the receiver's performance and ability to correctly mark invalid data.
 
-To obtain precise system time for all onboard instruments in the measuring car, GNSS receivers were utilized. Initially, this was achieved by combining the relative PPS signal (as described in the chapter on the \ref[VLF receiver]) with the absolute time from the internet, synchronized with the operating system time using {\em ntp-wait}. However, this method had drawbacks, it required a stable internet connection and took a long time to synchronize. Internet connectivity was provided via LTE, which was unreliable in some regions and during thunderstorms, leading to complications in initializing the measurement system and difficulty in restarting the instrumentation after power outages, such as when the car's diesel engine was restarted. 
+To obtain precise system time for all onboard instruments in the measuring car, GNSS receivers were utilized. Initially, this was achieved by combining the relative PPS signal (as described in the chapter on the \ref[VLF_receiver]) with the absolute time from the internet, synchronized with the operating system time using {\em ntp-wait}. However, this method had drawbacks, it required a stable internet connection and took a long time to synchronize. Internet connectivity was provided via LTE, which was unreliable in some regions and during thunderstorms, leading to complications in initializing the measurement system and difficulty in restarting the instrumentation after power outages, such as when the car's diesel engine was restarted. 
 The latest solution involved connecting an additional GNSS receiver to the onboard router, Turris Omnia, which provided basic positioning and precise time information. This router then served as the accurate time source for the onboard ethernet network, significantly improving the reliability of the entire setup.
 
 \par Inter-car communication
@@ -390,21 +397,21 @@ The advantage of using magnetic loop antennas to measure lightning is that obser
 
 \secc Correlation of measured lightning with lightning detection network
 
-The detection of lightning using the STP antenna has been compared with its detection using the Blitzortung.org network. It's important to note that not every lightning strike detected by the STP antenna is also detected by the Blitzortung.org network. Figure \ref[figur_blitz2] shows that when the storm was closest to the car according to Blitzortung.org, the STP antenna detected lightning at different times or at distances of more than 120 km. Conversely, as shown in Figure \ref[figur_blitz2], when the storm was located tens of kilometers away from the observation site according to Blitzortung.org, there is perfect conformity with the data from the STP antenna. In both figures, an interval of ±1 second is marked around the vertical lines corresponding to the detection times.
+The detection of lightning using the STP antenna has been compared with its detection using the Blitzortung.org network. It's important to note that not every lightning strike detected by the STP antenna is also detected by the Blitzortung.org network. Figure \ref[figur_blitz2] shows that when the storm was closest to the car according to Blitzortung.org, the STP antenna detected lightning at different times or at distances of more than 120 km. Conversely, as shown in Figure \ref[figur_blitz1], when the storm was located tens of kilometers away from the observation site according to Blitzortung.org, there is perfect conformity with the data from the STP antenna. In both figures, an interval of ±1 second is marked around the vertical lines corresponding to the detection times.
 
 Lightning at 18:24:48 was detected by a high-speed camera, see video 
 [1627302288.9546976.mp4.]. According to the video, one of the lightning channels occurred almost directly above the measurement car, but the nearest lightning detected by Blitzortung.org was at least 70 km away. The positioning accuracy in the case of the Blitzortung.org network is in the order of kilometers. Blitzortung.org detected discharges at a distance of 70 to 80 km simultaneously. This allows the deduction that this lightning was more than 80 km long or that a synchronous discharge occurred 80 km away.
 
 
 \medskip
-\label[figur_capture]
+\label[figur_blitz2]
 \picw=15cm \cinspic ./img/figur_blitz2.png
 \caption/f   Correlation with “nearby” (less than 20 km) lightning detection.  
 \medskip
 
 
 \medskip
-\label[figur_capture]
+\label[figur_blitz1]
 \picw=15cm \cinspic ./img/figur_blitz1.png
 \caption/f   Correlation with “distant” (more than 40 km) lightning detection.  
 \medskip
@@ -415,14 +422,14 @@ Lightning at 18:24:48 was detected by a high-speed camera, see video
 Figures \ref[figur_efmdata] and \ref[figur_efmdatadetail] compare vertical electric field measurements at the car's measuring site with camera recordings. The Kleinwächter EFM 115 on the car is not grounded, so it measures the gradient of electric potential between the sensor and the car body. As shown in Figure \ref[figur_efmdata], electric discharges occur during times of significant electric field changes. However, as detailed in Figure \ref[figur_efmdatadetail], changes in the electric field do not directly correspond to individual discharges recorded by the camera. It's important to note that the EFM measures the vertical component of the electric field, which integrates over a large area of the cloud and is also affected by the presence of the car.
 
 \medskip
-\label[figur_capture]
+\label[figur_efmdata]
 \picw=15cm \cinspic ./img/figur_efmdata.png
 \caption/f   Example of measurement with EFM compared with records of lightning captured on the camera. 
 \medskip
 
 
 \medskip
-\label[figur_capture]
+\label[figur_efmdatadetail]
 \picw=15cm \cinspic ./img/figur_efmdatadetail.png
 \caption/f   Detail of EFM data with a comparison with camera data.  
 \medskip
