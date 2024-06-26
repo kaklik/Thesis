@@ -116,7 +116,7 @@ The phase difference of QFH antenna is extensively exploited in the UHF receiver
 \caption/f Block diagram of active antenna RF-front end. In the left part the phase shifted terminals of the QFH antenna are connected, followed by the analogue branches for processing I and Q signals.
 \medskip
 
-From that perspective, the QHA antenna itself functions the same as an IQ demodulator. The signal on each port has a 90° signal phase shift in relation to the next port and QFHMIX01 is actually UHF analog front-end. The internally has two signal lines, one for I and Q signals. Each line contains LNA, mixer, and ADC buffer. The front-end also contains a local oscillator amplifier (clock buffer) and power stabilizers. 
+From that perspective, the QHA antenna itself functions the same as an I/Q demodulator. The signal on each port has a 90° signal phase shift in relation to the next port and QFHMIX01 is actually UHF analog front-end. The internally has two signal lines, one for I and Q signals. Each line contains LNA, mixer, and ADC buffer. The front-end also contains a local oscillator amplifier (clock buffer) and power stabilizers. 
 In total the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end is depicted in fig.\ref[QFHMIX_block_schematics].
 
 \medskip
@@ -125,12 +125,12 @@ In total the PCB of the QFHMIX01 module has two differential 100Ω input ports f
 \caption/f Calculated vertical radiation pattern of the single QFH antenna in two perpendicular cross-sections (normalised).
 \medskip
 
-The LNA structure contains the blocks concatenated from antenna input port to IQ demodulator input in this way: first BPF, gain block, second BPF, second gain block. First BPF is the filter, whose purpose is to cut out the signals outside of the band of interest, and thereby protect the first gain block from overdriving to a nonlinear regime. The filter passbands are depicted in figure \ref[input_RF_filter]. 
+The LNA structure contains the blocks concatenated from antenna input port to I/Q demodulator input in this way: first BPF, gain block, second BPF, second gain block. First BPF is the filter, whose purpose is to cut out the signals outside of the band of interest, and thereby protect the first gain block from overdriving to a nonlinear regime. The filter passbands are depicted in figure \ref[input_RF_filter]. 
 
 \picw=.5\hsize
 \clabel[input_RF_filter]{UHF receiver RF filters}
-\centerline {\inspic ./img/input_RF_filter1.png \hfil\hfil \inspic ./img/input_RF_filter2.png }\nobreak
 \centerline {a)\hfil\hfil b)}\nobreak\medskip
+\centerline {\inspic ./img/input_RF_filter1.png \hfil\hfil \inspic ./img/input_RF_filter2.png }\nobreak
 \caption/f Monte Carlo analysis of two RF filters. a) The filter placed immediately after the antenna is a two-stage filter designed to maintain low insertion loss. b) The filter located after the first amplifier is a three-stage filter designed to limit the propagation of out-of-band signals further into the receiver. Both filters are designed using discrete E24 series components, which effectively minimize the possibility of detuning due to vibrations in mobile applications and enable the filters to achieve very compact sizes. 
 \medskip
 
@@ -138,11 +138,11 @@ First gain block is based on the MPGA-105 selected for minimal noise figure and 
 
 Purpose of the mixer is to convert received signals into the ADC sampling bandwidth. The mixer is based on the AD8343 from Analog devices. The local oscillator input of the mixer is connected to the clock buffer. The signal output is connected to the ADC buffer.
 Clock buffer is needed for the conditioning of local oscillator signals distributed by the antenna cabling from the UHF receiver base station.  The used clock buffer is the Si53322 low-jitter dual output. Each output is used to feed Q and I lines mixers separately. 
-The I/Q signals, which are on the mixer output, need to be connected to the ADC input. To avoid aliasing on ADC it is necessary to pass signals through the LPF to cut off the higher frequencies. For that case a 5MHz bandwidth LT6604-5 from Analog devices was chosen. It is also an amplifier for IQ signals, which allows direct distribution by the UTP cable from the UHF RF front-end to the base station inside the car. The output of the amplifier is the 100Ω differential pair, which perfectly matches a twisted pair from the UTP CAT 6 cable.
+The I/Q signals, which are on the mixer output, need to be connected to the ADC input. To avoid aliasing on ADC it is necessary to pass signals through the LPF to cut off the higher frequencies. For that case a 5MHz bandwidth LT6604-5 from Analog devices was chosen. It is also an amplifier for I/Q signals, which allows direct distribution by the UTP cable from the UHF RF front-end to the base station inside the car. The output of the amplifier is the 100Ω differential pair, which perfectly matches a twisted pair from the UTP CAT 6 cable.
 
 PCB is produced from the 1.6mm thick FR4. All components, excluding connectors, are SMD mounted from single side. The RF blocks are carefully separated into different zones to avoid cross-talk. The RF parts are soldered on the bottom side of the PCB. The top side is a shielding GND layer with some signal jumpers and power voltage tracks.
 
-The frontend outputs IQ signals, local oscillator signal and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front-end and the receiver base unit mounted in the car. 
+The frontend outputs I/Q signals, local oscillator signal and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front-end and the receiver base unit mounted in the car. 
 
 \medskip
 \label[QFHMIX01E_PCB]
