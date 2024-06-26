@@ -1,4 +1,4 @@
-\documentclass[a4paper,landscape]{article}
+\documentclass[a4paper,portrait]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{array}
 \usepackage{colortbl}
@@ -7,12 +7,13 @@
 \usepackage{xcolor}
 \usepackage{nopageno} % Balíček pro odstranění číslování stránek
 \usepackage{adjustbox} % Balíček pro přizpůsobení velikosti tabulky
+\usepackage{rotating} % Balíček pro otáčení tabulek
 
-\geometry{a4paper,landscape,margin=1in}
+\geometry{a4paper,margin=1in}
 
 \begin{document}
 
-\begin{table*}
+\begin{sidewaystable}
 \centering
 \caption{Table summarising success of used technologies, with colours representing a degree of reliability: \newline \colorbox{red}{Failure} \colorbox{yellow}{Partial failure} \colorbox{green}{Correct function}.\label{Flight_reliability}}
 \begin{adjustbox}{width=\textwidth} % Přizpůsobení velikosti tabulky šířce stránky
@@ -30,7 +31,7 @@ Flight control computer & \cellcolor{yellow} Odroid-U2 & \cellcolor{yellow} Odro
 \bottomrule
 \end{tabular}}
 \end{adjustbox}
-\end{table*}
+\end{sidewaystable}
 
 \end{document}
 
