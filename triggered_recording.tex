@@ -4,13 +4,12 @@ The another requirement of the proposed system is being capable of the precise d
 Based on sources in the literature review section /ref suggests the development and implementation of algorithms for real-time lightning detection in ground-based systems pose that topic to an already solved problem, which is only a part of more sophisticated lightning location and mapping systems. Unfortunately lightning detection in these systems is based on signal level detection. The signal level seems to be set to individual stations based on the analysis of datastream coming from the station by the network server.
 That simple solution is not suitable to detect lightning in generic electromagnetic noisy environments and requires station placement in electromagnetically quiet areas. There also exists a conference paper 10.1109/ICISE.2010.5689931 introducing an adaptive signal detection algorithm based on short-time energy detection and Constant false alarm rate (CFAR) for real-time VHF intracloud lightning signal detection. This adaptive approach is promising to enhance the performance of lightning detection systems in ground-based setups by dynamically adjusting to varying signal characteristics, but unfortunately the statistics of noise background needs to be known. Therefore that could be hardly used for mobile measurements. Therefore there is not an existing solution which could be obviously used for the planned research.
 
-\sec Off-the-shelf lightning detection
-\label[LIGHTNING01A]
+\sec[LIGHTNING01A_trigger] Off-the-shelf lightning detection
 
 Initially I investigated the lightning triggering device based on AMS AS3935 integrated circuit and using a coil antenna. The device meets the requirements of mobility, and low power consumption. For measurements coincidence between ionizing radiation and lightning on aboard aircraft as example, the compact physical size of the device is also a considerable advantage, therefore the solution seems to be promising.
 Then I compared the performance and reliability of the detector with the Blitzortung lightning detection network. I choose Blitzortung as a network which has a good deployment in central Europe where the mobile measurements were performed.
 Therefore two detection systems were selected for atmospheric discharge detection in this study: the device based on the AMS AS3935 integrated circuit and a coil antenna and the Blitzortung lightning detection network [12]. Both these lightning detection systems use radio emission reception at VLF frequencies. The devices differ in the design and realization of the antennas and implementation of the lightning detection algorithm.
-The device equipped by AMS AS3935 uses LIGHTNING01A  MLAB module with a coreless coil antenna connected as a resonant LC circuit (Figure 1).  The resonant frequency of the coil antenna (MA5532-AE) with temperature insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5 \%. The receiver for the signal from the antenna is integrated in the circuit [13] manufactured by AMS company. In fact this strict matching requirement is required by the IC datasheet and is quite constraining and effectively limits the possible application of the circuit.
+The device equipped by AMS AS3935 uses LIGHTNING01A MLAB module \cite[LIGHTNING01A] with a coreless coil antenna connected as a resonant LC circuit (Figure 1).  The resonant frequency of the coil antenna (MA5532-AE) with temperature insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5 \%. The receiver for the signal from the antenna is integrated in the circuit [13] manufactured by AMS company. In fact this strict matching requirement is required by the IC datasheet and is quite constraining and effectively limits the possible application of the circuit.
 According to manufacturer description the integrated circuit processes signals based on the signal level threshold detected by a comparator. If the comparator triggers, the proprietary signal processing unit algorithmically analyzes the signal. The output of the signal processing algorithm implemented in the AS3935 circuit consists of a classification of signal relevance: lightning discharge (8), artificial disturbance (4) or high noise level (1). The algorithm also determines the approximate distance and the estimated energy of the lightning discharge based on signal shape.
 The internal registers configuration for a measurement described below was set to “outdoor mode” by AFE_GB control register. All other registers are kept with implicit values.
 The circuit diagram including the AS3935 is shown in figure 2. The integrated circuit is powered by a 3.6 V from one primary lithium-thionyl chloride cell without usage of an integrated LDO (low drop-out) stabilizer. An I2C (Inter-Integrated Circuit) bus is used for communication with a data logger that also records data from pressure and temperature sensors. A GPS (Global Positioning System) receiver is used for logging of the precise time. The data is stored on a SDcard in a module [14].
@@ -18,13 +17,13 @@ A block diagram of the interconnections is shown in figure 3. The used firmware 
 
 \medskip
 \picw=10cm \cinspic ./img/LIGHTNING01A.png
-\caption/f The bottom side of the LIGHTNING01A module [23]. The antenna coil is visible on the left. The tuning capacitors and Q limiting resistor are mounted on the right side from the antenna.
+\caption/f The bottom side of the newly designed LIGHTNING01A module \cite[LIGHTNING01A]. The antenna coil is visible on the left. The tuning capacitors and Q limiting resistor are mounted on the right side from the antenna.
 \medskip
 
 
 \medskip
 \picw=15cm \cinspic ./img/LIGHTNING01A_schematics.png
-\caption/f Schematic diagram of the lightning sensor based on commercially available AMS AS3935 IC (module LIGHTNING01A [23]).
+\caption/f Schematic diagram of the lightning sensor based on commercially available AMS AS3935 IC (used in LIGHTNING01A \cite[LIGHTNING01A]).
 \medskip
 
 \medskip
