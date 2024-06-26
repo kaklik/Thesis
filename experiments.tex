@@ -283,6 +283,7 @@ Observations were carried out with a gradually improving strategy with the aim o
 
 \secc Measuring Cars Infrastructure
 
+The position of the measuring car was stationary during the period of thunderstorm. Moreover, in the case of radiation detectors, an extended static position time interval is required to capture the before and after storm activity in order to be able to record the development of radiation change including the local parameters of the radiation background. 
 
 \medskip
 \label[CRREAT_CAR0_diagram]
@@ -290,25 +291,23 @@ Observations were carried out with a gradually improving strategy with the aim o
 \caption/f CRREAT CAR0 instrumentation schematic diagram. This car differs with a four element UHF antenna array receiver and GNSS orientation tracking sensor. 
 \medskip
 
+During the measuring campaigns, the method of data recording developed as well. The first campaigns were trying to make fully automatic recordings based on observed electromagnetic signals using the described LIGHTNING01 module. Please refer to the section \ref[LIGHTNING01A] for details.
+This system however had a lot of imperfections leading to its abandonment in the measuring car CAR0, where it was replaced by solely manual activation of recording until the trigger was implemented directly into the VLF receiver’s FPGA. See the fig. \ref[CRREAT_CAR0_diagram] for overview.  
+The manual activation of the recording was based on the visual perception of the operator observing the lightning activity. In contrast to CAR0, CAR1 was left with a semi-automatic method of activating the recording for the purpose of comparing the efficiency of both trigger methods. Car CAR1 thus had for a long time recorded triggers based on using a loop antenna and oscilloscope that generated triggers for other devices. See fig. CRREAT CAR1.  After the successful test of manual triggers that option was implemented to all three cars.
+
 \medskip
 \label[CRREAT_CAR1_diagram]
 \picw=15cm \cinspic ./img/CRREAT_CAR1_diagram.png
 \caption/f CRREAT CAR1 instrumentation schematic diagram. This car has the electric Field mill sensor installed. 
 \medskip
 
+The trigger signal was initially distributed to the camera via the Ethernet network, a solution common to both measuring cars, but at the end of the campaign this method was abandoned and replaced with a direct trigger signal connected to the high-speed all-sky camera input, because ethernet has unknown latency on processing the trigger packet from network and also in thunderstorm conditions, there sometimes happens that trigger packet is not derived to the camera correctly.
+
 \medskip
 \label[CRREAT_CAR2_diagram]
 \picw=15cm \cinspic ./img/CRREAT_CAR2_diagram.png
 \caption/f  CRREAT CAR2 instrumentation schematic diagram. This car has special equipment for takeoff and command and control of the UAV (unmanned autogyro).  
 \medskip
-
-The position of the measuring car was stationary during the period of thunderstorm. Moreover, in the case of radiation detectors, an extended static position time interval is required to capture the before and after storm activity in order to be able to record the development of radiation change including the local parameters of the radiation background. 
-
-During the measuring campaigns, the method of data recording developed as well. The first campaigns were trying to make fully automatic recordings based on observed electromagnetic signals using the described LIGHTNING01 module. Please refer to the section \ref[LIGHTNING01A] for details.
-This system however had a lot of imperfections leading to its abandonment in the measuring car CAR0, where it was replaced by solely manual activation of recording until the trigger was implemented directly into the VLF receiver’s FPGA. See the fig. \ref[CRREAT_CAR0_diagram] for overview.  
-The manual activation of the recording was based on the visual perception of the operator observing the lightning activity. In contrast to CAR0, CAR1 was left with a semi-automatic method of activating the recording for the purpose of comparing the efficiency of both trigger methods. Car CAR1 thus had for a long time recorded triggers based on using a loop antenna and oscilloscope that generated triggers for other devices. See fig. CRREAT CAR1.  After the successful test of manual triggers that option was implemented to all three cars.
-
-The trigger signal was initially distributed to the camera via the Ethernet network, a solution common to both measuring cars, but at the end of the campaign this method was abandoned and replaced with a direct trigger signal connected to the high-speed all-sky camera input, because ethernet has unknown latency on processing the trigger packet from network and also in thunderstorm conditions, there sometimes happens that trigger packet is not derived to the camera correctly.
 
 A significant challenge was caused by the time needed to record the data measured by individual detectors resulting from the long time interval needed to store the recording from the operational memory of devices. The deadtime was gradually reduced by optimizing the settings and improving software and firmware, but it still remains as the main limit preventing the gathering of data from more lightning events in case of successful expeditions.  
 

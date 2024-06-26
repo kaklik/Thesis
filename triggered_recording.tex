@@ -117,10 +117,9 @@ In conclusion I found out that a detector based on the currently widely used det
 \sec Additional investigation of triggering methods
 
 Since the previously mentioned method using existing commercially available solutions for triggering recordings proved to be insufficient during actual measurements, it was necessary to explore further possibilities.
-From the signal detection theory, if the signal is known and determined, the signal can be detected by using signal replication and correlation method or the matched filter method. However the lightning signal is time-space random and mostly uncertain (see typical lightning pulse description in Introductory chapter). Therefore there is only option to use the energy detection to detect the lightning signal. That approach is examined in the following paragraphs.
+From the signal detection theory, if the signal is known and determined, the signal can be detected by using signal replication and correlation method or the matched filter method. However the lightning signal is time-space random and mostly uncertain (see typical lightning pulse description in Introductory chapter). Therefore there is only the option to use the signal energy to detect the lightning. That approach is examined in the following paragraph \ref[oscilloscope_trigger] and \ref[manual_trigger].
 
-\secc Using the oscilloscope to generate recording trigger
-\label[lightning_triggerring_method]
+\secc[oscilloscope_trigger] Using the oscilloscope to generate recording trigger
 
 Because, the initial use of a VLF antenna or magnetic loop seemed to be suitable for capturing lightning signals in required quality. The additional search for trigger method was focused on the suitable signal analyzing methods. 
 
@@ -143,7 +142,7 @@ The information gathered from these experiments and subsequently obtained from t
 \caption/f The one of initial variants of STP loop VLF antenna mounted on the measuring car CAR1 has a resonant frequency of ~100 kHz. Its signal was directly sampled by an oscilloscope placed inside the car.
 \medskip
 
-\secc Manual trigger method
+\secc[manual_trigger] Manual trigger method
 
 Although the trigger solution implemented with an oscilloscope proved relatively effective, it has certain drawbacks. One of the main limitations is the necessity to set the pulse level and pulse length parameters for each storm, and sometimes even for each phase of the storm. This characteristic resulted in the omission of some clearly visible lightning events, which the operator in the car was able to see, but the oscilloscope did not trigger. Although this disadvantage can be theoretically eliminated by using the "force trigger" button on the oscilloscope, such a solution was uncomfortable and also assumed that the oscilloscope was already booted up and set to the appropriate mode at the time.
 It thus appeared that a probably more suitable solution would be to add a button for manual trigger operation for all devices, regardless of oscilloscope state.  That was achieved by adding a button to the car's gear lever as is depicted in the photo \ref[Manual_button]. This manual approach not only allows triggering of instruments before the oscilloscope is set, but it is also a comfortable solution for the driver to trigger while driving in a storm, where the driver often sees lightning in the storm, but resetting the oscilloscope while driving is not possible, as it would also have to dynamically change with the approaching storm.
