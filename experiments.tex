@@ -64,7 +64,7 @@ In the case of FIK-5 and FIK-6 flights that served as the test flights for the n
 
 The payload for example FIK-6 flight contained TF-ATMON and three different types of ionizing radiation detectors already mentioned in \ref[instrumentation] section: SPACEDOS with silicon PIN diode sensor, AIRDOS-C with scintillation crystal and silicon photomultiplier and a G-M tube. The total payload mass was 2 kg.
 
-SPACEDOS is a lightweight dosimeter intended for space applications and measurements on board spacecraft. The detector has been described in \cite[SPACEDOS]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[AIRDOS-C]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included, because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
+SPACEDOS is a lightweight dosimeter intended for space applications and measurements on board spacecraft. The detector has been described in \cite[10.1093/rpd/ncac106]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[10.1093/rpd/ncac105]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included, because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
 
 \medskip
 \label[FIK-6_setup]
@@ -76,7 +76,7 @@ SPACEDOS is a lightweight dosimeter intended for space applications and measurem
 
 The flight FIK-6 took place on December 18th, 2020 and lasted 1 hour and 40 minutes. The balloon was launched from Příbram airport (LKPM) which is located around latitude 50$^{\circ}$ N. The balloon flight path continued in eastern direction for about 80km. 
 
-The system TF-ATMON recorded temperature, air pressure, humidity and radiation characteristics as histograms of deposited energy of radiation events from all three radiation sensors in the gondola see Figure \ref[FIK-6_RAW_data]. The barometric altitude was calculated using the International Standard Atmosphere model 1976 \cite[standard_atmosphere]. 
+The system TF-ATMON recorded temperature, air pressure, humidity and radiation characteristics as histograms of deposited energy of radiation events from all three radiation sensors in the gondola see Figure \ref[FIK-6_RAW_data]. The barometric altitude was calculated using the International Standard Atmosphere model 1976 \cite[us_standard_atmosphere_1976]. 
 
 \medskip
 \label[FIK-6_RAW_data]
@@ -291,7 +291,7 @@ The position of the measuring car was stationary during the period of thundersto
 \caption/f CRREAT CAR0 instrumentation schematic diagram. This car differs with a four element UHF antenna array receiver and GNSS orientation tracking sensor. 
 \medskip
 
-During the measuring campaigns, the method of data recording developed as well. The first campaigns were trying to make fully automatic recordings based on observed electromagnetic signals using the described LIGHTNING01 module. Please refer to the section \ref[LIGHTNING01A] for details.
+During the measuring campaigns, the method of data recording developed as well. The first campaigns were trying to make fully automatic recordings based on observed electromagnetic signals using the described LIGHTNING01 module. Please refer to the section \ref[LIGHTNING01A_trigger] for details.
 This system however had a lot of imperfections leading to its abandonment in the measuring car CAR0, where it was replaced by solely manual activation of recording until the trigger was implemented directly into the VLF receiver’s FPGA. See the fig. \ref[CRREAT_CAR0_diagram] for overview.  
 The manual activation of the recording was based on the visual perception of the operator observing the lightning activity. In contrast to CAR0, CAR1 was left with a semi-automatic method of activating the recording for the purpose of comparing the efficiency of both trigger methods. Car CAR1 thus had for a long time recorded triggers based on using a loop antenna and oscilloscope that generated triggers for other devices. See fig. CRREAT CAR1.  After the successful test of manual triggers that option was implemented to all three cars.
 
