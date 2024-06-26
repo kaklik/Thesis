@@ -1,0 +1,36 @@
+\documentclass[a4paper,landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{nopageno} % Balíček pro odstranění číslování stránek
+\usepackage{adjustbox} % Balíček pro přizpůsobení velikosti tabulky
+
+\geometry{a4paper,landscape,margin=1in}
+
+\begin{document}
+
+\begin{table*}
+\centering
+\caption{Table summarising success of used technologies, with colours representing a degree of reliability: \newline \colorbox{red}{Failure} \colorbox{yellow}{Partial failure} \colorbox{green}{Correct function}.\label{Flight_reliability}}
+\begin{adjustbox}{width=\textwidth} % Přizpůsobení velikosti tabulky šířce stránky
+{\begin{tabular}{>{\centering\arraybackslash}m{0.08\textwidth} >{\centering\arraybackslash}m{0.1\textwidth} >{\centering\arraybackslash}m{0.1\textwidth} >{\centering\arraybackslash}m{0.1\textwidth} >{\centering\arraybackslash}m{0.13\textwidth} >{\centering\arraybackslash}m{0.13\textwidth} >{\centering\arraybackslash}m{0.13\textwidth} >{\centering\arraybackslash}m{0.13\textwidth}}\toprule
+Flight & FIK-1 & FIK-2 & FIK-3 & FIK-4 & FIK-5 & FIK-6 & FIK-9 \\\midrule
+Location (year) & CZ (2015) & CZ (2017) & CZ (2018) & SE (2019) & CZ (2019) & CZ (2020) & CZ (2023) \\
+Payload & \cellcolor{green} Candy detector, Web camera & \cellcolor{yellow} Candy detector, Web camera & \cellcolor{green} AIRDOS,
+360 deg camera & \cellcolor{green} AIRDOS-C CRY19, SPACEDOS, G-M, Socrat-R & \cellcolor{green} AIRDOS-C
+CRY19,SPACEDOS, G-M, 360 deg camera & \cellcolor{green} AIRDOS-C NaI(Tl), SPACEDOS, G-M, Ionmeter, 360 deg camera & \cellcolor{green} AIRDOS04 Prototype, LABDOS01B, LABDOS01A, PiTED, MiniPIX, TFHT01 \\
+Landing site & \cellcolor{yellow} vineyard Austria & \cellcolor{green} rapeseed field & \cellcolor{red} Poland & \cellcolor{yellow} swamp (Finland) & \cellcolor{green} forest & \cellcolor{red} railway corridor & \cellcolor{red} Near high voltage substation\\
+Power source & \cellcolor{green} Li-ion 18650 accu & \cellcolor{yellow} Li-ion 18650 and li-pol accu & \cellcolor{yellow} Lithium primary cells and li-pol accu & \cellcolor{green} Lithium primary cells & \cellcolor{yellow} Lithium primary cells & \cellcolor{green} Li-ion 18650 accu &  \cellcolor{green} Li-ion 18650 accu \\
+Telemetry system & \cellcolor{red} GSM & \cellcolor{yellow} GSM, 868 MHz Proprietary Modem & \cellcolor{yellow} SigFox, 868 MHz Proprietary Modem &  Outsourced & \cellcolor{green} LoRa, SigFox, SiK 433 MHz & \cellcolor{green} 2x LoRa, SiK 433 MHz & \cellcolor{green} 868 MHz LoRa, SiK 433 MHz \\
+Rescue beacon & \cellcolor{green} 433 MHz CW & \cellcolor{green} 433 MHz CW & \cellcolor{green} 433 MHz CW &  Outsourced & \cellcolor{green} 433 MHz CW & \cellcolor{green} 433 MHz CW & \cellcolor{green} 433 MHz CW \\
+Flight control computer & \cellcolor{yellow} Odroid-U2 & \cellcolor{yellow} Odroid-U2 & Not used & Not used/outsourced & \cellcolor{green} PX4, FMU v5 & \cellcolor{green} PX4, FMU v5 & \cellcolor{green} PX4, FMU v5, TF-ATMON \\
+\bottomrule
+\end{tabular}}
+\end{adjustbox}
+\end{table*}
+
+\end{document}
+
