@@ -125,9 +125,14 @@ In total the PCB of the QFHMIX01 module has two differential 100Ω input ports f
 \caption/f Calculated vertical radiation pattern of the single QFH antenna in two perpendicular cross-sections (normalised).
 \medskip
 
-The LNA structure contains the blocks concatenated from antenna input port to IQ demodulator input in this way: first BPF, gain block, second BPF, second gain block. First BPF is the filter, whose purpose is to cut out the signals outside of the band of interest, and thereby protect the first gain block from overdriving to a nonlinear regime. The filter passband is depicted in figure \ref[input_RF_filter]. 
+The LNA structure contains the blocks concatenated from antenna input port to IQ demodulator input in this way: first BPF, gain block, second BPF, second gain block. First BPF is the filter, whose purpose is to cut out the signals outside of the band of interest, and thereby protect the first gain block from overdriving to a nonlinear regime. The filter passbands are depicted in figure \ref[input_RF_filter]. 
 
-\rfc{TODO: vložit spočítanou frekvenční charakteristiku vstupního filtru}
+\picw=.5\hsize
+\clabel[input_RF_filter]{UHF receiver RF filters}
+\centerline {\inspic ./img/input_RF_filter1.png \hfil\hfil \inspic ./img/input_RF_filter2.png }\nobreak
+\centerline {a)\hfil\hfil b)}\nobreak\medskip
+\caption/f Monte Carlo analysis of two RF filters. a) The filter placed immediately after the antenna is a two-stage filter designed to maintain low insertion loss. b) The filter located after the first amplifier is a three-stage filter designed to limit the propagation of out-of-band signals further into the receiver. Both filters are designed using discrete E24 series components, which effectively minimize the possibility of detuning due to vibrations in mobile applications and enable the filters to achieve very compact sizes. 
+\medskip
 
 First gain block is based on the MPGA-105 selected for minimal noise figure and high third-order intercept point, specifically it has NF: 1.8dB, gain: 14.6 dB and OIP3: 35.8 dB. The second filter is the band pass filter.  Second gain block uses the MGVA-63 selected for acceptable noise figure and high-gain while maintaining  wide dynamic range, it has NF: 3.6dB,  gain: 21.5 dB and OIP3: 34.3 dB.  This sequence of components gives an RF path with approximately NF: 4.8 dB and gain: 32 dB.
 

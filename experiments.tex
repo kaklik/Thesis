@@ -26,8 +26,6 @@ Due to a relatively high value of payload and measurement relied only on board d
 
 Despite the generally successful nature of all fights and the fact that the gondolas were always found, different technologies were tried to eliminate the partial shortcomings which emerged during the previous balloon flights. For example, the initially used GSM based telemetry system was replaced by a significantly more robust IoT LoRa transmitter, making it possible to transmit the data necessary for tracing the gondola directly to the TheThingsNetwork. This step enables a high reliability of finding the gondola and at the same time a basic recording of the experiment data transmitted to the ground. For the case of more advanced detectors, it was also necessary that the 3D flight trajectory including the orientation to be recorded synchronously with the supplementary quantities. That is also ensured with the incorporation of the TF-ATMON system, which relies on PX4 autopilot firmware running on Pixhawk hardware equipped with IMU sensors. As can be seen from table T, flights conducted since FIK-5 implemented avionics using UAV technology. It is realized by the use of the Pixhawk based autopilot hardware with PX4 firmware. Telemetry was implemented by a very reliable combination of LoRa modem and SiK modem. 
 
-\rfc{Tady je potřeba vložit barevnou tabulku s lety FIK, nebo ji dát do přílohy}
-
 Apart from technologies used directly in balloon  gondolas a number of supplementary tools on ground have undergone intensive development. For example, in order to find the balloon it was necessary to have an accurate real-time map of its position together with a prediction of the next stage of the flight and the location of touch down. For that case of the flights since the FIK-5 use the habhub \urlnote{https://tracker.habhub.org/} (lately the \urlnote{https://amateur.sondehub.org/}) was used to track and predict the movement of stratospheric balloons in real-time. In fact at the beginning the HabHub was used to manually run the prediction of flight, but real-time calculation of trajectory predictions introduced in FIK-3 based on live telemetry data significantly decreases the time required for gondola recovery. 
 
 \secc The design of universal avionics
@@ -107,7 +105,7 @@ As the measured data show in Fig \ref[R-P_maximum], there is a very noticeable d
 
 \medskip
 \label[R-P_maximum]
-\picw=8cm \cinspic ./img/FIK-6_R-P_maximum.png
+\picw=15cm \cinspic ./img/FIK-6_R-P_maximum.png
 \caption/f Log-norm fit of ionising radiation measured data with calculated Regener-Pfotzer maxima for different detectors (G-M tube, NaI(Tl) scintillator and silicon PIN diode). Measured data are depicted with gray color as mean from 5 minutes of measurement with 2$\sigma$ standard errors.
 \medskip
 
