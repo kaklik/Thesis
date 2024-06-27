@@ -22,6 +22,11 @@
    \signature % makes dots
 }
 
+\def\mycite[#1]{{\null\def\_addcitelist##1{}\nonumcitations\unskip\cite[#1]}}
+\def\specialbibs{\bibnum=1000
+   \def\_printbib{\hangindent=2\iindent
+      \noindent\hskip2\iindent \llap{[\the\bibmark] }}%
+}
 
 \input glosdata
 
@@ -87,10 +92,10 @@ That is why I need to design and operate the multiple measurement systems carrie
 
 The objectives of this dissertation are to address and clarify several unresolved phenomena related to thunderstorms, particularly the initiation and development of lightning. This research aims to develop and utilize new tools for the detection and scientific observation of lightning events within thunderstorms. The focus will be on understanding the relationship between ionizing radiation and lightning, as well as developing innovative mobile instruments required for detailed storm observation. The specific tasks to be undertaken are as follows:
 
-\begitems
-\item - {\bf Development and Implementation of Lightning Detection Apparatus}: Mobile experimental apparatus capable of radio detection and localization of lightning events and ionizing radiation, considering the expected spatial scales, will be designed and deployed. Data will be collected using radio detectors, high-speed cameras, and ground-based electric field measurements.
-\item - {\bf Analysis of Spatial and Temporal Characteristics of Lightning Discharges}: The propagation of lightning, emitted radio signals, and associated electric fields will be studied. Methods for visualizing lightning discharges that avoid misinterpretation as ground strikes and more accurately reflect the physical principles of lightning development and radio signal emissions will be developed.
-\item - {\bf Enhancement of Measurement Techniques with in-situ atmospheric monitoring}: New instruments such as stratospheric balloons and unmanned aerial vehicles (UAVs) (especially unmanned autogyro) for in-situ measurements of electric fields and ionizing radiation will be developed. The new electric field mill and a semiconductor-based ionizing radiation detector will be integrated into the UAV.
+\begitems \style n
+* {\bf Development and Implementation of Lightning Detection Apparatus}: Design and deploy mobile experimental apparatus capable of radio detection and localization of lightning events and ionizing radiation, considering the expected spatial scales. Collect data using radio detectors, high-speed cameras, and ground-based electric field measurements.
+* {\bf Enhance understanding of Spatial and Temporal Characteristics of Lightning Discharges}: Develop visualization methods and improve measurement apparatuses for detecting lightning and ionizing radiation. Study the propagation of lightning, emitted radio signals, and associated electric fields, and reflect the physical principles of lightning development and radio emissions.
+* {\bf Enhancement of Measurement Techniques with in-situ atmospheric monitoring}: Develop and integrate new instruments, such as stratospheric balloons and unmanned aerial vehicles (UAVs), for in-situ measurements of electric fields and ionizing radiation. Employ new electric field mills and semiconductor-based ionizing radiation detectors integrated into UAVs to explore potential insights into lightning initiation and the locations of ionizing radiation generation within clouds.
 \enditems
 
 The results of this research are expected to provide a deeper understanding of lightning initiation and propagation. At the same time, it offers improved detection and observation techniques that can inform future studies, about the relation to ionizing radiation with direct practical applications in meteorology and atmospheric physics.
@@ -124,8 +129,16 @@ The results of this research are expected to provide a deeper understanding of l
 \nextoddpage
 
 \bibchap
+
 \usebib/c (simple) references
 
+\specialbibs
+
+\secc Papers in journals
+ 
+\bib[j1] = {J1} Kákona, J., Mikeš, J., Ambrožová, I., Ploc, O., Velychko, O., Sihver, L., and Kákona, M.: In situ ground-based mobile measurement of lightning events above central Europe, Atmos. Meas. Tech., 16, 547–561, https://doi.org/10.5194/amt-16-547-2023, 2023.
+ 
+\bib[j2] = {J2} Jakub Kákona, Martina Lužová, Martin Kákona, Marek Sommer, Martin Povišer, Ondřej Ploc, Roman Dvořák, Iva Ambrožová, MEASUREMENT OF THE REGENER–PFOTZER MAXIMUM USING DIFFERENT TYPES OF IONISING RADIATION DETECTORS AND A NEW TELEMETRY SYSTEM TF-ATMON, Radiation Protection Dosimetry, Volume 198, Issue 9-11, August 2022, Pages 712–719, https://doi.org/10.1093/rpd/ncac124
 
 
 \bye
