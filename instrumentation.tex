@@ -91,17 +91,13 @@ The use of this dedicated receiver decreases the data recording interval to abou
 
 The construction of the UHF receiver is designed in a way that enables a phase processing of the signal from the antenna array with the aim of future detailed mapping of the lightning \urlnote{https://github.com/UniversalScientificTechnologies/RSMS01}. However, in the case of this experiment, only the scalar envelope of the radio signal is considered.
 
-The UHF receiver operates approximately in the 370-406~MHz band, exact tuning depends on the local noise situation within the observation area. The receiver has 10~MHz bandwidth. The signal is received by an array of four QFH antennas mounted in a square-like configuration on the roof platform of the measuring car as is shown in the photos in Figure \ref[UHF-QFH_receiver]. The signal from each antenna is directly downconverted by an RF mixer to I and Q analog channels. Each channel is sampled by a 12-bit analog-to-digital converter with 10~MS/s.  
-
+The UHF receiver operates approximately in the 370-406~MHz band, exact tuning depends on the local noise situation within the observation area. The receiver has 10~MHz bandwidth. The signal is received by an array of four QFH antennas mounted in a square-like configuration on the roof platform of the measuring car as is shown in the photos in Figure \ref[UHF-QFH_receiver]. The signal from each antenna is directly downconverted by an RF mixer to I and Q analog channels. Each channel is sampled by a 12-bit analog-to-digital converter with 10~MS/s. The block diagram of the receiver is shown in Appendix \ref[SDR_receiver].
 
 \medskip
 \clabel[UHF-QFH_receiver]{UHF lightning signal receiver and its components}
 \picw=10cm \cinspic ./img/UHF-QFH_Receiver.png
 \caption/f The platform mount of a QFH receiver antenna is shown in the top left corner. Detailed pictures of the antenna can be seen at the bottom and the receiver is in the top right.
 \medskip
-
-The block diagram of the receiver is shown in Appendix X
-\rfc{TODO: vložit přílohu s blokovým schématem přijímače}
 
 
 The UHF radio receiver is triggered by an external trigger (coming from the VLF receiver), then records a signal fragment with the configured number of pre-trigger and post-trigger blocks up to 1.45 seconds long in total. The radio signal is simultaneously sampled from all elements in the antenna array. This feature is achieved by using an internal ring buffer that stores the samples from the antenna array before the trigger. Time stamping is implemented by storing an array of sample numbers along with a few last-time marks created by a PPS signal from an external GNSS receiver. This metadata is then recorded in the resulting data record file for each trigger event. That mechanism allows precise restoration of the absolute time of each recorded signal sample. 
