@@ -36,7 +36,7 @@ Therefore the TF-ATMON onboard stratospheric balloons has become an extremely us
 The schematic diagram of the avionics hardware summarized in the figure \ref[avionics_schematics].
 
 \medskip
-\label[avionics_schematics]
+\clabel[avionics_schematics]{FIK flight avionics}
 \picw=15cm \cinspic ./img/avionics_block_schematics.pdf
 \caption/f The schematic diagram of the new avionics concept used in FIK flights. 
 \medskip
@@ -67,7 +67,7 @@ The payload for example FIK-6 flight contained TF-ATMON and three different type
 SPACEDOS is a lightweight dosimeter intended for space applications and measurements on board spacecraft. The detector has been described in \cite[10.1093/rpd/ncac106]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[10.1093/rpd/ncac105]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included, because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
 
 \medskip
-\label[FIK-6_setup]
+\clabel[FIK-6_setup]{FIK-6 flight balloon setup}
 \picw=8cm \cinspic ./img/FIK-6_experiment_setup.png
 \caption/f FIK-6 experiment setup using the Hwoyee Weather Balloon 1600. 
 \medskip
@@ -79,13 +79,13 @@ The flight FIK-6 took place on December 18th, 2020 and lasted 1 hour and 40 minu
 The system TF-ATMON recorded temperature, air pressure, humidity and radiation characteristics as histograms of deposited energy of radiation events from all three radiation sensors in the gondola see Figure \ref[FIK-6_RAW_data]. The barometric altitude was calculated using the International Standard Atmosphere model 1976 \cite[us_standard_atmosphere_1976]. 
 
 \medskip
-\label[FIK-6_RAW_data]
+\clabel[FIK-6_RAW_data]{FIK-6 flight recorded data}
 \picw=15cm \cinspic ./img/FIK-6_RAW_data.png
 \caption/f Raw data measured during the flight. From top to bottom: temperature near scintillation crystal, air pressure inside the box of crystal, temperature inside the gondola, relative humidity inside the gondola, counts of radiation events per 10 seconds counted by scintillator, silicon detector, and  G-M counter, barometric altitude, and altitude from GNSS.
 \medskip
 
 \medskip
-\label[FIK-6_telemetry]
+\clabel[FIK-6_telemetry]{Acceleration and Angular Speed balloon telemetry}
 \picw=15cm \cinspic ./img/FIK-6_metadada.png
 \caption/f Acceleration and Angular Speed in axis perpendicular to the ground combined with ionizing radiation flux measured by the silicon PIN diode detector.
 \medskip
@@ -95,7 +95,7 @@ The figure \ref[FIK-6_telemetry] demonstrates the importance of telemetry data f
 The graphs show that the maximum reached altitude was approximately 33 km above sea level. During the flight the balloon passed the Regener-Pfotzer maximum twice. The rescue team followed the balloon along the whole flight trajectory. The precision of tracking allowed some participants of the rescue team to actually see the gondola touchdown visually. Therefore the gondola was successfully rescued within a few minutes after touchdown (Figure \ref[FIK-6_rescue_team]).
 
 \medskip
-\label[FIK-6_rescue_team]
+\clabel[FIK-6_rescue_team]{Gondola recovery, based on trajectory prediction}
 \picw=8cm \cinspic ./img/FIK-6_rescue_team.png
 \caption/f A screenshot from HabHub tracker. The CRREAT measurement vehicles, serving as stratospheric balloon chase cars, are equipped with telemetry receivers at the landing site. They are prepared for immediate gondola recovery, thanks to precise touchdown location predictions.
 \medskip
@@ -104,7 +104,7 @@ By processing the data a graph of detected altitude fig. \ref[R-P_maximum] was o
 As the measured data show in Fig \ref[R-P_maximum], there is a very noticeable difference between a number of data points measured during the flight upwards and during the descent. This difference is mainly caused by the different values of vertical speed. In the future balloon flights, this problem is planned to be overcome by a controlled descent, during which the rate of descent can be decreased in some phases of the flight so that it can be more comparable with the speed of the ascent.
 
 \medskip
-\label[R-P_maximum]
+\clabel[R-P_maximum]{Estimated Regener-Pfotzer maxima}
 \picw=15cm \cinspic ./img/FIK-6_R-P_maximum.png
 \caption/f Log-norm fit of ionising radiation measured data with calculated Regener-Pfotzer maxima for different detectors (G-M tube, NaI(Tl) scintillator and silicon PIN diode). Measured data are depicted with gray color as mean from 5 minutes of measurement with 2$\sigma$ standard errors.
 \medskip
@@ -124,7 +124,7 @@ Another unresolved challenge for use of the balloons for thunderstorm research, 
 For these reasons, it became necessary to shift to other carrier platforms to be used for practical storm activity measurements. The logical alternative for this step is to employ \glref{UAS}.
 
 \medskip
-\label[balloon_wind_takeoff]
+\clabel[balloon_wind_takeoff]{Takeoff of stratospheric baloon during high wind conditions}
 \picw=15cm \cinspic ./img/balloon_wind_takeoff.jpg
 \caption/f The experimental stratospheric balloon takeoff (FIK-2) under increased wind conditions. The takeoff was partially successful; however, the gondola impacted me and then the ground, causing damage to the internal power supply and telemetry antenna.
 \medskip
@@ -135,7 +135,7 @@ Despite widespread efforts which could be found in the literature \cite[https://
 \glref{UAS} offer additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of \glref{LCL} for example. The obvious requirement is to use a new unmanned airframe using TF-ATMON described in section \ref[balloon_flights] and employ the integrated flight controller take control over the measurement procedure in the atmosphere.
 
 \medskip
-\label[TF-G2_fly_clouds]
+\clabel[TF-G2_fly_clouds]{TF-G2 during flight}
 \picw=15cm \cinspic ./img/TF-G2_fly_clouds.jpg
 \caption/f TF-G2 autogyro under the clouds, during one of many test flights. 
 \medskip
@@ -153,7 +153,7 @@ The TF-G2 autogyro's airframe utilizes a lightweight yet robust and high impact 
 Internal components are protected from the weather by a waterproof fabric cover, which enables easy service access and supports equipment variability with its shape adaptability. Furthermore, that airframe's design allows easy access to onboard instruments and maintenance. This capability is achieved by rack-style mount options, where the payload could be easily fixed to a grid of screw holes which can be seen in figure \ref[TF-G2_hangar].
 
 \medskip
-\label[TF-G2_hangar]
+\clabel[TF-G2_hangar]{TF-G2 without rain cover}
 \picw=15cm \cinspic ./img/TF-G2_hangar.png
 \caption/f A development version of TF-G2 autogyro, waterproof fabric cover removed. The 3D printed parts could be seen according to the grid of screw holes used for mounting of the experimental equipment. 
 \medskip
@@ -197,7 +197,7 @@ $$ {A_D \over A_d} > \sqrt{2} \eqmark[IAS_sensitivity]$$
 The advantage of the higher sensitivity results in increased drag, but it should be negligible at low airspeeds. Therefore the best use case of the sensor is the integration of the sensing device into the relatively massive fuselage or other suitable airframe structure. In the case of TF-G2 autogyro it is resolved by integration of the TFSLOT01 sensor directly to the rotor head, just below the rotor hub as could be seen in fig \ref[TF-G2_hangar]. The figure \ref[TFSLOT01] shows detail of the TFSLOT01 sensor. 
 
 \medskip
-\label[TFSLOT01]
+\clabel[TFSLOT01]{TFSLOT01 airspeed sensor design}
 \picw=15cm \cinspic ./img/TFSLOT01.jpg
 \caption/f The photograph showcases a close-up of TFSLOT01, where the front part features the entry aperture AD. The narrow aperture Ad is slightly deeper into the structure. In the rear of the photo is visible the I2C cable, used to connect  the sensor to the flight controller. 
 \medskip
@@ -208,7 +208,7 @@ The advantage of the higher sensitivity results in increased drag, but it should
 The telemetry system used in the TF-G2 autogyro is significantly improved, but still based on the technology previously tested on stratospheric balloon's telemetry link. Unlike the one-way radio communication utilized in the balloon experiments, the TF-G2 employs a bidirectional half-duplex, TDM radio system. The modem still operates at a frequency of 433MHz, but with improved RF front-end to ensure more reliable communication link due to the demanding environmental conditions of the TF-G2 flight. The modem firmware is again based on modified SiK firmware, which incorporates integration to the new hardware capable of supporting antenna diversity, specifically a 2x2 MIMO configuration. This arrangement allows for the connection of two external antennas, each of which can be utilized for both transmitting and receiving signals. The optimal antenna is selected based on RSSI metric on received packet preamble before each transmission of the next packet. This dual-antenna setup significantly improves signal resilience against interference from multipath fading and is also robust against mechanical damage to one of the antennas—a critical improvement over the previous single-antenna modems used on balloon flights, where the damage actually happens (see the Table 1 in appendix \ref[FIK_flights]). It is also quite a common failure model of the antenna on UAVs, caused by prolonged exposure to vibrations during flights.
 
 \medskip
-\label[TFSIK01]
+\clabel[TFSIK01]{TFSIK dual-antenna telemetry modem}
 \picw=15cm \cinspic ./img/TFSIK01.jpg
 \caption/f TFSIK PCB without an electromagnetic shielding and 3D printed housing. The RF input and output with impedance matching network, RF switch, band-pass filter and LNA is in the left of the photo. 
 \medskip
@@ -222,16 +222,17 @@ Key innovation in the TF-G2's design is the tight integration of specialized sen
 For detection of ionizing radiation the UAV has been equipped with a semiconductor detector, AIRDOS03 (UAVDOS), previously tested during balloon flights. It is situated in the UAV's fuselage under a waterproof fabric cover and connected to the TF-ATMON system via serial link similarly as were described in the \ref[balloon_flights] section. The avionics system manages sensor readout, synchronizing data collection with the TF-G2's flight path and with data from other sensors (EFM, humidity, etc.), see the fig. \ref[E_mill_data] for example of that data. That onboard data processing together with telemetry link enable real-time preliminary analysis, aiding in the assessment of collected data during the flight.
 
 \medskip
-\label[E_mill_data]
+\clabel[E_mill_rotor]{EFM mounted on autogyro's rotor head}
+\picw=15cm \cinspic ./img/E_mill_rotor.png
+\caption/f Close up view of electric field mill (THUNDERMILL01) mounted into the autogyro rotor head. The sensing electrodes are below the rotating grounded disk. Part of one sensing electrode is visible in the left side of the E-mill’s rotor disk opening.  
+\medskip
+
+\medskip
+\label[E_mill_data]{Example of data measured by EFM mounted on autogyro}
 \picw=15cm \cinspic ./img/E_mill_data.png
 \caption/f Electric field measurement data along with environmental humidity and temperature, aligned with flight parameters during flight in a fair weather. 
 \medskip
 
-\medskip
-\label[E_mill_rotor]
-\picw=15cm \cinspic ./img/E_mill_rotor.png
-\caption/f Close up view of electric field mill (THUNDERMILL01) mounted into the autogyro rotor head. The sensing electrodes are below the rotating grounded disk. Part of one sensing electrode is visible in the left side of the E-mill’s rotor disk opening.  
-\medskip
 
 \secc Takeoff technique 
 
@@ -242,7 +243,7 @@ However, since the launch platform is mounted on the roof of the vehicle, the cr
 Additionally the overall status is visible through an analog camera, which provides both the driver and the operator the view on the autogyro, mounted in the takeoff platform. However, this display is limited by the camera's frame rate and the resolution of the analog camera (a digital camera cannot be used due to typically high latency in the image encoder and decoder). The driver and operator also have access to auditory and visual signals indicating the platform and takeoff status via a shared handheld controller, which can be used to abort the takeoff procedure in the event of an unforeseen issue.
 
 \medskip
-\label[takeoff_display]
+\clabel[takeoff_display]{UAV control panel}
 \picw=15cm \cinspic ./img/takeoff_display.png
 \caption/f Measuring CAR2 was equipped with special instruments required to operate the unmanned autogyro TF-G2.  In the center is an autogyro status display with rotor RPM and IAS indicators, bottom is video from the roof camera and on the right there is a UAV operator’s laptop.
 \medskip
@@ -251,7 +252,7 @@ The takeoff platform device is removably integrated into the assembly of magneti
 The mentioned handheld controller for the driver and operator is directly connected to the microcontroller managing the platform, allowing the platform's internal state to be overridden despite commands from the TF-G2. That takeoff solution is designed primarily to achieve overall safety before and during the thunderstorm measurement attempt. 
 
 \medskip
-\label[autogyro_takeoff_platform]
+\clabel[autogyro_takeoff_platform]{Autogyro takeoff platform}
 \picw=15cm \cinspic ./img/autogyro_takeoff_platform.png
 \caption/f Measuring CAR2 was equipped with a roof platform used to carry the TF-G2 autogyro to the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during actual takeoff and housing the weights used to prerotate the rotor to minimum RPMs.
 \medskip
@@ -261,7 +262,7 @@ The mentioned handheld controller for the driver and operator is directly connec
 Throughout the development phase of the unmanned autogyro, extensive test flights were conducted to evaluate various modifications and enhancements to the UAVs design, the firmware of the autopilot, and the ground equipment adjustments. One of these could be seen in the figure \ref[lift_drag].  Among these development verification, there were tests on detectors in certain scenarios. These are experiments usually conducted outside of the main thunderstorm session. 
 
 \medskip
-\label[lift_drag]
+\clabel[lift_drag]{Lift and Drag measurement platform}
 \picw=15cm \cinspic ./img/lift_drag.png
 \caption/f Measuring CAR2 was equipped with a roof lift and drag measuring platform used to carry on-ground testing procedures. 
 \medskip
@@ -286,7 +287,7 @@ Observations were carried out with a gradually improving strategy with the aim o
 The position of the measuring car was stationary during the period of thunderstorm. Moreover, in the case of radiation detectors, an extended static position time interval is required to capture the before and after storm activity in order to be able to record the development of radiation change including the local parameters of the radiation background. 
 
 \medskip
-\label[CRREAT_CAR0_diagram]
+\clabel[CRREAT_CAR0_diagram]{CRREAT CAR0 instrumentation diagram}
 \picw=15cm \cinspic ./img/CRREAT_CAR0_diagram.png
 \caption/f CRREAT CAR0 instrumentation schematic diagram. This car differs with a four element UHF antenna array receiver and GNSS orientation tracking sensor. 
 \medskip
@@ -296,7 +297,7 @@ This system however had a lot of imperfections leading to its abandonment in the
 The manual activation of the recording was based on the visual perception of the operator observing the lightning activity. In contrast to CAR0, CAR1 was left with a semi-automatic method of activating the recording for the purpose of comparing the efficiency of both trigger methods. Car CAR1 thus had for a long time recorded triggers based on using a loop antenna and oscilloscope that generated triggers for other devices. See fig. CRREAT CAR1.  After the successful test of manual triggers that option was implemented to all three cars.
 
 \medskip
-\label[CRREAT_CAR1_diagram]
+\clabel[CRREAT_CAR1_diagram]{CRREAT CAR1 instrumentation diagram}
 \picw=15cm \cinspic ./img/CRREAT_CAR1_diagram.png
 \caption/f CRREAT CAR1 instrumentation schematic diagram. This car has the electric Field mill sensor installed. 
 \medskip
@@ -304,7 +305,7 @@ The manual activation of the recording was based on the visual perception of the
 The trigger signal was initially distributed to the camera via the Ethernet network, a solution common to both measuring cars, but at the end of the campaign this method was abandoned and replaced with a direct trigger signal connected to the high-speed all-sky camera input, because ethernet has unknown latency on processing the trigger packet from network and also in thunderstorm conditions, there sometimes happens that trigger packet is not derived to the camera correctly.
 
 \medskip
-\label[CRREAT_CAR2_diagram]
+\clabel[CRREAT_CAR2_diagram]{CRREAT CAR2 instrumentation diagram}
 \picw=15cm \cinspic ./img/CRREAT_CAR2_diagram.png
 \caption/f  CRREAT CAR2 instrumentation schematic diagram. This car has special equipment for takeoff and command and control of the UAV (unmanned autogyro).  
 \medskip
@@ -317,7 +318,7 @@ Therefore, it was necessary to explore other methods that ideally would not depe
 This feature of the receiver not only enabled precise positioning but was particularly beneficial for applications like UAV following or potential future implementation of landing back on the car's roof. Utilizing this for the car's platform orientation across three axes partially replaced the manually operated compass but faced challenges in signal quality due to onboard equipment interference. Additionally, such a solution is very sensitive to interruptions in signal phase, as for example when the car passes under a highway bridge or driving on a road covered by trees, the both can easily disrupt the signal phase and result in inaccurate or incorrect orientation measurements. The usability of this innovation was thus primarily hindered by the implementation in the selected receiver, which was unable to reliably indicate when the provided moving baseline coordinates were invalid.
 
 \medskip
-\label[RTK_moving_baseline]
+\label[RTK_moving_baseline]{RTK antennas mounted on a vehicle}
 \picw=15cm \cinspic ./img/RTK_moving_baseline.png
 \caption/f  This image shows locations of the RTK (Real-Time Kinematic) antennas mounted on a vehicle for positioning using the moving baseline method.  
 \medskip

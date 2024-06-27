@@ -6,10 +6,12 @@ In order to determine the necessary parameters of lightning activity (lightning 
 The equipment of cars is not uniform as it is gradually improved and also the purpose of each car slightly differs.
 
 \medskip
-\label[CRREAT_CAR0]
+\clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
 \picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
 \caption/f Measuring CAR0 with instruments mounted on the roof platform. Other cars were equipped similarly. The differences of instrumentation are depicted in diagrams. 
 \medskip
+
+\rfc{Aktualizovat obrázek auta}
 
 \sec High-speed all-sky Cameras
  
@@ -18,7 +20,7 @@ The two cars were equipped with high-speed all-sky cameras. Their purpose is to 
 Chronos 1.4 camera  CR14-1.0-16M \cite[chronos_datasheet] was mounted in a waterproof SolidBox 69200. The box is covered with a plexiglass dome with the manufacturer designation Duradom 200mm depicted in Fig \ref[high_speed_allsky_camera]. 
 
 \medskip
-\label[high_speed_allsky_camera]
+\clabel[high_speed_allsky_camera]{High-speed all-sky camera}
 \picw=15cm \cinspic ./img/high-speed_camera.png
 \caption/f The camera has a wide-angle CS camera lens and is equipped with an IR blocking filter mounted in front of the LUX1310 CMOS sensor \urlnote{https://www.luxima.com/product_briefs/PDF/LUX1310_brief_v3.1.pdf}. The IR filter is mandatory, to avoid the adverse effect of sunlight coming into the camera lenses. 
 \medskip
@@ -59,7 +61,7 @@ For the observation,  the VLF receiver system was used simultaneously for detect
 
 
 \medskip
-\label[RSMS_control]
+\clabel[RSMS_control]{Lightnig signal receiver's control software}
 \picw=15cm \cinspic ./img/RSMS_control_interface.png
 \caption/f Screenshot of the web based interface to the VLF receiver used to set up the trigger and recording parameters. 
 \medskip
@@ -67,7 +69,7 @@ For the observation,  the VLF receiver system was used simultaneously for detect
 \secc[VLF_receiver] VLF signal receiver
 
 \medskip
-\label[VLF_antenna]
+\clabel[VLF_antenna]{VLF antenna array construction}
 \picw=15cm \cinspic ./img/VLF_antenna.png
 \caption/f A detailed view on aluminum construction, that holds orthogonal magnetics loop antennas.  The individual edges are isolated by 3D printed corners.
 \medskip
@@ -79,7 +81,7 @@ And the oscilloscope was replaced with the very similar hardware as the UHF sign
 An example of the captured lightning signal can be seen in fig. \ref[figur_VLFdata].
 
 \medskip
-\label[figur_VLFdata]
+\clabel[figur_VLFdata]{An example of VLF lightning signal}
 \picw=15cm \cinspic ./img/VLF_signals.png
 \caption/f Data visualization obtained from VLF antennas placed on three measuring cars (each car has a set of three orthogonal antennas). It is evident that the amplitude and quality of the signal differ significantly. In the first rows, clear interference in the signal on CAR1 caused by switching power supplies is visible. The mutual trigger delay, caused by triggering on different signal signatures, is also noticeable, complicating the capture of the entire lightning discharge.
 \medskip
@@ -95,7 +97,7 @@ The UHF receiver operates approximately in the 370-406 MHz band, exact tuning de
 
 
 \medskip
-\label[UHF-QFH_receiver]
+\clabel[UHF-QFH_receiver]{UHF lightning signal receiver and its components}
 \picw=10cm \cinspic ./img/UHF-QFH_Receiver.png
 \caption/f The platform mount of a QFH receiver antenna is shown in the top left corner. Detailed pictures of the antenna can be seen at the bottom and the receiver is in the top right.
 \medskip
@@ -111,7 +113,7 @@ The antenna array is mounted on an electrically non-conductive 18 mm thick plywo
 The phase difference of QFH antenna is extensively exploited in the UHF receiver construction, because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity) and loop ends connected to the active analog fronted PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered be 40-50 Ω port. Therefore two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case the QHA antenna has two loops with 100 Ω differential output ports with phase shift 90°. 
 
 \medskip
-\label[QFHMIX_block_schematics]
+\clabel[QFHMIX_block_schematics]{Block schematics of the UHF active antenna front-end}
 \picw=13cm \cinspic ./img/QFHMIX_block_schematics.png
 \caption/f Block diagram of active antenna RF-front end. In the left part the phase shifted terminals of the QFH antenna are connected, followed by the analogue branches for processing I and Q signals.
 \medskip
@@ -120,7 +122,7 @@ From that perspective, the QHA antenna itself functions the same as an I/Q demod
 In total the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end is depicted in fig.\ref[QFHMIX_block_schematics].
 
 \medskip
-\label[QFH_antenna_radiation_pattern]
+\clabel[QFH_antenna_radiation_pattern]{QFH antenna radiation pattern}
 \picw=13cm \cinspic ./img/QFH_antenna_radiation_pattern.png
 \caption/f Calculated vertical radiation pattern of the single QFH antenna in two perpendicular cross-sections (normalised).
 \medskip
@@ -145,7 +147,7 @@ PCB is produced from the 1.6mm thick FR4. All components, excluding connectors, 
 The frontend outputs I/Q signals, local oscillator signal and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front-end and the receiver base unit mounted in the car. 
 
 \medskip
-\label[QFHMIX01E_PCB]
+\clabel[QFHMIX01E_PCB]{Active antenna analog front-end PCB}
 \picw=10cm \cinspic ./img/QFHMIX01E_top.jpg
 \caption/f  Because the design of the QFHMIX01 is optimized for high dynamic range and low noise figure, these tradeoffs result in relatively high power dissipation. The PCB must therefore be equipped with a fan to provide cooling for the analog RF part.
 \medskip
@@ -212,7 +214,7 @@ To accurately assess the meteorological situation during thunderstorms, the meas
 The implementation of the disdrometer was necessitated by the need for high time resolution measurement of precipitation patterns and their evolution. Precipitation is a key meteorological parameter  for understanding the correlations between ionizing radiation and storm activity, because hydrometeors play a significant role in washing radon decay products out of the atmosphere, consequently creating temporary increase in radiation background levels on the ground \ref[Radon_precipitation]. High-rate precipitation data are necessary for distinguishing these events from occurrences of TGE.
 
 \medskip
-\label[Radon_precipitation]
+\clabel[Radon_precipitation]{Radon progeny washout}
 \picw=15cm \cinspic ./img/Precipitation_radon.png
 \caption/f  The graph clearly demonstrates the impact of rainfall on ionizing radiation flux on ground. The top panel shows the distance to lightning strikes (Blitzortung), while the subsequent panels display counts per second for different scintillation detectors (AIRDOS-C inside car, RT\#2 and  RT\#3 on the car roof). The final panel indicates precipitation intensity (5T precipitation). Notably, there is a clear increase in radiation counts following periods of rainfall, highlighting the washout effect of radon progeny from the atmosphere.
 \medskip
@@ -220,7 +222,7 @@ The implementation of the disdrometer was necessitated by the need for high time
 Traditional, widely used methods of precipitation measurement have their limitations. For instance, the commonly used tipping bucket rain gauge only provides data resolution dependent on precipitation intensity and has a relatively narrow effective range where the collection bucket can tip and accurately measure rainfall. 
 
 \medskip
-\label[tipping_bucket_limitation]
+\clabel[tipping_bucket_limitation]{Example of tipping bucket rain-gauge data}
 \picw=15cm \cinspic ./img/tipping_bucket_limitation.png
 \caption/f  This graph illustrates the limitations of using a tipping bucket rain gauge. While there is a slight increase in radiation detected (around 11:00), the lack of detailed information on precipitation type and better temporal resolution makes it difficult to attribute this increase to a specific phenomenon.
 \medskip
@@ -231,7 +233,7 @@ Furthermore, the tipping bucket rain gauge does not differentiate between differ
 In response to these challenges, the (DISDROMETER01)\urlnote{https://github.com/UniversalScientificTechnologies/DISDROMETER01}, was specifically designed for installation on a flat vehicle moving platform, enabling high-precision, real-time data collection during storm events. This instrument leverages SDR receiver technology previously utilized in the Bolidozor meteor detection network. It employs a piezoelectric element capable of detailed sensing of raindrop size distribution and intensity, from light drizzles to heavy downpours. 
 
 \medskip
-\label[DISDROMETER01]
+\clabel[DISDROMETER01]{DISDROMETER01 internals}
 \picw=15cm \cinspic ./img/DISDROMETER01.png
 \caption/f  Photograph of a DISDROMETER01 mounted on the roof of a car, featuring an open box that contains the piezo element, the primary sensing component of the device.
 \medskip
@@ -240,7 +242,7 @@ Technically the disdrometer captures sound waves generated by the impact of prec
 
 
 \medskip
-\label[DISDROMETER01_hyrometeors]
+\clabel[DISDROMETER01_hyrometeors]{Hail and rain drop captured by DISDROMETER01}
 \picw=10cm \cinspic ./img/DISDROMETER01_hydrometeors.png
 \caption/f  The graphs shows the difference of signal responses between various types of precipitation, specifically illustrating the difference between rain and hail. The top image is a detailed view of the impact of a single hailstone and bellow a single raindrop.
 \medskip
@@ -272,7 +274,7 @@ The new anemometer's design benefits from the inclusion of a circuit board that 
 Temperature data is used in multiple ways, one of the most common is for eliminating possible temperature dependent variations that might influence the sensors mounted on the car platform.  For that purpose the MLAB ALTIMET01A module was used, which combines temperature and pressure sensing capabilities, providing an overview of the atmospheric conditions. 
 
 \medskip
-\label[temperature_pressure]
+\clabel[temperature_pressure]{Example graph of temperature and pressure evolution during thunderstorm}
 \picw=15cm \cinspic ./img/temperature_pressure.png
 \caption/f  The graphs illustrate the changes in temperature and pressure during the passage of a thunderstorm. As evident, both variables fluctuate throughout the atmospheric event, often in a discontinuous manner.
 \medskip
