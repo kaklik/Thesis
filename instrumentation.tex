@@ -1,17 +1,15 @@
 
 To be able to record the different processes occurring during thunderstorms, the three cars were equipped with specialized measuring equipment. The aim is to verify the hypotheses  considering the relation between thunderstorms and ionizing radiation stated in the \ref[ionizing_radiation_detectors] section because these cars were able to move to locations with predicted storm activity and thus flexibly react to specific storm developments, and perform ground measurements directly at the lightning site.
 
-To determine the necessary parameters of lightning activity (lightning events’ timestamps, lightning type, and location), the measuring cars, see Fig. \ref[CRREAT_CAR0] (CAR0 and CAR1), was equipped with high-speed all-sky camera and radio receivers. The cars were used to transport and power the instruments in proximity to thunderstorms, and the car cabin also served as partial protection for the instrument operator.
+To determine the necessary parameters of lightning activity (lightning events’ timestamps, lightning type, and location), the measuring cars, see Fig. \ref[CRREAT_cars] (CAR0 and CAR1), was equipped with high-speed all-sky camera and radio receivers. The cars were used to transport and power the instruments in proximity to thunderstorms, and the car cabin also served as partial protection for the instrument operator.
 
 The equipment of cars is not uniform as it is gradually improved and also the purpose of each car slightly differs.
 
 \medskip
-\clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
-\picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
-\caption/f Measuring CAR0 with instruments mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams. 
+\clabel[CRREAT_cars]{CRREAT measurement cars with instruments mounted on the roof platform}
+\picw=15cm \cinspic ./img/CRREAT_cars.jpg
+\caption/f The CRREAT measurement cars with instruments mounted on platforms, the overviw of differences is shown in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and  \ref[CRREAT_CAR2_diagram]. 
 \medskip
-
-\rfc{Aktualizovat obrázek auta}
 
 \sec High-speed all-sky Cameras
  
@@ -47,7 +45,7 @@ That fact also favors the combination of VLF and UHF, because the primary intere
 
 As has been already stated, practically all current systems \cite[5173582] detect and locate lightning based on the occurrence of a pulse signal above a specified threshold value. The absolute time of pulse detection is processed, using algorithms based on the Time Difference of Arrival (TDoA) possibly enhanced by a combination with directional findings.  The calculated output is the most probable place of the pulse signal's origin. Only a minority of implementations consider the shape of the pulse or a sequence of pulses for a more detailed analysis of the signal's origin (excluding the correction of pulse dispersion to correct the TDoA value, which is quite common) \urlnote{https://www1.gifu-u.ac.jp/~lrg/falma.html}.
 
-To clarify the phenomena occurring during a lightning discharge, it was necessary to adopt a different approach and implement a device with different properties from existing systems. The fundamental differences from other systems include:
+To clarify the phenomena occurring during a lightning discharge, it was necessary to adopt a different approach and implement a SDR receiver with different properties from existing systems. The fundamental differences from other systems include:
 
 \begitems
 \item - The entire segment of the lightning event signal with a bandwidth of 10 MHz is recorded, which is nearly double the bandwidth of the most of currently used solutions.
@@ -108,7 +106,14 @@ The block diagram of the receiver is shown in Appendix X
 
 The UHF radio receiver is triggered by an external trigger (coming from the VLF receiver), then records a signal fragment with the configured number of pre-trigger and post-trigger blocks up to 1.45 seconds long in total. The radio signal is simultaneously sampled from all elements in the antenna array. This feature is achieved by using an internal ring buffer that stores the samples from the antenna array before the trigger. Time stamping is implemented by storing an array of sample numbers along with a few last-time marks created by a PPS signal from an external GNSS receiver. This metadata is then recorded in the resulting data record file for each trigger event. That mechanism allows precise restoration of the absolute time of each recorded signal sample. 
 
-The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity (therefore typical application of that antenna is for satellite communication). The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, which is the situation of lightning detection. That technical feature at the same time allows the direct processing of the signal from the antenna as quadrature I/Q data. 
+\medskip
+\clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
+\picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
+\caption/f Measuring CAR0 with all-sky high-speed camera and array of QFH mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram]. 
+\medskip
+
+
+The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof \ref[CRREAT_CAR0]. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity (therefore typical application of that antenna is for satellite communication). The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, which is the situation of lightning detection. That technical feature at the same time allows the direct processing of the signal from the antenna as quadrature I/Q data. 
 
 The phase difference of the QFH antenna is extensively exploited in the UHF receiver construction because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity), and loop ends connected to the active analog fronted PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered to be a 40-50 Ω port. Therefore two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case, the QHA antenna has two loops with 100 Ω differential output ports with phase shift 90°. 
 
@@ -178,7 +183,7 @@ Electric field sensors were planned to be used as devices capable of indicating 
 
 However, challenges persisted with the Kleinwächter EFM 115, as its mechanical and weather durability did not meet the demands of mobile fieldwork, and the quality of its data output sometimes fell under the required quality. These obstacles resulted in the necessity for an alternative solution, prompting the development of a new design for electric field mills. The new design also required increased versatility, because these custom mills were engineered to seamlessly integrate into stationary setups, mobile measurements utilizing vehicles, and even atmospheric assessments via Unmanned Aerial Vehicles (UAVs), addressing both the mechanical robustness and data quality issues which were encountered with commercial alternatives.
 
-For the construction of the new electric field mill (THUNDERMILL01), the initial design was first tested in a laboratory and then put on the measuring car roof, as shown in Figure \ref[THUNDERMILL01_on_car]. At that time, the mill was housed in a tin-plated can turned upside down to protect it from external weather influences. This solution proved ineffective, as the metal can rust through in approximately two months. Subsequent units intended for stationary placement at the Lomnický Štít observatory were therefore made with a stainless steel casing \ref[LS_THUNDERMILL].
+For the construction of the new electric field mill (THUNDERMILL01), the initial design was first tested in a laboratory and then put on the measuring car roof, as shown in Figure \ref[THUNDERMILL01_on_car]. At that time, the mill was housed in a tin-plated can turned upside down to protect it from external weather influences. This solution proved ineffective, as the metal can rust through in approximately two months. Subsequent units intended for stationary placement at the Lomnický Štít observatory were therefore made with a stainless steel casing \ref[LS_THUNDERMILL], where is compared with Boltek sensors \ref[THUNDERMILL_LS_boltek].
 
 
 \medskip
@@ -195,15 +200,11 @@ For the construction of the new electric field mill (THUNDERMILL01), the initial
 
 After testing on the car roof, there was a requirement to deploy the same electric field mill to the rotor head of the TF-G2 autogyro to measure the distribution of the electric field directly in the atmosphere. This placement can be seen in the image in the chapter \ref[autogyro_thunderstorm], where the instrumentation is described in more detail.
 
-
-\medskip
+\midinsert
 \clabel[THUNDERMILL_LS_boltek]{Comparison of Boltek and THUNDERMILL01}
 \picw=15cm \cinspic ./img/THUNDERMILL_LS_boltek.png
 \caption/f  The graph shows a comparison of the UP and DOWN configurations of THUNDERMILL01 at the Lomnický Štít observatory. Additionally, it includes a comparison with the particle flux of ionizing radiation detected by the SEVAN detector, also located at Lomnický Štít. The electric field measurements are displayed for Boltek and THUNDERMILL instruments for comparison.
-\medskip
-
-
-
+\endinsert
 
 \sec Meteorological instruments
 
@@ -216,7 +217,7 @@ The implementation of the disdrometer was necessitated by the need for high-time
 \medskip
 \clabel[Radon_precipitation]{Radon progeny washout}
 \picw=15cm \cinspic ./img/Precipitation_radon.png
-\caption/f  The graph demonstrates the impact of rainfall on ionizing radiation flux on the ground. The top panel shows the distance to lightning strikes (Blitzortung), while the subsequent panels display counts per second for different scintillation detectors (AIRDOS-C inside the car, RT\#2 and  RT\#3 on the car roof). The final panel indicates precipitation intensity (5T precipitation). Notably, there is a clear increase in radiation counts following periods of rainfall, highlighting the washout effect of radon progeny from the atmosphere.
+\caption/f  The graph clearly demonstrates the impact of rainfall on ionizing radiation flux on ground. The top panel shows the detections from the LIGHTNING01 module (described in section \ref[LIGHTNING01A_trigger]),  distance to lightning strikes (Blitzortung.org), while the subsequent panels display counts per second for different scintillation detectors (AIRDOS-N inside car, RT-56 on the car roof). The final panel indicates precipitation intensity (5T precipitation). Notably, there is a clear increase in radiation counts following periods of rainfall, highlighting the washout effect of radon progeny from the atmosphere.
 \medskip
 
 Traditional, widely used methods of precipitation measurement have their limitations. For instance, the commonly used tipping bucket rain gauge only provides data resolution dependent on precipitation intensity and has a relatively narrow effective range where the collection bucket can tip and accurately measure rainfall. 

@@ -3,4 +3,4 @@
 
 montage DISDROMETER01_hailstone.png  DISDROMETER01_raindrop.png -tile 1x2 -geometry +0+0 DISDROMETER01_hydrometeors.png
 
-montage ALTIMET01_pressure.png  ALTIMET01_temperature.png -tile 1x2 -geometry +0+0 temperature_pressure.png
+#montage ALTIMET01_pressure.png  ALTIMET01_temperature.png -tile 1x2 -geometry +0+0 temperature_pressure.png
