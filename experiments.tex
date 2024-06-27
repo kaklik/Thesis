@@ -228,7 +228,7 @@ For detection of ionizing radiation the UAV has been equipped with a semiconduct
 \medskip
 
 \medskip
-\label[E_mill_data]{Example of data measured by EFM mounted on autogyro}
+\clabel[E_mill_data]{Example of data measured by EFM mounted on autogyro}
 \picw=15cm \cinspic ./img/E_mill_data.png
 \caption/f Electric field measurement data along with environmental humidity and temperature, aligned with flight parameters during flight in a fair weather. 
 \medskip
@@ -318,7 +318,7 @@ Therefore, it was necessary to explore other methods that ideally would not depe
 This feature of the receiver not only enabled precise positioning but was particularly beneficial for applications like UAV following or potential future implementation of landing back on the car's roof. Utilizing this for the car's platform orientation across three axes partially replaced the manually operated compass but faced challenges in signal quality due to onboard equipment interference. Additionally, such a solution is very sensitive to interruptions in signal phase, as for example when the car passes under a highway bridge or driving on a road covered by trees, the both can easily disrupt the signal phase and result in inaccurate or incorrect orientation measurements. The usability of this innovation was thus primarily hindered by the implementation in the selected receiver, which was unable to reliably indicate when the provided moving baseline coordinates were invalid.
 
 \medskip
-\label[RTK_moving_baseline]{RTK antennas mounted on a vehicle}
+\clabel[RTK_moving_baseline]{RTK antennas mounted on a vehicle}
 \picw=15cm \cinspic ./img/RTK_moving_baseline.png
 \caption/f  This image shows locations of the RTK (Real-Time Kinematic) antennas mounted on a vehicle for positioning using the moving baseline method.  
 \medskip
@@ -345,7 +345,7 @@ Quick communication was also essential for confirming data records, as the lengt
 Figure \ref[figur_radon] shows an example of ionizing radiation measurement using the gamma spectrometer AIRDOS-C. In the upper graph, a storm approaching a parked measuring car is displayed using data from the Blitzortung.org network. The vertical red lines mark the times when lightning was registered by the STP antenna. The lower graph shows the number of particles registered by the ionizing radiation detector every 15 seconds. In this particular example, the lightning activity ceased just after 20:30. The graph shows an increase in ionizing radiation flux by approximately 30 \%. This increase is related to a radon progenies washout from the atmosphere caused by rain that started at 19:45.
 
 \medskip
-\label[figur_radon]
+\clabel[figur_radon]{Ionizing radiation flux compared to registered lightning}
 \picw=15cm \cinspic ./img/figur_radon.png
 \caption/f  Measuring ionizing radiation using a car compared to lightning registered by antennas. The beginning of measurements using  AIRDOS-C and STP antennas corresponds to switching on the devices after parking the car on a spot at 19:15. The measurement ended at 21:25 by switching off the devices and leaving the observation spot.  
 \medskip
@@ -354,7 +354,7 @@ Figure \ref[fig_gamma] shows a detail of ionizing radiation measurement at the t
 
 
 \medskip
-\label[fig_gamma]
+\clabel[fig_gamma]{Individual registered particles of ionizing radiatio of gamma spectrometer}
 \picw=15cm \cinspic ./img/fig_gamma.png
 \caption/f   Lightning detected by Blitzortung.org and triggers from STP antenna plotted together with individual registered particles of ionizing radiation above channel 30 of gamma spectrometer.  
 \medskip
@@ -368,7 +368,7 @@ To maintain clarity, luminosity curves are added to videos, which are converted 
 The following enclosed video [1627302288.9546976.mp4] shows lightning together with leaders and recoil leaders. During the observation, the camera is pointed towards the zenith and its lens allows capture of the entire sky from horizon to horizon. For the illustration of the camera view a plain camera frame is shown in Fig.  \ref[figur_horizon]. During the thunderstorm recording, the camera shutter time is decreased in order to capture lightning that has high brightness dynamics. As a result, lightning is not visible on the camera together with details of clouds and surrounding terrain. The processed video has the position of the horizon marked with a green circle with an inscribed designation of the cardinal directions. In the upper part of the video, there is a white graph showing a luminosity curve with a green pointer marking the current position of the displayed frame on the time axis. On the right, the used color range is visible, corresponding to the brightness recorded by each camera pixel with a depth of 8 bits. The bottom line shows the number of the current frame over the total number of frames recorded. The next is Sg=1/1 (information on which part of the camera’s internal memory was used for recording) and the time of the current frame ‘T=’ in seconds relative to trigger time.
 
 \medskip
-\label[figur_horizon]
+\clabel[figur_horizon]{A still image example from the all-sky camera}
 \picw=15cm \cinspic ./img/figur_horizon.png
 \caption/f   A still image example from the all-sky camera showing horizon and fish-eye lens distortion.  
 \medskip
@@ -376,7 +376,7 @@ The following enclosed video [1627302288.9546976.mp4] shows lightning together w
 The resulting luminosity curves contain morphological signatures, such as sharp peaks or slow changes in luminosity. Thanks to this, video recordings with similar luminosity curve progressions can be compared, and from several recordings, those parts can be chosen that have similar luminosity curves and a visible lightning channel (not covered by clouds). Such a process helps to reveal what lightning really looks like.
 
 \medskip
-\label[luminosity_curves]
+\label[luminosity_curves]{An example of luminosity curves}
 \picw=15cm \cinspic ./img/luminosity_curve_examples.png
 \caption/f   An example of luminosity curves for a few lightning.  
 \medskip
@@ -386,7 +386,7 @@ The resulting luminosity curves contain morphological signatures, such as sharp 
 The advantage of using magnetic loop antennas to measure lightning is that observations are not disrupted by optically opaque clouds or daylight scattered in the atmosphere during daytime storms. However, when measuring the magnetic component of the electric field with a coil, only changes over time, specifically changes in the current flowing through the lightning channel, can be detected. A constant current in the lightning channel cannot be detected by a magnetic loop antenna. Figure \ref[figur_capture] shows an example of lightning recorded simultaneously by an STP antenna and a camera. The camera recording clearly shows a change in luminosity, with the sky being brighter before the lightning than after it occurred. Slow changes in brightness, indicating slow changes in current, are not visible in the antenna recording. Instead, clusters of fast pulses are observed, suggesting details about the development of lightning channels that are not visible in the camera recordings, likely because they are obscured by light from a constant current in the main channel. Pulses visible in both camera and antenna recordings are recoil leaders, and the most prominent short impulse is the CG return stroke.
 
 \medskip
-\label[figur_capture]
+\label[figur_capture]{Example of VLF signal with the comparison to camera data}
 \picw=15cm \cinspic ./img/STP_camera_data.png
 \caption/f   Example of data from STP antenna with the comparison to camera data.  
 \medskip
