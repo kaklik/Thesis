@@ -9,35 +9,38 @@ That simple solution is not suitable to detect lightning in generic electromagne
 Initially I investigated the lightning triggering device based on AMS AS3935 integrated circuit and using a coil antenna. The device meets the requirements of mobility, and low power consumption. For measurements coincidence between ionizing radiation and lightning on aboard aircraft as example, the compact physical size of the device is also a considerable advantage, therefore the solution seems to be promising.
 Then I compared the performance and reliability of the detector with the Blitzortung lightning detection network. I choose Blitzortung as a network which has a good deployment in central Europe where the mobile measurements were performed.
 Therefore two detection systems were selected for atmospheric discharge detection in this study: the device based on the AMS AS3935 integrated circuit and a coil antenna and the Blitzortung lightning detection network [12]. Both these lightning detection systems use radio emission reception at VLF frequencies. The devices differ in the design and realization of the antennas and implementation of the lightning detection algorithm.
-The device equipped by AMS AS3935 uses LIGHTNING01A MLAB module \cite[LIGHTNING01A] with a coreless coil antenna connected as a resonant LC circuit (Figure 1).  The resonant frequency of the coil antenna (MA5532-AE) with temperature insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5 \%. The receiver for the signal from the antenna is integrated in the circuit [13] manufactured by AMS company. In fact this strict matching requirement is required by the IC datasheet and is quite constraining and effectively limits the possible application of the circuit.
+The device equipped by AMS AS3935 uses LIGHTNING01A MLAB module \cite[LIGHTNING01A] with a coreless coil antenna connected as a resonant LC circuit (Figure \ref[DIVISEK01_PCB]).  The resonant frequency of the coil antenna (MA5532-AE) with temperature insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5 \%. The receiver for the signal from the antenna is integrated in the circuit \ref[DIVISEK01_schematics] manufactured by AMS company. In fact this strict matching requirement is required by the IC datasheet and is quite constraining and effectively limits the possible application of the circuit.
 According to manufacturer description the integrated circuit processes signals based on the signal level threshold detected by a comparator. If the comparator triggers, the proprietary signal processing unit algorithmically analyzes the signal. The output of the signal processing algorithm implemented in the AS3935 circuit consists of a classification of signal relevance: lightning discharge (8), artificial disturbance (4) or high noise level (1). The algorithm also determines the approximate distance and the estimated energy of the lightning discharge based on signal shape.
 The internal registers configuration for a measurement described below was set to “outdoor mode” by AFE_GB control register. All other registers are kept with implicit values.
-The circuit diagram including the AS3935 is shown in figure 2. The integrated circuit is powered by a 3.6 V from one primary lithium-thionyl chloride cell without usage of an integrated LDO (low drop-out) stabilizer. An I2C (Inter-Integrated Circuit) bus is used for communication with a data logger that also records data from pressure and temperature sensors. A GPS (Global Positioning System) receiver is used for logging of the precise time. The data is stored on a SDcard in a module [14].
-A block diagram of the interconnections is shown in figure 3. The used firmware for the device is available at [15].
+The circuit diagram including the AS3935 is shown in figure \ref[DIVISEK01_schematics]. The integrated circuit is powered by a 3.6 V from one primary lithium-thionyl chloride cell without usage of an integrated LDO (low drop-out) stabilizer. An I2C (Inter-Integrated Circuit) bus is used for communication with a data logger that also records data from pressure and temperature sensors. A GPS (Global Positioning System) receiver is used for logging of the precise time. The data is stored on a SDcard in a module \cite[DATALOGGER01A].
+A block diagram of the interconnections is shown in figure \ref[DIVISEK01_block_diagram]. The used firmware for the device is available at \cite[DIVISEK01].
 
 \medskip
 \picw=10cm \cinspic ./img/LIGHTNING01A.png
 \caption/f The bottom side of the newly designed LIGHTNING01A module \cite[LIGHTNING01A]. The antenna coil is visible on the left. The tuning capacitors and Q limiting resistor are mounted on the right side from the antenna.
+\clabel[DIVISEK01_PCB]{AS3935 based detector PCB design}
 \medskip
 
 
 \medskip
 \picw=15cm \cinspic ./img/LIGHTNING01A_schematics.png
 \caption/f Schematic diagram of the lightning sensor based on commercially available AMS AS3935 IC (used in LIGHTNING01A \cite[LIGHTNING01A]).
+\clabel[DIVISEK01_schematics]{AS3935 based detector schematics diagram}
 \medskip
 
 \medskip
 \picw=15cm \cinspic ./img/lightning_detector_block_diagram.png
-\caption/f Schematic block diagram of the examined lightning detector. Detailed schematics of modules are available at [14], [22-24].
+\caption/f Schematic block diagram of the examined lightning detector. Detailed schematics of modules are available at \cite[DATALOGGER01A,GPS01B,LIGHTNING01A,ALTIMET01A].
+\clabel[DIVISEK01_block_diagram]{AS3935 based detector block diagram}
 \medskip
 
 The time response of the lightning detector was tested in the laboratory prior to field measurements using a power signal generator with a wire loop of 60 mm diameter. The wire loop was placed at a distance of 30 mm from the antenna. The interrupt output was captured by an oscilloscope. Response time to a rectangular signal was 93 ms (±1 ms). The rectangular signal pulse was classified by the internal algorithm as a disturbance  (“DIVIS4” output in the log file). The response time to the received signal was found not to be constant for each signal. Some pulses were classified as lightning (“DIVIS8” in log file) by the proprietary algorithm where response time was only a few milliseconds. Due to the time delay introduced by the algorithm, the device could be potentially used for triggering of other measuring devices by using a pretrigger recording buffer of maximal algorithm latency plus lightning duration. For a lightning event duration of less than 900 ms, a one second pre-trigger buffer was found to be suitable.
 
-The proposed system, powered by a one LS33600 cell, can operate continuously for five days. Power consumption is dominated by the GPS receiver. Lifetime of the system without GPS is approximately three months. For measurements in the field, the instrument is mounted on the roof of a measurement car inside a waterproof plastic box as shown in figure 4.
+The proposed system, powered by a one LS33600 cell, can operate continuously for five days. Power consumption is dominated by the GPS receiver. Lifetime of the system without GPS is approximately three months. For measurements in the field, the instrument is mounted on the roof of a measurement car inside a waterproof plastic box as shown in figure \ref[DIVISEK01_Deployment].
 
 \medskip
 \picw=15cm \cinspic ./img/DIVISEK01_Deployment.png
-\caption/f The examined deployment on the roof of a car. The module LIGHTNING01A \cite[LIGHTNING01A] with antenna is located in the upper right corner of the box. Module with battery is DATALOGGER01A \cite[DATALOGGER01A]. GPS receiver \cite[GPS01B] is located in the upper left corner with connected black GPS antenna. Rest module beside LIGHTNING01A is ALTIMET01A \cite[ALTIMET01A].\label[DIVISEK01_Deployment]
+\caption/f The examined deployment on the roof of a car. The module LIGHTNING01A \cite[LIGHTNING01A] with antenna is located in the upper right corner of the box. Module with battery is DATALOGGER01A \cite[DATALOGGER01A]. GPS receiver \cite[GPS01B] is located in the upper left corner with connected black GPS antenna. Rest module beside LIGHTNING01A is ALTIMET01A \cite[ALTIMET01A].\clabel[DIVISEK01_Deployment]{AS3935 based detector mounted on the car roof}
 \medskip
 
 \sec Blitzortung network
