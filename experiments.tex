@@ -2,17 +2,17 @@ After initial processing of storm activity records with the described instrument
 
 \sec[balloon_flights] Stratospheric Balloon Flights
 
-Stratospheric balloon flights are conducted for several reasons related to the research of electromagnetic phenomena in the atmosphere associated with storm activity. They allow for the testing of instruments under various adverse conditions, enable the testing of data transmission methods over relatively long distances and in unfavorable weather, and provide a platform to lift additional instruments in the atmosphere. For example, they offer insights into the behavior of ionizing radiation in the upper layers of the atmosphere, where particles of primary cosmic radiation with sufficient energy interact and generate showers of secondary cosmic radiation. This phenomenon causes the situation, that with increasing depth of the atmosphere, the intensity of primary radiation decreases whereas the secondary component intensity increases. 
-At an altitude of about 20 km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum [Pfotzer, 1936; Regener, 1933; Regener and Pfotzer, 1935]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level [Bazilevskaya and Svirzhevskaya, 1998]. 
-Due to that physical phenomenon, Stratospheric balloons are a useful tool for the investigation of cosmic radiation at high altitudes (around and above the Regener-Pfotzer maximum region).
+Stratospheric balloon flights are conducted for several reasons related to the research of electromagnetic phenomena in the atmosphere associated with storm activity. They allow for the testing of instruments under various adverse conditions, enable the testing of data transmission methods over relatively long distances and in unfavorable weather, and provide a platform to lift additional instruments in the atmosphere. For example, they offer insights into the behavior of ionizing radiation in the upper layers of the atmosphere, where particles of primary cosmic radiation with sufficient energy interact and generate showers of secondary cosmic radiation. This phenomenon causes the situation that with increasing depth of the atmosphere, the intensity of primary radiation decreases whereas the secondary component intensity increases. 
+At an altitude of about 20 km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum \cite[REGENER1935]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level \cite[Bazilevskaya1998]. 
+Due to that physical phenomenon, stratospheric balloons are a useful tool for the investigation of cosmic radiation at high altitudes (around and above the Regener-Pfotzer maximum region).
 
 Since the composition of the radiation field varies with altitude \cite[10.1093/oxfordjournals.rpd.a081837] various radiation detector types should be used to measure the vertical profile of cosmic radiation in the atmosphere. 
 
 However, the radiation-measuring instruments need to be supplemented by other sensors measuring temperature, pressure, humidity, altitude, acceleration, etc.  All these sensors should be continuously monitored during the launch and the flight of the balloon to verify their proper function and their values have to be recorded for further processing of all obtained data. 
 
-Therefore I proposed the development of the TF-ATMON \urlnote{https://www.thunderfly.cz/tf-atmon.html} system, based on the use of existing tools of the open-source PX4 autopilot and supplemented with the new TFSIK01 telemetry transmitter. That enables on-ground monitoring of sensors and recording of data during the flight and at the same time real-time tracking of the balloon. This methodology was firstly used in full scale on stratospheric balloon flight FIK-6 \ref[FIK-6_setup]  and then improved in FIK-9 flight. 
+Therefore I proposed the development of the TF-ATMON\urlnote{https://www.thunderfly.cz/tf-atmon.html} system, based on the use of existing tools of the open-source PX4 autopilot and supplemented with the new TFSIK01 telemetry transmitter. That enables on-ground monitoring of sensors and recording of data during the flight and at the same time real-time tracking of the balloon. This methodology was firstly used in full scale on stratospheric balloon flight FIK-6 \ref[FIK-6_setup]  and then improved in FIK-9 flight. 
 
-I have participated in the launch of  multiple stratospheric balloons, the overview of flights is summarized in Table 1. At the beginning (until the FIK6 flight) the construction of balloon gondolas was designed for specific instruments used for particular flights. Balloon avionics was therefore built around the chosen detectors from scratch.
+I have participated in the launch of  multiple stratospheric balloons, the overview of flights is summarized in Table 1 in appendix \ref[FIK_flights]. At the beginning (until the FIK6 flight) the construction of balloon gondolas was designed for specific instruments used for a particular flight. Balloon avionics was therefore built around the chosen detectors from scratch.
 
 This concept led to a situation when every new flight meant a significant amount of work although many components were recycled every year and used for the next one. The reason was the need to adapt the avionics to the updated version of the detectors.
 
@@ -30,7 +30,7 @@ Apart from technologies used directly in balloon  gondolas, many supplementary t
 
 \secc The design of universal avionics
 
-Based on the described experiences the concept of a universal avionics called TF-ATMON emerged. That technology makes it possible to connect different types of payloads and carry out various atmospheric measurements. Furthermore, it provides basic services such as power supply, time, position, and 3D orientation information to the payload instruments. That data is recorded in parallel with quantities that affect many types of measurements, including temperature, pressure, humidity, magnetic field, and acceleration. At the same time flight computer provide services for payload to record data from experiments in a common log file. 
+Based on the described experiences the concept of a universal avionics called TF-ATMON emerged. That technology makes it possible to connect different types of payloads and carry out various atmospheric measurements. Furthermore, it provides basic services such as power supply, time, position, and 3D orientation information to the payload instruments. That data is recorded in parallel with quantities that affect many types of measurements, including temperature, pressure, humidity, magnetic field, and acceleration. At the same time flight computer provides the services for payload to record data from experiments in a common log file. 
 Therefore the TF-ATMON onboard stratospheric balloons have become an extremely useful tool for testing instruments like cosmic radiation detectors and dosimeters at high altitudes.
 
 The schematic diagram of the avionics hardware is summarized in the figure \ref[avionics_schematics].
@@ -64,7 +64,7 @@ In the case of FIK-5 and FIK-6 flights that served as the test flights for the n
 
 The payload for example FIK-6 flight contained TF-ATMON and three different types of ionizing radiation detectors already mentioned in \ref[instrumentation] section: SPACEDOS with silicon PIN diode sensor, AIRDOS-C with scintillation crystal and silicon photomultiplier and a G-M tube. The total payload mass was 2 kg.
 
-SPACEDOS is a lightweight dosimeter intended for space applications and measurements onboard spacecraft. The detector has been described in \cite[10.1093/rpd/ncac106]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[10.1093/rpd/ncac105]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included, because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
+SPACEDOS is a lightweight dosimeter intended for space applications and measurements onboard spacecraft. The detector has been described in \cite[10.1093/rpd/ncac106]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[10.1093/rpd/ncac105]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
 
 \medskip
 \clabel[FIK-6_setup]{FIK-6 flight balloon setup}
@@ -76,7 +76,7 @@ SPACEDOS is a lightweight dosimeter intended for space applications and measurem
 
 The flight FIK-6 took place on December 18th, 2020 and lasted 1 hour and 40 minutes. The balloon was launched from Příbram airport (LKPM) which is located around latitude 50$^{\circ}$ N. The balloon flight path continued in the eastern direction for about 80km. 
 
-The system TF-ATMON recorded temperature, air pressure, humidity, and radiation characteristics as histograms of deposited energy of radiation events from all three radiation sensors in the gondola see Figure \ref[FIK-6_RAW_data]. The barometric altitude was calculated using the International Standard Atmosphere model 1976 \cite[us_standard_atmosphere_1976]. 
+The system TF-ATMON recorded temperature, air pressure, humidity, and radiation characteristics as histograms of deposited energy of radiation events from all three radiation sensors in the gondola, see Figure \ref[FIK-6_RAW_data]. The barometric altitude was calculated using the International Standard Atmosphere Model 1976 \cite[us_standard_atmosphere_1976]. 
 
 \medskip
 \clabel[FIK-6_RAW_data]{FIK-6 flight recorded data}
@@ -87,10 +87,10 @@ The system TF-ATMON recorded temperature, air pressure, humidity, and radiation 
 \medskip
 \clabel[FIK-6_telemetry]{Acceleration and Angular Speed balloon telemetry}
 \picw=15cm \cinspic ./img/FIK-6_metadada.png
-\caption/f Acceleration and Angular Speed in axis perpendicular to the ground combined with ionizing radiation flux measured by the silicon PIN diode detector.
+\caption/f Acceleration and angular speed in axis perpendicular to the ground combined with ionizing radiation flux measured by the silicon PIN diode detector.
 \medskip
 
-Figure \ref[FIK-6_telemetry] demonstrates the importance of telemetry data from the TF-ATMON system during measurement processing. The graphs show an increase in the response of the silicon ionizing radiation detector at the times of take-off, burst, and landing when there was a rapid increase in mechanical stress. The effect is caused by the microphone effect of the silicon detector circuit. At the same time, it can be seen there are considerable vibrations, rapid changes in acceleration, and gondola rotation during the balloon descent. The increase in humidity is also observable in fig \ref[FIK-6_RAW_data], which can even freeze on the instruments during some parts of the flight. All of them may affect the measurement of atmospheric quantities and for some types of instruments, they have to be compensated.
+Figure \ref[FIK-6_telemetry] demonstrates the importance of telemetry data from the TF-ATMON system during measurement processing. The graphs show an increase in the response of the silicon ionizing radiation detector at the times of take-off, burst, and landing when there was a rapid increase in mechanical stress. The effect is caused by the microphone effect of the silicon detector circuit. At the same time, it can be seen there are considerable vibrations, rapid changes in acceleration, and gondola rotation during the balloon descent. The increase in relative humidity is also observable in fig \ref[FIK-6_RAW_data]. Then the water wapor can freeze on the instruments during some parts of the flight. All of them may affect the measurement of atmospheric quantities and for some types of instruments, they have to be compensated.
 
 The graphs show that the maximum reached altitude was approximately 33 km above sea level. During the flight, the balloon passed the Regener-Pfotzer maximum twice. The rescue team followed the balloon along the whole flight trajectory. The precision of tracking allowed some participants of the rescue team to see the gondola touchdown visually. Therefore the gondola was successfully rescued within a few minutes after touchdown (Figure \ref[FIK-6_rescue_team]).
 
@@ -113,15 +113,15 @@ As the measured data show in Fig \ref[R-P_maximum], there is a very noticeable d
 
 \secc Outcome of stratospheric balloon flights
 
-FIK flights were  used to test different types of ionizing radiation detectors with the use of the Regener-Pfotzer maximum phenomenon. 
+The FIK flights were  used to test different types of ionizing radiation detectors with the use of the Regener-Pfotzer maximum phenomenon. 
 
 The telemetric system \iid TF-ATMON has been verified. It enables data recording, pre-flight instruments check, and their monitoring during flight. Thanks to the availability of different communication interfaces  to the avionics, the use of various payload detectors is simplified. The technology at the same time improves the possibilities of  the fast localization of a balloon gondola after its landing. It is therefore possible to carry out even experiments requiring a short time to recover the gondola after the flight. 
 
 As can be seen from Table 1 in appendix \ref[FIK_flights], the last unsolved problem with the stratospheric balloon flights is the control of descent. Therefore, in future balloon flights and thunderstorm exploration, there exists a requirement to use the autopilot contained in TF-ATMON to control descent trajectory.
 
 The descent should be controlled by using an airframe carrying a payload. Thus it would be possible to choose the landing site and reduce the possible risk of creating dangerous situations and at the same time with a possibility to control the descent rate and trajectory. 
-Another unresolved challenge for use of the balloons for thunderstorm research is the difficulty of launching them in strong winds, which are nearly always present near storms, especially at times when the measurements are most critical \ref[balloon_wind_takeoff].
-For these reasons, it became necessary to shift to other carrier platforms to be used for practical storm activity measurements. The logical alternative for this step is to employ \glref{UAS}.
+Another unresolved challenge for use of the balloons for thunderstorm research is the difficulty of launching them in strong winds, which are nearly always present near storms, especially at times when the measurements are most critical. See the Figure \ref[balloon_wind_takeoff] for that situation.
+For these reasons, it became necessary to shift to other carrier platforms to be used for practical storm activity measurements. The logical alternative for this step is to employ unmanned aircraft system (\glref{UAS}).
 
 \medskip
 \clabel[balloon_wind_takeoff]{Takeoff of the stratospheric balloon during high wind conditions}
@@ -132,7 +132,8 @@ For these reasons, it became necessary to shift to other carrier platforms to be
 \sec[autogyro_thunderstorm] Autogyro Thunderstorm Flights
 
 Despite widespread efforts which could be found in the literature \cite[https://doi.org/10.1029/2006JD007242,TELEXTheThunderstormElectrificationandLightningExperiment,  ScientificInsightsfromFourGenerationsofLagrangianSmartBalloonsinAtmosphericResearch, ABalloon_precipitation] to deploy measurement balloons into thunderstorms with various sensors, these attempts were often unsafe, and the results are sporadic because the balloon flight path is uncontrolled or control is very limited \urlnote{https://windbornesystems.com/}. Therefore that technique seems to be outdated in comparison with the current \glref{UAV} technology. This fact led to the exploration of using \glref{UAV}s instead. Moreover, due to the spatial extent of lightning structures (see section \ref[results] for details), it's required to experiment with multiple coordinated locations simultaneously, which is practically unattainable with uncontrolled balloons.  Therefore better understanding of the phenomena can very likely be achieved by using specially equipped \glref{UAS}, which enables measurement directly in or near the thunderstorms. 
-\glref{UAS} offer additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of \glref{LCL} for example. The obvious requirement is to use a new unmanned airframe using TF-ATMON described in section \ref[balloon_flights] and employ the integrated flight controller to take control over the measurement procedure in the atmosphere.
+
+\glref{UAS} offer additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of lifting condensation level (\glref{LCL}) for example. The obvious requirement is to use a new unmanned airframe using TF-ATMON described in section \ref[balloon_flights] and employ the integrated flight controller to take control over the measurement procedure in the atmosphere.
 
 \medskip
 \clabel[TF-G2_fly_clouds]{TF-G2 during flight}
@@ -140,15 +141,17 @@ Despite widespread efforts which could be found in the literature \cite[https://
 \caption/f TF-G2 autogyro under the clouds, during one of many test flights. 
 \medskip
 
+The described idea resulted in the attempt to use an unmanned autogyro to carry measuring instruments to the vicinity of thunderstorms shown in Figure \ref[TF-G2_fly_clouds]. The main goal of this experiment was to measure and locate the ionizing radiation presence together with the electric field and resolve the uncertainty of the source and direction of ionizing radiation produced in thunderstorms. 
 
-The described idea resulted in the attempt to use an unmanned autogyro to carry measuring instruments to the vicinity of thunderstorms \ref[TF-G2_fly_clouds]. The main goal of this experiment was to measure and locate the ionizing radiation presence together with the electric field and resolve the uncertainty of the source and direction of ionizing radiation produced in thunderstorms. 
 For the investigation of thunderstorm activity, an autogyro presents several key advantages over other types of UAVs such as multicopters or fixed-wing aircraft, primarily due to its unique aerodynamic properties and operational capabilities. Autogyros, or gyroplanes, leverage the autorotation of their main rotor to stay airborne, which allows for safe flight at low speeds and in turbulent atmospheric conditions often encountered near thunderstorms.
+
 Compared to multicopters, autogyros are more efficient in terms of energy consumption for longer flight tracks, as they do not require power and control to spin multiple rotors for lift, relying instead on forward motion or wind. This efficiency is advantageous for conducting high-altitude atmospheric research missions that demand sustained presence in targeted areas to gather comprehensive data.
+
 Moreover, unlike fixed-wing aircraft that require higher speeds and runways for safety, autogyros can perform take-offs and landings in confined spaces, making them ideal for deployment in varied terrains and closer proximity to storm activities. Their inherent stability, even in gusty conditions, allows for more reliable data collection of meteorological parameters.
 
 \secc Autogyro airframe
 
-Because there was not commercially available a suitable unmanned autogyro to perform atmospheric measurement in stormy conditions. The situation resulted in the design of TF-G2 autogyro which I developed in cooperation with the ThunderFly team. This step represents a significant advancement in the design and application of UAV technology for atmospheric research, specifically targeting the challenging conditions presented by thunderstorms. 
+There was not a suitable unmanned autogyro to perform atmospheric measurement in stormy conditions commercially available. The situation resulted in the design of TF-G2 autogyro which I developed in cooperation with the ThunderFly team. This step represents a significant advancement in the design and application of UAV technology for atmospheric research, specifically targeting the challenging conditions presented by thunderstorms. 
 The TF-G2 autogyro's airframe utilizes a lightweight yet robust and high-impact strength 3D printed material for the airframe and unique rotor design, which enables rotor blade shape modification. This technological decision gives the ability to easily replace parts, which is useful to quickly resolve damages as flights near thunderclouds often result in mishaps. 
 Internal components are protected from the weather by a waterproof fabric cover, which enables easy service access and supports equipment variability with its shape adaptability. Furthermore, the airframe's design allows easy access to onboard instruments and maintenance. This capability is achieved by rack-style mount options, where the payload could be easily fixed to a grid of screw holes which can be seen in figure \ref[TF-G2_hangar].
 
@@ -158,48 +161,48 @@ Internal components are protected from the weather by a waterproof fabric cover,
 \caption/f A development version of TF-G2 autogyro, waterproof fabric cover removed. The 3D-printed parts could be seen according to the grid of screw holes used for mounting of the experimental equipment. 
 \medskip
 
-The avionics design is largely identical to the avionics used in already described stratospheric balloon flights, with differences primarily in the power supply, because the autogyro includes components for propulsion, such as an electric motor and its \glref{ESC}. To ensure robust pre-flight control, the ESC provides status information, including energy drawn from batteries via the UAVCAN bus. Another distinction is the use of special sensors, like an airspeed sensor, half-duplex telemetry system, and specific sensors used directly for atmospheric measurements.
+The avionics design is largely identical to the avionics used in already described stratospheric balloon flights, with differences primarily in the power supply, because the autogyro includes components for propulsion, such as an electric motor and its electronic speed controller (\glref{ESC}). To ensure robust pre-flight control, the ESC provides status information, including energy drawn from batteries via the UAVCAN bus. Another distinction is the use of special sensors, like an airspeed sensor, half-duplex telemetry system, and specific sensors used directly for atmospheric measurements.
 
 \secc Airspeed sensing
 
-In the case of autogyros, similar to airplanes, it is required to measure the \glref{IAS} to safely perform takeoffs and in-flight maneuvers. Even though autogyros cannot be stalled in the traditional sense because their lift is generated by the rotor's rotational speed rather than directly by airspeed, they exhibit unique behavior. At insufficient forward airspeed, a gyrocopter begins to settle until it potentially impacts the ground — a scenario that can be considered a survivable landing. Conversely, when the airspeed is excessively high, the rotor can easily exceed its critical \glref{RPM}, leading to potential rotor disintegration. To mitigate these risks, the TF-G2 autogyro is equipped with an \glref{IAS}  sensor to accurately monitor and control airspeed, thus ensuring operational safety under varying flight conditions.
-Initially, a conventional Pitot tube was used for that purpose, but it proved very sensitive to clogging by snow, ice, or mud after complicated landings, necessitating disassembly and thorough cleaning. Thus, I proposed a solution named TFSLOT01, utilizing the Venturi effect. Where the velocity and pressure of the fluid are required to meet Bernoulli’s principle\ref[Bernoulli].
+In the case of autogyros, similar to airplanes, it is required to measure the indicated airspeed (\glref{IAS}) to safely perform takeoffs and in-flight maneuvers. Even though autogyros cannot be stalled in the traditional sense because their lift is generated by the rotor's rotational speed rather than directly by airspeed, they exhibit unique behavior. At insufficient forward airspeed, a gyrocopter begins to settle until it potentially impacts the ground — a scenario that can be considered a survivable landing. Conversely, when the airspeed is excessively high, the rotor can easily exceed its critical \glref{RPM}, leading to potential rotor disintegration. To mitigate these risks, the TF-G2 autogyro is equipped with an \glref{IAS}  sensor to accurately monitor and control airspeed, thus ensuring operational safety under varying flight conditions.
+Initially, a conventional Pitot tube was used for that purpose, but it proved very sensitive to clogging by snow, ice, or mud after complicated landings, necessitating disassembly and thorough cleaning. Thus, I proposed a solution named TFSLOT01, utilizing the Venturi effect.  To describe the application of Bernoulli’s principle for measuring airspeed, we define the following variables:
+
+\begitems
+* $\Delta p$ -- Measured pressure difference
+* $\rho$ -- Air density
+* $v_\infty$ -- Free air velocity e.g. measured airspeed
+* $v$ -- The velocity of air running through the sensor
+* $A_D$ -- Cross-section area at the position of the outer pressure port
+* $A_d$ -- Cross-section area at the position of internal pressure port
+\enditems
+
+In the context of small velocities, where the TFSLOT01 sensor operates, the air velocity and pressure must satisfy Bernoulli’s principle:
 
 $$ {1 \over 2}\rho v_\infty^{2} + p_\infty = {1 \over 2}\rho v^{2} + p \eqmark[Bernoulli]$$
 
-Then the velocities are in relation to cross sections \ref[cross_section_areas] in the plane of pressure measurement ports
+Then the velocities are in relation to cross sections in the plane of pressure measurement ports
 
 $$ {v \over v_\infty} = {A_D \over A_d} \eqmark[cross_section_areas]$$
 
 
-Therefore equations for pressure difference and airspeed velocity could be derived \ref[air_velocity], which corresponds to the \glref{IAS}.
+Therefore equations for pressure difference and airspeed velocity could be derived, which correspond to the \glref{IAS}.
 
 $$
 \Delta p = {1 \over 2}\rho{v_\infty}^{2}\left[\left({v \over v_\infty}\right)^2 - 1\right] \Rightarrow v_\infty = \sqrt{{2\Delta p \over \rho\left[\left({A_D \over A_d}\right)^2 - 1\right]}}
 \eqmark[air_velocity]
 $$
 
-Where
-
-\begitems
-* $\Delta p$: Measured pressure difference
-* $\rho$: Air density
-* $v_\infty$: Free air velocity e.g. measured airspeed
-* $v$: The velocity of air running through the sensor
-* $A_D$: Cross-section area at the position of the outer pressure port
-* $A_d$: Cross-section area at the position of internal pressure port
-\enditems
-
-There is also should be noted that the sensor utilizing that principle is theoretically more sensitive (e.g. has a higher measurable pressure difference at the same airspeed) than the pitot-static tube (at the same air density) in the geometric configuration where the following equation\ref[IAS_sensitivity] is valid
+There should be noted that the sensor utilizing the described principle is theoretically more sensitive (e.g. has a higher measurable pressure difference at the same airspeed) than the Pitot-static tube (at the same air density) in the geometric configuration where the following equation is valid
 
 $$ {A_D \over A_d} > \sqrt{2} \eqmark[IAS_sensitivity]$$
 
-The advantage of the higher sensitivity results in increased drag, but it should be negligible at low airspeeds. Therefore the best use case of the sensor is the integration of the sensing device into the relatively massive fuselage or other suitable airframe structure. In the case of TF-G2 autogyro, it is resolved by integration of the TFSLOT01 sensor directly to the rotor head, just below the rotor hub as could be seen in fig \ref[TF-G2_hangar]. Figure \ref[TFSLOT01] shows details of the TFSLOT01 sensor. 
+The advantage of the higher sensitivity results in increased drag, but it should be negligible at low airspeeds. Therefore the best use case of the sensor is the integration of the sensing device into the relatively massive fuselage or other suitable airframe structure. In the case of TF-G2 autogyro, it is resolved by integration of the TFSLOT01 sensor directly to the rotor head, just below the rotor hub as could be seen in Figure \ref[TF-G2_hangar]. Figure \ref[TFSLOT01] shows details of the TFSLOT01 sensor. 
 
 \medskip
 \clabel[TFSLOT01]{TFSLOT01 airspeed sensor design}
 \picw=15cm \cinspic ./img/TFSLOT01.jpg
-\caption/f The photograph showcases a close-up of TFSLOT01, where the front part features the entry aperture AD. The narrow aperture Ad is slightly deeper into the structure. In the rear of the photo is visible the I2C cable, used to connect  the sensor to the flight controller. 
+\caption/f The photograph showcases a close-up of TFSLOT01, where the front part features the entry aperture $A_D$. The narrow aperture $A_d$ is slightly deeper into the structure. In the rear of the photo is visible the I2C cable, used to connect  the sensor to the flight controller. 
 \medskip
 
 \secc Telemetry system
@@ -219,7 +222,7 @@ Furthermore, the improved system benefits from the versatility in antenna config
 \secc Carried sensors
 
 The key innovation in the TF-G2's design is the tight integration of specialized sensors for measuring electric fields and ionizing radiation. These sensors are mounted in a way to minimizes interference from the airframe by maximizing the benefits of the autogyro construction. The placement of an electric field mill is directly under the rotor, exploiting the UAV rotor's characteristic of being unpowered, thus avoiding significant electromagnetic interaction with the measured values. See the figure \ref[E_mill_rotor]. The only additional requirement on the airframe is that the rotary disk of EFM is electrically connected to the measuring electronics. That is achieved through a conductive connection of the rotor's bearing.
-For the detection of ionizing radiation, the UAV has been equipped with a semiconductor detector, AIRDOS03 (UAVDOS), previously tested during balloon flights. It is situated in the UAV's fuselage under a waterproof fabric cover and connected to the TF-ATMON system via serial link similarly as described in the \ref[balloon_flights] section. The avionics system manages sensor readout, synchronizing data collection with the TF-G2's flight path and with data from other sensors (EFM, humidity, etc.), see Fig. \ref[E_mill_data] for an example of that data. That onboard data processing together with the telemetry link enables real-time preliminary analysis, aiding in the assessment of collected data during the flight.
+For the detection of ionizing radiation, the UAV has been equipped with a semiconductor detector, AIRDOS03 (UAVDOS), previously tested during balloon flights. It is situated in the UAV's fuselage under a waterproof fabric cover and connected to the TF-ATMON system via serial link similarly as described in section \ref[balloon_flights]. The avionics system manages sensor readout, synchronizing data collection with the TF-G2's flight path and with data from other sensors (EFM, humidity, etc.), see Fig. \ref[E_mill_data] for an example of that data. That onboard data processing together with the telemetry link enables real-time preliminary analysis, aiding in the assessment of collected data during the flight.
 
 \medskip
 \clabel[E_mill_rotor]{EFM mounted on autogyro's rotor head}
@@ -267,13 +270,13 @@ Throughout the development phase of the unmanned autogyro, extensive test flight
 \caption/f Measuring CAR2 was equipped with a roof lift and drag measuring platform used to carry on-ground testing procedures. 
 \medskip
 
-Two notable supportive experiments emerged from these testing flights. The first significant experiment involved testing the UAV's flight capabilities under strong wind conditions alongside measuring floating dust concentrations (Floating dust is associated with the development of storm activity and the electrification of cloudiness \cite[7735367]). For this experiment, New Year's Eve fireworks were used as a modeling source of floating dust. The measurements were significant, as expected because the instrument convincingly detected at least a two-fold increase in the concentrations of floating dust in hours following the fireworks display.
+Two notable supportive experiments emerged from these testing flights. The first significant experiment involved testing the UAV's flight capabilities under strong wind conditions alongside measuring floating dust concentrations (floating dust is associated with the development of storm activity and the electrification of cloudiness \cite[7735367]). For this experiment, New Year's Eve fireworks were used as a modeling source of floating dust. The measurements were significant, as expected because the instrument convincingly detected at least a two-fold increase in the concentrations of floating dust in hours following the fireworks display.
 The second experiment was focused on verifying the directional homogeneity of the signal received by a Quadrifilar Helix (QFH) antenna (see figure \ref[QFH_antenna_radiation_pattern]). Leveraging the close frequency proximity of the telemetry transmission band from the UAV (433 MHz) to the observational band for lightning discharges, this experiment was conducted by having the UAV fly in circles around a measuring vehicle. The signal level was manually monitored on the receiver. This experiment was used for verification of the QFH antenna's effectiveness in maintaining homogenous sensitivity.
 In addition to the mentioned experiments, numerous routine flights and experiments were conducted near storm clouds. These experiments were carried out simultaneously with ground measurements, which were the primary focus. The success of these attempts varied greatly; however, system failures often occurred, preventing the intended use of the collected data.
 
 \sec Ground level measurements
 
-Within the context of the CRREAT project, the term {\em ground level measurements} encompasses a broader scope, including measurements based on passive and stationary high-altitude observatories. My involvement in these stationary measurements was minimal, primarily relating to some aspects of electronics design. However, I consider it useful to mention the existence of these measurements here, as theirs uses similar, or identical equipment, which allows for the extrapolation of findings from the stationary observation’s data to active ground measurements conducted near thunderclouds with vehicles, on where my primary work was focused.
+Within the context of the CRREAT project, the term {\em ground level measurements} encompasses a broader scope, including measurements based on passive and stationary high-altitude observatories. My involvement in these stationary measurements was minimal, primarily relating to some aspects of electronics design. However, I consider it useful to mention the existence of these measurements here because uses similar, or identical equipment, which allows for the extrapolation of findings from the stationary observation’s data to active ground measurements conducted near thunderclouds with vehicles, on where my primary work was focused.
 
 The summer storm measurement campaigns employing vehicles equipped with detection devices represent a culmination of all experiments described in previous sections. The deployment of vehicles equipped with specialized detection devices is based on exhaustive preparatory work, where each component's function and reliability are evaluated by previously mentioned experiments performed occasionally out of the main thunderstorm session e.g. in winter.  Given that the components and devices were often tested separately to prevent their failure during critical moments of storm activity. 
 The average duration of monitoring a single storm's development is approximately half an hour, offering minimal opportunity for adjustments or repairs. The presence of an error on a single of three cars usually fails in a thunderstorm observation attempt. This constraint illustrates the importance of reliability, precise calibration, and software stability of the instruments used in the described research.
@@ -289,20 +292,20 @@ The position of the measuring car was stationary during the period of thundersto
 \medskip
 \clabel[CRREAT_CAR0_diagram]{CRREAT CAR0 instrumentation diagram}
 \picw=15cm \cinspic ./img/CRREAT_CAR0_diagram.png
-\caption/f CRREAT CAR0 instrumentation schematic diagram. This car differs with a four-element UHF antenna array receiver and GNSS orientation tracking sensor. 
+\caption/f CRREAT CAR0 instrumentation schematic diagram. This car differs by a four-element UHF antenna array receiver and GNSS orientation tracking sensor. 
 \medskip
 
-During the measuring campaigns, the method of data recording developed as well. The first campaigns were trying to make fully automatic recordings based on observed electromagnetic signals using the described LIGHTNING01 module. Please refer to the section \ref[LIGHTNING01A_trigger] for details.
-This system however had a lot of imperfections leading to its abandonment in the measuring car CAR0, where it was replaced by solely manual activation of recording until the trigger was implemented directly into the VLF receiver’s FPGA. See the fig. \ref[CRREAT_CAR0_diagram] for overview.  
-The manual activation of the recording was based on the visual perception of the operator observing the lightning activity. In contrast to CAR0, CAR1 was left with a semi-automatic method of activating the recording to compare the efficiency of both trigger methods. Car CAR1 thus had for a long time recorded triggers based on using a loop antenna and oscilloscope that generated triggers for other devices. See fig. CRREAT CAR1.  After the successful test of manual triggers that option was implemented in all three cars.
+During the measuring campaigns, the method of data recording developed as well. The first campaigns were trying to make fully automatic recordings based on observed electromagnetic signals using the described LIGHTNING01 module. Refer to section \ref[LIGHTNING01A_trigger] for details.
+This system however had a lot of imperfections leading to its abandonment in the measuring car CAR0, where it was replaced by solely manual activation of recording until the trigger was implemented directly into the VLF receiver’s FPGA. See fig. \ref[CRREAT_CAR0_diagram] for overview.  
+The manual activation of the recording was based on the visual perception of the operator observing the lightning activity. In contrast to CAR0, CAR1 was left with a semi-automatic method of activating the recording to compare the efficiency of both trigger methods. Car CAR1 thus had for a long time recorded triggers based on using a loop antenna and oscilloscope that generated triggers for other devices. See Fig. \ref[CRREAT_CAR1_diagram].  After the successful test of manual triggers that option was implemented in all three cars.
 
 \medskip
 \clabel[CRREAT_CAR1_diagram]{CRREAT CAR1 instrumentation diagram}
 \picw=15cm \cinspic ./img/CRREAT_CAR1_diagram.png
-\caption/f CRREAT CAR1 instrumentation schematic diagram. This car has the electric Field mill sensor installed. 
+\caption/f CRREAT CAR1 instrumentation schematic diagram. This car has the electric field mill sensor installed. 
 \medskip
 
-The trigger signal was initially distributed to the camera via the Ethernet network, a solution common to both measuring cars, but at the end of the campaign this method was abandoned and replaced with a direct trigger signal connected to the high-speed all-sky camera input because ethernet has unknown latency on processing the trigger packet from network and also in thunderstorm conditions, there sometimes happens that trigger packet is not derived to the camera correctly.
+The trigger signal was initially distributed to the camera via the Ethernet network, a solution common to both measuring cars, but at the end of the campaign this method was abandoned and replaced with a direct trigger signal connected to the high-speed all-sky camera input because Ethernet has unknown latency on processing the trigger packet from network and also in thunderstorm conditions, there sometimes happens that trigger packet is not derived to the camera correctly.
 
 \medskip
 \clabel[CRREAT_CAR2_diagram]{CRREAT CAR2 instrumentation diagram}
@@ -314,7 +317,8 @@ A significant challenge was caused by the time needed to record the data measure
 
 For high-quality data collection on storm activity, most of the described instruments require accurate information about time and position to compare the recorded data with external data sources.
 GNSS receivers were mainly used for this purpose. The evolution of position tracking for the vehicle initially utilized a simple solution with a GPS receiver for coordinate logging and a manually targeted compass to determine car orientation. However, this method proved imprecise and unfeasible in the context of various operational tasks, as it was often neglected or not performed accurately.
-Therefore, it was necessary to explore other methods that ideally would not depend on manual recording of the car orientation. This led to the adoption of radio navigation, enabling real-time tracking of orientation. For this purpose, the three MLAB GNSS modules GPS02 equipped with a uBlox NEO-M8P receiver capable of Real-Time Kinematic (RTK) navigation were used. That module at the same time supports moving baseline configurations, allowing each receiver to be used both as a rover and a base station. The moving baseline in the context of uBlox means that position is measured in local NED coordinates relative to the base. Therefore baseline and three position angles could be estimated. 
+Therefore, it was necessary to explore other methods that ideally would not depend on manual recording of the car orientation. This led to the adoption of radio navigation, enabling real-time tracking of orientation. For this purpose, the three MLAB GNSS modules GPS02 equipped with a uBlox NEO-M8P receiver capable of Real-Time Kinematic (RTK) navigation were used. That module at the same time supports moving baseline configurations, allowing each receiver to be used both as a rover and a base station. The moving baseline in the context of uBlox means the  position is measured in local NED coordinates relative to the base. Therefore a baseline and three position angles could be estimated. 
+
 This feature of the receiver not only enabled precise positioning but was particularly beneficial for applications like UAV following or potential future implementation of landing back on the car's roof. Utilizing this for the car's platform orientation across three axes partially replaced the manually operated compass but faced challenges in signal quality due to onboard equipment interference. Additionally, such a solution is very sensitive to interruptions in the signal phase, as when the car passes under a highway bridge or driving on a road covered by trees, both can easily disrupt the signal phase and result in incorrect orientation measurements. The usability of this innovation was thus primarily hindered by the implementation in the selected receiver, which was unable to reliably indicate when the provided moving baseline coordinates were invalid.
 
 \medskip
@@ -325,14 +329,12 @@ This feature of the receiver not only enabled precise positioning but was partic
 
 It was initially assumed that the suboptimal results (even below the manufacturer's specifications) were due to poor-quality GNSS antennas. Basic patch active antennas were used, all oriented in the same direction according to the application note, to prevent phase shifts from different directions. However, changing the antenna type to a QFH antenna, which has significantly better parameters compared to the patch antenna, did not result in any noticeable improvement in the receiver's performance and ability to correctly mark invalid data.
 
-To obtain precise system time for all onboard instruments in the measuring car, GNSS receivers were utilized. Initially, this was achieved by combining the relative PPS signal (as described in the chapter on the \ref[VLF_receiver]) with the absolute time from the internet, synchronized with the operating system time using {\em ntp-wait}. However, this method had drawbacks, it required a stable internet connection and took a long time to synchronize. Internet connectivity was provided via LTE, which was unreliable in some regions and during thunderstorms, leading to complications in initializing the measurement system and difficulty in restarting the instrumentation after power outages, such as when the car's diesel engine was restarted. 
-The latest solution involved connecting an additional GNSS receiver to the onboard router, Turris Omnia, which provided basic positioning and precise time information. This router then served as the accurate time source for the onboard ethernet network, significantly improving the reliability of the entire setup.
-
-\par Inter-car communication
+To obtain precise system time for all onboard instruments in the measuring car, GNSS receivers were utilized. Initially, this was achieved by combining the relative PPS signal (as described in the section \ref[VLF_receiver]) with the absolute time from the internet, synchronized with the operating system time using {\em ntp-wait}. However, this method had drawbacks, it required a stable internet connection and took a long time to synchronize. Internet connectivity was provided via LTE, which was unreliable in some regions and during thunderstorms, leading to complications in initializing the measurement system and difficulty in restarting the instrumentation after power outages, such as when the car's diesel engine was restarted. 
+The latest solution involved connecting an additional GNSS receiver to the onboard router, Turris Omnia, which provided basic positioning and precise time information. This router then served as the accurate time source for the onboard Ethernet network, significantly improving the reliability of the entire setup.
 
 From the beginning of utilizing cars for atmospheric measurements, challenges were faced in how to effectively share information between drivers or operators of the measuring vehicles. Initially, with only two vehicles, the crew included an operator besides the driver to manage navigation, search for suitable observation spots, respond to the actual storm developments, and assist with instrument operation. However, this approach became impractical with the addition of a third vehicle due to the demand for a high number of personnel. The first attempt at solving this issue involved using PMR radios for inter-vehicle communication, which quickly proved ineffective for drivers and did not support the inclusion of a coordinating team member. Expanding PMR radios with chat and location sharing via standard communication apps also fell short in practicality.
 
-Thus, HabHub technology, previously tested in balloon flights (see the chapter \ref[balloon_flights]), was transitioned to, enabling vehicle location sharing on a unified map on the webpage. This service, augmented with Jitsi\urlnote{https://meet.jit.si/} for voice communication, offered a more functional solution. However, challenges persisted, in the form of poor audio quality from laptop microphones and unresolved integration of vehicle hands-free systems with measuring notebooks connected to the internet via onboard modems, because the connection interfered with connecting the driver's regular smartphone used for navigation.
+Thus, HabHub technology, previously tested in balloon flights (see section \ref[balloon_flights]), was transitioned to, enabling vehicle location sharing on a unified map on the webpage. This service, augmented with Jitsi\urlnote{https://meet.jit.si/} for voice communication, offered a more functional solution. However, challenges persisted, in the form of poor audio quality from laptop microphones and unresolved integration of vehicle hands-free systems with measuring notebooks connected to the internet via onboard modems, because the connection interfered with connecting the driver's regular smartphone used for navigation.
 
 \secc Data capturing procedure
 
@@ -378,7 +380,7 @@ The resulting luminosity curves contain morphological signatures, such as sharp 
 \medskip
 \clabel[luminosity_curves]{An example of luminosity curves}
 \picw=15cm \cinspic ./img/luminosity_curve_examples.png
-\caption/f   An example of luminosity curves for a few lightning.  
+\caption/f   An example of luminosity curves for a few lightning events.  
 \medskip
 
 \secc Radio signal measurements
