@@ -34,11 +34,25 @@
       \noindent\hskip2\iindent \llap{[\the\bibmark] }}%
 }
 
+
+\def\printcaption#1#2{\leftskip=\iindent \rightskip=\iindent 
+   \setbox0=\hbox\bgroup \aftergroup\docaption{\bf#1 #2.}\enspace} 
+\def\docaption{\tmpdim=\hsize \advance\tmpdim by-2\iindent 
+   \ifdim\wd0>\tmpdim \unhbox0 \else \hfil\hfil\unhbox0 \fi \endgraf \egroup} 
+
+
 \input glosdata
 
 \load [./pdfextra/pdfextra]
 \filedef/e[1627302288.9546976.mp4]{./img/1627302288.9546976.mp4}
 \attach[1627302288.9546976.mp4]
+
+\filedef/e[1627302745.846055.mp4]{./img/1627302745.846055.mp4}
+\attach[1627302745.846055.mp4]
+
+\filedef/e[2021-08-15-20-07-35.912167-lightning.mp4]{./img/2021-08-15-20-07-35.912167-lightning.mp4}
+\attach[2021-08-15-20-07-35.912167-lightning.mp4]
+
 \showattached
 
 \draft
