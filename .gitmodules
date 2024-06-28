@@ -1,0 +1,3 @@
+[submodule "pdfextra"]
+	path = pdfextra
+	url = git@github.com:vlasakm/pdfextra.git

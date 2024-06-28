@@ -3,7 +3,7 @@ After initial processing of storm activity records with the described instrument
 \sec[balloon_flights] Stratospheric Balloon Flights
 
 Stratospheric balloon flights are conducted for several reasons related to the research of electromagnetic phenomena in the atmosphere associated with storm activity. They allow for the testing of instruments under various adverse conditions, enable the testing of data transmission methods over relatively long distances and in unfavorable weather, and provide a platform to lift additional instruments in the atmosphere. For example, they offer insights into the behavior of ionizing radiation in the upper layers of the atmosphere, where particles of primary cosmic radiation with sufficient energy interact and generate showers of secondary cosmic radiation. This phenomenon causes the situation that with increasing depth of the atmosphere, the intensity of primary radiation decreases whereas the secondary component intensity increases. 
-At an altitude of about 20 km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum \cite[REGENER1935]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level \cite[Bazilevskaya1998]. 
+At an altitude of about 20 km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum \cite[REGENER1935, Regener1934IntensityOT, REGENER1933]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level \cite[Bazilevskaya1998]. 
 Due to that physical phenomenon, stratospheric balloons are a useful tool for the investigation of cosmic radiation at high altitudes (around and above the Regener-Pfotzer maximum region).
 
 Since the composition of the radiation field varies with altitude \cite[10.1093/oxfordjournals.rpd.a081837] various radiation detector types should be used to measure the vertical profile of cosmic radiation in the atmosphere. 
@@ -367,7 +367,18 @@ Because lightning discharges often happen inside clouds and lightning channels a
 
 To maintain clarity, luminosity curves are added to videos, which are converted from BW recordings captured by cameras to false colors to make details of lightning (that have high luminosity dynamics) visible.  
 
-The following enclosed video [1627302288.9546976.mp4] shows lightning together with leaders and recoil leaders. During the observation, the camera is pointed towards the zenith and its lens allows capture of the entire sky from horizon to horizon. For the illustration of the camera view a plain camera frame is shown in Fig.  \ref[figur_horizon]. During the thunderstorm recording, the camera shutter time is decreased to capture lightning that has high brightness dynamics. As a result, lightning is not visible on the camera together with details of clouds and surrounding terrain. The processed video has the position of the horizon marked with a green circle with an inscribed designation of the cardinal directions. In the upper part of the video, there is a white graph showing a luminosity curve with a green pointer marking the current position of the displayed frame on the time axis. On the right, the used color range is visible, corresponding to the brightness recorded by each camera pixel with a depth of 8 bits. The bottom line shows the number of the current frame over the total number of frames recorded. The next is Sg=1/1 (information on which part of the camera’s internal memory was used for recording) and the time of the current frame ‘T=’ in seconds relative to trigger time.
+\midinsert
+\clabel[video_1627302288.9546976.mp4]{Lightning leaders and recoil leaders}
+\render[1627302288.9546976.mp4][
+name=bigvideo,
+controls=false,
+repeat=0,
+aactions=\renditionautoplay,
+]{\picwidth=\hsize \inspic{./img/1627302288.9546976.png}}
+\caption/f   The enclosed video file: {\em 1627302288.9546976.mp4} shows lightning together with leaders and recoil leaders.
+\endinsert
+
+ During the observation, the camera is pointed towards the zenith and its lens allows capture of the entire sky from horizon to horizon. For the illustration of the camera view a plain camera frame is shown in Fig.  \ref[figur_horizon]. During the thunderstorm recording, the camera shutter time is decreased to capture lightning that has high brightness dynamics. As a result, lightning is not visible on the camera together with details of clouds and surrounding terrain. The processed video has the position of the horizon marked with a green circle with an inscribed designation of the cardinal directions. In the upper part of the video, there is a white graph showing a luminosity curve with a green pointer marking the current position of the displayed frame on the time axis. On the right, the used color range is visible, corresponding to the brightness recorded by each camera pixel with a depth of 8 bits. The bottom line shows the number of the current frame over the total number of frames recorded. The next is Sg=1/1 (information on which part of the camera’s internal memory was used for recording) and the time of the current frame ‘T=’ in seconds relative to trigger time.
 
 \medskip
 \clabel[figur_horizon]{A still image example from the all-sky camera}
@@ -397,8 +408,7 @@ The advantage of using magnetic loop antennas to measure lightning is that obser
 
 The detection of lightning using the STP antenna has been compared with its detection using the Blitzortung.org network. It's important to note that not every lightning strike detected by the STP antenna is also detected by the Blitzortung.org network. Figure \ref[figur_blitz2] shows that when the storm was closest to the car according to Blitzortung.org, the STP antenna detected lightning at different times or at distances of more than 120 km. Conversely, as shown in Figure \ref[figur_blitz1], when the storm was located tens of kilometers away from the observation site according to Blitzortung.org, there is perfect conformity with the data from the STP antenna. In both figures, an interval of ±1 second is marked around the vertical lines corresponding to the detection times.
 
-Lightning at 18:24:48 was detected by a high-speed camera, see video 
-[1627302288.9546976.mp4.]. According to the video, one of the lightning channels occurred almost directly above the measurement car, but the nearest lightning detected by Blitzortung.org was at least 70 km away. The positioning accuracy in the case of the Blitzortung.org network is in the order of kilometers. Blitzortung.org detected discharges at a distance of 70 to 80 km simultaneously. This allows the deduction that this lightning was more than 80 km long or that a synchronous discharge occurred 80 km away.
+Lightning at 18:24:48 was detected by a high-speed camera, see video \ref[video_1627302288.9546976.mp4]. According to the video, one of the lightning channels occurred almost directly above the measurement car, but the nearest lightning detected by Blitzortung.org was at least 70 km away. The positioning accuracy in the case of the Blitzortung.org network is in the order of kilometers. Blitzortung.org detected discharges at a distance of 70 to 80 km simultaneously. This allows the deduction that this lightning was more than 80 km long or that a synchronous discharge occurred 80 km away.
 
 
 \medskip
