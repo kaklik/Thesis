@@ -63,10 +63,10 @@
 \sec \notoc \nonum Foreword 
 
 I chose to write a relatively wide introduction to help explain the necessary context for understanding some of the trade-offs made throughout this work. I believe this approach will allow readers to grasp the broad spectrum of activities that, without explanation, might seem unrelated.
-At the beginning of my research, I focused on the Bolidozor network. Bolidozor is a forward-scattering radio meteor detection network that non-cooperatively uses signals from the French military radar GRAVES \urlnote{https://spp.fas.org/military/program/track/graves.pdf}.  This means that the signals transmitted by GRAVES are scattered by meteor trails in the atmosphere, making it easy to receive reflections across large parts of Europe, even with a simple ground plane antenna.
+At the beginning of my research, I focused on the Bolidozor network. Bolidozor is a forward-scattering radio meteor detection network that non-cooperatively uses signals from the French military radar GRAVES\urlnote{https://spp.fas.org/military/program/track/graves.pdf}.  This means that the signals transmitted by GRAVES are scattered by meteor trails in the atmosphere, making it easy to receive reflections across large parts of Europe, even with a simple ground plane antenna.
   
 There are several reasons for focusing on this area. Firstly, unlike visual meteor observations using cameras, radar observations are independent of weather and daylight conditions. This advantage allows radio observations to overcome the limitations that visual observation networks face, which often experience impaired sensitivity for significant portions of time. Additionally, radio observation can enhance the precision of meteoroid velocity estimation due to the significant Doppler effect observed in the reflected signals \ref[Bolidozor_starlink_reflections].
-The existence of a Doppler-shifted "head echo" (fig. \ref[Bolidozor_head_echo]) in meteor reflections was a key focus, as I planned to use this phenomenon to estimate meteor trajectories from signals received by multiple stations. This approach appears feasible, as there have been successful attempts to calculate meteor vectors in the atmosphere based on these Doppler-shifted signals (M. A. Vallejo\fnote{Callsign: EA4EOZ}, 2016 et al.). 
+The existence of a Doppler-shifted {\em head echo} (fig. \ref[Bolidozor_head_echo]) in meteor reflections was a key focus, as I planned to use this phenomenon to estimate meteor trajectories from signals received by multiple stations. This approach appears feasible, as there have been successful attempts to calculate meteor vectors in the atmosphere based on these Doppler-shifted signals (M. A. Vallejo\fnote{Callsign: EA4EOZ}, 2016 et al.). 
 
 \medskip
 \label[Bolidozor_head_echo]
@@ -85,7 +85,7 @@ The GRAVES radar also has a side transmission from its antenna, but these transm
 \medskip
 
 That results in very few meteor events which could be used for trajectory verification by using the local video-based meteor detection networks here in the Czech Republic. 
-To resolve this problem I decided to switch from GRAVES radar transmission to the local transmitters which are more suitable for local meteor detection.  I selected the VOR beacons for airplane navigation. These beacons have reduced transmission power compared to GRAVES, but according to the numerical model I constructed the meteor radar based on that transmitters could be feasible with the use of state-of-the-art radio components.
+To resolve this problem I decided to switch from GRAVES radar transmission to the local transmitters which are more suitable for local meteor detection.  I selected the VOR beacons for airplane navigation. These beacons have reduced transmission power compared to GRAVES, but according to the numerical model I constructed the meteor radar based on that transmitters could be feasible with the use of state-of-the-art radio components\urlnote{https://github.com/bolidozor/iPython-models/blob/master/VOR_beacons.ipynb}.
 
 
 \medskip
