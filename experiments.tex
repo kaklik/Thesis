@@ -30,7 +30,7 @@ Apart from technologies used directly in balloon  gondolas, many supplementary t
 
 \secc The design of universal avionics
 
-Based on the described experiences the concept of a universal avionics called TF-ATMON emerged. That technology makes it possible to connect different types of payloads and carry out various atmospheric measurements. Furthermore, it provides basic services such as power supply, time, position, and 3D orientation information to the payload instruments. That data is recorded in parallel with quantities that affect many types of measurements, including temperature, pressure, humidity, magnetic field, and acceleration. At the same time flight computer provides the services for payload to record data from experiments in a common log file. 
+Based on the described experiences the concept of a universal avionics called TF-ATMON emerged. That technology makes it possible to connect different types of payloads and carry out various atmospheric measurements. Furthermore, it provides basic services such as power supply, time, position, and 3D orientation information to the payload instruments. That data is recorded in parallel with quantities that affect many types of measurements, including temperature, pressure, humidity, magnetic field, and acceleration. At the same time flight computer provides the services for the payload to record data from experiments in a common log file. 
 Therefore the TF-ATMON onboard stratospheric balloons have become an extremely useful tool for testing instruments like cosmic radiation detectors and dosimeters at high altitudes.
 
 The schematic diagram of the avionics hardware is summarized in the figure \ref[avionics_schematics].
@@ -64,7 +64,7 @@ In the case of FIK-5 and FIK-6 flights that served as the test flights for the n
 
 The payload for example FIK-6 flight contained TF-ATMON and three different types of ionizing radiation detectors already mentioned in \ref[instrumentation] section: SPACEDOS with silicon PIN diode sensor, AIRDOS-C with scintillation crystal and silicon photomultiplier and a G-M tube. The total payload mass was 2 kg.
 
-SPACEDOS is a lightweight dosimeter intended for space applications and measurements onboard spacecraft. The detector has been described in \cite[10.1093/rpd/ncac106]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[10.1093/rpd/ncac105]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included because it has high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
+SPACEDOS is a lightweight dosimeter intended for space applications and measurements onboard spacecraft. The detector has been described in \cite[10.1093/rpd/ncac106]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[10.1093/rpd/ncac105]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included because it has a high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system were put inside a polystyrene box. 
 
 \medskip
 \clabel[FIK-6_setup]{FIK-6 flight balloon setup}
@@ -87,10 +87,10 @@ The system TF-ATMON recorded temperature, air pressure, humidity, and radiation 
 \medskip
 \clabel[FIK-6_telemetry]{Acceleration and Angular Speed balloon telemetry}
 \picw=15cm \cinspic ./img/FIK-6_metadada.png
-\caption/f Acceleration and angular speed in axis perpendicular to the ground combined with ionizing radiation flux measured by the silicon PIN diode detector.
+\caption/f Acceleration and angular speed in the axis perpendicular to the ground combined with ionizing radiation flux measured by the silicon PIN diode detector.
 \medskip
 
-Figure \ref[FIK-6_telemetry] demonstrates the importance of telemetry data from the TF-ATMON system during measurement processing. The graphs show an increase in the response of the silicon ionizing radiation detector at the times of take-off, burst, and landing when there was a rapid increase in mechanical stress. The effect is caused by the microphone effect of the silicon detector circuit. At the same time, it can be seen there are considerable vibrations, rapid changes in acceleration, and gondola rotation during the balloon descent. The increase in relative humidity is also observable in fig \ref[FIK-6_RAW_data]. Then the water wapor can freeze on the instruments during some parts of the flight. All of them may affect the measurement of atmospheric quantities and for some types of instruments, they have to be compensated.
+Figure \ref[FIK-6_telemetry] demonstrates the importance of telemetry data from the TF-ATMON system during measurement processing. The graphs show an increase in the response of the silicon ionizing radiation detector at the times of take-off, burst, and landing when there was a rapid increase in mechanical stress. The effect is caused by the microphone effect of the silicon detector circuit. At the same time, it can be seen there are considerable vibrations, rapid changes in acceleration, and gondola rotation during the balloon descent. The increase in relative humidity is also observable in fig \ref[FIK-6_RAW_data]. Then the water vapor can freeze on the instruments during some parts of the flight. All of them may affect the measurement of atmospheric quantities and for some types of instruments, they have to be compensated.
 
 The graphs show that the maximum reached altitude was approximately 33 km above sea level. During the flight, the balloon passed the Regener-Pfotzer maximum twice. The rescue team followed the balloon along the whole flight trajectory. The precision of tracking allowed some participants of the rescue team to see the gondola touchdown visually. Therefore the gondola was successfully rescued within a few minutes after touchdown (Figure \ref[FIK-6_rescue_team]).
 
@@ -131,7 +131,7 @@ As can be seen from Table 1 in appendix \ref[FIK_flights], the last unsolved pro
 
 The descent should be controlled by using an airframe carrying a payload. Thus it would be possible to choose the landing site and reduce the possible risk of creating dangerous situations and at the same time with a possibility to control the descent rate and trajectory. 
 Another unresolved challenge for use of the balloons for thunderstorm research is the difficulty of launching them in strong winds, which are nearly always present near storms, especially at times when the measurements are most critical. See the Figure \ref[balloon_wind_takeoff] for that situation.
-For these reasons, it became necessary to shift to other carrier platforms to be used for practical storm activity measurements. The logical alternative for this step is to employ unmanned aircraft system (\glref{UAS}).
+For these reasons, it became necessary to shift to other carrier platforms to be used for practical storm activity measurements. The logical alternative for this step is to employ an unmanned aircraft system (\glref{UAS}).
 
 \medskip
 \clabel[balloon_wind_takeoff]{Takeoff of the stratospheric balloon during high wind conditions}
@@ -286,7 +286,7 @@ In addition to the mentioned experiments, numerous routine flights and experimen
 
 \sec Ground level measurements
 
-Within the context of the CRREAT project, the term {\em ground level measurements} encompasses a broader scope, including measurements based on passive and stationary high-altitude observatories. My involvement in these stationary measurements was minimal, primarily relating to some aspects of electronics design. However, I consider it useful to mention the existence of these measurements here because they uses similar, or identical equipment, which allows for the extrapolation of findings from the stationary observation’s data to active ground measurements conducted near thunderclouds with vehicles, on where my primary work was focused.
+Within the context of the CRREAT project, the term {\em ground level measurements} encompasses a broader scope, including measurements based on passive and stationary high-altitude observatories. My involvement in these stationary measurements was minimal, primarily relating to some aspects of electronics design. However, I consider it useful to mention the existence of these measurements here because they use similar, or identical equipment, which allows for the extrapolation of findings from the stationary observation’s data to active ground measurements conducted near thunderclouds with vehicles, on where my primary work was focused.
 
 The summer storm measurement campaigns employing vehicles equipped with detection devices represent a culmination of all experiments described in previous sections. The deployment of vehicles equipped with specialized detection devices is based on exhaustive preparatory work, where each component's function and reliability are evaluated by previously mentioned experiments performed occasionally out of the main thunderstorm session e.g. in winter.  Given that the components and devices were often tested separately to prevent their failure during critical moments of storm activity. 
 The average duration of monitoring a single storm's development is approximately half an hour, offering minimal opportunity for adjustments or repairs. The presence of an error on a single of three cars usually fails in a thunderstorm observation attempt. This constraint illustrates the importance of reliability, precise calibration, and software stability of the instruments used in the described research.
