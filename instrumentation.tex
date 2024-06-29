@@ -1,14 +1,14 @@
 
 To be able to record the different processes occurring during thunderstorms, the three cars were equipped with specialized measuring equipment. The aim is to verify the hypotheses  considering the relation between thunderstorms and ionizing radiation stated in the section \ref[ionizing_radiation_detectors]. These cars were able to move to locations with predicted storm activity and thus flexibly react to specific storm developments, and perform ground measurements directly at the lightning site.
 
-To determine the necessary parameters of lightning activity (lightning events’ timestamps, lightning type, and location), the measuring cars, see Fig. \ref[CRREAT_cars] (CAR0 and CAR1), was equipped with high-speed all-sky camera and radio receivers. The cars were used to transport and power the instruments in proximity to thunderstorms, and the car cabin also served as partial protection for the instrument operator.
+To determine the necessary parameters of lightning activity (lightning events’ timestamps, lightning type, and location), the measuring cars, see Fig. \ref[CRREAT_cars] (CAR0 and CAR1), were equipped with a high-speed all-sky camera and radio receivers. The cars were used to transport and power the instruments in proximity to thunderstorms, and the car cabin also served as partial protection for the instrument operator.
 
 The equipment of cars is not uniform as it is gradually improved and also the purpose of each car slightly differs.
 
 \medskip
 \clabel[CRREAT_cars]{CRREAT measurement cars with instruments mounted on the roof platform}
 \picw=15cm \cinspic ./img/CRREAT_cars.jpg
-\caption/f The CRREAT measurement cars with instruments mounted on platforms, the overviw of differences is shown in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and  \ref[CRREAT_CAR2_diagram]. 
+\caption/f The CRREAT measurement cars with instruments mounted on platforms, the overview of differences is shown in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and  \ref[CRREAT_CAR2_diagram]. 
 \medskip
 
 \sec[High_speed_camera] High-speed all-sky Cameras
@@ -45,14 +45,14 @@ That fact also favors the combination of VLF and UHF, because the primary intere
 
 As has been already stated, practically all current systems \cite[5173582] detect and locate lightning based on the occurrence of a pulse signal above a specified threshold value. The absolute time of pulse detection is processed, using algorithms based on the Time Difference of Arrival (TDoA) possibly enhanced by a combination with directional findings.  The calculated output is the most probable place of the pulse signal's origin. Only a minority of implementations consider the shape of the pulse or a sequence of pulses for a more detailed analysis of the signal's origin (excluding the correction of pulse dispersion to correct the TDoA value, which is quite common) \urlnote{https://www1.gifu-u.ac.jp/~lrg/falma.html}.
 
-To clarify the phenomena occurring during a lightning discharge, it was necessary to adopt a different approach and implement a SDR receiver with different properties from existing systems. The fundamental differences from other systems include:
+To clarify the phenomena occurring during a lightning discharge, it was necessary to adopt a different approach and implement an SDR receiver with different properties from existing systems. The fundamental differences from other systems include:
 
 \begitems
-\item - The entire segment of the lightning event signal with a bandwidth of 10 MHz is recorded, which is nearly double the bandwidth of the most of currently used solutions.
-\item - Each station uses an antenna array, which can be utilized in the future for advanced signal processing, thereby making it possible to obtain directional resolution.
-\item - Thanks to directional resolution, stations can spatially and temporally separate individual observed phenomena.
-\item - Recording the entire signal segment allows for a more precise reconstruction of the lightning discharge structure.
-\item - Lightning discharge can then be described by vectors in the future instead of the current most common description by a point cloud.
+* The entire segment of the lightning event signal with a bandwidth of 10 MHz is recorded, which is nearly double the bandwidth of the most of currently used solutions.
+* Each station uses an antenna array, which can be utilized in the future for advanced signal processing, thereby making it possible to obtain directional resolution.
+* Thanks to directional resolution, stations can spatially and temporally separate individual observed phenomena.
+* Recording the entire signal segment allows for a more precise reconstruction of the lightning discharge structure.
+* Lightning discharge can then be described by vectors in the future instead of the current most common description by a point cloud.
 \enditems
 
 For the observation,  the VLF receiver system was used simultaneously for detection of the lightning and triggering other instruments in the cars. The detection of the lightning  was based on pulse width and the signal level; both parameters were set by the operator during the thunderstorm event. The range of these parameters is usually 5 to 20 ~$\mu$s for the pulse width and  10 to 30 mV for the signal level. The values are set directly to the registers of the signal processing FPGA into the receiver. For convenience, the values could be set directly in the web-based UI shown in Fig. \ref[RSMS_control]. 
@@ -105,7 +105,7 @@ The UHF radio receiver is triggered by an external trigger (coming from the VLF 
 \medskip
 \clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
 \picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
-\caption/f Measuring CAR0 with all-sky high-speed camera and array of QFH mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram]. 
+\caption/f Measuring CAR0 with an all-sky high-speed camera and array of QFH antenna mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram]. 
 \medskip
 
 
@@ -178,9 +178,9 @@ The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulti
 
 Electric field sensors were planned to be used as devices capable of indicating the potential for lightning discharges in clouds. For this purpose, Boltek detectors were initially acquired and Boltek detectors were used for ground-based measurements. Despite their widespread use, these detectors presented significant limitations for mobile measurements due to their bulkiness and less optimal design for mobile deployment. Seeking a more adaptable solution, the more compact Kleinwächter EFM 115 was transitioned to. This Electric Field Mill (EFM) offered an improved form factor for mobile applications, directly connecting its analog signal output to a data logger equipped with a GPS for accurate timestamping \urlnote{https://github.com/mlab-modules/FIELDMILL01}, with a logging time resolution of 110 ms.
 
-However, challenges persisted with the Kleinwächter EFM 115, as its mechanical and weather durability did not meet the demands of mobile fieldwork, and the quality of its data output sometimes fell under the required quality. These obstacles resulted in the necessity for an alternative solution, prompting the development of a new design for electric field mills. The new design also required increased versatility because these custom mills were engineered to seamlessly integrate into stationary setups, mobile measurements utilizing vehicles, and even atmospheric assessments via Unmanned Aerial Vehicles (UAVs), addressing both the mechanical robustness and data quality issues which were encountered with commercial alternatives.
+However, challenges persisted with the Kleinwächter EFM 115, as its mechanical and weather durability did not meet the demands of mobile fieldwork, and the quality of its data output sometimes fell under the required quality. These obstacles resulted in the necessity for an alternative solution, prompting the development of a new design for electric field mills. The new design also required increased versatility because these custom mills were engineered to seamlessly integrate into stationary setups, mobile measurements utilizing vehicles, and even atmospheric assessments via Unmanned Aerial Vehicles (UAVs), addressing both the mechanical robustness and data quality issues that were encountered with commercial alternatives.
 
-For the construction of the new electric field mill (THUNDERMILL01), the initial design was first tested in a laboratory and then put on the measuring car roof, as shown in Figure \ref[THUNDERMILL01_on_car]. At that time, the mill was housed in a tin-plated can turned upside down to protect it from external weather influences. This solution proved ineffective, as the metal can rust through in approximately two months. Subsequent units intended for stationary placement at the Lomnický Štít observatory were therefore made with a stainless steel casing shown in Figure \ref[LS_THUNDERMILL], where are the measured values compared with Boltek sensor \ref[THUNDERMILL_LS_boltek].
+For the construction of the new electric field mill (THUNDERMILL01), the initial design was first tested in a laboratory and then put on the measuring car roof, as shown in Figure \ref[THUNDERMILL01_on_car]. At that time, the mill was housed in a tin-plated can turned upside down to protect it from external weather influences. This solution proved ineffective, as the metal can rust through in approximately two months. Subsequent units intended for stationary placement at the Lomnický Štít observatory were therefore made with a stainless steel casing shown in Figure \ref[LS_THUNDERMILL], where the measured values compared with Boltek sensor \ref[THUNDERMILL_LS_boltek].
 
 \medskip
 \clabel[THUNDERMILL01_on_car]{EFM mounted on the CRREAT car's roof}
@@ -213,7 +213,7 @@ The implementation of the disdrometer was necessitated by the need for high-time
 \medskip
 \clabel[Radon_precipitation]{Radon progeny washout}
 \picw=15cm \cinspic ./img/Precipitation_radon.png
-\caption/f  The graph clearly demonstrates the impact of rainfall on ionizing radiation flux on ground. The top panel shows the detections from the LIGHTNING01 module (described in section \ref[LIGHTNING01A_trigger]),  distance to lightning strikes (Blitzortung.org), while the subsequent panels display counts per second for different scintillation detectors (AIRDOS-N inside car, RT-56 on the car roof). The final panel indicates precipitation intensity (5T precipitation). Notably, there is a clear increase in radiation counts following periods of rainfall, highlighting the washout effect of radon progeny from the atmosphere.
+\caption/f  The graph demonstrates the impact of rainfall on ionizing radiation flux on the ground. The top panel shows the detections from the LIGHTNING01 module (described in section \ref[LIGHTNING01A_trigger]), and distance to lightning strikes (Blitzortung.org), while the subsequent panels display counts per second for different scintillation detectors (AIRDOS-N inside car, RT-56 on the car roof). The final panel indicates precipitation intensity (5T precipitation). Notably, there is a clear increase in radiation counts following periods of rainfall, highlighting the washout effect of radon progeny from the atmosphere.
 \medskip
 
 Traditional, widely used methods of precipitation measurement have their limitations. For instance, the commonly used tipping bucket rain gauge only provides data resolution dependent on precipitation intensity and has a relatively narrow effective range where the collection bucket can tip and accurately measure rainfall. 
@@ -225,9 +225,9 @@ Traditional, widely used methods of precipitation measurement have their limitat
 \medskip
 
 
-Furthermore, the tipping bucket rain gauge does not differentiate between different types of precipitation (rain, snow, hail, graupels, etc.) as could be seen in Figure \ref[tipping_bucket_limitation]. The different hydrometeors types have impact to the efficiency of radionuclide washout and also the electrification of storm clouds. The tipping bucket rain gauge has a significant advantage in precise volume measurement of the precipitation, but it is a value that is not useful too much because rain intensity and hydrometeor type are more important. In contrast, the disdrometer---another type of instrument---is capable of identifying precipitation types but generally lacks precision in measuring volume. In the case of mobile measurement using cars, there is also a requirement to avoid optical principles, which most commercial disdrometers are based on, which are unsuitable for vehicle roof mounting due to their sensitivity to movement and vibration.
+Furthermore, the tipping bucket rain gauge does not differentiate between different types of precipitation (rain, snow, hail, graupels, etc.) as could be seen in Figure \ref[tipping_bucket_limitation]. The different hydrometeors types have an impact on the efficiency of radionuclide washout and also the electrification of storm clouds. The tipping bucket rain gauge has a significant advantage in precise volume measurement of the precipitation, but it is a value that is not useful too much because rain intensity and hydrometeor type are more important. In contrast, the disdrometer---another type of instrument---is capable of identifying precipitation types but generally lacks precision in measuring volume. In the case of mobile measurement using cars, there is also a requirement to avoid optical principles, which most commercial disdrometers are based on, which are unsuitable for vehicle roof mounting due to their sensitivity to movement and vibration.
 
-In response to these challenges, the DISDROMETER01\urlnote{https://github.com/UniversalScientificTechnologies/DISDROMETER01}, was specifically designed for installation on a flat vehicle moving platform, enabling high-precision, real-time data collection during storm events. This instrument leverages SDR receiver technology previously utilized in the Bolidozor meteor detection network. It employs a piezoelectric element (see Figure \ref[DISDROMETER01]) capable of  sensing of raindrop size distribution and intensity. The sensing element responds to different hydrometeros with deffirent waveforms as is shown in Fig. \ref[DISDROMETER01_hyrometeors]. 
+In response to these challenges, the DISDROMETER01\urlnote{https://github.com/UniversalScientificTechnologies/DISDROMETER01}, was specifically designed for installation on a flat vehicle moving platform, enabling high-precision, real-time data collection during storm events. This instrument leverages SDR receiver technology previously utilized in the Bolidozor meteor detection network. It employs a piezoelectric element (see Figure \ref[DISDROMETER01]) capable of  sensing of raindrop size distribution and intensity. The sensing element responds to different hydrometeors with different waveforms as is shown in Fig. \ref[DISDROMETER01_hyrometeors]. 
 
 \medskip
 \clabel[DISDROMETER01]{DISDROMETER01 internals}
