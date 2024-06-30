@@ -105,7 +105,7 @@ The UHF radio receiver is triggered by an external trigger (coming from the VLF 
 \medskip
 \clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
 \picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
-\caption/f Measuring CAR0 with an all-sky high-speed camera and array of QFH antenna mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram]. 
+\caption/f Measuring CAR0 with an all-sky high-speed camera and an array of QFH antenna mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram]. 
 \medskip
 
 
@@ -120,7 +120,7 @@ The phase difference of the QFH antenna is extensively exploited in the UHF rece
 \medskip
 
 From that perspective, the QHA antenna itself functions the same as an I/Q demodulator. The signal on each port has a 90° signal phase shift in relation to the next port, and QFHMIX01 is actually a UHF analog front-end. Internally, it has two separate signal paths, one for the I signal and one for the Q signal. Each path contains an LNA, mixer, and ADC buffer. The front end also includes a local oscillator amplifier (clock buffer) and power stabilizers.
-In total the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal, and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end are depicted in fig.\ref[QFHMIX_block_schematics].
+In total, the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal, and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end are depicted in fig.\ref[QFHMIX_block_schematics].
 
 \medskip
 \clabel[QFH_antenna_radiation_pattern]{QFH antenna radiation pattern}
