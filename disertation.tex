@@ -21,7 +21,7 @@
 \declaration {
    I declare that I have written the submitted thesis independently and that I have cited all used information sources in accordance with the methodological guideline on adhering to ethical principles in the preparation of university theses.
 
-   In Prague on June 26, 2024 % !!! Attention, you have to change this item.
+   In Prague on June 30, 2024 % !!! Attention, you have to change this item.
    \signature % makes dots
 }
 
@@ -64,11 +64,14 @@ Thank you all.
 \filedef/e[TF-G2_autogyro_takeoff.mp4]{./img/TF-G2_autogyro_takeoff.mp4}
 \attach[TF-G2_autogyro_takeoff.mp4]
 
+\filedef/e[Init_CG_2021-06-09_10-48-35.mp4]{./img/Init_CG_2021-06-09_10-48-35.mp4}
+\attach[Init_CG_2021-06-09_10-48-35.mp4]
+
 
 
 \showattached
 
-\draft
+%\draft
 
 
 \makefront
@@ -191,7 +194,7 @@ The results of this research are expected to provide a deeper understanding of l
 
 \secc International Conference Proceedings Relevant to the Thesis
 
-\bib[c1] = {C1} P. Puričer, P. Kovář, J. Mikeš and J. Kákona, Telemetry system for research stratospheric balloon, 2017 International Conference on Applied Electronics (AE), Pilsen, Czech Republic, 2017, pp. 1-4, doi: 10.23919/AE.2017.8053608. keywords: {Telemetry;Modems;Antennas;Global Positioning System;Transceivers;Sensitivity;Instruments;telemetry;stratospheric baloon;communication;UHF band},
+\bib[c1] = {C1} J. Mikeš, O. Hanuš and J. Kákona, Methodology for monitoring lightning stroke of an object by means of a smart sensoric, in Proceedings of the International Conference on Lightning \& Static Electricity (ICOLSE 2017), The Institute of Electrical Engineers of Japan, 2017.
 
 \secc Other Publications in Journals with Impact Factor
 
@@ -204,17 +207,31 @@ The results of this research are expected to provide a deeper understanding of l
 
 \bib[c2] = {C2} Martin Kákona, Václav Štěpán, Iva Ambrožová, Todor Arsov, Jan Chroust, Jakub Kákona, Ivo Kalapov, Pavel Krist, Martina Lužová, Nina Nikolova, Dagmar Peksová, Ondřej Ploc, Marek Sommer, Jakub Šlegl, Christo Angelov; Comparative measurements of mixed radiation fields using liulin and AIRDOS dosimeters. AIP Conf. Proc. 26 February 2019; 2075 (1): 130003. https://doi.org/10.1063/1.5091288
 
-\bib[c3] = {C3} O. Hanuš, J. Mikeš and J. Kákona, “Autonomous groundwater monitoring station
-with wireless communication,” in 23rd IMEKO TC4 Symposium Electrical \& Elec-
-tronic Measurement, ser. 23, IMEKO TC4 Technical Committee on Measurement of
-Electrical Quantities, 2019.
+\bib[c3] = {C3} O. Hanuš, J. Mikeš and J. Kákona, Autonomous groundwater monitoring station with wireless communication, in 23rd IMEKO TC4 Symposium Electrical \& Electronic Measurement, ser. 23, IMEKO TC4 Technical Committee on Measurement of Electrical Quantities, 2019.
 
-\app[attached_files] Attached files
 
-\rfc{Sem přidat seznam do PDF vložených souborů s návodem na jejich oddělení}
+\app[attached_files] Attached video files
 
-\rfc{Někde ověřit, že text deklarace je správný}
+This appendix provides a list of the attached video files that accompany this dissertation. Each video is accessible directly within the document, can be extracted from the thesis PDF, or viewed on YouTube via the provided link.
 
-\rfc{Vyzkoušet co se stane, když se někdo pokusí dokument vytisknout}
+\begitems
+* 1627302288.9546976.mp4: Used in \ref[video_1627302288.9546976.mp4], Access: \url{https://youtu.be/bz5C8w7LCHI} or play directly in the document.
+* 1627302745.846055.mp4: Used in \ref[video_1627302745.846055.mp4], Access: \url{https://youtu.be/uvGOy2K-y8s} or play directly in the document.
+* 2021-08-15-20-07-35.912167-lightning.mp4: Used in \ref[video_2021-08-15-20-07-35.912167-lightning.mp4], Access: \url{https://youtu.be/DjffA6NS8dg} or play directly in the document.
+* TF-G2_autogyro_takeoff.mp4: Used in \ref[autogyro_takeoff_platform], Access: \url{https://youtu.be/-Ga4DO3h_1c} or play directly in the document.
+* Init_CG_2021-06-09_10-48-35.mp4: Used in \ref[video_Init_CG_2021-06-09_10-48-35.mp4], Access: \url{https://youtu.be/NmoR5DubcTM} or play directly in the document.
+\enditems
+
+\midinsert
+\clabel[video_Init_CG_2021-06-09_10-48-35.mp4]{Video -- rare capture of the beginning of the lightning discharge}
+\render[Init_CG_2021-06-09_10-48-35.mp4][
+name=bigvideo,
+controls=true,
+repeat=0,
+%aactions=\renditionautoplay,
+]{\picwidth=\hsize \inspic{./img/Init_CG_2021-06-09_10-48-35.png}}
+\caption/f   The video shows a rare capture of the beginning of a CG lightning, which is visible as a slight brightening in the other videos, but is otherwise out of the field of view, so its structure is not visible. The subsequent return stroke can be observed in the video a few hundred milliseconds later. 
+\endinsert
+
 
 \bye
