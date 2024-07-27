@@ -264,22 +264,22 @@ Additionally, the overall status is visible through an analog camera, which prov
 The takeoff platform device is removably integrated into the assembly of magnetic VLF receiving antennas, as seen in Figure \ref[autogyro_takeoff_platform]. This platform is connected to the ground control station mounted inside the trunk of the car and is controlled by the autogyro's autopilot states via previously described TFSIK01 telemetry modems. The platform's firmware responds to commands sent by the TF-G2 using the commands on the MAVLink 2 protocol.
 The mentioned handheld controller for the driver and operator is directly connected to the microcontroller managing the platform, allowing the platform's internal state to be overridden despite commands from the TF-G2. That takeoff solution is designed primarily to achieve overall safety before and during the thunderstorm measurement attempt. 
 
-%\medskip
-%\clabel[autogyro_takeoff_platform]{Autogyro takeoff platform}
-%\picw=15cm \cinspic ./img/autogyro_takeoff_platform.png
-%\caption/f Measuring CAR2 was equipped with a roof platform used to carry the TF-G2 autogyro to the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during actual takeoff and housing the weights used to prerotate the rotor to minimum RPMs.
-%\medskip
+\medskip
+\clabel[autogyro_takeoff_platform]{Autogyro takeoff platform}
+\picw=15cm \cinspic ./img/autogyro_takeoff_platform.png
+\caption/f Measuring CAR2 was equipped with a roof platform used to carry the TF-G2 autogyro to the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during actual takeoff and housing the weights used to prerotate the rotor to minimum RPMs.
+\medskip
 
-\midinsert
-\clabel[autogyro_takeoff_platform]{Video -- TF-G2 autogyro car platform takeoff}
-\render[TF-G2_autogyro_takeoff.mp4][
-name=bigvideo,
-controls=true,
-repeat=0,
+%\midinsert
+%\clabel[autogyro_takeoff_platform]{Video -- TF-G2 autogyro car platform takeoff}
+%\render[TF-G2_autogyro_takeoff.mp4][
+%name=bigvideo,
+%controls=true,
+%repeat=0,
 %aactions=\renditionautoplay,
-]{\picwidth=\hsize \inspic{./img/autogyro_takeoff_platform.png}}
-\caption/f   Measuring CAR2 equipped with a roof platform used to carry and take off the TF-G2 autogyro at the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during takeoff and weights inside are used to prerotate the rotor to minimum RPMs. The embedded video file: {\em TF-G2_autogyro_takeoff.mp4} shows the takeoff process. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/-Ga4DO3h_1c}.  
-\endinsert
+%]{\picwidth=\hsize \inspic{./img/autogyro_takeoff_platform.png}}
+%\caption/f   Measuring CAR2 equipped with a roof platform used to carry and take off the TF-G2 autogyro at the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during takeoff and weights inside are used to prerotate the rotor to minimum RPMs. The embedded video file: {\em TF-G2_autogyro_takeoff.mp4} shows the takeoff process. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/-Ga4DO3h_1c}.  
+%\endinsert
 
 
 \secc Test flights
@@ -389,18 +389,24 @@ Because lightning discharges often happen inside clouds and lightning channels a
 
 To maintain clarity, luminosity curves are added to videos, which are converted from BW recordings captured by cameras to false colors to make details of lightning (that have high luminosity dynamics) visible.  
 
-\midinsert
+\medskip
 \clabel[video_1627302288.9546976.mp4]{Video -- lightning leaders and recoil leaders}
-\render[1627302288.9546976.mp4][
-name=bigvideo,
-controls=true,
-repeat=0,
-%aactions=\renditionautoplay,
-]{\picwidth=\hsize \inspic{./img/1627302288.9546976.png}}
-\caption/f   The embedded video file: {\em 1627302288.9546976.mp4} shows lightning together with leaders and recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/bz5C8w7LCHI}.
-\endinsert
+\picw=15cm \cinspic ./img/1627302288.9546976.png
+\caption/f   The embedded video file: {\em 1627302288.9546976.mp4} shows lightning together with leaders and recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/bz5C8w7LCHI}.  
+\medskip
 
- During the observation, the camera is pointed towards the zenith and its lens allows capture of the entire sky from horizon to horizon. For the illustration of the camera view a plain camera frame is shown in Fig.  \ref[figur_horizon]. During the thunderstorm recording, the camera shutter time is decreased to capture lightning that has high brightness dynamics. As a result, lightning is not visible on the camera together with details of clouds and surrounding terrain. The processed video has the position of the horizon marked with a green circle with an inscribed designation of the cardinal directions. In the upper part of the video, there is a white graph showing a luminosity curve with a green pointer marking the current position of the displayed frame on the time axis. On the right, the used color range is visible, corresponding to the brightness recorded by each camera pixel with a depth of 8 bits. The bottom line shows the number of the current frame over the total number of frames recorded. The next is Sg=1/1 (information on which part of the camera’s internal memory was used for recording) and the time of the current frame ‘T=’ in seconds relative to trigger time.
+%\midinsert
+%\clabel[video_1627302288.9546976.mp4]{Video -- lightning leaders and recoil leaders}
+%\render[1627302288.9546976.mp4][
+%name=bigvideo,
+%controls=true,
+%repeat=0,
+%aactions=\renditionautoplay,
+%]{\picwidth=\hsize \inspic{./img/1627302288.9546976.png}}
+%\caption/f   The embedded video file: {\em 1627302288.9546976.mp4} shows lightning together with leaders and recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/bz5C8w7LCHI}.
+%\endinsert
+
+During the observation, the camera is pointed towards the zenith and its lens allows capture of the entire sky from horizon to horizon. For the illustration of the camera view a plain camera frame is shown in Fig.  \ref[figur_horizon]. During the thunderstorm recording, the camera shutter time is decreased to capture lightning that has high brightness dynamics. As a result, lightning is not visible on the camera together with details of clouds and surrounding terrain. The processed video has the position of the horizon marked with a green circle with an inscribed designation of the cardinal directions. In the upper part of the video, there is a white graph showing a luminosity curve with a green pointer marking the current position of the displayed frame on the time axis. On the right, the used color range is visible, corresponding to the brightness recorded by each camera pixel with a depth of 8 bits. The bottom line shows the number of the current frame over the total number of frames recorded. The next is Sg=1/1 (information on which part of the camera’s internal memory was used for recording) and the time of the current frame ‘T=’ in seconds relative to trigger time.
 
 \medskip
 \clabel[figur_horizon]{A still image example from the all-sky camera}
