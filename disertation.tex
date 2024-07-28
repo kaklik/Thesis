@@ -174,7 +174,116 @@ The results of this research are expected to provide a deeper understanding of l
 \caption/f Block schematics of VLF and UHF receivers. The VLF receiver has the STP antenna connected directly to the ADC input. 
 \medskip
 
+\app[LIGHTNING01A_trigger] Off-the-shelf lightning detection
 
+Initially, I investigated the lightning-triggering device based on the AMS AS3935 integrated circuit and used a coil antenna. The device meets the requirements of mobility and low power consumption. For measurements of coincidence between ionizing radiation and lightning aboard aircraft, for example, the compact physical size of the device is also a considerable advantage, therefore the solution seems to be promising.
+Then I compared the performance and reliability of the detector with the Blitzortung lightning detection network. I chose Blitzortung as a network that has a good deployment in central Europe where the mobile measurements were performed.
+Therefore two detection systems were selected for atmospheric discharge detection in this study: the device based on the AMS AS3935 integrated circuit and a coil antenna and the Blitzortung.org lightning detection network \cite[Blitzortung.org]. Both of  these lightning detection systems use radio emission reception at VLF. The devices differ in the design and realization of the antennas and implementation of the lightning detection algorithm.
+The device equipped by AMS AS3935 uses LIGHTNING01A MLAB module \cite[LIGHTNING01A] with a coreless coil antenna connected as a resonant LC circuit (Figure \ref[DIVISEK01_PCB]).  The resonant frequency of the coil antenna (MA5532-AE) with temperature-insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5~\%. This strict matching requirement is required by the IC datasheet \cite[ams_as3935_datasheet] and is quite constraining and effectively limits the possible application of the circuit.
+According to the manufacturer's description, the integrated circuit processes signals based on the signal level threshold detected by a comparator. If the comparator triggers, the proprietary signal processing unit algorithmically analyzes the signal. The output of the signal processing algorithm implemented in the AS3935 circuit consists of a classification of signal relevance: lightning discharge (8), artificial disturbance (4), or high noise level (1). The algorithm also determines the approximate distance and the estimated energy of the lightning discharge based on signal shape.
+The internal registers configuration for a measurement described below was set to “outdoor mode” by the AFE_GB control register. All other registers are kept with implicit values.
+The circuit diagram including the AS3935 is shown in Figure \ref[DIVISEK01_schematics]. The integrated circuit is powered by 3.6 V from one primary lithium-thionyl chloride cell without the usage of an integrated LDO (low drop-out) stabilizer. An I2C (Inter-Integrated Circuit) bus is used for communication with a data logger that also records data from pressure and temperature sensors. A GPS (Global Positioning System) receiver is used for logging the precise time. The data is stored on an SDcard in a module \cite[DATALOGGER01A].
+A block diagram of the interconnections is shown in Figure \ref[DIVISEK01_block_diagram]. The used firmware for the device is available at \cite[DIVISEK01].
+
+\medskip
+\picw=10cm \cinspic ./img/LIGHTNING01A.png
+\caption/f The bottom side of the newly designed LIGHTNING01A module \cite[LIGHTNING01A]. The antenna coil is visible on the left. The tuning capacitors and Q-limiting resistors are mounted on the right side of the antenna.
+\clabel[DIVISEK01_PCB]{AS3935 based detector PCB design}
+\medskip
+
+
+\medskip
+\picw=15cm \cinspic ./img/LIGHTNING01A_schematics.png
+\caption/f Schematic diagram of the lightning sensor based on commercially available AMS AS3935 IC (used in LIGHTNING01A \cite[LIGHTNING01A]).
+\clabel[DIVISEK01_schematics]{AS3935 based detector schematics diagram}
+\medskip
+
+\medskip
+\picw=15cm \cinspic ./img/lightning_detector_block_diagram.png
+\caption/f Schematic block diagram of the examined lightning detector. Detailed schematics of modules are available at \cite[DATALOGGER01A, GPS01B, LIGHTNING01A, ALTIMET01A].
+\clabel[DIVISEK01_block_diagram]{AS3935 based detector block diagram}
+\medskip
+
+The time response of the lightning detector was tested in the laboratory before field measurements using a power signal generator with a wire loop of 60 mm diameter. The wire loop was placed at a distance of 30 mm from the antenna. The interrupt output was captured by an oscilloscope. Response time to a rectangular signal was 93 ms (±1 ms). The rectangular signal pulse was classified by the internal algorithm as a disturbance  (“DIVIS4” output in the log file). The response time to the received signal was found not to be constant for each signal. Some pulses were classified as lightning (“DIVIS8” in the log file) by the proprietary algorithm where the response time was only a few milliseconds. Due to the time delay introduced by the algorithm, the device could be potentially used for triggering other measuring devices by using a pretrigger recording buffer of maximal algorithm latency plus lightning duration. For a lightning event duration of less than 900 ms, a one-second pre-trigger buffer was found to be suitable.
+
+The proposed system, powered by one LS33600 cell, can operate continuously for five days. Power consumption is dominated by the GPS receiver. The lifetime of the system without GPS is approximately three months. For measurements in the field, the instrument is mounted on the roof of a measurement car inside a waterproof plastic box as shown in figure \ref[DIVISEK01_Deployment].
+
+\medskip
+\picw=15cm \cinspic ./img/DIVISEK01_Deployment.png
+\caption/f The examined deployment on the roof of a car. The module LIGHTNING01A \cite[LIGHTNING01A] with antenna is located in the upper right corner of the box. Module with battery is DATALOGGER01A \cite[DATALOGGER01A]. GPS receiver \cite[GPS01B] is located in the upper left corner with a connected black GPS antenna. Rest module beside LIGHTNING01A is ALTIMET01A \cite[ALTIMET01A].\clabel[DIVISEK01_Deployment]{AS3935 based detector mounted on the car roof}
+\medskip
+
+\sec Blitzortung network
+
+The second investigated option of triggering was the use of the Blitzortung.org network. Blitzortung.org is a World-Wide Low-Cost Community-Based TDOA Lightning Detection and Lightning Location Network \cite[Blitzortung, Blitzortung.org]. Blitzortung.org collects signals that are received by a combination of  multiple magnetic loop antennas and electric monopoles deployed at network stations \cite[Blitzortung.org]. The configuration, implementation, and sensitivity of stations are not uniform. There are multiple causes for these differences. The network members have different hardware versions, and different quality of maintenance, and the antennas are mounted at different locations with different orientations \urlnote{https://www.blitzortung.org/en/station_list}.
+
+Such variance of network parameters could be considered as beneficial because it increases sensitivity to different lightning signal types. The most common implementation of the magnetic loop antenna in Blitzortung.org network sites consists of several loops of shielded coaxial cable, where the inner conductor is used for the magnetic loop itself, and one end of the shield is connected to the antenna amplifier ground. The antenna is not tuned to the specific resonant frequency. However, the goal of the station operators is to maintain the highest achievable resonant frequency \cite[Blitzortung.org].
+
+The Blitzortung.org controller outputs a 256-byte signal fragment covering the pulse with a time resolution of 1.95~$\mu$s along with the timestamp of the trigger and metadata of the station location, GPS signal quality, and validity of data. Detailed signal processing is carried out on the network server. The final result of the data processing in the Blitzortung network is the approximate location of the sources of each captured pulse. The signal processing is carried out in two steps. In the first step, a starting point is computed by a time of arrival algorithm \cite[TOALightningLocationRetrievalonSphericalandOblateSpheroidalEarthGeometries] from the first four-time stamps corrected for time of group arrival \cite[TOGA].  In the second step, a numerical  method  is  used  to  minimize  the  sum  of squared  distances  to  the hyperbolic curves \cite[Blitzortung.org].
+
+To use Blitzortung.org as a recording trigger both the processed data from the server and the use of the station itself were investigated. The usage of the Blitzortung station hardware was relatively quickly abandoned because the station is not constructed to trigger lightning signals in proximity to the thunderstorm. Therefore the station usually reaches something like an “overage” which is called an “interference mode” in Blitzortung.org terminology \urlnote{https://info.lightningmaps.org/doku.php?id=en:hardware:red:operation:interference}. The practical result is that the station is not able to generate relevant triggers for lightning. Instead, it triggers very frequently. Sometimes the opposite situation arises -- the Blitzortung.org station can detect lightning far away but is not able to trigger lightning in a near vicinity. The situation is dependent probably on the storm development and the terrain. However, in both cases, the station trigger output is not usable for triggering other devices. There is a possibility that the situation could be resolved by changing the Blitzortung station firmware, unfortunately, the firmware is closed source, similar to the exact implementation of location algorithms used on the servers.
+
+\sec Comparison of different triggering methods
+
+During the triggering method development, the devices were regularly tested by a car measurement campaign. There could be shown an example of data captured during a thunderstorm near the village of Borkovice, Czechia (car position 49.1949915 N, 14.639835 E, at altitude 427~m a.s.l.) on August 3, 2019, as shown in figure \ref[lightning_times].
+
+
+\medskip
+\clabel[lightning_times]{Lightning detection testing situation map}
+\picw=15cm \cinspic ./img/lightning_times.png
+\caption/f The position and timing of a thunderstorm at Borkovice. The circles are positions of lightning registered by the Blitzortung network. Color depends on the relative time of lightning after a measurement car stops. The car position is marked as a blue cross.
+\medskip
+
+
+The timestamp of lightning detected by LIGHTNING01A was recorded with a 1 s accuracy. The Blitzortung network provides timestamps down to a 1 $\mu$s accuracy. Fig. \ref[detection_timeseries] shows all lightning-triggered signals in all devices over a time period from 12:49 to 13:52 UTC, a time interval during which the car did not change position. LIGHTNING01A distinguished between artificial discharges (depicted in the Fig. \ref[detection_coincidences] as DIVIS4) and natural lightning (depicted in the figure as DIVIS8). Coincidences between LIGHTNING01A and Blitzortung.org detections are shown in Tab. \ref[t1]. The nearest detections around the measurement car are depicted on the map in Fig \ref[lightning_times]. Tab. \ref[t1] and Fig. \ref[detection_coincidences] are generated by algorithms realized by Jupyter notebooks \cite[Coincidences]. The final assessment of binary time events data was done by a similar approach as described in a work \cite[Donges2016].
+
+
+\medskip
+\clabel[detection_timeseries]{Comparison of Blitzortung.org with LIGHTNING01A}
+\picw=15cm \cinspic ./img/detection_timeseries.png
+\caption/f Detections of the two studied methods. For Blitzortung.org there are detections labeled as BLITZ, the vertical axis corresponds to the distance between the Blitzortung.org location and the fixed position of the LIGHTNING01A deployment. Vertical lines represent all LIGHTNING01A’s detections (DIVIS48). Triangles point to detections recognized by LIGHTNING01A as lightning (DIVIS8). For LIGHTNING01A the vertical axis is not relevant because the sensor does not provide a precise distance.
+\medskip
+
+\topinsert
+\vskip-\topskip \hbox to0pt{\pdfsave\pdfrotate{90}\hss \vtop to\hsize{\hsize=\vsize \vss
+\clabel[t1]{Table of coincidence rates among detectors.}
+\ctable{ccccrrcrc}{
+\hfil  & Count & BLITZ5 & BLITZ10 & BLITZ20 & BLITZ30 & DIVIS48 & DIVIS4 & DIVIS8 \crl \tskip1pt
+{\bf BLITZ5}  & 19  & 1.000 & 1.000 & 1.000 & 1.000 & 0.947 & 0.895 & 0.368  \cr
+{\bf BLITZ10} & 78  & 0.462 & 1.000 & 1.000 & 1.000 & 0.872 & 0.846 & 0.141  \cr
+{\bf BLITZ20} & 109 & 0.358 & 0.844 & 1.000 & 1.000 & 0.798 & 0.734 & 0.147  \cr
+{\bf BLITZ30} & 123 & 0.317 & 0.756 & 0.894 & 1.000 & 0.797 & 0.732 & 0.138  \cr
+{\bf DIVIS48} & 128 & 0.164 & 0.453 & 0.492 & 0.539 & 1.000 & 0.875 & 0.156  \cr
+{\bf DIVIS4}  & 110 & 0.173 & 0.491 & 0.527 & 0.573 & 1.000 & 1.000 & 0.018  \cr
+{\bf DIVIS8}  & 18  & 0.111 & 0.222 & 0.278 & 0.333 & 1.000 & 0.111 & 1.000 \cr
+}
+\caption/t Table of coincidence rates among detectors. The presented values are the proportion of detections in the row-labeled detector for which there is at least one coincident detection of the column-labeled detector. The Blitzortung network is represented by virtual detectors BLITZ5, BLITZ10, BLITZ20, and BLITZ30, which are considered triggered upon registered lightning in a 5 km, 10 km, 20 km, and 30 km radius respectively around the LIGHTNING01A deployment. DIVIS48, DIVIS4, and DIVIS8 are the LIGHTNING01A detector with different filtering of candidate detections, with DIVIS48 having the most lenient filtering. The count represents the absolute number of events measured for the detector/conditions in each row.
+\vss}\pdfrestore}\vskip-\hsize \vskip\vsize
+\endinsert
+
+\medskip
+\clabel[detection_coincidences]{Map of detection coincidences between Blitzortung.org and LIGHTNING01}
+\picw=15cm \cinspic ./img/detection_coincidences.png
+\caption/f Map of Blitzortung.org detections with LIGHTNING01A coincidences displayed. White marks show the positions of all Blitzortung.org detections in the region and time period of interest. If a Blitzortung.org detection coincides with a DIVIS4 or DIVIS8 detection, an additional blue or red mark, respectively, is placed.
+\medskip
+
+
+The records produced by LIGHTNING01A allow for recording of the absolute time of the detected event within a ±1 s window. As a basic evaluation of LIGHTNING01A’s fitness to trigger other measurement instruments, where coincidences were counted  among LIGHTNING01A detections and detections from Blitzortung.org in multiple predefined radii. The coincidence rates obtained are presented in table \ref[t1]. Events were considered coincident if they fell within a ±1.5 s time window. This value for the window width was selected such that the absolute time uncertainty of LIGHTNING01A records, the latency of LIGHTNING01A response, and the duration of lightning phenomena, which may conceivably be in the order of hundreds of milliseconds, were accounted for. For window widths in the range of ±1.2 s to ±2.0 s, the coincidence rate between any pair of detectors does not differ by more than 0.05 from the table value, which corresponds to the window width of ±1.5 s.
+
+For illustration, those of Blitzortung.org detections that were coincident with LIGHTNING01A detections were picked out, and these are plotted on a map in figure \ref[detection_coincidences]. It should be noted that none of the systems compared here has 100\% detection efficiency \cite[Blitzortung_evaluation].
+
+If Blitzortung.org is postulated as a reference system, it can be seen that LIGHTNING01A (see column DIVIS48 in the table) covers 94.7\% of Blitzortung detections in the range of 5 km (BLITZ5) and more than 79\% in the range of 30 km (see the line BLITZ30 in the table). The detection of long-distance lightning is possibly influenced by the directional characteristics of the antenna. The sensitivity of the antenna (measured in the number of coincident lightning) is higher in the direction perpendicular to the antenna orientation (see figure \ref[detection_coincidences]; compare the sector around 49.0° N, 14.3° E with 49.3° N, 14.5° E).
+
+It can be seen from table \ref[t1] that the proprietary lightning detection algorithm implemented in the AMS chip, which is supposed to distinguish lightning from man-made disturbance, cannot be relied upon. Only 36.8\% of lightning detected by Blitzortung.org are considered as lightning by LIGHTNING01A (DIVIS8). Therefore, all DIVIS8 and DIVIS4 events (DIVIS48) have to be considered. However, 42.7\% of DIVIS4 detections are not registered by Blitzortung at distances up to 30 km. These are likely to be false detections or detections beyond the evaluated range of 30 km.
+Blitzortung.org network and LIGHTNING01A detector differ not only in sensitivity, but also in usability due to issues of network connectivity, power requirements, device size, and noise filtering capabilities. For most of these parameters, the LIGHTNING01A device was found only partially suitable as an electromagnetic lightning detector used in this work for terrain measurement. Blitzortung.org is designed to filter noise signals (false detections) by a network of detectors. Consequently, Blitzortung.org gives a useful trigger after the signal has been processed by a network server. It is done in seconds and it is too slow for mobile measurement purposes. LIGHTNING01A has limited ability to reject autonomously noise signals which is important to avoid filling a memory of other instruments by data captured by false trigger signals, but this ability is not sufficiently robust.
+
+However, the findings looked initially promising, because LIGHTNING01A is a lightweight, highly mobile, battery-operated lightning detection system based on the AS3935 integrated circuit  with possible application of radiation measurement in thunderstorms on board aircraft.
+
+This LIGHTNING01A is suitable only for triggering terrain measurement devices (lightning discharge mapping device, ionizing radiation detectors, electric field measurement, etc.) with the presumption that triggered devices are capable of recording the data in intervals at least from one second before the trigger to one second after the trigger, which is caused by the uncertainty of lightning trigger output from the AS3935 chip.
+
+Additionally, for applications like ionizing radiation measurements, the sensitivity is considered too high, since lightning more than 10 km away from the ionizing radiation measurement venue is not of interest. The sensitivity of the AS3935 device can be decreased by increasing the level of the lightning detection threshold. This can be done by setting the internal SREJ or WDTH registers of the AS3935, as shown in figure 20 or 21 in the datasheet \cite[AS3935_datasheet], but this also affects the overall sensitivity of the device. Therefore, the false negative rate for near lightning is increased.
+
+Only a slight directional sensitivity of the antenna was observed. This could theoretically be compensated by pointing the AS3935’s antenna (or the whole measurement car) towards the thunderclouds; however, for close lightning within a 5 km radius, this effect is negligible.
 
 \bibchap
 
