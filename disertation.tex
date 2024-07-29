@@ -43,10 +43,10 @@ Thank you all.
 }
 
 
-\def\printcaption#1#2{\leftskip=\iindent \rightskip=\iindent 
-   \setbox0=\hbox\bgroup \aftergroup\docaption{\bf#1 #2.}\enspace} 
-\def\docaption{\tmpdim=\hsize \advance\tmpdim by-2\iindent 
-   \ifdim\wd0>\tmpdim \unhbox0 \else \hfil\hfil\unhbox0 \fi \endgraf \egroup} 
+\def\printcaption#1#2{\leftskip=\iindent \rightskip=\iindent
+   \setbox0=\hbox\bgroup \aftergroup\docaption{\bf#1 #2.}\enspace}
+\def\docaption{\tmpdim=\hsize \advance\tmpdim by-2\iindent
+   \ifdim\wd0>\tmpdim \unhbox0 \else \hfil\hfil\unhbox0 \fi \endgraf \egroup}
 
 
 \input glosdata
@@ -69,28 +69,28 @@ Thank you all.
 %\showattached
 
 
-%\draft
+\draft
 
 
 \makefront
 
-\sec \notoc \nonum Foreword 
+\sec \notoc \nonum Foreword
 
 I chose to write a relatively wide introduction to help explain the necessary context for understanding some of the trade-offs made throughout this work. I believe this approach will allow readers to grasp the broad spectrum of activities that, without explanation, might seem unrelated.
 At the beginning of my research, I focused on the Bolidozor network. Bolidozor is a forward-scattering radio meteor detection network that non-cooperatively uses signals from the French military radar GRAVES\urlnote{https://spp.fas.org/military/program/track/graves.pdf}.  This means that the signals transmitted by GRAVES are scattered by meteor trails in the atmosphere, making it easy to receive reflections across large parts of Europe, even with a simple ground plane antenna.
-  
+
 There are several reasons for focusing on this area. Firstly, unlike visual meteor observations using cameras, radar observations are independent of weather and daylight conditions. This advantage allows radio observations to overcome the limitations that visual observation networks face, which often experience impaired sensitivity for significant portions of time. Additionally, radio observation can enhance the precision of meteoroid velocity estimation due to the significant Doppler effect observed in the reflected signals \ref[Bolidozor_starlink_reflections].
-The existence of a Doppler-shifted {\em head echo} (fig. \ref[Bolidozor_head_echo]) in meteor reflections was a key focus, as I planned to use this phenomenon to estimate meteor trajectories from signals received by multiple stations. This approach appears feasible, as there have been successful attempts to calculate meteor vectors in the atmosphere based on these Doppler-shifted signals (M. A. Vallejo\fnote{Callsign: EA4EOZ}, 2016 et al.). 
+The existence of a Doppler-shifted {\em head echo} (fig. \ref[Bolidozor_head_echo]) in meteor reflections was a key focus, as I planned to use this phenomenon to estimate meteor trajectories from signals received by multiple stations. This approach appears feasible, as there have been successful attempts to calculate meteor vectors in the atmosphere based on these Doppler-shifted signals (M. A. Vallejo\fnote{Callsign: EA4EOZ}, 2016 et al.).
 
 \medskip
 \label[Bolidozor_head_echo]
 \picw=15cm \cinspic ./img/Bolidozor_multibolid.png
-\caption/f   An example of a spectrogram from the Bolidozor network showing the time-aligned meteor head-echo (the dotted line in the image) Doppler shift on five network stations  (vertical axis is absolute time and horizontal axis is frequency in Hz). 
+\caption/f   An example of a spectrogram from the Bolidozor network showing the time-aligned meteor head-echo (the dotted line in the image) Doppler shift on five network stations  (vertical axis is absolute time and horizontal axis is frequency in Hz).
 \medskip
 
-The trouble begins with the fact that there is no easy way to verify that the calculated trajectory is correct or incorrect. 
-The one issue rooted in the situation is that radio signals received by the Bolidozor network have a detected meteor every few seconds which complicates the clear assignment of the specific visual observation to the calculated trajectory, especially in cases where a digital video camera occasionally has a few seconds of latency or inaccuracy. The second issue is caused by the situation that  GRAVES radar guaranteedly lightens only a relatively small fraction of the atmosphere, but there are also side radiation lobes. The primary enlightened part is located above south Europe where there were little video detection networks at that time. 
-The GRAVES radar also has a side transmission from its antenna, but these transmissions are not stable and there is not exactly a known enlightened area. 
+The trouble begins with the fact that there is no easy way to verify that the calculated trajectory is correct or incorrect.
+The one issue rooted in the situation is that radio signals received by the Bolidozor network have a detected meteor every few seconds which complicates the clear assignment of the specific visual observation to the calculated trajectory, especially in cases where a digital video camera occasionally has a few seconds of latency or inaccuracy. The second issue is caused by the situation that  GRAVES radar guaranteedly lightens only a relatively small fraction of the atmosphere, but there are also side radiation lobes. The primary enlightened part is located above south Europe where there were little video detection networks at that time.
+The GRAVES radar also has a side transmission from its antenna, but these transmissions are not stable and there is not exactly a known enlightened area.
 
 \medskip
 \label[Bolidozor_starlink_reflections]
@@ -98,18 +98,18 @@ The GRAVES radar also has a side transmission from its antenna, but these transm
 \caption/f   An example of a spectrogram showing the doppler-shifted reflections from Starlink satellites received on the Svákov Bolidozor station (Vertical axis corresponds to time and horizontal to signal frequency).
 \medskip
 
-That results in very few meteor events which could be used for trajectory verification by using the local video-based meteor detection networks here in the Czech Republic. 
+That results in very few meteor events which could be used for trajectory verification by using the local video-based meteor detection networks here in the Czech Republic.
 To resolve this problem I decided to switch from GRAVES radar transmission to the local transmitters which are more suitable for local meteor detection.  I selected the VOR beacons for airplane navigation. These beacons have reduced transmission power compared to GRAVES, but according to the numerical model I constructed the meteor radar based on those transmitters could be feasible with the use of state-of-the-art radio components\urlnote{https://github.com/bolidozor/iPython-models/blob/master/VOR_beacons.ipynb}.
 
 
 \medskip
 \label[Bolidozor_VOR_airplanes]
 \picw=15cm \cinspic ./img/Bolidozor_VOR_airplanes.png
-\caption/f  Reflection from airplanes visible at the received signal from the VOR transmitter (Prague OKL). The Doppler shift curves are related to the airplane trajectories. 
+\caption/f  Reflection from airplanes visible at the received signal from the VOR transmitter (Prague OKL). The Doppler shift curves are related to the airplane trajectories.
 \medskip
 
-Unfortunately, that new approach requires a complete redesign of the existing signal processing and construction of the new SDR receiver. That receiver should be capable of receiving multiple VOR transmitters at once because the frequencies of VOR transmitters are allocated in such a way that neighboring transmitters have significantly different frequencies to enhance airplane navigation safety and reliability. That results in the requirement of processing the 10MHz of signal bandwidth instead of the previous 192 kHz including a wide dynamic range of signal input, because this bandwidth will be likely affected by the strong nearby signals like a reflection from the airplanes visible in Fig. \ref[Bolidozor_VOR_airplanes].  
-These requirements for the receiver redesign were way beyond the initial project funding available; it is also beyond my manpower. Therefore I had steppily realized that the newly developed instruments needed to have commercial applications to avoid reliance on unreliable and discontinuous systems of scientific founding. As a result, I had to search for possible commercial applications that required the new instruments. That also explains why the majority of the newly developed instruments described in chapter \ref[instrumentation] are currently commercially available. For the case of the new radio receiver, I found the following areas of possible applications: 
+Unfortunately, that new approach requires a complete redesign of the existing signal processing and construction of the new SDR receiver. That receiver should be capable of receiving multiple VOR transmitters at once because the frequencies of VOR transmitters are allocated in such a way that neighboring transmitters have significantly different frequencies to enhance airplane navigation safety and reliability. That results in the requirement of processing the 10MHz of signal bandwidth instead of the previous 192 kHz including a wide dynamic range of signal input, because this bandwidth will be likely affected by the strong nearby signals like a reflection from the airplanes visible in Fig. \ref[Bolidozor_VOR_airplanes].
+These requirements for the receiver redesign were way beyond the initial project funding available; it is also beyond my manpower. Therefore I had steppily realized that the newly developed instruments needed to have commercial applications to avoid reliance on unreliable and discontinuous systems of scientific founding. As a result, I had to search for possible commercial applications that required the new instruments. That also explains why the majority of the newly developed instruments described in chapter \ref[instrumentation] are currently commercially available. For the case of the new radio receiver, I found the following areas of possible applications:
 
 \begitems
 * Meteor trail detection and localization
@@ -118,9 +118,9 @@ These requirements for the receiver redesign were way beyond the initial project
 \enditems
 
 Luckily there arose an opportunity to cooperate with the CRREAT project whose main aim was the study of high-energy atmospheric events, where electromagnetic events in the atmosphere (electrometeors) observations fit well and at the same time are vital requirements. In the frame of the CRREAT project, I designed the new SDR receiver concept (described in section \ref[radio_receivers]) with all the mentioned applications in mind. That allows the construction of the receiver to be implemented with the significant assistance of other members of the CRREAT team or external collaborators and with the use of CRREAT funding.
-But at the same time, there is a threat that the observation of lightning has similar issues as Bolidozor’s radio meteor observation because computing a location of lightning occurrence is possible, but there is a non-trivial task to verify that the result is relevant. 
-The requirement to build the ability to verify the calculated results branched out in the broad range of different work packages, which needs to be solved to gather relevant information about lightning or more generally atmospheric electricity from multiple sources. I describe ground-based, airborne, and remote sensing instruments in detail in chapter \ref[instrumentation]. But for the overview of the tasks, firstly the lightning should be detected, the antenna should be calibrated, and the electric field needs to be measured at the same time. The \iid lighting also needs to be simultaneously captured on high-speed cameras for geometric triangulation etc. 
-That is why I need to design and operate the multiple measurement systems carried by cars on the ground and also in airborne vehicles presented and used in the following thesis. 
+But at the same time, there is a threat that the observation of lightning has similar issues as Bolidozor’s radio meteor observation because computing a location of lightning occurrence is possible, but there is a non-trivial task to verify that the result is relevant.
+The requirement to build the ability to verify the calculated results branched out in the broad range of different work packages, which needs to be solved to gather relevant information about lightning or more generally atmospheric electricity from multiple sources. I describe ground-based, airborne, and remote sensing instruments in detail in chapter \ref[instrumentation]. But for the overview of the tasks, firstly the lightning should be detected, the antenna should be calibrated, and the electric field needs to be measured at the same time. The \iid lighting also needs to be simultaneously captured on high-speed cameras for geometric triangulation etc.
+That is why I need to design and operate the multiple measurement systems carried by cars on the ground and also in airborne vehicles presented and used in the following thesis.
 
 
 
@@ -128,35 +128,23 @@ That is why I need to design and operate the multiple measurement systems carrie
 
 \chap Introduction
 
-\sec Scope of the thesis
+\input introduction.tex
 
-The objectives of this dissertation are to address and clarify several unresolved phenomena related to thunderstorms, particularly the initiation and development of lightning. This research aims to develop and utilize new tools for the detection and scientific observation of lightning events within thunderstorms. The focus will be on understanding the relationship between ionizing radiation and lightning, as well as developing innovative mobile instruments required for detailed storm observation. The specific tasks to be undertaken are as follows:
+\chap[triggered_recording] Lightning triggered recording
 
-\begitems \style n
-* {\bf Development and Implementation of Lightning Detection Apparatus}: Design and deploy mobile experimental apparatus capable of radio detection and localization of lightning events and ionizing radiation, considering the expected spatial scales. Collect data using radio detectors, high-speed cameras, and ground-based electric field measurements.
-* {\bf Enhance understanding of Spatial and Temporal Characteristics of Lightning Discharges}: Develop visualization methods and improve measurement apparatuses for detecting lightning and ionizing radiation. Study the propagation of lightning, emitted radio signals, and associated electric fields, and reflect the physical principles of lightning development and radio emissions.
-* {\bf Enhancement of Measurement Techniques with in-situ atmospheric monitoring}: Develop and integrate new instruments, such as stratospheric balloons and unmanned aerial vehicles (UAVs), for in-situ measurements of electric fields and ionizing radiation. Employ new electric field mills and semiconductor-based ionizing radiation detectors integrated into UAVs to explore potential insights into lightning initiation and the locations of ionizing radiation generation within clouds.
-\enditems
-
-The results of this research are expected to provide a deeper understanding of lightning initiation and propagation. At the same time, it offers improved detection and observation techniques that can inform future studies about the relation to ionizing radiation with direct practical applications in meteorology and atmospheric physics.
-
-\input introduction.tex 
-
-\chap[triggered_recording] Lightning triggered recording 
-
-\input triggered_recording.tex 
+\input triggered_recording.tex
 
 \chap[instrumentation] Proposed Instrumentation
 
-\input instrumentation.tex 
+\input instrumentation.tex
 
 \chap[experiments] Subsequent Experiments
 
-\input experiments.tex 
+\input experiments.tex
 
 \chap[results] Summary of results
 
-\input results.tex 
+\input results.tex
 
 \app Index
 \makeindex
@@ -171,7 +159,7 @@ The results of this research are expected to provide a deeper understanding of l
 \app[SDR_receiver] SDR receiver block schematics
 \medskip
 \picw=8cm \cinspic ./img/RSMS_receiver.png
-\caption/f Block schematics of VLF and UHF receivers. The VLF receiver has the STP antenna connected directly to the ADC input. 
+\caption/f Block schematics of VLF and UHF receivers. The VLF receiver has the STP antenna connected directly to the ADC input.
 \medskip
 
 \app[LIGHTNING01A_trigger] Off-the-shelf lightning detection
@@ -302,6 +290,8 @@ Only a slight directional sensitivity of the antenna was observed. This could th
 
 \secc International Conference Proceedings Relevant to the Thesis
 
+\bib[c4] = {C4} M. Kákona, J. Kákona, R. Dvořák, I. Ambrožová, O. Velychko, J. Šlegl, M. Sommer, V. Hanousek, and O. Ploc, “Measurements with Angular Sensitive Electric Field Mill in Thunderstorms,” presented at the AtmoHEAD 2024 International Conference, Ischia, Italy, 2024.
+
 \bib[c1] = {C1} J. Mikeš, O. Hanuš, and J. Kákona, “Methodology for monitoring lightning stroke of an object by means of a smart sensoric,” in Proceedings of the International Conference on Lightning \& Static Electricity (ICOLSE 2017), The Institute of Electrical Engineers of Japan, 2017.
 
 \secc Other Publications in Journals with Impact Factor
@@ -309,6 +299,8 @@ Only a slight directional sensitivity of the antenna was observed. This could th
 \bib[j3] = {J3} I. Ambrožová, M. Kákona, R. Dvořák, J. Kákona, M. Lužová, M. Povišer, M. Sommer, O. Velychko, and O. Ploc, “Latitudinal effect on the position of Regener–Pfotzer maximum investigated by balloon flight HEMERA 2019 in Sweden and balloon flights FIK in Czechia,” Radiation Protection Dosimetry, vol. 199, no. 15-16, pp. 2041–2046, Oct. 2023. [Online]. Available: \url{https://doi.org/10.1093/rpd/ncac299}
 
 \bib[j4] = {J4} M. Kákona, J. Šlegl, D. Kyselová, M. Sommer, J. Kákona, M. Lužová, V. Štěpán, O. Ploc, S. Kodaira, J. Chroust, D. John, I. Ambrožová, and P. Krist, “AIRDOS — open-source PIN diode airborne dosimeter,” Journal of Instrumentation, vol. 16, no. 03, pp. T03006, Mar. 2021. [Online]. Available: \url{https://dx.doi.org/10.1088/1748-0221/16/03/T03006}
+
+\bib[j5] = {J5} I. Ambrožová, M. Kákona, H. Kyznarová, P. Novák, J. Kákona, J. Šlegl, M. Tesař, O. Velychko, and O. Ploc, “Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS,” Silva Gabreta, vol. 30, pp. 63–71, 2023. [Accepted manuscript, not yet published]
 
 \secc Other International Conference Proceedings
 
@@ -335,7 +327,7 @@ This appendix provides a list of the attached video files that accompany this di
 %controls=true,
 %repeat=0,
 %]{\picwidth=\hsize \inspic{./img/Init_CG_2021-06-09_10-48-35.png}}
-%\caption/f   The video shows a rare capture of the beginning of a CG lightning, which is visible as a slight brightening in the other videos, but is otherwise out of the field of view, so its structure is not visible. The subsequent return stroke can be observed in the video a few hundred milliseconds later. 
+%\caption/f   The video shows a rare capture of the beginning of a CG lightning, which is visible as a slight brightening in the other videos, but is otherwise out of the field of view, so its structure is not visible. The subsequent return stroke can be observed in the video a few hundred milliseconds later.
 %\endinsert
 
 
