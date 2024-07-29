@@ -156,7 +156,7 @@ The frontend outputs I/Q signals, local oscillator signal, and power supply are 
 It is worth noting that most of the available RF components were chosen to ensure that the design can operate across a wide range of frequencies without significant modifications. Specifically, to retune to a substantially different frequency, it is necessary to replace the conductive structure of the antenna loops and retune the input RF filters in the QFHMIX01. This approach allows for the easy assembly of a system that can operate anywhere in the range of 40 MHz to 1 GHz. Additionally, these changes can be implemented on existing manufactured units, allowing the same equipment to be used in subsequent experiments without substantial investments.
 
 
-\sec[ionizing_radiation_detectors] Ionizing radiation detectors
+\sec[ionizing_radiation_detectors] EMI-resistant Ionizing radiation detectors
 
 During the research, scintillation, and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kákona_Ambrožová_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200~keV to 40~MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15~s integration of events is provided.
 
@@ -172,7 +172,7 @@ The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulti
 \caption/f  Example of an analog pulse from a silicon photomultiplier (USTSIPM01 module) that is digitized by a free channel on the ADC of a VLF receiver. The pulse is probably caused by a muon from cosmic rays.
 \medskip
 
-\sec[Electric_field_mills] Electric Field Sensors
+\sec[Electric_field_mills] High Time Resolution Electric Field Sensors
 
 Electric field sensors were planned to be used as devices capable of indicating the potential for lightning discharges in clouds. For this purpose, Boltek detectors were initially acquired and Boltek detectors were used for ground-based measurements. Despite their widespread use, these detectors presented significant limitations for mobile measurements due to their bulkiness and less optimal design for mobile deployment. Seeking a more adaptable solution, the more compact Kleinwächter EFM 115 was transitioned to. This Electric Field Mill (EFM) offered an improved form factor for mobile applications, directly connecting its analog signal output to a data logger equipped with a GPS for accurate timestamping \urlnote{https://github.com/mlab-modules/FIELDMILL01}, with a logging time resolution of 110 ms.
 
