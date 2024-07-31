@@ -238,22 +238,23 @@ Additionally, the overall status is visible through an analog camera, which prov
 The takeoff platform device is removably integrated into the assembly of magnetic VLF receiving antennas, as seen in Figure \ref[autogyro_takeoff_platform]. This platform is connected to the ground control station mounted inside the trunk of the car and is controlled by the autogyro's autopilot states via previously described TFSIK01 telemetry modems. The platform's firmware responds to commands sent by the TF-G2 using the commands on the MAVLink 2 protocol.
 The mentioned handheld controller for the driver and operator is directly connected to the microcontroller managing the platform, allowing the platform's internal state to be overridden despite commands from the TF-G2. That takeoff solution is designed primarily to achieve overall safety before and during the thunderstorm measurement attempt.
 
-\medskip
-\clabel[autogyro_takeoff_platform]{Autogyro takeoff platform}
-\picw=15cm \cinspic ./img/autogyro_takeoff_platform.png
-\caption/f Measuring CAR2 was equipped with a roof platform used to carry the TF-G2 autogyro to the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during actual takeoff and housing the weights used to prerotate the rotor to minimum RPMs.
-\medskip
+% Replaced with wideo
+%\medskip
+%\clabel[autogyro_takeoff_platform]{Autogyro takeoff platform}
+%\picw=15cm \cinspic ./img/autogyro_takeoff_platform.png
+%\caption/f Measuring CAR2 was equipped with a roof platform used to carry the TF-G2 autogyro to the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during actual takeoff and housing the weights used to prerotate the rotor to minimum RPMs.
+%\medskip
 
-%\midinsert
-%\clabel[autogyro_takeoff_platform]{Video -- TF-G2 autogyro car platform takeoff}
-%\render[TF-G2_autogyro_takeoff.mp4][
-%name=bigvideo,
-%controls=true,
-%repeat=0,
+\midinsert
+\clabel[autogyro_takeoff_platform]{Video -- TF-G2 autogyro car platform takeoff}
+\render[TF-G2_autogyro_takeoff.mp4][
+name=bigvideo,
+controls=true,
+repeat=0,
 %aactions=\renditionautoplay,
-%]{\picwidth=\hsize \inspic{./img/autogyro_takeoff_platform.png}}
-%\caption/f   Measuring CAR2 equipped with a roof platform used to carry and take off the TF-G2 autogyro at the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during takeoff and weights inside are used to prerotate the rotor to minimum RPMs. The embedded video file: {\em TF-G2_autogyro_takeoff.mp4} shows the takeoff process. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/-Ga4DO3h_1c}.
-%\endinsert
+]{\picwidth=\hsize \inspic{./img/autogyro_takeoff_platform.png}}
+\caption/f Measuring CAR2 equipped with a roof platform used to carry and take off the TF-G2 autogyro at the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during takeoff and weights inside are used to prerotate the rotor to minimum RPMs. The embedded video file: {\em TF-G2_autogyro_takeoff.mp4} shows the takeoff process. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/-Ga4DO3h_1c}.
+\endinsert
 
 \secc Airborne sensors
 
@@ -394,22 +395,23 @@ Because lightning discharges often happen inside clouds and lightning channels a
 
 To maintain clarity, luminosity curves are added to videos, which are converted from BW recordings captured by cameras to false colors to make details of lightning (that have high luminosity dynamics) visible.
 
-\medskip
-\clabel[video_1627302288.9546976.mp4]{Video -- lightning leaders and recoil leaders}
-\picw=15cm \cinspic ./img/1627302288.9546976.png
-\caption/f   The embedded video file: {\em 1627302288.9546976.mp4} shows lightning together with leaders and recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/bz5C8w7LCHI}.
-\medskip
-
-%\midinsert
+% static Figure
+%\medskip
 %\clabel[video_1627302288.9546976.mp4]{Video -- lightning leaders and recoil leaders}
-%\render[1627302288.9546976.mp4][
-%name=bigvideo,
-%controls=true,
-%repeat=0,
-%aactions=\renditionautoplay,
-%]{\picwidth=\hsize \inspic{./img/1627302288.9546976.png}}
+%\picw=15cm \cinspic ./img/1627302288.9546976.png
 %\caption/f   The embedded video file: {\em 1627302288.9546976.mp4} shows lightning together with leaders and recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/bz5C8w7LCHI}.
-%\endinsert
+%\medskip
+
+\midinsert
+\clabel[video_1627302288.9546976.mp4]{Video -- lightning leaders and recoil leaders}
+\render[1627302288.9546976.mp4][
+name=bigvideo,
+controls=true,
+repeat=0,
+%aactions=\renditionautoplay,
+]{\picwidth=\hsize \inspic{./img/1627302288.9546976.png}}
+\caption/f   The embedded video file: {\em 1627302288.9546976.mp4} shows lightning together with leaders and recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/bz5C8w7LCHI}.
+\endinsert
 
 During the observation, the camera is pointed towards the zenith and its lens allows capture of the entire sky from horizon to horizon. For the illustration of the camera view a plain camera frame is shown in Fig.  \ref[figur_horizon]. During the thunderstorm recording, the camera shutter time is decreased to capture lightning that has high brightness dynamics. As a result, lightning is not visible on the camera together with details of clouds and surrounding terrain. The processed video has the position of the horizon marked with a green circle with an inscribed designation of the cardinal directions. In the upper part of the video, there is a white graph showing a luminosity curve with a green pointer marking the current position of the displayed frame on the time axis. On the right, the used color range is visible, corresponding to the brightness recorded by each camera pixel with a depth of 8 bits. The bottom line shows the number of the current frame over the total number of frames recorded. The next is Sg=1/1 (information on which part of the camera’s internal memory was used for recording) and the time of the current frame ‘T=’ in seconds relative to trigger time.
 
@@ -429,15 +431,32 @@ The resulting luminosity curves contain morphological signatures, such as sharp 
 
 \secc[radio_signal_measurements] Radio signal measurements
 
-The advantage of using magnetic loop antennas to measure lightning is that observations are not disrupted by optically opaque clouds or daylight scattered in the atmosphere during daytime storms. However, when measuring the magnetic component of the electric field with a coil, only changes over time, specifically changes in the current flowing through the lightning channel, can be detected. A constant current in the lightning channel cannot be detected by a magnetic loop antenna. Figure \ref[figur_capture] shows an example of lightning recorded simultaneously by an STP antenna and a camera. The camera recording clearly shows a change in luminosity, with the sky being brighter before the lightning than after it occurred. Slow changes in brightness, indicating slow changes in current, are not visible in the antenna recording. Instead, clusters of fast pulses are observed, suggesting details about the development of lightning channels that are not visible in the camera recordings, likely because they are obscured by light from a constant current in the main channel. Pulses visible in both camera and antenna recordings are recoil leaders, and the most prominent short impulse is the CG return stroke.
+The advantage of using magnetic loop antennas to measure lightning is that observations are not disrupted by optically opaque clouds or daylight scattered in the atmosphere during daytime storms. However, when measuring the magnetic component of the electric field with a coil, only changes over time, specifically changes in the current flowing through the lightning channel, can be detected. A constant current in the lightning channel cannot be detected by a magnetic loop antenna. Figure \ref[figur_capture] shows an example of lightning recorded simultaneously by the VLF, UHF receivers and the all-sky camera. The camera recording clearly shows a change in luminosity, with the sky being brighter before the lightning than after it occurred. Slow changes in brightness, indicating slow changes in current, are not visible in the antenna recording. Instead, clusters of fast pulses are observed, suggesting details about the development of lightning channels that are not visible in the camera recordings, likely because they are obscured by light from a constant current in the main channel. Pulses visible in both camera and antenna recordings are recoil leaders, and the most prominent short impulse is the IC return stroke.
 
 \medskip
-\clabel[figur_capture]{Example of VLF signal with the comparison to camera data}
-\picw=15cm \cinspic ./img/STP_camera_data.png
-\caption/f   Example of data from STP antenna with the comparison to camera data.
+\clabel[figur_capture]{Example of VLF and UHF signal with the comparison to camera data}
+\picw=15cm \cinspic ./img/fig_UHF_VLF_noise.png
+\caption/f   Example of data from VLF and UHF receivers with the comparison to camera data.
 \medskip
 
-Based on the experience from recordings where some parts of lightning are visible, cloud-obscured lightning events can be characterized. There is an example of the luminosity curve compared to the STP antenna signal data shown in Figure \ref[figur_capture]. At the very beginning, the lightning usually starts with a faith peak with a fast-rising edge (at time 0.2 s). Then there is an optically dark phase with low luminosity. This dark period is not quiet in the radio signal. It is a phase of developing a leader. As the leader in the cloud connects to more and more charged regions it becomes brighter, sometimes slowly and sometimes abruptly. During and after a decrease in the current in the positive leader the recoil leaders are appearing (after time 0.4 s). Some recoil leaders have high luminosity when they connect to the main channel. In the radio spectrum, simultaneous peaks are observed that correspond to short, intense brightenings. In some cases the lightning results in CG discharge, which is accompanied by high-intensity flash (at time 0.5~s). However, this phenomenon does not occur very often. Using the described equipment, CG return strokes were registered in less than 10\% of cases.
+Based on the experience from recordings where some parts of lightning are visible, cloud-obscured lightning events can be characterized. There is an example of the luminosity curve compared to the VLF signal shown in Figure \ref[figur_capture]. At the very beginning, the lightning usually starts with a faith peak with a fast-rising edge. Then there is an optically dark phase with low luminosity. This dark period is not quiet in the radio signal. It is a phase of developing a leader. As the leader in the cloud connects to more and more charged regions it becomes brighter, sometimes slowly and sometimes abruptly. During and after a decrease in the current in the positive leader the recoil leaders are appearing. Some recoil leaders have high luminosity when they connect to the main channel. In the radio spectrum, simultaneous peaks are observed that correspond to short, intense brightenings with radio intensity similar to IC return stroke visible in the video Fig. \ref[2022-08-26-16-09-04.213386-lightning.mp4]. In some cases the lightning results in CG return-stroke discharge (not the shown case), which is accompanied by high-intensity flash. However, this phenomenon does not occur very often. Using the described equipment, CG return strokes were registered in less than 10\% of cases. The Figure \ref[figur_VLF_lightning_signals] shows the radio signals of this lightning in detail.
+
+\medskip
+\clabel[figur_VLF_lightning_signals]{Example of VLF signals received from different phases of lightning}
+\picw=15cm \cinspic ./img/fig_VLF_lightning_signals.png
+\caption/f   Details of the signal recorded by a loop antenna in the VLF band, showing different phases of a lightning discharge. The main graph displays the overall signal over time, while the individual insets (indicated by red arrows) provide magnified views of specific sections of the signal. It is observed that the morphological characteristics of the signal are very similar across all parts of the lightning discharge. This phenomenon illustrates the difficulty of determining the phase of a lightning discharge solely based on the shape of the signal and its amplitude without a detailed analysis of its geometric development. The purple and red crosses mark characteristic features in the signal that are key for further analysis.
+\medskip
+
+\midinsert
+\clabel[2022-08-26-16-09-04.213386-lightning.mp4]{Video -- lightning negative side of leader with IC return stroke}
+\render[2022-08-26-16-09-04.213386-lightning.mp4][
+name=bigvideo,
+controls=true,
+repeat=0,
+aactions=\renditionautoplay,
+]{\picwidth=\hsize \inspic{./img/2022-08-26-16-09-04.213386-lightning.mp4.png}}
+\caption/f   The embedded video file: {\em 2022-08-26-16-09-04.213386-lightning.mp4} shows lightning  negative leader with subsequent IC return stroke. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF.
+\endinsert
 
 \secc Electric field measurements
 
@@ -475,12 +494,18 @@ Both mills were installed on a car and were not grounded. The Kleinwächter EFM 
 \caption/f   Detail of the yellow marked section from Figure \ref[figur_THUNDERMILL01_data], alighned with a light curve from Chronos all-sky high-speed camera recording.  Note the significantly higher time resolution of the THUNDERMILL01 data in comparison with \ref[figur_efmdatadetail]. The blue series is THUNDERMILL01's signal amplitude corresponding to 110°.
 \medskip
 
-\medskip
-\clabel[figur_THUNDERMILL01_half-turn]{Detail of THUNDERMILL01 raw data output}
-\picw=15cm \cinspic ./img/fig_thundermill2024-07-28_02:10:49.129152256.png
-\caption/f   Example of raw THUNDERMILL01 data output corresponding to a signal during a half-turn of EFM. The gray mark corresponds to the middle gray mark in Figure \ref[figur_THUNDERMILL01_detail]. Showing sudden change of the voltage on electrodes during the turning of THUNDERMILL01  EFM. This graph at sametime demonstrate the angular sensitivity of THUNDERMILL01.
-\medskip
+%\medskip
+%\clabel[figur_THUNDERMILL01_half-turn]{Detail of THUNDERMILL01 raw data output}
+%\picw=15cm \cinspic ./img/fig_thundermill2024-07-28_02:10:49.129152256.png
+%\caption/f   Example of raw THUNDERMILL01 data output corresponding to a signal during a half-turn of EFM. The gray mark corresponds to the middle gray mark in Figure \ref[figur_THUNDERMILL01_detail]. Showing sudden change of the voltage on electrodes during the turning of THUNDERMILL01  EFM. This graph at sametime demonstrate the angular sensitivity of THUNDERMILL01.
+%\medskip
 
+\medskip
+\picw=.5\hsize
+\clabel[figur_THUNDERMILL01_half-turn]{Detail of THUNDERMILL01 raw data output}
+\centerline {\picw=6cm \inspic ./img/fig_thundermill2024-07-28_02:10:49.129152256.png \hfil\hfil \picw=6.5cm \inspic ./img/fig_thundermill2024-07-28_02:10:49.215201024.png }\nobreak
+\caption/f Example of raw THUNDERMILL01 data output corresponding to a signal during a half-turn of EFM. The gray mark corresponds to the middle gray mark in Figure \ref[figur_THUNDERMILL01_detail]. Showing sudden change of the voltage on electrodes during the turning of \nobreak{THUNDERMILL01}  EFM. This graph at sametime demonstrate the angular sensitivity of \nobreak{THUNDERMILL01}.
+\medskip
 
 \rfc{Přidat graf z THUNDERMILL01, který ukazuje lepší časové rozlišení bleskových výbojů.}
 
@@ -490,4 +515,4 @@ The ground-level observation attempts lead to insights such as the geometry of l
 
 To verify this new hypothesis, further experiments are necessary. These should involve deploying ionizing radiation detectors at various altitudes and distances from storm clouds to systematically study the radiation patterns and determine if the ionizing radiation indeed does not radiate strictly downward.
 
-It has been shown that the most noticeable phenomena in VLF recordings (excluding return stroke, which according to our measurements occur in less than 10\% of cases) are so-called recoil leaders, sometimes referred to as needles. These are linear objects that cannot be interpreted as a single point. This finding has a significant impact on existing systems attempting to map lightning discharges based on radio localization.
+It has been shown that the most noticeable phenomena in VLF recordings (excluding CG return stroke, which according to our measurements occur in less than 10\% of cases) are so-called recoil leaders, sometimes referred to as needles. These are linear objects that cannot be interpreted as a single point. This finding has a significant impact on existing systems attempting to map lightning discharges based on radio localization.
