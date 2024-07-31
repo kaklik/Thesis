@@ -52,7 +52,7 @@ name=bigvideo,
 controls=true,
 repeat=0,
 ]{\picwidth=\hsize \inspic{./img/1627302745.846055.png}}
-\caption/f   The embedded video file: {\em 1627302745.846055.mp4} shows lightning together with the positive side of leaders and then recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/uvGOy2K-y8s}
+\caption/f   The embedded video file: {\em 1627302745.846055.mp4} shows lightning together with the positive side of leaders and then recoil leaders. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \hbox{\url{https://youtu.be/uvGOy2K-y8s}}.
 \endinsert
 
 Video \ref[video_2021-08-15-20-07-35.912167-lightning.mp4] captures an invisible positive leader, only blurred recoil leaders are visible. From T=+0.07 s (1:36) a negative side of the leader is visible. Negative leader branches abundantly, its propagation is faster than the positive leader and contains hot luminous ends. The second visible negative leader starts at T=+0.25 s (1:51). The negative leaders do not generate recoil leaders.
@@ -72,29 +72,8 @@ name=bigvideo,
 controls=true,
 repeat=0,
 ]{\picwidth=\hsize \inspic{./img/2021-08-15-20-07-35.912167-lightning.png}}
-\caption/f   The embedded video file: {\em 2021-08-15-20-07-35.912167-lightning.mp4} shows negative leader branching abundantly, its propagation is faster than the positive leader and contains hot luminous ends. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \url{https://youtu.be/DjffA6NS8dg}
+\caption/f   The embedded video file: {\em 2021-08-15-20-07-35.912167-lightning.mp4} shows negative leader branching abundantly, its propagation is faster than the positive leader and contains hot luminous ends. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \hbox{\url{https://youtu.be/DjffA6NS8dg}}.
 \endinsert
-
-
-\secc Comparison of observed lightning with lightning detection network
-
-The detection of lightning using the STP antenna has been compared with its detection using the Blitzortung.org network. It's important to note that not every lightning strike detected by the STP antenna is also detected by the Blitzortung.org network. Figure \ref[figur_blitz2] shows that when the storm was closest to the car according to Blitzortung.org, the STP antenna detected lightning at different times or at distances of more than 120 km. Conversely, as shown in Figure \ref[figur_blitz1], when the storm was located tens of kilometers away from the observation site according to Blitzortung.org, there was perfect conformity with the data from the STP antenna. In both figures, an interval of ±1 second is marked around the vertical lines corresponding to the detection times.
-
-Lightning at 18:24:48 was detected by a high-speed camera, see video \ref[video_1627302288.9546976.mp4]. According to the video, one of the lightning channels occurred almost directly above the measurement car, but the nearest lightning detected by Blitzortung.org was at least 70 km away. The positioning accuracy in the case of the Blitzortung.org network is in the order of kilometers. Blitzortung.org detected discharges at a distance of 70 to 80 km simultaneously. This allows the deduction that this lightning was more than 80 km long or that a synchronous discharge occurred 80 km away.
-
-
-\medskip
-\clabel[figur_blitz2]{Correlation with less than 20 km lightning detections}
-\picw=15cm \cinspic ./img/figur_blitz2.png
-\caption/f   Correlation with “nearby” (less than 20 km) lightning detection.
-\medskip
-
-
-\medskip
-\clabel[figur_blitz1]{Correlation with more than 20 km lightning detections}
-\picw=15cm \cinspic ./img/figur_blitz1.png
-\caption/f   Correlation with “distant” (more than 40 km) lightning detection.
-\medskip
 
 \secc[VLF_LMA] Novel method of VLF lightning mapping
 
@@ -115,6 +94,37 @@ The localization algorithm utilizes segments with at least two TDoA values that 
 The fragment signal processing method is selected due to the aforementioned results. Additionally, the use of cross-correlation over signal segments provides significant advantages when one of the signals (in this case, CAR1) is heavily interfered with by uncorrelated noise absent from other stations. That is a feature that cannot be applied on conventional lightning detection networks, where only individually recorded pulses are processed.
 
 The visualization is achieved through a graph algorithm that progressively adds points to the graph in a way that satisfies the geometric conditions related to lightning propagation, like utilizing adjacent lightning channels. This approach effectively eliminates the need for clustering algorithms commonly used \cite[Sibolla2021] to determine the lightning strike area, as the connection between individual parts of lightning is not lost in the process. The described algorithm could be significantly improved by implementing an algorithmic estimation of the optimal number of segments based on pre-analysis of the lightning development in the signal fragment, which could be probably done by some form of identification of lightning phases in the signal. In other words, the creation of a lightning signal model which should be then matched to the real signals from different stations.
+
+\secc Comparison of observed lightning with lightning detection network
+
+The detection of lightning using the VLF has been compared with its detection using the Blitzortung.org network. It's important to note that not every lightning strike detected by the VLF - STP antenna is also detected by the Blitzortung.org network. Figure \ref[figur_blitz2] shows that when the storm was closest to the car according to Blitzortung.org, the STP antenna detected lightning at different times or at distances of more than 120 km. Conversely, as shown in Figure \ref[figur_blitz1], when the storm was located tens of kilometers away from the observation site according to Blitzortung.org, there was perfect conformity with the data from the STP antenna. In both figures, an interval of ±1 second is marked around the vertical lines corresponding to the detection times.
+
+Lightning at 18:24:48 was detected by a high-speed camera, see video \ref[video_1627302288.9546976.mp4]. According to the video, one of the lightning channels occurred almost directly above the measurement car, but the nearest lightning detected by Blitzortung.org was at least 70 km away. The positioning accuracy in the case of the Blitzortung.org network is in the order of kilometers. Blitzortung.org detected discharges at a distance of 70 to 80 km simultaneously. This allows the deduction that this lightning was more than 80 km long or that a synchronous discharge occurred 80 km away.
+
+
+\medskip
+\clabel[figur_blitz2]{Correlation with less than 20 km lightning detections}
+\picw=15cm \cinspic ./img/figur_blitz2.png
+\caption/f   Correlation with “nearby” (less than 20 km) lightning detection.
+\medskip
+
+
+\medskip
+\clabel[figur_blitz1]{Correlation with more than 20 km lightning detections}
+\picw=15cm \cinspic ./img/figur_blitz1.png
+\caption/f   Correlation with “distant” (more than 40 km) lightning detection.
+\medskip
+
+We have developed our own system for radio lightning localization as is shown in section\ref[VLF_LMA], including algorithms for visualizing lightning. However, we were unable to compare our system with those operating in Central Europe. We could not find a lightning that could be unequivocally matched with the lightning recorded by our system. We compared our records over the entire duration of storms measured from a single location with the Blitzortung.org network and the LINET network.
+
+The Figure \ref[Lighning_trigger_coincidences] shows an example of a severe storm that passed over the measuring vehicle. It indicates the distance of detected lightning strikes from the vehicle's location and all recorded triggers. From the records, we see that only one trigger at 16:43:40 coincides with the lightning inditaced in immediate vicinity of the vehicle. However, we do not have a video recording for this time because the video recording duration exceeds 1.5 minutes, so we are unable to capture every lightning strike. Observers in the vehicle confirmed that there was no lightning in the immediate vicinity of the vehicle at that time. Thus, it was a trigger from a distant lightning strike. The trigger was confirmed by two measuring vehicles located 2 km apart. The thickness of the lines depicting the trigger is 1 second ( ±0.5 seconds from the trigger, which is recorded with an accuracy of 10 ms).
+
+\medskip
+\clabel[Lighning_trigger_coincidences]{Correlation with more than 20 km lightning detections}
+\picw=15cm \cinspic ./img/Lighning_trigger_coincidences.png
+\caption/f   Example of a severe storm passing over the measuring vehicle. The figure shows the distance of detected lightning strikes from the vehicle and all recorded triggers. Only one trigger at 16:43:40 matched the vicinity of the vehicle, but no lightning was observed at that time. This trigger was confirmed by two measuring vehicles 2 km apart. The line thickness represents 1 second (±0.5 seconds) from the trigger, recorded with 10 ms accuracy.
+\medskip
+
 
 \sec[conclusions] Conclusions
 
