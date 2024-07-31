@@ -460,26 +460,24 @@ aactions=\renditionautoplay,
 
 \secc Electric field measurements
 
-Both the Kleinwächter EFM 115 and the THUNDERMILL01 are used on measurement cars. The Kleinwächter EFM 115 has lower time resolution compared to the THUNDERMILL01, as illustrated in Figures \ref[figur_efmdatadetail] and \ref[figur_THUNDERMILL01_detail].
+The Kleinwächter EFM 115, Boltek and the THUNDERMILL01 are used on measurement cars. The Kleinwächter EFM 115 has lower time resolution compared to the THUNDERMILL01, as illustrated in Figures \ref[figur_efmdatadetail] and \ref[figur_THUNDERMILL01_detail].
 
-The THUNDERMILL01 provides additional angular information by outputting the value of each digitized voltage point on the electrodes during each half-rotation. This feature not only improves time resolution but also avoids averaging values over the entire rotation, which is a limitation of the Kleinwächter EFM 115 and similar electric field mills. Therefore, the THUNDERMILL01 offers a more precise and detailed measurement of the electric field changes.
+As the bonus THUNDERMILL01 provides additional angular information by outputting the value of each digitized voltage point on the electrodes during each half-rotation. This feature not only improves time resolution but also avoids averaging values over the entire rotation, which is a limitation of the Kleinwächter EFM 115 and similar electric field mills. Therefore, the THUNDERMILL01 offers a more precise and detailed measurement of the electric field changes. The angular sensitivity is explained in \mycite[c4].
 
-Both mills were installed on a car and were not grounded. The Kleinwächter EFM 115 measures the gradient of electric potential between the sensor and the car body, capturing the vertical electric field component over a large area and influenced by the car's presence. The THUNDERMILL01, with its superior time resolution and detailed angular data, provides a more accurate representation of electric field dynamics.
+Both mills were installed on a car and were not grounded. Therefore measures the gradient of electric potential between the sensor and the car body, capturing the vertical electric field component over a large area and influenced by the car's presence. As is visible from Figures \ref[figur_efmdata] and \ref[figur_THUNDERMILL01_data] the both EFMs captured the lightning effect on electric field above the car. The significant difference is visible in Figures \ref[figur_efmdatadetail] and \ref[figur_THUNDERMILL01_detail], where the THUNDERMILL01 is able to respond to electric field changes during different phases of a lightning. The main principle of fast time response is depicted in Figure \ref[figur_THUNDERMILL01_half-turn], where is shown the effect of lightning on the signal digitized from THUNDERMILL01 electrodes during a half-turn. 
+
 
 \medskip
 \clabel[figur_efmdata]{Example of Kleinwächter EFM 115 measurement}
 \picw=15cm \cinspic ./img/figur_efmdata.png
-\caption/f   Example of measurement with EFM compared with records of lightning captured on the camera.
+\caption/f   Example of measurement with Kleinwächter EFM 115 compared with records of lightning captured on the camera.
 \medskip
-
 
 \medskip
 \clabel[figur_efmdatadetail]{Comparison of Kleinwächter EFM 115 data with camera data in detail}
 \picw=15cm \cinspic ./img/figur_efmdatadetail.png
 \caption/f   Detail of Kleinwächter EFM 115 data with a comparison with camera data. Showing poor time resolution of the commercial EFM.
 \medskip
-
-
 
 \medskip
 \clabel[figur_THUNDERMILL01_data]{Overview of EFM data captured by THUNDERMILL01 during a thunderstorm}
@@ -504,10 +502,8 @@ Both mills were installed on a car and were not grounded. The Kleinwächter EFM 
 \picw=.5\hsize
 \clabel[figur_THUNDERMILL01_half-turn]{Detail of THUNDERMILL01 raw data output}
 \centerline {\picw=6cm \inspic ./img/fig_thundermill2024-07-28_02:10:49.129152256.png \hfil\hfil \picw=6.5cm \inspic ./img/fig_thundermill2024-07-28_02:10:49.215201024.png }\nobreak
-\caption/f Example of raw THUNDERMILL01 data output corresponding to a signal during a half-turn of EFM. The gray mark corresponds to the middle gray mark in Figure \ref[figur_THUNDERMILL01_detail]. Showing sudden change of the voltage on electrodes during the turning of \nobreak{THUNDERMILL01}  EFM. This graph at the same time demonstrates the angular sensitivity of \nobreak{THUNDERMILL01}.
+\caption/f Example of raw THUNDERMILL01 data output corresponding to a signal during a half-turn of EFM. The gray mark corresponds to the middle gray mark in Figure \ref[figur_THUNDERMILL01_detail]. Showing sudden change of the voltage on electrodes during the turning of \nobreak{THUNDERMILL01} EFM.
 \medskip
-
-\rfc{Přidat graf z THUNDERMILL01, který ukazuje lepší časové rozlišení bleskových výbojů.}
 
 \secc Summary of ground-based measurements
 
