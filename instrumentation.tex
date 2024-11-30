@@ -31,6 +31,7 @@ The camera lenses used were  FE185C057HA-1 \cite[camera_lenses]. The high-speed 
 
 
 Radio receiver implementation has several iterations, from the initial overview recordings made with an oscilloscope to a dedicated solution utilizing an antenna array, allowing for a greater number of lightning strikes to be recorded. One of the compromises that had to be addressed in the design of the radio receivers was the choice of the received band. This is limited both by the physical properties of the lightning discharge and by the frequency band allocation table in the EU, as bands with continuous broadcasting are unsuitable for radio observations. At the same time, there are sizing restrictions on the car roof platform, which favors the use of a combination of VLF for detection and UHF for more precision mapping.
+
 The observational band is chosen according to the segment of interest in the lightning discharge. Broadly, the following bands that can be used for observing lightning discharges can be distinguished:
 
 \begitems
@@ -41,7 +42,7 @@ The observational band is chosen according to the segment of interest in the lig
 
 That fact also favors the combination of VLF and UHF, because the primary interest was set to detection of lightning and then observing the lightning initiation point in coincidence with ionizing radiation.
 
-\secc Recording trigger implementation
+\secc[Recording_trigger_implementation] Recording trigger implementation
 
 As has been already stated, practically all current systems \cite[5173582] detect and locate lightning based on the occurrence of a pulse signal above a specified threshold value. The absolute time of pulse detection is processed, using algorithms based on the Time Difference of Arrival (TDoA) possibly enhanced by a combination with directional findings.  The calculated output is the most probable place of the pulse signal's origin. Only a minority of implementations consider the shape of the pulse or a sequence of pulses for a more detailed analysis of the signal's origin (excluding the correction of pulse dispersion to correct the TDoA value, which is quite common) \urlnote{https://www1.gifu-u.ac.jp/~lrg/falma.html}.
 
@@ -109,7 +110,9 @@ The UHF radio receiver is triggered by an external trigger (coming from the VLF 
 \medskip
 
 
-The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof \ref[CRREAT_CAR0]. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity (therefore typical application of that antenna is for satellite communication). The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, which is the situation of lightning detection. That technical feature at the same time allows the direct processing of the signal from the antenna as quadrature I/Q data.
+The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof \ref[CRREAT_CAR0]. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. 
+
+Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity. The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth shown in fig. \ref[input_RF_filter]. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage as is shown in fig. \ref[QFH_antenna_radiation_pattern], which is exactly the situation of lightning detection. That technical feature at the same time allows the direct processing of the signal from the antenna as quadrature I/Q data.
 
 The phase difference of the QFH antenna is extensively exploited in the UHF receiver construction because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity), and loop ends connected to the active analog fronted PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered to be a 40-50 Ω port. Therefore two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case, the QHA antenna has two loops with 100 Ω differential output ports with phase shift 90°.
 
@@ -120,6 +123,7 @@ The phase difference of the QFH antenna is extensively exploited in the UHF rece
 \medskip
 
 From that perspective, the QHA antenna itself functions the same as an I/Q demodulator. The signal on each port has a 90° signal phase shift in relation to the next port, and QFHMIX01 is actually a UHF analog front-end. Internally, it has two separate signal paths, one for the I signal and one for the Q signal. Each path contains an LNA, mixer, and ADC buffer. The front end also includes a local oscillator amplifier (clock buffer) and power stabilizers.
+
 In total, the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal, and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end are depicted in fig.\ref[QFHMIX_block_schematics].
 
 \medskip
@@ -140,12 +144,18 @@ The LNA structure contains the blocks concatenated from the antenna input port t
 The first gain block is based on the MPGA-105 selected for minimal noise figure and high third-order intercept point, specifically, it has NF: 1.8dB, gain: 14.6 dB, and OIP3: 35.8 dB. The second filter is the band pass filter.  The second gain block uses the MGVA-63 selected for acceptable noise figure and high gain while maintaining  a wide dynamic range, it has NF: 3.6dB,  gain: 21.5 dB, and OIP3: 34.3 dB.  This sequence of components gives an RF path with approximately NF: 4.8 dB and gain: 32 dB.
 
 The purpose of the mixer is to convert received signals into the ADC sampling bandwidth. The mixer is based on the AD8343 from Analog Devices. The local oscillator input of the mixer is connected to the clock buffer. The signal output is connected to the ADC buffer.
+
 A clock buffer is needed for the conditioning of local oscillator signals distributed by the antenna cabling from the UHF receiver base station.  The used clock buffer is the Si53322 low-jitter dual output. Each output is used to feed Q and I line mixers separately.
+
 The I/Q signals, which are on the mixer output, need to be connected to the ADC input. To avoid aliasing on ADC it is necessary to pass signals through the LPF to cut off the higher frequencies. For that case, a 5MHz bandwidth LT6604-5 from Analog Devices was chosen. It is also an amplifier for I/Q signals, which allows direct distribution by the UTP cable from the UHF RF front end to the base station inside the car. The output of the amplifier is the 100Ω differential pair, which perfectly matches a twisted pair from the UTP CAT 6 cable.
 
 PCB is produced from the 1.6mm thick FR4. All components, excluding connectors, are SMD mounted from a single side. The RF blocks are carefully separated into different zones to avoid cross-talk. The RF parts are soldered on the bottom side of the PCB. The top side is a shielding GND layer with some signal jumpers and power voltage tracks.
 
-The frontend outputs I/Q signals, local oscillator signal, and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front end and the receiver base unit mounted in the car.
+The frontend outputs I/Q signals, local oscillator signal, and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front end and the receiver base unit mounted in the car. 
+
+The instrumentation was subjected to many tests to verify the noise level of the recording device and the frequency band. In order to exclude that the recorded signals are external signals and not parasitic signals generated by the device itself.
+
+For verification of antenna radiation pattern, the newly designed unmanned gyroplane described in the section \ref[autogyro_thunderstorm] was also used.
 
 \medskip
 \clabel[QFHMIX01E_PCB]{Active antenna analog front-end PCB}
@@ -155,13 +165,14 @@ The frontend outputs I/Q signals, local oscillator signal, and power supply are 
 
 It is worth noting that most of the available RF components were chosen to ensure that the design can operate across a wide range of frequencies without significant modifications. Specifically, to retune to a substantially different frequency, it is necessary to replace the conductive structure of the antenna loops and retune the input RF filters in the QFHMIX01. This approach allows for the easy assembly of a system that can operate anywhere in the range of 40 MHz to 1 GHz. Additionally, these changes can be implemented on existing manufactured units, allowing the same equipment to be used in subsequent experiments without substantial investments.
 
-
 \sec[ionizing_radiation_detectors] EMI-resistant Ionizing radiation detectors
 
 During the research, scintillation, and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kákona_Ambrožová_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200~keV to 40~MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15~s integration of events is provided.
 
 Newly derived scintillation detectors GEODOS01 and GEODOS02 had scintillation crystals with a diameter of approximately 18~mm and a length of 30~mm. In addition to these newly developed detectors, the commercial RT-56 detectors were also operated on vehicles for a short period. However, due to their internal and unknown autocalibration, which is unsuitable for mobile measurements, they were subsequently moved to static observation sites. The identical construction of GEODOS01 detectors was then also used at static observatories, similar to the RT-56 detectors. All these described types of detectors at static locations detected ionizing radiation related to thunderstorm activity. Specifically, the observation sites were Poledník and the Lomnický Štít observatory.
+
 Unfortunately, the mobile deployment of these detectors in the measuring cars does not provide any significant detections of ionizing radiation, therefore the system was widened by the use of  SPACEDOS with another silicon PIN diode to increase sensitivity.  The G-M tube described in subsequent balloon experiments was also used for a short time, but none of these sensors were able to indisputably detect ionizing radiation associated with storm activity during mobile measurements. The causes of this situation will be discussed in chapter \ref[results].
+
 Towards the end of the research, this approach was reassessed, leading to the design of another ionizing radiation detector. In this latest design, a larger NaI(Tl) crystal was optically coupled with a USTSIPM01 module, whose electrical signal output is connected via a balun transformer \urlnote{https://www.mlab.cz/module/SATABAL01/} to a spare ADC channel of the previously described VLF receiver. The result is a device capable of recording individual ionizing radiation interactions in the NaI(Tl) crystal, timely coupled to the lightning. The maximum recording length is identical to the length of the recorded VLF signal fragment.
 
 The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulting from cosmic radiation outside of storm activity. Unfortunately, this approach was implemented towards the end of the measurement season, during which cars were available. Consequently, there is very little experimental data, therefore this potential improvement of sensitivity was not adequately examined.
@@ -246,6 +257,7 @@ Technically the disdrometer captures sound waves generated by the impact of prec
 \secc Storm-resistant Anemometer
 
 Given the necessity of knowing both the direction and speed of the wind during storm measurements, especially for launching unmanned aerial vehicles from the car rooftops and for overall safety in measurement, it was essential to equip the measurement vehicles with an anemometer capable of assessing these parameters in storm conditions.
+
 The development of the alternative anemometer was initiated in response to the failure of a standard cup anemometer during its first deployment on a highway drive. This unexpected failure highlighted the need for a device capable of enduring high-speed conditions (at least 130 km/h) in adverse weather, including wind and hail, without significant maintenance. Although the issue might have potentially been addressed by acquiring a high-quality professional anemometer, a more application-suitable design, with less aerodynamic drag was sought, given the intended use case. This pursuit coincided with efforts to develop a replacement for the Pitot tube for UAV applications (described in detail in section \ref[autogyro_thunderstorm]). Logical progression led to the use of similar technology for the anemometer mounted on a vehicle.
 
 \medskip

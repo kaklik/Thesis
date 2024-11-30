@@ -3,7 +3,9 @@ After initial processing of storm activity records with the described instrument
 \sec[balloon_flights] Stratospheric Balloon Flights
 
 Stratospheric balloon flights are conducted for several reasons related to the research of electromagnetic phenomena in the atmosphere associated with storm activity. They allow for the testing of instruments under various adverse conditions, enable the testing of data transmission methods over relatively long distances and in unfavorable weather, and provide a platform to lift additional instruments in the atmosphere. For example, they offer insights into the behavior of ionizing radiation in the upper layers of the atmosphere, where particles of primary cosmic radiation with sufficient energy interact and generate showers of secondary cosmic radiation. This phenomenon causes the situation that with increasing depth of the atmosphere, the intensity of primary radiation decreases whereas the secondary component intensity increases.
+
 At an altitude of about 20 km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum \cite[REGENER1935, Regener1934IntensityOT, REGENER1933]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level \cite[Bazilevskaya1998].
+
 Due to that physical phenomenon, stratospheric balloons are a useful tool for the investigation of cosmic radiation at high altitudes (around and above the Regener-Pfotzer maximum region).
 
 Since the composition of the radiation field varies with altitude \cite[10.1093/oxfordjournals.rpd.a081837] various radiation detector types should be used to measure the vertical profile of cosmic radiation in the atmosphere.
@@ -31,6 +33,7 @@ Apart from technologies used directly in balloon  gondolas, many supplementary t
 \secc The design of avionics
 
 Based on the described experiences the concept of a universal avionics called TF-ATMON emerged. That technology makes it possible to connect different types of payloads and carry out various atmospheric measurements. Furthermore, it provides basic services such as power supply, time, position, and 3D orientation information to the payload instruments. That data is recorded in parallel with quantities that affect many types of measurements, including temperature, pressure, humidity, magnetic field, and acceleration. At the same time flight computer provides the services for the payload to record data from experiments in a common log file.
+
 Therefore the TF-ATMON onboard stratospheric balloons have become an extremely useful tool for testing instruments like cosmic radiation detectors and dosimeters at high altitudes.
 
 The schematic diagram of the avionics hardware is summarized in the figure \ref[avionics_schematics].
@@ -122,7 +125,9 @@ By using the statistical methods, a functional dependence of ionizing radiation 
 As the measured data show in Fig \ref[R-P_maximum], there is a very noticeable difference between a number of data points measured during the flight upwards and during the descent. This difference is mainly caused by the different values of vertical speeds. In future balloon flights, this limitation is planned to be overcome by a controlled descent, during which the rate of descent can be decreased in some phases of the flight so that it can be more comparable with the speed of the ascent. It could be also seen from Table 1 in appendix \ref[FIK_flights], that the last unsolved issue with stratospheric balloon flights is the safe control of descent. Therefore, in future balloon flights and thunderstorm exploration, there exists a requirement to use the autopilot already contained in TF-ATMON to control descent trajectory.
 
 The descent should be controlled by using an airframe carrying the payload. Thus it would be possible to choose the landing site and reduce the possible risk of creating dangerous situations and at the same time with a possibility to control the descent rate and trajectory.
+
 Another unresolved challenge for the use of the balloons from the point of thunderstorm research is the difficulty of launching them in strong winds, which are nearly always present near storms, especially at times when the measurements are most critical. See the Figure \ref[balloon_wind_takeoff] for that situation.
+
 For these reasons, it became necessary to search for other carrier platforms to be used for practical storm activity measurements. The logical alternative for this step is to employ an unmanned aircraft system (\glref{UAS}).
 
 \medskip
@@ -154,7 +159,9 @@ Moreover, unlike fixed-wing aircraft that require higher speeds and runways for 
 \secc Storm-resistant Autogyro airframe
 
 There was not a suitable unmanned autogyro to perform atmospheric measurements in stormy conditions commercially available. The situation resulted in the design of TF-G2 autogyro which I developed in cooperation with the ThunderFly team. This step represents a significant advancement in the design and application of UAV technology for atmospheric research, specifically targeting the challenging conditions presented by thunderstorms.
+
 The TF-G2 autogyro's airframe utilizes a lightweight yet robust and high-impact strength 3D printed material for the airframe and unique rotor design, which enables rotor blade shape modification. This technological decision gives the ability to easily replace parts, which is useful to quickly resolve damages as flights near thunderclouds often result in mishaps.
+
 Internal components are protected from the weather by a waterproof fabric cover, which enables easy service access and supports equipment variability with its shape adaptability. Furthermore, the airframe's design allows easy access to onboard instruments and maintenance. This capability is achieved by rack-style mount options, where the payload could be easily fixed to a grid of screw holes which can be seen in figure \ref[TF-G2_hangar].
 
 \medskip
@@ -168,6 +175,7 @@ The avionics design is largely identical to the avionics used in already describ
 \secc Harsh-weather Airspeed sensing
 
 In the case of autogyros, similar to airplanes, it is required to measure the indicated airspeed (\glref{IAS}) to safely perform takeoffs and in-flight maneuvers. Even though autogyros cannot be stalled in the traditional sense because their lift is generated by the rotor's rotational speed rather than directly by airspeed, they exhibit unique behavior. At insufficient forward airspeed, a gyrocopter begins to settle until it potentially impacts the ground — a scenario that can be considered a survivable landing. Conversely, when the airspeed is excessively high, the rotor can easily exceed its critical \glref{RPM}, leading to potential rotor disintegration. To mitigate these risks, the TF-G2 autogyro is equipped with an \glref{IAS}  sensor to accurately monitor and control airspeed, thus ensuring operational safety under varying flight conditions.
+
 Initially, a conventional Pitot tube was used for that purpose, but it proved very sensitive to clogging by snow, ice, or mud after complicated landings, necessitating disassembly and thorough cleaning. Thus, I proposed a solution named TFSLOT01, utilizing the Venturi effect.  To describe the application of Bernoulli’s principle for measuring airspeed, we define the following variables:
 
 \begitems
@@ -210,7 +218,9 @@ The advantage of the higher sensitivity results in increased drag, but it should
 \secc Noise-resistant Telemetry system
 
 
-The telemetry system used in the \iid TF-G2 autogyro is a significantly improved variant of the technology previously tested on the stratospheric balloon's telemetry link. Unlike the one-way radio communication utilized in the balloon experiments, the TF-G2 employs a bidirectional half-duplex, Adaptive time division multiplexing (TDM) radio system with Frequency-hopping spread spectrum (FHSS) and Adaptive Frequency Agility (AFA). The modem still operates at a frequency of 433~MHz, but with a highly improved RF front-end to ensure a more reliable communication link due to the demanding environmental conditions of the TF-G2 flight. The modem firmware is based on modified SiK firmware, which newly incorporates integration to the hardware capable of supporting antenna diversity, specifically a 2x2 MIMO configuration. This arrangement allows for the connection of two external antennas, each of which can be utilized for both transmitting and receiving signals. The optimal antenna is automatically selected based on the RSSI metric on the received packet preamble before each transmission of the next packet. This dual-antenna setup significantly improves signal resilience against lightning interference, and multipath fading and is also robust against mechanical damage to one of the antennas — a critical improvement over the previous single-antenna modems used on balloon flights, where the damage happens (see Table 1 in appendix \ref[FIK_flights]). It is also quite a common failure mode of the antenna on UAVs, caused by prolonged exposure to vibrations during flights.
+The telemetry system used in the \iid TF-G2 autogyro is a significantly improved variant of the technology previously tested on the stratospheric balloon's telemetry link. Unlike the one-way radio communication utilized in the balloon experiments, the TF-G2 employs a bidirectional half-duplex, Adaptive time division multiplexing (TDM) radio system with Frequency-hopping spread spectrum (FHSS) and Adaptive Frequency Agility (AFA). The modem still operates at a frequency of 433~MHz, but with a highly improved RF front-end to ensure a more reliable communication link due to the demanding environmental conditions of the TF-G2 flight. 
+
+The modem firmware is based on modified SiK firmware, which newly incorporates integration to the hardware capable of supporting antenna diversity, specifically a 2x2 MIMO configuration. This arrangement allows for the connection of two external antennas, each of which can be utilized for both transmitting and receiving signals. The optimal antenna is automatically selected based on the RSSI metric on the received packet preamble before each transmission of the next packet. This dual-antenna setup significantly improves signal resilience against lightning interference, and multipath fading and is also robust against mechanical damage to one of the antennas — a critical improvement over the previous single-antenna modems used on balloon flights, where the damage happens (see Table 1 in appendix \ref[FIK_flights]). It is also quite a common failure mode of the antenna on UAVs, caused by prolonged exposure to vibrations during flights.
 
 \medskip
 \clabel[TFSIK01]{TFSIK dual-antenna telemetry modem}
@@ -224,9 +234,13 @@ Furthermore, the improved system benefits from the versatility in antenna config
 \secc Takeoff technique for thunderstorm observations
 
 Since the unmanned autogyro TF-G2 (like other autogyros) requires the rotor to be spun up to a flight RPM value to allow its operation during the flight, it is necessary to inject rotational energy into the rotor before takeoff (in the case of TF-G2 the required energy range is something between 100 to 200 J, depending on the actual weight and rotor configuration). One of the simplest ways to achieve this spin-up is by ensuring airflow through the rotor, which is firstly pre-spun to a minimum RPM by directly applying a rotation force to the rotor. Subsequently, these rotations increase to flight speed through forward motion. The required minimum forward speed needed to increase RPM to flight value is in the range of a few meters per second. In the case of those conditions, the autogyro becomes airborne within a few tens of meters, after that the internal autopilot can automatically climb to a stable flight.
+
 To ensure this procedure is feasible during approaching thunderstorms, it was necessary to develop a range of supportive devices, such as a launch platform and visualization of the gyrocopter's status on the car roof. The takeoff from the car roof platform is an advantage for safety and time-saving.
+
 The resulting design of the takeoff platform is visible in the video and image in Figure \ref[autogyro_takeoff_platform], where the autogyro is secured in an inclined launch position, allowing to increase in the airflow through the rotor. In this position, the gyrocopter's rotor is locked by a mechanism contained in the platform until takeoff. At the beginning of this assisted takeoff, the platform unlocks the rotor, which is then spun to minimum speed by weights connected to the rotor by pulleys. At this minimum RPM speed, aerodynamic forces enable further rotor acceleration due to the incoming airflow.
+
 However, since the launch platform is mounted on the roof of the vehicle, the crew in the vehicle (pilot and driver) cannot directly see the procedure. Therefore, the vehicle's crew must receive adequate and high-quality data to semi-automatically carry out the launch procedure. The TF-G2's autopilot is programmed to automatically transition between the different phases of takeoff once predefined criteria are met. Therefore the crew only needs to monitor key decision variables such as IAS and rotor RPM, to be able to respond adequately to a non-standard situation. These values are therefore required to be displayed with low latency and in a format that enables the car driver to determine whether to speed up, slow down, or maintain the current speed. This is facilitated by a set of displays, as seen in Figure \ref[takeoff_display], which have been added to the measurement vehicle.
+
 Additionally, the overall status is visible through an analog camera, which provides both the driver and the operator a view of the autogyro, mounted in the takeoff platform. However, this display is limited by the camera's frame rate and the resolution of the analog camera (a digital camera cannot be used due to typically high latency in the image encoder and decoder). The driver and operator also have access to auditory and visual signals indicating the platform and takeoff status via a shared handheld controller, which can be used to abort the takeoff procedure in the event of an unforeseen issue.
 
 \medskip
@@ -236,6 +250,7 @@ Additionally, the overall status is visible through an analog camera, which prov
 \medskip
 
 The takeoff platform device is removably integrated into the assembly of magnetic VLF receiving antennas, as seen in Figure \ref[autogyro_takeoff_platform]. This platform is connected to the ground control station mounted inside the trunk of the car and is controlled by the autogyro's autopilot states via previously described TFSIK01 telemetry modems. The platform's firmware responds to commands sent by the TF-G2 using the commands on the MAVLink 2 protocol.
+
 The mentioned handheld controller for the driver and operator is directly connected to the microcontroller managing the platform, allowing the platform's internal state to be overridden despite commands from the TF-G2. That takeoff solution is designed primarily to achieve overall safety before and during the thunderstorm measurement attempt.
 
 % Replaced with video
@@ -259,6 +274,7 @@ repeat=0,
 \secc Airborne sensors
 
 The key innovation in the TF-G2's design is the tight integration of specialized sensors for measuring electric fields and ionizing radiation. These sensors are mounted in a way to minimizes interference from the airframe by maximizing the benefits of the autogyro construction. The placement of an electric field mill is directly under the rotor, exploiting the UAV rotor's characteristic of being unpowered, thus avoiding significant electromagnetic interaction with the measured values. See the figure \ref[E_mill_rotor]. The only additional requirement on the airframe is that the rotary disk of EFM is electrically connected to the measuring electronics. That is achieved through a conductive connection of the rotor's bearing.
+
 For the detection of ionizing radiation, the UAV has been equipped with a semiconductor detector, AIRDOS03 (UAVDOS), previously tested during balloon flights. It is situated in the UAV's fuselage under a waterproof fabric cover and connected to the TF-ATMON system via serial link similarly as described in section \ref[balloon_flights]. The avionics system manages sensor readout, synchronizing data collection with the TF-G2's flight path and with data from other sensors (EFM, humidity, etc.), see Fig. \ref[E_mill_data] for an example of that data. That onboard data processing together with the telemetry link enables real-time preliminary analysis, aiding in the assessment of collected data during the flight.
 
 \medskip
@@ -273,7 +289,6 @@ For the detection of ionizing radiation, the UAV has been equipped with a semico
 \caption/f Electric field measurement data along with environmental humidity and temperature, aligned with flight parameters during a flight in fair weather.
 \medskip
 
-
 \secc Test flights
 
 Throughout the development phase of the unmanned autogyro, extensive test flights were conducted to evaluate various modifications and enhancements to the UAV design, the firmware of the autopilot, and the ground equipment adjustments. One of these could be seen in the figure \ref[lift_drag].  Among these development verification, there were tests on detectors in certain scenarios. These are experiments usually conducted outside of the main thunderstorm session.
@@ -285,7 +300,9 @@ Throughout the development phase of the unmanned autogyro, extensive test flight
 \medskip
 
 Two notable supportive experiments emerged from these testing flights. The first significant experiment involved testing the UAV's flight capabilities under strong wind conditions alongside measuring floating dust concentrations (floating dust is associated with the development of storm activity and the electrification of cloudiness \cite[7735367]). For this experiment, New Year's Eve fireworks were used as a modeling source of floating dust. The measurements were significant, as expected because the instrument convincingly detected at least a two-fold increase in the concentrations of floating dust in hours following the fireworks display.
+
 The second experiment was focused on verifying the directional homogeneity of the signal received by a Quadrifilar Helix (QFH) antenna (see figure \ref[QFH_antenna_radiation_pattern]). Leveraging the close frequency proximity of the telemetry transmission band from the UAV (433 MHz) to the observational band for lightning discharges, this experiment was conducted by having the UAV fly in circles around a measuring vehicle. The signal level was manually monitored on the receiver. This experiment was used for verification of the QFH antenna's effectiveness in maintaining homogenous sensitivity.
+
 In addition to the mentioned experiments, numerous routine flights and experiments were conducted near storm clouds. These experiments were carried out simultaneously with ground measurements, which were the primary focus. The success of these attempts varied greatly; however, system failures often occurred, preventing the intended use of the collected data.
 
 \secc Results from UAV employment
@@ -298,7 +315,9 @@ Within the context of the CRREAT project, the term {\em ground level measurement
 
 The summer storm measurement campaigns employing vehicles equipped with detection devices represent a culmination of all experiments described in previous sections. The deployment of vehicles equipped with specialized detection devices is based on exhaustive preparatory work, where each component's function and reliability are evaluated by previously mentioned experiments performed occasionally out of the main thunderstorm session e.g. in winter.  Given that the components and devices were often tested separately to prevent their failure during critical moments of storm activity.
 The average duration of monitoring a single storm's development is approximately half an hour, offering minimal opportunity for adjustments or repairs. The presence of an error on a single of three cars usually fails in a thunderstorm observation attempt. This constraint illustrates the importance of reliability, precise calibration, and software stability of the instruments used in the described research.
+
 Throughout the campaign, the reliability of the instruments, the methods of their calibration (for example dark frame and flat-field of cameras), and the challenges posed by software errors were gradually identified as the critical barriers to conducting the research. Each of these elements significantly influenced the outcome of the measurements and, in turn, the insights that could be collected from storm activity. This reality unexpectedly highlights the intrinsic complexity of atmospheric measurements, when attempting to capture the transient nature of thunderstorm phenomena.
+
 Recognizing these challenges, during the multiple summer storm seasons, many measuring expeditions were carried out in the Czech Republic and Slovakia with the equipment described. This allowed the measurement of electrostatic, magnetic, electromagnetic, and optical manifestations of storms, including monitoring ionizing radiation. By comparing the different obtained lightning recordings with each other, individual phases of lightning can be reconstructed.
 
 Observations were carried out with a gradually improving strategy to get the measuring car (especially the ones equipped with radiation detectors) as close to the storm cell or under the cell as possible. The position of the storm cell was monitored by services using data from third-party networks \cite[windy,Blitzortung].
@@ -314,7 +333,9 @@ The position of the measuring car was stationary during the period of thundersto
 \medskip
 
 During the measuring campaigns, the method of data recording developed as well. The first campaigns were trying to make fully automatic recordings based on observed electromagnetic signals using the described LIGHTNING01 module. Refer to section \ref[LIGHTNING01A_trigger] for details.
+
 This system however had a lot of imperfections leading to its abandonment in the measuring car CAR0, where it was replaced by solely manual activation of recording until the trigger was implemented directly into the VLF receiver’s FPGA. See fig. \ref[CRREAT_CAR0_diagram] for an overview.
+
 The manual activation of the recording was based on the visual perception of the operator observing the lightning activity. In contrast to CAR0, CAR1 was left with a semi-automatic method of activating the recording to compare the efficiency of both trigger methods. Car CAR1 thus had for a long time recorded triggers based on using a loop antenna and oscilloscope that generated triggers for other devices. See Fig. \ref[CRREAT_CAR1_diagram].  After the successful test of manual triggers that option was implemented in all three cars.
 
 \medskip
@@ -334,7 +355,9 @@ The trigger signal was initially distributed to the camera via the Ethernet netw
 A significant challenge was caused by the time needed to record the data measured by individual detectors resulting from the long time interval needed to store the recording from the operational memory of devices. The dead time was gradually reduced by optimizing the settings and improving software and firmware, but it still remains the main limit preventing the gathering of data from more lightning events in case of successful expeditions.
 
 For high-quality data collection on storm activity, most of the described instruments require accurate information about time and position to compare the recorded data with external data sources.
+
 GNSS receivers were mainly used for this purpose. The evolution of position tracking for the vehicle initially utilized a simple solution with a GPS receiver for coordinate logging and a manually targeted compass to determine car orientation. However, this method proved imprecise and unfeasible.
+
 Therefore, it was necessary to explore other methods that ideally would not depend on manual recording of the car orientation. This led to the adoption of radio navigation, enabling real-time tracking of orientation. For this purpose, the three MLAB GNSS modules GPS02 equipped with a uBlox NEO-M8P receiver capable of Real-Time Kinematic (RTK) navigation were used. That module at the same time supports moving baseline configurations, allowing each receiver to be used both as a rover and a base station. The moving baseline in the context of uBlox means the  position is measured in local NED coordinates relative to the base. Therefore a baseline and three position angles could be estimated.
 
 This feature of the receiver not only enabled precise positioning but was particularly beneficial for future applications like UAV following or potential implementation of landing back on the car's roof. Utilizing this for the car's platform orientation across three axes partially replaced the manually operated compass but faced challenges because the solution is very sensitive to interruptions in the signal phase, as when the car passes under a highway bridge or driving on a road covered by trees, both can easily disrupt the signal and result in incorrect orientation measurements. The usability of this innovation was thus primarily hindered by the implementation in the selected receiver, which was unable to reliably indicate when the provided moving baseline coordinates were invalid.
@@ -348,6 +371,7 @@ This feature of the receiver not only enabled precise positioning but was partic
 It was initially assumed that the suboptimal results (even below the manufacturer's specifications) were due to poor-quality GNSS antennas. Basic patch active antennas were used, all oriented in the same direction according to the application note, to prevent phase shifts from different directions. However, changing the antenna type to a QFH antenna, which has significantly better parameters compared to the patch antenna, did not result in any noticeable improvement in the receiver's performance and ability to correctly mark invalid data.
 
 To obtain precise system time for all onboard instruments in the measuring car, GNSS receivers were utilized. Initially, this was achieved by combining the relative PPS signal (as described in section \ref[VLF_receiver]) with the absolute time from the internet, synchronized with the operating system time using {\em ntp-wait}. However, this method had drawbacks, it required a stable internet connection and took a long time to synchronize. Internet connectivity was provided via LTE, which was unreliable in some regions and during thunderstorms, leading to complications in initializing the measurement system and difficulty in restarting the instrumentation after power outages, such as when the car's diesel engine was restarted.
+
 The latest solution involved connecting an additional GNSS receiver to the onboard router, Turris Omnia, which provided basic positioning and precise time information. This router then served as the accurate time source for the onboard Ethernet network, significantly improving the reliability of the entire setup.
 
 From the beginning of utilizing cars for atmospheric measurements, challenges were faced in how to effectively share information between drivers or operators of the measuring vehicles. Initially, with only two vehicles, the crew included an operator besides the driver to manage navigation, search for suitable observation spots, respond to the actual storm developments, and assist with instrument operation. However, this approach became impractical with the addition of a third vehicle due to the demand for a high number of personnel. The first attempt at solving this issue involved using PMR radios for inter-vehicle communication, which quickly proved ineffective for drivers and did not support the inclusion of a coordinating team member. Expanding PMR radios with chat and location sharing via standard communication apps also fell short in practicality.
@@ -357,7 +381,9 @@ Thus, HabHub technology, previously tested in balloon flights (see section \ref[
 \secc Data capturing procedure
 
 Before each expedition, selecting the right time and location for observation was essential for the experiment. This process involved a decision-making sequence that began with long-term weather forecasts to identify potential stormy days, followed by ECMWF model results tens of hours in advance. On the measurement day, satellite images revealing cumulonimbus cloud formation and, subsequently, radar data were used to pinpoint the precise location suitable for measurements.
+
 Communication between cars, aside from coordinating measurements and positioning to ensure a non-linear arrangement of cars, is aimed at maintaining a strategic positioning relative to the highway for rapid relocation in response to storm development. Ensuring geometrically advantageous positioning of the vehicles relative to storm clouds proved challenging due to the linear nature of highways. Sometimes, opposing exits allowed for symmetrical positioning around the highway without straying too far. In other cases, exits before, within, and after highway curves were utilized.
+
 Quick communication was also essential for confirming data records, as the lengthy recording time necessitated verification that all vehicles recorded data simultaneously (otherwise the data recording should be omitted), a task managed manually through verbal communication, highlighting the need for automation in future stationary measurement station setups.
 
 \secc Ionizing radiation measurements
