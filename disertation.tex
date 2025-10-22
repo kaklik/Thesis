@@ -8,7 +8,7 @@
 \subtitleCZ {Implementace pokročilé instrumentace a bezpilotních prostředků pro atmosférický výzkum}
 \author {Jakub Kákona}
 \studyinfo {P2612 - Electrical Engineering and Information Technology\nl P0716D06 - Aeronautical and Space Engineering}
-\date {Nov 2024}
+\date {Oct 2025}
 \supervisor{doc. Dr. Ing. Pavel Kovář\nl Consultant: doc. Ing. Jan Mikeš, Ph.D.}
 
 \abstractEN {This dissertation explores the use of radio detection for studying electromagnetic phenomena in the atmosphere, focusing on the development and integration of advanced radio receivers, meteorological instruments, mobile measurement platforms, telemetry systems, and unmanned aerial vehicles (UAVs). It presents a comprehensive approach to capturing and analyzing atmospheric data, offering insights into the complex dynamics of storms and electromagnetic events. Through a series of experiments, including atmospheric flights and ground-based measurements, the research demonstrates the potential of novel technologies to enhance the understanding of atmospheric processes, significantly contributing to the field of atmospheric sciences.}
@@ -281,6 +281,84 @@ This LIGHTNING01A is suitable only for triggering terrain measurement devices (l
 Additionally, for applications like ionizing radiation measurements, the sensitivity is considered too high, since lightning more than 10 km away from the ionizing radiation measurement venue is not of interest. The sensitivity of the AS3935 device can be decreased by increasing the level of the lightning detection threshold. This can be done by setting the internal SREJ or WDTH registers of the AS3935, as shown in figure 20 or 21 in the datasheet \cite[AS3935_datasheet], but this also affects the overall sensitivity of the device. Therefore, the false negative rate for near lightning is increased.
 
 Only a slight directional sensitivity of the antenna was observed. This could theoretically be compensated by pointing the AS3935’s antenna (or the whole measurement car) towards the thunderclouds; however, for close lightning within a 5 km radius, this effect is negligible.
+
+\app[UHF_signal_receiver] UHF signal receiver
+
+The construction of the UHF receiver is designed in a way that enables a phase processing of the signal from the antenna array with the aim of future detailed mapping of the lightning \urlnote{https://github.com/UniversalScientificTechnologies/RSMS01}. However, in the case of this experiment, only the scalar envelope of the radio signal is considered.
+
+The UHF receiver operates approximately in the 370-406~MHz band, exact tuning depends on the local noise situation within the observation area. The receiver has 10~MHz bandwidth. The signal is received by an array of four QFH antennas mounted in a square-like configuration on the roof platform of the measuring car as is shown in the photos in Figure \ref[UHF-QFH_receiver]. The signal from each antenna is directly downconverted by an RF mixer to I and Q analog channels. Each channel is sampled by a 12-bit analog-to-digital converter with 10~MS/s. The block diagram of the receiver is shown in Appendix \ref[SDR_receiver].
+
+\medskip
+\clabel[UHF-QFH_receiver]{UHF lightning signal receiver and its components}
+\picw=10cm \cinspic ./img/UHF-QFH_Receiver.png
+\caption/f The platform mount of a QFH receiver antenna is shown in the top left corner. Detailed pictures of the antenna can be seen at the bottom and the receiver is in the top right.
+\medskip
+
+
+The UHF radio receiver is triggered by an external trigger (coming from the VLF receiver), then records a signal fragment with the configured number of pre-trigger and post-trigger blocks up to 1.45 seconds long in total. The radio signal is simultaneously sampled from all elements in the antenna array. This feature is achieved by using an internal ring buffer that stores the samples from the antenna array before the trigger. Time stamping is implemented by storing an array of sample numbers along with a few last-time marks created by a PPS signal from an external GNSS receiver. This metadata is then recorded in the resulting data record file for each trigger event. That mechanism allows precise restoration of the absolute time of each recorded signal sample.
+
+\medskip
+\clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
+\picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
+\caption/f Measuring CAR0 with an all-sky high-speed camera and an array of QFH antenna mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram].
+\medskip
+
+
+The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof \ref[CRREAT_CAR0]. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. 
+
+Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity. The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth shown in fig. \ref[input_RF_filter]. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, as is shown in fig. \ref[QFH_antenna_radiation_pattern], which is exactly the situation of lightning detection. That technical feature at the same time allows the direct processing of the signal from the antenna as quadrature I/Q data.
+
+The phase difference of the QFH antenna is extensively exploited in the UHF receiver construction because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity), and loop ends connected to the active analog fronted PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered to be a 40-50 Ω port. Therefore two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case, the QHA antenna has two loops with 100 Ω differential output ports with a phase shift 90°.
+
+\medskip
+\clabel[QFHMIX_block_schematics]{Block schematics of the UHF active antenna front-end}
+\picw=13cm \cinspic ./img/QFHMIX_block_schematics.png
+\caption/f Block diagram of active antenna RF-front end. In the left part, the phase-shifted terminals of the QFH antenna are connected, followed by the analog branches for processing I and Q signals.
+\medskip
+
+From that perspective, the QHA antenna itself functions the same as an I/Q demodulator. The signal on each port has a 90° signal phase shift in relation to the next port, and QFHMIX01 is actually a UHF analog front-end. Internally, it has two separate signal paths, one for the I signal and one for the Q signal. Each path contains an LNA, mixer, and ADC buffer. The front end also includes a local oscillator amplifier (clock buffer) and power stabilizers.
+
+In total, the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal, and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end are depicted in fig.\ref[QFHMIX_block_schematics].
+
+\medskip
+\clabel[QFH_antenna_radiation_pattern]{QFH antenna radiation pattern}
+\picw=13cm \cinspic ./img/QFH_antenna_radiation_pattern.png
+\caption/f Calculated vertical radiation pattern of the single QFH antenna in two perpendicular cross-sections (normalized).
+\medskip
+
+The LNA structure contains the blocks concatenated from the antenna input port to the I/Q demodulator input in this way: first BPF, gain block, second BPF, second gain block. First BPF is the filter, whose purpose is to cut out the signals outside of the band of interest, and thereby protect the first gain block from overdriving to a nonlinear regime. The filter passbands are depicted in Figure \ref[input_RF_filter].
+
+\picw=.5\hsize
+\clabel[input_RF_filter]{UHF receiver RF filters}
+\centerline {a)\hfil\hfil b)}\nobreak\medskip
+\centerline {\inspic ./img/input_RF_filter1.png \hfil\hfil \inspic ./img/input_RF_filter2.png }\nobreak
+\caption/f Monte Carlo analysis of two RF filters. a) The filter placed immediately after the antenna is a two-stage filter designed to maintain low insertion loss. b) The filter located after the first amplifier is a three-stage filter designed to limit the propagation of out-of-band signals further into the receiver. Both filters are designed using discrete E24 series components, which effectively minimize the possibility of detuning due to vibrations in mobile applications and enable the filters to achieve very compact sizes.
+\medskip
+
+The first gain block is based on the MPGA-105 selected for minimal noise figure and high third-order intercept point, specifically, it has NF: 1.8dB, gain: 14.6 dB, and OIP3: 35.8 dB. The second filter is the band pass filter.  The second gain block uses the MGVA-63 selected for acceptable noise figure and high gain while maintaining  a wide dynamic range, it has NF: 3.6dB,  gain: 21.5 dB, and OIP3: 34.3 dB.  This sequence of components gives an RF path with approximately NF: 4.8 dB and gain: 32 dB.
+
+The purpose of the mixer is to convert received signals into the ADC sampling bandwidth. The mixer is based on the AD8343 from Analog Devices. The local oscillator input of the mixer is connected to the clock buffer. The signal output is connected to the ADC buffer.
+
+A clock buffer is needed for the conditioning of local oscillator signals distributed by the antenna cabling from the UHF receiver base station.  The used clock buffer is the Si53322 low-jitter dual output. Each output is used to feed Q and I line mixers separately.
+
+The I/Q signals, which are on the mixer output, need to be connected to the ADC input. To avoid aliasing on ADC it is necessary to pass signals through the LPF to cut off the higher frequencies. For that case, a 5~MHz bandwidth LT6604-5 from Analog Devices was chosen. It is also an amplifier for I/Q signals, which allows direct distribution by the UTP cable from the UHF RF front end to the base station inside the car. The output of the amplifier is the 100~Ω differential pair, which perfectly matches a twisted pair from the UTP CAT 6 cable.
+
+PCB is produced from the 1.6mm thick FR4. All components, excluding connectors, are SMD mounted from a single side. The RF blocks are carefully separated into different zones to avoid cross-talk. The RF parts are soldered on the bottom side of the PCB. The top side is a shielding GND layer with some signal jumpers and power voltage tracks.
+
+The front-end outputs I/Q signals, local oscillator signal, and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front end and the receiver base unit mounted in the car. 
+
+The instrumentation was subjected to many tests to verify the noise level of the recording device and the frequency band. In order to exclude that the recorded signals are external signals and not parasitic signals generated by the device itself.
+
+For verification of antenna radiation pattern, the newly designed unmanned gyroplane described in the section \ref[autogyro_thunderstorm] was also used.
+
+\medskip
+\clabel[QFHMIX01E_PCB]{Active antenna analog front-end PCB}
+\picw=10cm \cinspic ./img/QFHMIX01E_top.jpg
+\caption/f  Because the design of the QFHMIX01 is optimized for high dynamic range and low noise figure, these tradeoffs result in relatively high power dissipation. The PCB must therefore be equipped with a fan to provide cooling for the analog RF part.
+\medskip
+
+It is worth noting that most of the available RF components were chosen to ensure that the design can operate across a wide range of frequencies without significant modifications. Specifically, to retune to a substantially different frequency, it is necessary to replace the conductive structure of the antenna loops and retune the input RF filters in the QFHMIX01. This approach allows for the easy assembly of a system that can operate anywhere in the range of 40 MHz to 1 GHz. Additionally, these changes can be implemented on existing manufactured units, allowing the same equipment to be used in subsequent experiments without substantial investments.
+
 
 \bibchap
 

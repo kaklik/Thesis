@@ -73,7 +73,14 @@ For the observation,  the VLF receiver system was used simultaneously for detect
 \caption/f A detailed view on aluminum construction that holds orthogonal magnetic loop antennas.  The individual edges are isolated by 3D-printed corners.
 \medskip
 
-The VLF signal receiver is based on a magnetic loop antenna and initially on a storage oscilloscope with a control computer for data readout. For one lightning event, that setup could record 800 ms of 8-bit samples with a sampling rate of 250 MS/s taking several minutes of recording time. From that concept which uses the antenna  mounted flat on the plywood as depicted in Fig. \ref[loop_antenna]. In the dedicated receiver, the  antenna array design was introduced, although it is based on the use of the same  VLFANT01 module, with the 10 m length, STP cable coiled into loops. The antenna loops were attached orthogonally to the structure made from 40mm aluminum profiles mounted on the car roof. See  Fig. \ref[VLF_antenna] for details.
+The VLF signal receiver is based on a magnetic loop antenna and initially on a storage oscilloscope with a control computer for data readout. For one lightning event, that setup could record 800 ms of 8-bit samples with a sampling rate of 250 MS/s taking several minutes of recording time. From that concept which uses the antenna  mounted flat on the plywood as depicted in Fig. \ref[loop_antenna]. In the dedicated receiver, the  antenna array design was introduced, although it is based on the use of the same  VLFANT01 module, with the 10 m length, STP cable coiled into loops. The antenna loops were attached orthogonally to the structure made from 40~mm aluminum profiles mounted on the car roof. See  Fig. \ref[VLF_antenna] for details. 
+The small-signal input reflection of the three orthogonal loops (“Top”, “Side”, “Rear”) was measured in range of 10 MHz using a calibrated VNA. The first reflection minima occur at 1.149~MHz (Top), 2.124~MHz (Side), and 2.319~MHz (Rear), confirming that the magnetic loops are operated well below their self-resonance for VLF lightning pulse reception. Accordingly, the practically useful signal region is taken from ≈100 kHz up to the first minimum for each loop. See Fig. \ref[figur_VLF_S11] for the combined $S_{11}$ plot with annotated minima.
+
+\medskip
+\clabel[figur_VLF_S11]{VLF antenna frequency dependence of the input reflection coefficient |S₁₁|}
+\picw=15cm \cinspic ./img/MagLoop_S11_0to10MHz.png
+\caption/f Input reflection magnitude |$S_{11}$| (50~Ω reference) for three magnetic loop antenna array measured with a VNA. Vertical dashed lines mark the reflection dips: Top — 1.149~MHz, Side — 2.124~MHz, Rear — 2.319~MHz. These frequencies indicate the onset of self-resonant behavior; for broadband lightning pulse reception, the practically useful bandwidth is typically below the first marked minimum for each loop. Therefore bellow 1~MHz for all three loops. 
+\medskip
 
 The oscilloscope was replaced with very similar hardware as the UHF signal receiver described in section \ref[UHF_signal_receiver]. The main difference is that the VLF antenna is directly coupled to the ADC inputs.
 
@@ -88,83 +95,6 @@ An example of the captured lightning signal can be seen in Fig. \ref[figur_VLFda
 
 The use of this dedicated receiver decreases the data recording interval to about twenty seconds and allows recording of the 1.45-second long signal fragment with 12-bit  ADC resolution.  This increase in parameters was a significant step from the original oscilloscope-based experiments.
 
-\secc[UHF_signal_receiver] UHF signal receiver
-
-The construction of the UHF receiver is designed in a way that enables a phase processing of the signal from the antenna array with the aim of future detailed mapping of the lightning \urlnote{https://github.com/UniversalScientificTechnologies/RSMS01}. However, in the case of this experiment, only the scalar envelope of the radio signal is considered.
-
-The UHF receiver operates approximately in the 370-406~MHz band, exact tuning depends on the local noise situation within the observation area. The receiver has 10~MHz bandwidth. The signal is received by an array of four QFH antennas mounted in a square-like configuration on the roof platform of the measuring car as is shown in the photos in Figure \ref[UHF-QFH_receiver]. The signal from each antenna is directly downconverted by an RF mixer to I and Q analog channels. Each channel is sampled by a 12-bit analog-to-digital converter with 10~MS/s. The block diagram of the receiver is shown in Appendix \ref[SDR_receiver].
-
-\medskip
-\clabel[UHF-QFH_receiver]{UHF lightning signal receiver and its components}
-\picw=10cm \cinspic ./img/UHF-QFH_Receiver.png
-\caption/f The platform mount of a QFH receiver antenna is shown in the top left corner. Detailed pictures of the antenna can be seen at the bottom and the receiver is in the top right.
-\medskip
-
-
-The UHF radio receiver is triggered by an external trigger (coming from the VLF receiver), then records a signal fragment with the configured number of pre-trigger and post-trigger blocks up to 1.45 seconds long in total. The radio signal is simultaneously sampled from all elements in the antenna array. This feature is achieved by using an internal ring buffer that stores the samples from the antenna array before the trigger. Time stamping is implemented by storing an array of sample numbers along with a few last-time marks created by a PPS signal from an external GNSS receiver. This metadata is then recorded in the resulting data record file for each trigger event. That mechanism allows precise restoration of the absolute time of each recorded signal sample.
-
-\medskip
-\clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
-\picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
-\caption/f Measuring CAR0 with an all-sky high-speed camera and an array of QFH antenna mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram].
-\medskip
-
-
-The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof \ref[CRREAT_CAR0]. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. 
-
-Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity. The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth shown in fig. \ref[input_RF_filter]. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage as is shown in fig. \ref[QFH_antenna_radiation_pattern], which is exactly the situation of lightning detection. That technical feature at the same time allows the direct processing of the signal from the antenna as quadrature I/Q data.
-
-The phase difference of the QFH antenna is extensively exploited in the UHF receiver construction because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity), and loop ends connected to the active analog fronted PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered to be a 40-50 Ω port. Therefore two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case, the QHA antenna has two loops with 100 Ω differential output ports with phase shift 90°.
-
-\medskip
-\clabel[QFHMIX_block_schematics]{Block schematics of the UHF active antenna front-end}
-\picw=13cm \cinspic ./img/QFHMIX_block_schematics.png
-\caption/f Block diagram of active antenna RF-front end. In the left part, the phase-shifted terminals of the QFH antenna are connected, followed by the analog branches for processing I and Q signals.
-\medskip
-
-From that perspective, the QHA antenna itself functions the same as an I/Q demodulator. The signal on each port has a 90° signal phase shift in relation to the next port, and QFHMIX01 is actually a UHF analog front-end. Internally, it has two separate signal paths, one for the I signal and one for the Q signal. Each path contains an LNA, mixer, and ADC buffer. The front end also includes a local oscillator amplifier (clock buffer) and power stabilizers.
-
-In total, the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal, and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end are depicted in fig.\ref[QFHMIX_block_schematics].
-
-\medskip
-\clabel[QFH_antenna_radiation_pattern]{QFH antenna radiation pattern}
-\picw=13cm \cinspic ./img/QFH_antenna_radiation_pattern.png
-\caption/f Calculated vertical radiation pattern of the single QFH antenna in two perpendicular cross-sections (normalized).
-\medskip
-
-The LNA structure contains the blocks concatenated from the antenna input port to the I/Q demodulator input in this way: first BPF, gain block, second BPF, second gain block. First BPF is the filter, whose purpose is to cut out the signals outside of the band of interest, and thereby protect the first gain block from overdriving to a nonlinear regime. The filter passbands are depicted in Figure \ref[input_RF_filter].
-
-\picw=.5\hsize
-\clabel[input_RF_filter]{UHF receiver RF filters}
-\centerline {a)\hfil\hfil b)}\nobreak\medskip
-\centerline {\inspic ./img/input_RF_filter1.png \hfil\hfil \inspic ./img/input_RF_filter2.png }\nobreak
-\caption/f Monte Carlo analysis of two RF filters. a) The filter placed immediately after the antenna is a two-stage filter designed to maintain low insertion loss. b) The filter located after the first amplifier is a three-stage filter designed to limit the propagation of out-of-band signals further into the receiver. Both filters are designed using discrete E24 series components, which effectively minimize the possibility of detuning due to vibrations in mobile applications and enable the filters to achieve very compact sizes.
-\medskip
-
-The first gain block is based on the MPGA-105 selected for minimal noise figure and high third-order intercept point, specifically, it has NF: 1.8dB, gain: 14.6 dB, and OIP3: 35.8 dB. The second filter is the band pass filter.  The second gain block uses the MGVA-63 selected for acceptable noise figure and high gain while maintaining  a wide dynamic range, it has NF: 3.6dB,  gain: 21.5 dB, and OIP3: 34.3 dB.  This sequence of components gives an RF path with approximately NF: 4.8 dB and gain: 32 dB.
-
-The purpose of the mixer is to convert received signals into the ADC sampling bandwidth. The mixer is based on the AD8343 from Analog Devices. The local oscillator input of the mixer is connected to the clock buffer. The signal output is connected to the ADC buffer.
-
-A clock buffer is needed for the conditioning of local oscillator signals distributed by the antenna cabling from the UHF receiver base station.  The used clock buffer is the Si53322 low-jitter dual output. Each output is used to feed Q and I line mixers separately.
-
-The I/Q signals, which are on the mixer output, need to be connected to the ADC input. To avoid aliasing on ADC it is necessary to pass signals through the LPF to cut off the higher frequencies. For that case, a 5MHz bandwidth LT6604-5 from Analog Devices was chosen. It is also an amplifier for I/Q signals, which allows direct distribution by the UTP cable from the UHF RF front end to the base station inside the car. The output of the amplifier is the 100Ω differential pair, which perfectly matches a twisted pair from the UTP CAT 6 cable.
-
-PCB is produced from the 1.6mm thick FR4. All components, excluding connectors, are SMD mounted from a single side. The RF blocks are carefully separated into different zones to avoid cross-talk. The RF parts are soldered on the bottom side of the PCB. The top side is a shielding GND layer with some signal jumpers and power voltage tracks.
-
-The frontend outputs I/Q signals, local oscillator signal, and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front end and the receiver base unit mounted in the car. 
-
-The instrumentation was subjected to many tests to verify the noise level of the recording device and the frequency band. In order to exclude that the recorded signals are external signals and not parasitic signals generated by the device itself.
-
-For verification of antenna radiation pattern, the newly designed unmanned gyroplane described in the section \ref[autogyro_thunderstorm] was also used.
-
-\medskip
-\clabel[QFHMIX01E_PCB]{Active antenna analog front-end PCB}
-\picw=10cm \cinspic ./img/QFHMIX01E_top.jpg
-\caption/f  Because the design of the QFHMIX01 is optimized for high dynamic range and low noise figure, these tradeoffs result in relatively high power dissipation. The PCB must therefore be equipped with a fan to provide cooling for the analog RF part.
-\medskip
-
-It is worth noting that most of the available RF components were chosen to ensure that the design can operate across a wide range of frequencies without significant modifications. Specifically, to retune to a substantially different frequency, it is necessary to replace the conductive structure of the antenna loops and retune the input RF filters in the QFHMIX01. This approach allows for the easy assembly of a system that can operate anywhere in the range of 40 MHz to 1 GHz. Additionally, these changes can be implemented on existing manufactured units, allowing the same equipment to be used in subsequent experiments without substantial investments.
-
 \sec[ionizing_radiation_detectors] EMI-resistant Ionizing radiation detectors
 
 During the research, scintillation, and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kákona_Ambrožová_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200~keV to 40~MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15~s integration of events is provided.
@@ -173,7 +103,23 @@ Newly derived scintillation detectors GEODOS01 and GEODOS02 had scintillation cr
 
 Unfortunately, the mobile deployment of these detectors in the measuring cars does not provide any significant detections of ionizing radiation, therefore the system was widened by the use of  SPACEDOS with another silicon PIN diode to increase sensitivity.  The G-M tube described in subsequent balloon experiments was also used for a short time, but none of these sensors were able to indisputably detect ionizing radiation associated with storm activity during mobile measurements. The causes of this situation will be discussed in chapter \ref[results].
 
-Towards the end of the research, this approach was reassessed, leading to the design of another ionizing radiation detector. In this latest design, a larger NaI(Tl) crystal was optically coupled with a USTSIPM01 module, whose electrical signal output is connected via a balun transformer \urlnote{https://www.mlab.cz/module/SATABAL01/} to a spare ADC channel of the previously described VLF receiver. The result is a device capable of recording individual ionizing radiation interactions in the NaI(Tl) crystal, timely coupled to the lightning. The maximum recording length is identical to the length of the recorded VLF signal fragment.
+To ensure that the detectors were not influenced by electromagnetic interference (EMI) from lightning or associated current impulses, the GEODOS01 detector was tested using a lightning current generator. During this experiment, the detector was placed at a distance of approximately 3~m from the high-current discharge setup (Fig. \ref[geodos01_emi_test]), and 85~kA standard 10/350~µs waveforms were generated. No deviations or transient increases in the detected count rate were observed, confirming that the detector and its electronics are immune to electromagnetic interference produced by nearby lightning discharges, as is shown in Fig. \ref[geodos01_emi_test_data].
+
+\medskip
+\clabel[geodos01_emi_test_data]{GEODOS01 EMI immunity test recorded data}
+\picw=15cm \cinspic ./img/GEODOS_EMI_test_data.png
+\caption/f Recorded total count rate of the GEODOS01 detector during EMI immunity test.
+\medskip
+
+The test confirmed that the detector’s signal chain and shielding design are sufficiently resistant to strong transient electromagnetic fields produced during lightning discharges. While the applied 85 kA, 10/350 µs current impulses are a standardized, technical approximation of a lightning stroke and cannot reproduce the full variability of natural lightning (source geometry, spectral content, rise times, and radiated field distribution), they represent the most rigorous and practically achievable laboratory proxy.
+
+\medskip
+\clabel[geodos01_emi_test]{GEODOS01 EMI immunity test}
+\picw=15cm \cinspic ./img/GEODOS01_lightning_generator_annotated.png
+\caption/f Test of the GEODOS01 detector using a lightning current generator. The detector was positioned 3 m from the high-current discharge, and no EMI-induced artifacts were observed in the recorded signal.
+\medskip
+
+Towards the end of the research, GEODOS01 design was reassessed, leading to the design of another ionizing radiation detector. In this latest design, a larger NaI(Tl) crystal was optically coupled with a USTSIPM01 module, whose electrical signal output is connected via a balun transformer \urlnote{https://www.mlab.cz/module/SATABAL01/} to a spare ADC channel of the previously described VLF receiver. The result is a device capable of recording individual ionizing radiation interactions in the NaI(Tl) crystal, timely coupled to the lightning. The maximum recording length is identical to the length of the recorded VLF signal fragment.
 
 The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulting from cosmic radiation outside of storm activity. Unfortunately, this approach was implemented towards the end of the measurement season, during which cars were available. Consequently, there is very little experimental data, therefore this potential improvement of sensitivity was not adequately examined.
 
@@ -187,7 +133,7 @@ The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulti
 
 Electric field sensors were planned to be used as devices capable of indicating the potential for lightning discharges in clouds. For this purpose, Boltek detectors were initially acquired and Boltek detectors were used for ground-based measurements. Despite their widespread use, these detectors presented significant limitations for mobile measurements due to their bulkiness and less optimal design for mobile deployment. Seeking a more adaptable solution, the more compact Kleinwächter EFM 115 was transitioned to. This Electric Field Mill (EFM) offered an improved form factor for mobile applications, directly connecting its analog signal output to a data logger equipped with a GPS for accurate timestamping \urlnote{https://github.com/mlab-modules/FIELDMILL01}, with a logging time resolution of 110 ms.
 
-However, challenges persisted with the Kleinwächter EFM 115, as its mechanical and weather durability did not meet the demands of mobile fieldwork, and time resolution was not adequate to observation of lightning events as I published in \mycite[j1]. This situation resulted in the necessity for an alternative solution, prompting the development of a new design for electric field mills. The new design also required increased versatility because these custom mills were engineered to integrate into stationary setups, mobile measurements vehicles, and even atmospheric monitoring via Unmanned Aerial Vehicles (UAVs).
+However, challenges persisted with the Kleinwächter EFM 115, as its mechanical and weather durability did not meet the demands of mobile fieldwork, and time resolution was not adequate to observation of lightning events, as I published in \mycite[j1]. This situation resulted in the necessity for an alternative solution, prompting the development of a new design for electric field mills. The new design also required increased versatility because these custom mills were engineered to integrate into stationary setups, mobile measurement vehicles, and even atmospheric monitoring via Unmanned Aerial Vehicles (UAVs).
 
 For the construction of the new electric field mill (THUNDERMILL01), the initial design was first tested in a laboratory and then installed on the roof of a measuring car, as shown in Figure \ref[THUNDERMILL01_on_car]. At that time, the mill was housed in a tin-plated can turned upside down to protect it from external weather influences. This solution proved ineffective, as the metal can rusted through in approximately two months. Subsequent units intended for stationary placement at the Lomnický Štít observatory were therefore made with a stainless steel casing, as shown in Figure \ref[LS_THUNDERMILL]. The measured values are compared with the Boltek sensor, as illustrated in the graph in Figure \ref[THUNDERMILL_LS_boltek]. The results from that research are published in \mycite[c4].
 
@@ -217,7 +163,7 @@ To accurately assess the meteorological situation during thunderstorms, the meas
 
 \secc Precipitation Distinguishing Disdrometer
 
-The implementation of the disdrometer was necessitated by the need for high-time resolution measurement of precipitation patterns and their evolution. Precipitation is a key meteorological parameter  for understanding the correlations between ionizing radiation and storm activity, because hydrometeors play a significant role in washing radon decay products out of the atmosphere, consequently creating a temporary increase in radiation background levels on the ground \ref[Radon_precipitation]. High-rate precipitation data are necessary for distinguishing these events from occurrences of TGE.
+The implementation of the disdrometer was necessitated by the need for high-time resolution measurement of precipitation patterns and their evolution. Precipitation is a key meteorological parameter for understanding the correlations between ionizing radiation and storm activity, because hydrometeors play a significant role in washing radon decay products out of the atmosphere, consequently creating a temporary increase in radiation background levels on the ground \ref[Radon_precipitation]. High-rate precipitation data are necessary for distinguishing these events from occurrences of TGE.
 
 \medskip
 \clabel[Radon_precipitation]{Radon progeny washout}
@@ -234,7 +180,7 @@ Traditional, widely used methods of precipitation measurement have their limitat
 \medskip
 
 
-Furthermore, the tipping bucket rain gauge does not differentiate between different types of precipitation (rain, snow, hail, graupels, etc.) as could be seen in Figure \ref[tipping_bucket_limitation]. The different hydrometeors types have an impact on the efficiency of radionuclide washout and also the electrification of storm clouds. The tipping bucket rain gauge has a significant advantage in precise volume measurement of the precipitation, but it is a variable that is not useful for the proposed thunderstorm observation because rain intensity and hydrometeor type are more important. In contrast, the disdrometer---another type of instrument---is capable of identifying precipitation types but generally lacks precision in measuring volume. In the case of mobile measurement using cars, there is also a requirement to avoid optical principles, which most commercial disdrometers are based on, which are unsuitable for vehicle roof mounting due to their sensitivity to movement and vibration.
+Furthermore, the tipping bucket rain gauge does not differentiate between different types of precipitation (rain, snow, hail, graupel, etc.) as can be seen in Figure \ref[tipping_bucket_limitation]. The different hydrometeor types have an impact on the efficiency of radionuclide washout and also the electrification of storm clouds. The tipping bucket rain gauge has a significant advantage in precise volume measurement of the precipitation, but it is a variable that is not useful for the proposed thunderstorm observation because rain intensity and hydrometeor type are more important. In contrast, the disdrometer---another type of instrument---is capable of identifying precipitation types but generally lacks precision in measuring volume. In the case of mobile measurement using cars, there is also a requirement to avoid optical principles, which most commercial disdrometers are based on, which are unsuitable for vehicle roof mounting due to their sensitivity to movement and vibration.
 
 In response to these challenges, the DISDROMETER01\urlnote{https://github.com/UniversalScientificTechnologies/DISDROMETER01}, was specifically designed for installation on a flat vehicle moving platform, enabling high-precision, real-time data collection during storm events. This instrument leverages SDR receiver technology previously utilized in the Bolidozor meteor detection network. It employs a piezoelectric element (see Figure \ref[DISDROMETER01]) capable of  sensing of raindrop size distribution and intensity. The sensing element responds to different hydrometeors with different waveforms as is shown in Fig. \ref[DISDROMETER01_hyrometeors].
 
