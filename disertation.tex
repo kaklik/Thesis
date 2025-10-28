@@ -2,9 +2,9 @@
 \worktype [D/EN]
 \faculty {F3}
 \department {Department of Radioelectronics}
-\title {Radio Detection of Electromagnetic Phenomena in the Atmosphere}
+\title {Detection of Electromagnetic Phenomena in the Atmosphere}
 \subtitle {Integrating Advanced Instrumentation and UAVs for Enhanced Atmospheric Research}
-\titleCZ {Rádiová detekce elektromagnetických jevů v atmosféře}
+\titleCZ {Detekce elektromagnetických jevů v atmosféře}
 \subtitleCZ {Implementace pokročilé instrumentace a bezpilotních prostředků pro atmosférický výzkum}
 \author {Jakub Kákona}
 \studyinfo {P2612 - Electrical Engineering and Information Technology\nl P0716D06 - Aeronautical and Space Engineering}
@@ -21,7 +21,7 @@
 \declaration {
    I declare that I have written the submitted thesis independently and that I have cited all used information sources in accordance with the methodological guideline on adhering to ethical principles in the preparation of university theses.
 
-   In Prague on November 30, 2024 % !!! Attention, you have to change this item.
+   In Prague on October 31, 2025
    \signature % makes dots
 }
 
@@ -87,8 +87,8 @@ Thank you all.
 I chose to write a relatively wide introduction to explain the necessary context for understanding some of the trade-offs made throughout this work. This approach will allow readers to grasp the broad spectrum of activities that, without explanation, might seem unrelated.
 At the beginning of my research, I focused on the Bolidozor network. Bolidozor is a forward-scattering radio meteor detection network that non-cooperatively uses signals from the French military radar GRAVES\urlnote{https://spp.fas.org/military/program/track/graves.pdf}.  This means that the signals transmitted by GRAVES are scattered by meteor trails in the atmosphere, making it easy to receive reflections across large parts of Europe, even with a simple ground plane antenna.
 
-There are several reasons for focusing on this area. Firstly, unlike visual meteor observations using cameras, radar observations are independent of weather and daylight conditions. This advantage allows radio observations to overcome the limitations that visual observation networks face, which often experience impaired sensitivity for significant portions of time. Additionally, radio observation can enhance the precision of meteoroid velocity estimation due to the considerable Doppler effect observed in the reflected signals (fig. \ref[Bolidozor_starlink_reflections]).
-The existence of a Doppler-shifted {\em head echo} (fig. \ref[Bolidozor_head_echo]) in meteor reflections was a key focus, as I planned to use this phenomenon to estimate meteor trajectories from signals received by multiple stations. This approach appears feasible, as there have been successful attempts to calculate meteor vectors in the atmosphere based on these Doppler-shifted signals (M. A. Vallejo\fnote{Callsign: EA4EOZ}, 2016 et al.).
+There are several reasons for focusing on this area. Firstly, unlike visual meteor observations using cameras, radar observations are independent of weather and daylight conditions. This advantage allows radio observations to overcome the limitations that visual observation networks face, which often experience impaired sensitivity for significant portions of time. Additionally, radio observation can enhance the precision of meteoroid velocity estimation due to the considerable Doppler effect observed in the reflected signals (Fig.~\ref[Bolidozor_starlink_reflections]).
+The existence of a Doppler-shifted {\em head echo} (Fig.~\ref[Bolidozor_head_echo]) in meteor reflections was a key focus, as I planned to use this phenomenon to estimate meteor trajectories from signals received by multiple stations. This approach appears feasible, as there have been successful attempts to calculate meteor vectors in the atmosphere based on these Doppler-shifted signals (M. A. Vallejo\fnote{Callsign: EA4EOZ}, 2016 et al.).
 
 \medskip
 \label[Bolidozor_head_echo]
@@ -97,17 +97,17 @@ The existence of a Doppler-shifted {\em head echo} (fig. \ref[Bolidozor_head_ech
 \medskip
 
 The trouble begins with the fact that there is no easy way to verify that the calculated trajectory is correct or incorrect.
-The one issue rooted in the situation is that radio signals received by the Bolidozor network have a detected meteor every few seconds which complicates the clear assignment of the specific visual observation to the calculated trajectory, especially in cases where a digital video camera occasionally has a few seconds of latency or inaccuracy. The second issue is caused by the situation that  GRAVES radar guaranteedly lightens only a relatively small fraction of the atmosphere, but there are also side radiation lobes. The primary enlightened part is located above south Europe where there were little video detection networks at that time.
-The GRAVES radar also has a side transmission from its antenna, but these transmissions are not stable and there is not exactly a known enlightened area.
+The one issue rooted in the situation is that radio signals received by the Bolidozor network have a detected meteor every few seconds, which complicates the clear assignment of the specific visual observation to the calculated trajectory, especially in cases where a digital video camera occasionally has a few seconds of latency or some inaccuracy. The second issue is caused by the situation that GRAVES radar guarantees that it will light up only a relatively small fraction of the atmosphere, but there are also side radiation lobes. The primary enlightened part is located above South Europe, where there were few video detection networks at that time.
+The GRAVES radar also has a side transmission from its antenna, but these transmissions are not stable, and there is no exact known enlightened area.
 
 \medskip
 \label[Bolidozor_starlink_reflections]
 \picw=10cm \cinspic ./img/Bolidozor_starlink.png
-\caption/f   An example of a spectrogram showing the doppler-shifted reflections from Starlink satellites received on the Svákov Bolidozor station (Vertical axis corresponds to time and horizontal to signal frequency).
+\caption/f   An example of a spectrogram showing the Doppler-shifted reflections from Starlink satellites received on the Svákov Bolidozor station (Vertical axis corresponds to time and horizontal to signal frequency).
 \medskip
 
-That results in very few meteor events which could be used for trajectory verification by using the local video-based meteor detection networks here in the Czech Republic.
-To resolve this problem I decided to switch from GRAVES radar transmission to the local transmitters which are more suitable for local meteor detection.  I selected the VOR beacons for airplane navigation. These beacons have reduced transmission power compared to GRAVES, but according to the numerical model I constructed the meteor radar based on those transmitters could be feasible with the use of state-of-the-art radio components\urlnote{https://github.com/bolidozor/iPython-models/blob/master/VOR_beacons.ipynb}.
+That results in very few meteor events, which could be used for trajectory verification by using the local video-based meteor detection networks here in the Czech Republic.
+To resolve this problem, I decided to switch from GRAVES radar transmission to the local transmitters, which are more suitable for local meteor detection.  I selected the VOR beacons for airplane navigation. These beacons have reduced transmission power compared to GRAVES, but according to the numerical model I constructed, the meteor radar based on those transmitters could be feasible with the use of state-of-the-art radio components\urlnote{https://github.com/bolidozor/iPython-models/blob/master/VOR_beacons.ipynb}.
 
 \medskip
 \label[Bolidozor_VOR_airplanes]
@@ -117,9 +117,9 @@ To resolve this problem I decided to switch from GRAVES radar transmission to th
 
 Unfortunately, that approach requires a complete redesign of the existing signal processing and construction of the new SDR receiver. That receiver should be capable of receiving multiple VOR transmitters at once because the frequencies of VOR transmitters are allocated in such a way that neighboring transmitters have significantly different frequencies to enhance airplane navigation safety and reliability. 
 
-Therefore processing of the entire 10~MHz of signal bandwidth was required, instead of the previous 192 kHz and also including high dynamic range of signal input. It is because this wide bandwidth will be likely affected by the strong nearby signals like a reflection from the airplanes visible in Fig. \ref[Bolidozor_VOR_airplanes].
+Therefore, processing of the entire 10~MHz of signal bandwidth was required, instead of the previous 192 kHz, and also including a high dynamic range of signal input. It is because this wide bandwidth will likely be affected by the strong nearby signals, like a reflection from the airplanes visible in Fig.~\ref[Bolidozor_VOR_airplanes].
 
-These requirements for the receiver redesign were way beyond the initial project funding available; it is also beyond my manpower. Therefore I had steppily realized that the newly developed instruments needed to have commercial applications to avoid reliance on unreliable and discontinuous systems of scientific founding. As a result, I had to search for possible commercial applications that required the new instruments. That also explains why the majority of the newly developed instruments described in chapter \ref[instrumentation] are currently commercially available. For the case of the new radio receiver, I found the following areas of possible applications:
+These requirements for the receiver redesign were way beyond the initial project funding available; it is also beyond my manpower. Therefore, I had stepwise realized that the newly developed instruments needed to have commercial applications to avoid reliance on unreliable and discontinuous systems of scientific founding. As a result, I had to search for possible commercial applications that required the new instruments. That also explains why the majority of the newly developed instruments described in chapter \ref[instrumentation] are currently commercially available. For the case of the new radio receiver, I found the following areas of possible applications:
 
 \begitems
 * Meteor trail detection and localization
@@ -127,15 +127,14 @@ These requirements for the receiver redesign were way beyond the initial project
 * Atmospheric electrical and ionization events observation
 \enditems
 
-Luckily there arose an opportunity to cooperate with the CRREAT project whose main aim was the study of high-energy atmospheric events, where electromagnetic events in the atmosphere (electrometeors) observations fit well and at the same time are vital requirements. In the frame of the CRREAT project, I designed the new SDR receiver concept (described in section \ref[radio_receivers]) with all the mentioned applications in mind. That allows the construction of the receiver to be implemented with the significant assistance of other members of the CRREAT team or external collaborators and with the use of CRREAT funding.
+Luckily, there arose an opportunity to cooperate with the CRREAT project, whose main aim was the study of high-energy atmospheric events, where observations of electromagnetic events in the atmosphere (electrometeors) fit well and at the same time are vital requirements. In the frame of the CRREAT project, I designed the new SDR receiver concept (described in Section~\ref[radio_receivers]) with all the mentioned applications in mind. That allows the construction of the receiver to be implemented with the significant assistance of other members of the CRREAT team or external collaborators and with the use of CRREAT funding.
 
-But at the same time, there is a threat that the observation of lightning has similar issues as Bolidozor’s radio meteor observation because computing a location of lightning occurrence is possible, but there is a non-trivial task to verify that the result is relevant.
+At the same time, there is a threat that the observation of lightning has similar issues as Bolidozor’s radio meteor observation because computing a location of lightning occurrence is possible, but it is a non-trivial task to verify that the result is relevant.
 
-The importance to build the ability to verify the calculated results branched out in the broad range of different work packages, which needs to be solved to gather relevant information about lightning or more generally atmospheric electricity from multiple sources. I describe ground-based, airborne, and remote sensing instruments in detail in chapter \ref[instrumentation]. But for the overview of the tasks, firstly the lightning should be detected, the antenna should be calibrated, and the electric field needs to be measured at the same time. The \iid lighting also needs to be simultaneously captured on high-speed cameras for geometric triangulation etc.
+The importance of building the ability to verify the calculated results branched out in a broad range of different work packages, which need to be solved to gather relevant information about lightning or, more generally, atmospheric electricity from multiple sources. I describe ground-based, airborne, and remote sensing instruments in detail in Chapter~\ref[instrumentation]. But for the overview of the tasks, firstly, the lightning should be detected, the antenna should be calibrated, and the electric field needs to be measured at the same time. The \iid lighting also needs to be simultaneously captured on high-speed cameras for geometric triangulation, etc.
 That is why I need to design and operate the multiple measurement systems carried by cars on the ground and also in airborne vehicles presented and used in the following thesis.
 
-
-\chap Introduction
+\chap Introduction and Objectives
 
 \input introduction.tex
 
@@ -151,7 +150,7 @@ That is why I need to design and operate the multiple measurement systems carrie
 
 \input experiments.tex
 
-\chap[results] Summary of results
+\chap[results] Results, Fulfillment of Objectives, and Scientific Contributions
 
 \input results.tex
 
@@ -168,14 +167,14 @@ That is why I need to design and operate the multiple measurement systems carrie
 \app[SDR_receiver] SDR receiver block schematics
 \medskip
 \picw=8cm \cinspic ./img/RSMS_receiver.png
-\caption/f Block schematics of VLF and UHF receivers. The VLF receiver has the STP antenna connected directly to the ADC input.
+\caption/f Block schematics of UHF receiver with active antenna array elements.
 \medskip
 
 \app[LIGHTNING01A_trigger] Off-the-shelf lightning detection
 
-Initially, I investigated the lightning-triggering device based on the AMS AS3935 integrated circuit and used a coil antenna. The device meets the requirements of mobility and low power consumption. For measurements of coincidence between ionizing radiation and lightning aboard aircraft, for example, the compact physical size of the device is also a considerable advantage, therefore the solution seems to be promising.
-Then I compared the performance and reliability of the detector with the Blitzortung lightning detection network. I chose Blitzortung as a network that has a good deployment in central Europe where the mobile measurements were performed.
-Therefore two detection systems were selected for atmospheric discharge detection in this study: the device based on the AMS AS3935 integrated circuit and a coil antenna and the Blitzortung.org lightning detection network \cite[Blitzortung.org]. Both of  these lightning detection systems use radio emission reception at VLF. The devices differ in the design and realization of the antennas and implementation of the lightning detection algorithm.
+Initially, I investigated the lightning-triggering device based on the AMS AS3935 integrated circuit and used a coil antenna. The device meets the requirements of mobility and low power consumption. For measurements of coincidence between ionizing radiation and lightning aboard aircraft, for example, the compact physical size of the device is also a considerable advantage; therefore, the solution seems to be promising.
+Then I compared the performance and reliability of the detector with the Blitzortung lightning detection network. I chose Blitzortung as a network that has a good deployment in central Europe, where the mobile measurements were performed.
+Therefore, two detection systems were selected for atmospheric discharge detection in this study: the device based on the AMS AS3935 integrated circuit and a coil antenna, and the Blitzortung.org lightning detection network \cite[Blitzortung.org]. Both of these lightning detection systems use radio emission reception at VLF. The devices differ in the design and realization of the antennas and implementation of the lightning detection algorithm.
 The device equipped by AMS AS3935 uses LIGHTNING01A MLAB module \cite[LIGHTNING01A] with a coreless coil antenna connected as a resonant LC circuit (Figure \ref[DIVISEK01_PCB]).  The resonant frequency of the coil antenna (MA5532-AE) with temperature-insensitive C0G ceramic capacitors is matched at 500 kHz ±3.5~\%. This strict matching requirement is required by the IC datasheet \cite[ams_as3935_datasheet] and is quite constraining and effectively limits the possible application of the circuit.
 According to the manufacturer's description, the integrated circuit processes signals based on the signal level threshold detected by a comparator. If the comparator triggers, the proprietary signal processing unit algorithmically analyzes the signal. The output of the signal processing algorithm implemented in the AS3935 circuit consists of a classification of signal relevance: lightning discharge (8), artificial disturbance (4), or high noise level (1). The algorithm also determines the approximate distance and the estimated energy of the lightning discharge based on signal shape.
 The internal registers configuration for a measurement described below was set to “outdoor mode” by the AFE_GB control register. All other registers are kept with implicit values.
@@ -201,9 +200,9 @@ A block diagram of the interconnections is shown in Figure \ref[DIVISEK01_block_
 \clabel[DIVISEK01_block_diagram]{AS3935 based detector block diagram}
 \medskip
 
-The time response of the lightning detector was tested in the laboratory before field measurements using a power signal generator with a wire loop of 60 mm diameter. The wire loop was placed at a distance of 30 mm from the antenna. The interrupt output was captured by an oscilloscope. Response time to a rectangular signal was 93 ms (±1 ms). The rectangular signal pulse was classified by the internal algorithm as a disturbance  (“DIVIS4” output in the log file). The response time to the received signal was found not to be constant for each signal. Some pulses were classified as lightning (“DIVIS8” in the log file) by the proprietary algorithm where the response time was only a few milliseconds. Due to the time delay introduced by the algorithm, the device could be potentially used for triggering other measuring devices by using a pretrigger recording buffer of maximal algorithm latency plus lightning duration. For a lightning event duration of less than 900 ms, a one-second pre-trigger buffer was found to be suitable.
+The time response of the lightning detector was tested in the laboratory before field measurements using a power signal generator with a wire loop of 60 mm diameter. The wire loop was placed at a distance of 30 mm from the antenna. The interrupt output was captured by an oscilloscope. Response time to a rectangular signal was 93 ms (±1 ms). The rectangular signal pulse was classified by the internal algorithm as a disturbance  (“DIVIS4” output in the log file). The response time to the received signal was found not to be constant for each signal. Some pulses were classified as lightning (“DIVIS8” in the log file) by the proprietary algorithm, where the response time was only a few milliseconds. Due to the time delay introduced by the algorithm, the device could be potentially used for triggering other measuring devices by using a pretrigger recording buffer of maximal algorithm latency plus lightning duration. For a lightning event duration of less than 900 ms, a one-second pre-trigger buffer was found to be suitable.
 
-The proposed system, powered by one LS33600 cell, can operate continuously for five days. Power consumption is dominated by the GPS receiver. The lifetime of the system without GPS is approximately three months. For measurements in the field, the instrument is mounted on the roof of a measurement car inside a waterproof plastic box as shown in figure \ref[DIVISEK01_Deployment].
+The proposed system, powered by one LS33600 cell, can operate continuously for five days. The GPS receiver dominates power consumption. The lifetime of the system without GPS is approximately three months. For measurements in the field, the instrument is mounted on the roof of a measurement car inside a waterproof plastic box as shown in figure \ref[DIVISEK01_Deployment].
 
 \medskip
 \picw=15cm \cinspic ./img/DIVISEK01_Deployment.png
@@ -212,13 +211,13 @@ The proposed system, powered by one LS33600 cell, can operate continuously for f
 
 \sec Blitzortung network
 
-The second investigated option of triggering was the use of the Blitzortung.org network. Blitzortung.org is a World-Wide Low-Cost Community-Based TDOA Lightning Detection and Lightning Location Network \cite[Blitzortung, Blitzortung.org]. Blitzortung.org collects signals that are received by a combination of  multiple magnetic loop antennas and electric monopoles deployed at network stations \cite[Blitzortung.org]. The configuration, implementation, and sensitivity of stations are not uniform. There are multiple causes for these differences. The network members have different hardware versions, and different quality of maintenance, and the antennas are mounted at different locations with different orientations \urlnote{https://www.blitzortung.org/en/station_list}.
+The second investigated option of triggering was the use of the Blitzortung.org network. Blitzortung.org is a World-Wide Low-Cost Community-Based TDOA Lightning Detection and Lightning Location Network \cite[Blitzortung, Blitzortung.org]. Blitzortung.org collects signals that are received by a combination of multiple magnetic loop antennas and electric monopoles deployed at network stations \cite[Blitzortung.org]. The configuration, implementation, and sensitivity of stations are not uniform. There are multiple causes for these differences. The network members have different hardware versions, and different quality of maintenance, and the antennas are mounted at different locations with different orientations \urlnote{https://www.blitzortung.org/en/station_list}.
 
 Such variance of network parameters could be considered as beneficial because it increases sensitivity to different lightning signal types. The most common implementation of the magnetic loop antenna in Blitzortung.org network sites consists of several loops of shielded coaxial cable, where the inner conductor is used for the magnetic loop itself, and one end of the shield is connected to the antenna amplifier ground. The antenna is not tuned to the specific resonant frequency. However, the goal of the station operators is to maintain the highest achievable resonant frequency \cite[Blitzortung.org].
 
-The Blitzortung.org controller outputs a 256-byte signal fragment covering the pulse with a time resolution of 1.95~$\mu$s along with the timestamp of the trigger and metadata of the station location, GPS signal quality, and validity of data. Detailed signal processing is carried out on the network server. The final result of the data processing in the Blitzortung network is the approximate location of the sources of each captured pulse. The signal processing is carried out in two steps. In the first step, a starting point is computed by a time of arrival algorithm \cite[TOALightningLocationRetrievalonSphericalandOblateSpheroidalEarthGeometries] from the first four-time stamps corrected for time of group arrival \cite[TOGA].  In the second step, a numerical  method  is  used  to  minimize  the  sum  of squared  distances  to  the hyperbolic curves \cite[Blitzortung.org].
+The Blitzortung.org controller outputs a 256-byte signal fragment covering the pulse with a time resolution of 1.95~$\mu$s, along with the timestamp of the trigger and metadata of the station location, GPS signal quality, and validity of data. Detailed signal processing is carried out on the network server. The final result of the data processing in the Blitzortung network is the approximate location of the sources of each captured pulse. The signal processing is carried out in two steps. In the first step, a starting point is computed by a time of arrival algorithm \cite[TOALightningLocationRetrievalonSphericalandOblateSpheroidalEarthGeometries] from the first four time stamps corrected for time of group arrival \cite[TOGA].  In the second step, a numerical method is used to minimize the sum of squared distances to the hyperbolic curves \cite[Blitzortung.org].
 
-To use Blitzortung.org as a recording trigger both the processed data from the server and the use of the station itself were investigated. The usage of the Blitzortung station hardware was relatively quickly abandoned because the station is not constructed to trigger lightning signals in proximity to the thunderstorm. Therefore the station usually reaches something like an “overage” which is called an “interference mode” in Blitzortung.org terminology \urlnote{https://info.lightningmaps.org/doku.php?id=en:hardware:red:operation:interference}. The practical result is that the station is not able to generate relevant triggers for lightning. Instead, it triggers very frequently. Sometimes the opposite situation arises -- the Blitzortung.org station can detect lightning far away but is not able to trigger lightning in a near vicinity. The situation is dependent probably on the storm development and the terrain. However, in both cases, the station trigger output is not usable for triggering other devices. There is a possibility that the situation could be resolved by changing the Blitzortung station firmware, unfortunately, the firmware is closed source, similar to the exact implementation of location algorithms used on the servers.
+To use Blitzortung.org as a recording trigger, both the processed data from the server and the use of the station itself were investigated. The usage of the Blitzortung station hardware was relatively quickly abandoned because the station is not constructed to trigger lightning signals in proximity to the thunderstorm. Therefore the station usually reaches something like an “overage” which is called an “interference mode” in Blitzortung.org terminology \urlnote{https://info.lightningmaps.org/doku.php?id=en:hardware:red:operation:interference}. The practical result is that the station is not able to generate relevant triggers for lightning. Instead, it triggers very frequently. Sometimes the opposite situation arises -- the Blitzortung.org station can detect lightning far away but is not able to trigger lightning in the near vicinity. The situation is probably dependent on the storm's development and the terrain. However, in both cases, the station trigger output is not usable for triggering other devices. There is a possibility that the situation could be resolved by changing the Blitzortung station firmware, unfortunately, the firmware is closed source, similar to the exact implementation of location algorithms used on the servers.
 
 \sec Comparison of different triggering methods
 
@@ -228,7 +227,7 @@ During the triggering method development, the devices were regularly tested by a
 \medskip
 \clabel[lightning_times]{Lightning detection testing situation map}
 \picw=15cm \cinspic ./img/lightning_times.png
-\caption/f The position and timing of a thunderstorm at Borkovice. The circles are positions of lightning registered by the Blitzortung network. Color depends on the relative time of lightning after a measurement car stops. The car position is marked as a blue cross.
+\caption/f The position and timing of a thunderstorm at Borkovice. The circles are positions of lightning registered by the Blitzortung network. Color depends on the relative time of lightning after the measurement car stops. The car position is marked as a blue cross.
 \medskip
 
 
@@ -238,7 +237,7 @@ The timestamp of lightning detected by LIGHTNING01A was recorded with a 1 s accu
 \medskip
 \clabel[detection_timeseries]{Comparison of Blitzortung.org with LIGHTNING01A}
 \picw=15cm \cinspic ./img/detection_timeseries.png
-\caption/f Detections of the two studied methods. For Blitzortung.org there are detections labeled as BLITZ, the vertical axis corresponds to the distance between the Blitzortung.org location and the fixed position of the LIGHTNING01A deployment. Vertical lines represent all LIGHTNING01A’s detections (DIVIS48). Triangles point to detections recognized by LIGHTNING01A as lightning (DIVIS8). For LIGHTNING01A the vertical axis is not relevant because the sensor does not provide a precise distance.
+\caption/f Detections of the two studied methods. For Blitzortung.org, there are detections labeled as BLITZ; the vertical axis corresponds to the distance between the Blitzortung.org location and the fixed position of the LIGHTNING01A deployment. Vertical lines represent all LIGHTNING01A’s detections (DIVIS48). Triangles point to detections recognized by LIGHTNING01A as lightning (DIVIS8). For LIGHTNING01A the vertical axis is not relevant because the sensor does not provide a precise distance.
 \medskip
 
 \topinsert
@@ -254,7 +253,7 @@ The timestamp of lightning detected by LIGHTNING01A was recorded with a 1 s accu
 {\bf DIVIS4}  & 110 & 0.173 & 0.491 & 0.527 & 0.573 & 1.000 & 1.000 & 0.018  \cr
 {\bf DIVIS8}  & 18  & 0.111 & 0.222 & 0.278 & 0.333 & 1.000 & 0.111 & 1.000 \cr
 }
-\caption/t Table of coincidence rates among detectors. The presented values are the proportion of detections in the row-labeled detector for which there is at least one coincident detection of the column-labeled detector. The Blitzortung network is represented by virtual detectors BLITZ5, BLITZ10, BLITZ20, and BLITZ30, which are considered triggered upon registered lightning in a 5 km, 10 km, 20 km, and 30 km radius respectively around the LIGHTNING01A deployment. DIVIS48, DIVIS4, and DIVIS8 are the LIGHTNING01A detector with different filtering of candidate detections, with DIVIS48 having the most lenient filtering. The count represents the absolute number of events measured for the detector/conditions in each row.
+\caption/t Table of coincidence rates among detectors. The presented values are the proportion of detections in the row-labeled detector for which there is at least one coincident detection of the column-labeled detector. The Blitzortung network is represented by virtual detectors BLITZ5, BLITZ10, BLITZ20, and BLITZ30, which are considered triggered upon registered lightning in a 5 km, 10 km, 20 km, and 30 km radius respectively around the LIGHTNING01A deployment. DIVIS48, DIVIS4, and DIVIS8 are the LIGHTNING01A detectors with different filtering of candidate detections, with DIVIS48 having the most lenient filtering. The count represents the absolute number of events measured for the detector/conditions in each row.
 \vss}\pdfrestore}\vskip-\hsize \vskip\vsize
 \endinsert
 
@@ -265,28 +264,28 @@ The timestamp of lightning detected by LIGHTNING01A was recorded with a 1 s accu
 \medskip
 
 
-The records produced by LIGHTNING01A allow for recording of the absolute time of the detected event within a ±1 s window. As a basic evaluation of LIGHTNING01A’s fitness to trigger other measurement instruments, where coincidences were counted  among LIGHTNING01A detections and detections from Blitzortung.org in multiple predefined radii. The coincidence rates obtained are presented in table \ref[t1]. Events were considered coincident if they fell within a ±1.5 s time window. This value for the window width was selected such that the absolute time uncertainty of LIGHTNING01A records, the latency of LIGHTNING01A response, and the duration of lightning phenomena, which may conceivably be in the order of hundreds of milliseconds, were accounted for. For window widths in the range of ±1.2 s to ±2.0 s, the coincidence rate between any pair of detectors does not differ by more than 0.05 from the table value, which corresponds to the window width of ±1.5 s.
+The records produced by LIGHTNING01A allow for recording of the absolute time of the detected event within a ±1s window. As a basic evaluation of LIGHTNING01A’s fitness to trigger other measurement instruments, where coincidences were counted among LIGHTNING01A detections and detections from Blitzortung.org in multiple predefined radii. The coincidence rates obtained are presented in Table~\ref[t1]. Events were considered coincident if they fell within a ±1.5 s time window. This value for the window width was selected such that the absolute time uncertainty of LIGHTNING01A records, the latency of LIGHTNING01A response, and the duration of lightning phenomena, which may conceivably be in the order of hundreds of milliseconds, were accounted for. For window widths in the range of ±1.2 s to ±2.0 s, the coincidence rate between any pair of detectors does not differ by more than 0.05 from the table value, which corresponds to the window width of ±1.5 s.
 
 For illustration, those of Blitzortung.org detections that were coincident with LIGHTNING01A detections were picked out, and these are plotted on a map in figure \ref[detection_coincidences]. It should be noted that none of the systems compared here has 100\% detection efficiency \cite[Blitzortung_evaluation].
 
 If Blitzortung.org is postulated as a reference system, it can be seen that LIGHTNING01A (see column DIVIS48 in the table) covers 94.7\% of Blitzortung detections in the range of 5 km (BLITZ5) and more than 79\% in the range of 30 km (see the line BLITZ30 in the table). The detection of long-distance lightning is possibly influenced by the directional characteristics of the antenna. The sensitivity of the antenna (measured in the number of coincident lightning) is higher in the direction perpendicular to the antenna orientation (see figure \ref[detection_coincidences]; compare the sector around 49.0° N, 14.3° E with 49.3° N, 14.5° E).
 
 It can be seen from table \ref[t1] that the proprietary lightning detection algorithm implemented in the AMS chip, which is supposed to distinguish lightning from man-made disturbance, cannot be relied upon. Only 36.8\% of lightning detected by Blitzortung.org are considered as lightning by LIGHTNING01A (DIVIS8). Therefore, all DIVIS8 and DIVIS4 events (DIVIS48) have to be considered. However, 42.7\% of DIVIS4 detections are not registered by Blitzortung at distances up to 30 km. These are likely to be false detections or detections beyond the evaluated range of 30 km.
-Blitzortung.org network and LIGHTNING01A detector differ not only in sensitivity, but also in usability due to issues of network connectivity, power requirements, device size, and noise filtering capabilities. For most of these parameters, the LIGHTNING01A device was found only partially suitable as an electromagnetic lightning detector used in this work for terrain measurement. Blitzortung.org is designed to filter noise signals (false detections) by a network of detectors. Consequently, Blitzortung.org gives a useful trigger after the signal has been processed by a network server. It is done in seconds and it is too slow for mobile measurement purposes. LIGHTNING01A has limited ability to reject autonomously noise signals which is important to avoid filling a memory of other instruments by data captured by false trigger signals, but this ability is not sufficiently robust.
+The Blitzortung.org network and the LIGHTNING01A detector differ not only in sensitivity but also in usability due to issues of network connectivity, power requirements, device size, and noise filtering capabilities. For most of these parameters, the LIGHTNING01A device was found only partially suitable as an electromagnetic lightning detector used in this work for terrain measurement. Blitzortung.org is designed to filter noise signals (false detections) by a network of detectors. Consequently, Blitzortung.org gives a useful trigger after the signal has been processed by a network server. It is done in seconds, and it is too slow for mobile measurement purposes. LIGHTNING01A has limited ability to autonomously reject noise signals, which is important to avoid filling the memory of other instruments with data captured by false trigger signals, but this ability is not sufficiently robust.
 
-However, the findings looked initially promising, because LIGHTNING01A is a lightweight, highly mobile, battery-operated lightning detection system based on the AS3935 integrated circuit  with possible application of radiation measurement in thunderstorms on board aircraft.
+However, the findings looked initially promising, because LIGHTNING01A is a lightweight, highly mobile, battery-operated lightning detection system based on the AS3935 integrated circuit with possible application of radiation measurement in thunderstorms on board aircraft.
 
 This LIGHTNING01A is suitable only for triggering terrain measurement devices (lightning discharge mapping device, ionizing radiation detectors, electric field measurement, etc.) with the presumption that triggered devices are capable of recording the data in intervals at least from one second before the trigger to one second after the trigger, which is caused by the uncertainty of lightning trigger output from the AS3935 chip.
 
-Additionally, for applications like ionizing radiation measurements, the sensitivity is considered too high, since lightning more than 10 km away from the ionizing radiation measurement venue is not of interest. The sensitivity of the AS3935 device can be decreased by increasing the level of the lightning detection threshold. This can be done by setting the internal SREJ or WDTH registers of the AS3935, as shown in figure 20 or 21 in the datasheet \cite[AS3935_datasheet], but this also affects the overall sensitivity of the device. Therefore, the false negative rate for near lightning is increased.
+Additionally, for applications like ionizing radiation measurements, the sensitivity is considered too high, since lightning more than 10 km away from the ionizing radiation measurement venue is not of interest. The sensitivity of the AS3935 device can be decreased by increasing the level of the lightning detection threshold. This can be done by setting the internal SREJ or WDTH registers of the AS3935, as shown in figures 20 or 21 in the datasheet \cite[AS3935_datasheet], but this also affects the overall sensitivity of the device. Therefore, the false negative rate for near lightning is increased.
 
 Only a slight directional sensitivity of the antenna was observed. This could theoretically be compensated by pointing the AS3935’s antenna (or the whole measurement car) towards the thunderclouds; however, for close lightning within a 5 km radius, this effect is negligible.
 
-\app[UHF_signal_receiver] UHF signal receiver
+\app[UHF_signal_receiver] UHF receiver with QFH array
 
 The construction of the UHF receiver is designed in a way that enables a phase processing of the signal from the antenna array with the aim of future detailed mapping of the lightning \urlnote{https://github.com/UniversalScientificTechnologies/RSMS01}. However, in the case of this experiment, only the scalar envelope of the radio signal is considered.
 
-The UHF receiver operates approximately in the 370-406~MHz band, exact tuning depends on the local noise situation within the observation area. The receiver has 10~MHz bandwidth. The signal is received by an array of four QFH antennas mounted in a square-like configuration on the roof platform of the measuring car as is shown in the photos in Figure \ref[UHF-QFH_receiver]. The signal from each antenna is directly downconverted by an RF mixer to I and Q analog channels. Each channel is sampled by a 12-bit analog-to-digital converter with 10~MS/s. The block diagram of the receiver is shown in Appendix \ref[SDR_receiver].
+The UHF receiver operates approximately in the 370-406~MHz band; exact tuning depends on the local noise situation within the observation area. The receiver has a 10~MHz bandwidth. The signal is received by an array of four QFH antennas mounted in a square-like configuration on the roof platform of the measuring car, as is shown in the photos in Figure \ref[UHF-QFH_receiver]. The signal from each antenna is directly downconverted by an RF mixer to I and Q analog channels. Each channel is sampled by a 12-bit analog-to-digital converter with 10~MS/s. The block diagram of the receiver is shown in Appendix \ref[SDR_receiver].
 
 \medskip
 \clabel[UHF-QFH_receiver]{UHF lightning signal receiver and its components}
@@ -300,15 +299,16 @@ The UHF radio receiver is triggered by an external trigger (coming from the VLF 
 \medskip
 \clabel[CRREAT_CAR0]{Measuring CAR0 with instruments mounted on the roof platform}
 \picw=15cm \cinspic ./img/CAR0_instrumentation.jpg
-\caption/f Measuring CAR0 with an all-sky high-speed camera and an array of QFH antenna mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram].
+\caption/f Measuring CAR0 with an all-sky high-speed camera and an array of QFH antennas mounted on the roof platform. Other cars were equipped similarly. The differences in instrumentation are depicted in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and \ref[CRREAT_CAR2_diagram].
 \medskip
 
 
 The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof \ref[CRREAT_CAR0]. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. 
 
-Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity. The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth shown in fig. \ref[input_RF_filter]. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, as is shown in fig. \ref[QFH_antenna_radiation_pattern], which is exactly the situation of lightning detection. That technical feature at the same time allows the direct processing of the signal from the antenna as quadrature I/Q data.
+Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity. The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth shown in f
+g. \ref[input_RF_filter]. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, as is shown in Fig.~\ref[QFH_antenna_radiation_pattern], which is exactly the situation of lightning detection. That technical feature, at the same time, allows the direct processing of the signal from the antenna as quadrature I/Q data.
 
-The phase difference of the QFH antenna is extensively exploited in the UHF receiver construction because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity), and loop ends connected to the active analog fronted PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered to be a 40-50 Ω port. Therefore two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case, the QHA antenna has two loops with 100 Ω differential output ports with a phase shift 90°.
+The phase difference of the QFH antenna is extensively exploited in the UHF receiver construction because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity), and loop ends connected to the active analog front-end PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered to be a 40-50 Ω port. Therefore, two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case, the QHA antenna has two loops with 100 Ω differential output ports with a phase shift of 90°.
 
 \medskip
 \clabel[QFHMIX_block_schematics]{Block schematics of the UHF active antenna front-end}
@@ -318,7 +318,7 @@ The phase difference of the QFH antenna is extensively exploited in the UHF rece
 
 From that perspective, the QHA antenna itself functions the same as an I/Q demodulator. The signal on each port has a 90° signal phase shift in relation to the next port, and QFHMIX01 is actually a UHF analog front-end. Internally, it has two separate signal paths, one for the I signal and one for the Q signal. Each path contains an LNA, mixer, and ADC buffer. The front end also includes a local oscillator amplifier (clock buffer) and power stabilizers.
 
-In total, the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal, and two 100Ω differential outputs for I and Q signals to ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end are depicted in fig.\ref[QFHMIX_block_schematics].
+In total, the PCB of the QFHMIX01 module has two differential 100Ω input ports for the antenna, one differential LVPECL input for the LO signal, and two 100Ω differential outputs for I and Q signals to the ADC. It should be noted that LVPECL logic was selected for LO to minimize electromagnetic interference radiated back in antenna loops.  The block schematics of the QFHMIX01 active antenna front-end are depicted in Fig.~\ref[QFHMIX_block_schematics].
 
 \medskip
 \clabel[QFH_antenna_radiation_pattern]{QFH antenna radiation pattern}
@@ -335,15 +335,15 @@ The LNA structure contains the blocks concatenated from the antenna input port t
 \caption/f Monte Carlo analysis of two RF filters. a) The filter placed immediately after the antenna is a two-stage filter designed to maintain low insertion loss. b) The filter located after the first amplifier is a three-stage filter designed to limit the propagation of out-of-band signals further into the receiver. Both filters are designed using discrete E24 series components, which effectively minimize the possibility of detuning due to vibrations in mobile applications and enable the filters to achieve very compact sizes.
 \medskip
 
-The first gain block is based on the MPGA-105 selected for minimal noise figure and high third-order intercept point, specifically, it has NF: 1.8dB, gain: 14.6 dB, and OIP3: 35.8 dB. The second filter is the band pass filter.  The second gain block uses the MGVA-63 selected for acceptable noise figure and high gain while maintaining  a wide dynamic range, it has NF: 3.6dB,  gain: 21.5 dB, and OIP3: 34.3 dB.  This sequence of components gives an RF path with approximately NF: 4.8 dB and gain: 32 dB.
+The first gain block is based on the MPGA-105 selected for minimal noise figure and high third-order intercept point, specifically, it has NF: 1.8dB, gain: 14.6 dB, and OIP3: 35.8 dB. The second filter is the band-pass filter.  The second gain block uses the MGVA-63 selected for acceptable noise figure and high gain while maintaining a wide dynamic range; it has NF: 3.6dB,  gain: 21.5 dB, and OIP3: 34.3 dB.  This sequence of components gives an RF path with approximately NF: 4.8 dB and gain: 32 dB.
 
 The purpose of the mixer is to convert received signals into the ADC sampling bandwidth. The mixer is based on the AD8343 from Analog Devices. The local oscillator input of the mixer is connected to the clock buffer. The signal output is connected to the ADC buffer.
 
-A clock buffer is needed for the conditioning of local oscillator signals distributed by the antenna cabling from the UHF receiver base station.  The used clock buffer is the Si53322 low-jitter dual output. Each output is used to feed Q and I line mixers separately.
+A clock buffer is needed for the conditioning of local oscillator signals distributed by the antenna cabling from the UHF receiver base station.  The used clock buffer is the Si53322 low-jitter dual output. Each output is used to feed the Q and I line mixers separately.
 
-The I/Q signals, which are on the mixer output, need to be connected to the ADC input. To avoid aliasing on ADC it is necessary to pass signals through the LPF to cut off the higher frequencies. For that case, a 5~MHz bandwidth LT6604-5 from Analog Devices was chosen. It is also an amplifier for I/Q signals, which allows direct distribution by the UTP cable from the UHF RF front end to the base station inside the car. The output of the amplifier is the 100~Ω differential pair, which perfectly matches a twisted pair from the UTP CAT 6 cable.
+The I/Q signals, which are on the mixer output, need to be connected to the ADC input. To avoid aliasing on ADC, it is necessary to pass signals through the LPF to cut off the higher frequencies. In that case, a 5~MHz bandwidth LT6604-5 from Analog Devices was chosen. It is also an amplifier for I/Q signals, which allows direct distribution by the UTP cable from the UHF RF front end to the base station inside the car. The output of the amplifier is the 100~Ω differential pair, which perfectly matches a twisted pair from the UTP CAT 6 cable.
 
-PCB is produced from the 1.6mm thick FR4. All components, excluding connectors, are SMD mounted from a single side. The RF blocks are carefully separated into different zones to avoid cross-talk. The RF parts are soldered on the bottom side of the PCB. The top side is a shielding GND layer with some signal jumpers and power voltage tracks.
+PCB is produced from the 1.6mm thick FR4. All components, excluding connectors, are SMD mounted from a single side. The RF blocks are carefully separated into different zones to avoid crosstalk. The RF parts are soldered on the bottom side of the PCB. The top side is a shielding GND layer with some signal jumpers and power voltage tracks.
 
 The front-end outputs I/Q signals, local oscillator signal, and power supply are connected to the one IDC381-8-110 punch-down KRONE connector on the top side of the PCB. This connector is the main interface between the RF front end and the receiver base unit mounted in the car. 
 
@@ -358,6 +358,297 @@ For verification of antenna radiation pattern, the newly designed unmanned gyrop
 \medskip
 
 It is worth noting that most of the available RF components were chosen to ensure that the design can operate across a wide range of frequencies without significant modifications. Specifically, to retune to a substantially different frequency, it is necessary to replace the conductive structure of the antenna loops and retune the input RF filters in the QFHMIX01. This approach allows for the easy assembly of a system that can operate anywhere in the range of 40 MHz to 1 GHz. Additionally, these changes can be implemented on existing manufactured units, allowing the same equipment to be used in subsequent experiments without substantial investments.
+
+\app The design of a stratospheric sensing balloon
+
+Based on the described experiences, the concept of a universal avionics called TF-ATMON emerged. That technology makes it possible to connect different types of payloads and carry out various atmospheric measurements. Furthermore, it provides basic services such as power supply, time, position, and 3D orientation information to the payload instruments. That data is recorded in parallel with quantities that affect many types of measurements, including temperature, pressure, humidity, magnetic field, and acceleration. At the same time flight computer provides the services for the payload to record data from experiments in a common log file.
+
+Therefore, the TF-ATMON onboard stratospheric balloons have become an extremely useful tool for testing instruments like cosmic radiation detectors and dosimeters at high altitudes.
+
+The schematic diagram of the avionics hardware is summarized in the figure \ref[avionics_schematics].
+
+\medskip
+\clabel[avionics_schematics]{FIK flight avionics}
+\picw=15cm \cinspic ./img/avionics_block_schematics.pdf
+\caption/f The schematic diagram of the new avionics concept used in FIK flights.
+\medskip
+
+The concept, where the balloon-specific avionics are almost completely separated from the experiment set of detectors, simplified the realization of the next balloon flights. It reduced the complexity of connecting different types of detectors and, at the same time, improved the integrity of supplementary data measurements. Overall, the new features can be summarized as follows:
+
+\begitems
+* Easy implementation of different payloads
+* Redundant telemetry links
+* Gondola orientation and spatial position tracking and logging
+* Reliable IMU sensor processing and calibration
+* Possible use of relatively high-power consumption payloads
+* Pre-flight continuous charging as an option
+* Power monitoring and uptime calculation relevant to the actual temperature and available energy level
+* Real-time pre-flight payload diagnostic
+\enditems
+
+The detailed documentation of the used electronics blocks can be found under the following names: TFGPS01, TFSIK01, TFHT01, TFLORA01. It should be noted that the TFSIK modem has been designed after the long use of the MLAB electronic module ISM01, which was its predecessor. In both cases, the SiK firmware used on the balloon has been altered to one-way (downlink) communication (therefore, the modem on the balloon is not able to receive) for safety reasons.
+
+In the case of FIK-5 and FIK-6 flights that served as the test flights for the novel approach using TF-ATMON technology, the payload was not fully relied on yet. All the detectors thus had their SD cards for data recording, and some even had their power supply; therefore, the payload weight was higher than theoretically required in case of full use of TF-ATMON, and some lift was wasted. This situation originated in the conservative flight plan, which required a successful log and function of the payload even in the failure of the new method.
+
+\secc Implementation of Atmospheric Radiation Detectors
+
+The payload, for example, FIK-6 flight, contained TF-ATMON and three different types of ionizing radiation detectors already mentioned in \ref[instrumentation] section: SPACEDOS with a silicon PIN diode sensor, AIRDOS-C with a scintillation crystal and a silicon photomultiplier, and a G-M tube. The total payload mass was 2 kg.
+
+SPACEDOS is a lightweight dosimeter intended for space applications and measurements onboard spacecraft. The detector has been described in \cite[10.1093/rpd/ncac106]. AIRDOS-C is a scintillation detector with a small crystal. The detector has been described in \cite[10.1093/rpd/ncac105]. The G-M tube STS-5 was used in the Geiger–Müller counter. This detector is capable of registering the flux only and is included because it has a high detection volume, which allows good resolution in flux. All detectors, together with other sensors and the TF-ATMON system, were put inside a polystyrene box.
+
+\medskip
+\clabel[FIK-6_setup]{FIK-6 flight balloon setup}
+\picw=8cm \cinspic ./img/FIK-6_experiment_setup.png
+\caption/f FIK-6 experiment setup using the Hwoyee Weather Balloon 1600.
+\medskip
+
+\secc Results from the balloon flights
+
+The TF-ATMON reliably recorded temperature, air pressure, humidity, and radiation characteristics as histograms of deposited energy of radiation events from all three radiation sensors in the gondola, as is shown in Figure \ref[FIK-6_RAW_data].
+
+\medskip
+\clabel[FIK-6_RAW_data]{FIK-6 flight recorded data}
+\picw=15cm \cinspic ./img/FIK-6_RAW_data.png
+\caption/f Raw data measured during the flight. From top to bottom: temperature near the scintillation crystal, air pressure inside the box of the crystal, temperature inside the gondola, relative humidity inside the gondola, counts of radiation events per 10 seconds counted by the scintillator, the silicon detector, and the G-M counter, barometric altitude, and altitude from GNSS. The barometric altitude was calculated using the International Standard Atmosphere Model 1976 \cite[us_standard_atmosphere_1976].
+\medskip
+
+\medskip
+\clabel[FIK-6_telemetry]{Acceleration and Angular Speed balloon telemetry}
+\picw=15cm \cinspic ./img/FIK-6_metadada.png
+\caption/f Acceleration and angular speed in the axis perpendicular to the ground combined with ionizing radiation flux measured by the silicon PIN diode detector.
+\medskip
+
+Figure \ref[FIK-6_telemetry] demonstrates the importance of telemetry data from the TF-ATMON system during measurement processing. The graphs show an increase in the response of the silicon ionizing radiation detector at the times of take-off, burst, and landing when there was a rapid increase in mechanical stress. The effect is caused by the microphone effect of the silicon detector circuit. A similar situation is observable during the balloon descent, where there are considerable vibrations, rotations, and rapid changes in the acceleration of the gondola. The increase in relative humidity between radiation detectors is also observable in fig \ref[FIK-6_RAW_data]. All of these conditions may affect the atmospheric observations for some types of instruments; they have to be compensated.  Due to the telemetric system \iid TF-ATMON compensation becomes possible. TF-ATMON enables data recording, pre-flight instruments check, and their monitoring during flight. At the same time thanks to the availability of different communication interfaces to the avionics, the use of various payload detectors integration is simplified.
+
+The technology also improves the possibilities of the fast localization of a balloon gondola after its landing.  The rescue team followed the balloon along the whole flight trajectory. The level of tracking precision and prediction allowed some participants of the rescue team to see the gondola touchdown visually. Therefore, the gondola was successfully rescued within a few minutes after touchdown (Figure \ref[FIK-6_rescue_team]). It is therefore possible to carry out even experiments requiring a short time to recover the gondola after the flight.
+
+% Vložený obrázek s popisekem vedle
+%\medskip
+%\clabel[FIK-6_rescue_team]{Gondola recovery, based on trajectory prediction}It is, therefore, possible to carry out even experiments requiring a short time to recover the gondola after the flight.
+%\hbox to\hsize{\picw=.4\hsize \inspic ./img/FIK-6_rescue_team.png
+%  \hfil\vbox{\hsize=.55\hsize \iindent=0pt \emergencystretch=2em
+%    \caption/f A screenshot from HabHub tracker. The CRREAT measurement vehicles, serving as stratospheric balloon chase cars, are equipped with telemetry receivers at the landing site. They are prepared for immediate gondola recovery, thanks to precise touchdown location predictions.
+%   \par}}
+%\medskip
+
+% Původně vložený obrázek s popisekem pod ním
+\medskip
+\clabel[FIK-6_rescue_team]{Gondola recovery, based on trajectory prediction}
+\picw=8cm \cinspic ./img/FIK-6_rescue_team.png
+\caption/f A screenshot from HabHub tracker. The CRREAT measurement vehicles, serving as stratospheric balloon chase cars, are equipped with telemetry receivers at the landing site. They are prepared for immediate gondola recovery, thanks to precise touchdown location predictions.
+\medskip
+
+By using the statistical methods, a functional dependence of ionizing radiation flux on altitude was found. We have demonstrated that this dependence can be described by a log-normal distribution, excluding the influence of ionizing radiation originating from the Earth's crust. These results are published in the articles \cite[10.1093/rpd/ncac299] and \mycite[j2]. By processing the data, the graph of ionizing radiation versus altitude (Fig. \ref[R-P_maximum]) was obtained. It shows that the measured altitude of the Regener-Pfotzer maximum was around 19 km above sea level for all detector types.
+
+
+
+
+\app Storm-resistant Autogyro design
+
+There was no suitable, commercially available unmanned autogyro to perform atmospheric measurements in stormy conditions. The situation resulted in the design of TF-G2\urlnote{https://docs.thunderfly.cz/instruments/TF-G2} autogyro, which I developed in cooperation with the ThunderFly team. This step represents a significant advancement in the design and application of UAV technology for atmospheric research, specifically targeting the challenging conditions presented by thunderstorms.
+
+The TF-G2 autogyro's airframe utilizes a lightweight yet robust and high-impact strength 3D printed material for the airframe and a unique rotor design, which enables rotor blade shape modification. This technological decision gives the ability to easily replace parts, which is useful to quickly resolve damage, as flights near thunderclouds often result in mishaps.
+
+Internal components are protected from the weather by a waterproof fabric cover, which enables easy service access and supports equipment variability with its shape adaptability. Furthermore, the airframe's design allows easy access to onboard instruments and maintenance. This capability is achieved by rack-style mount options, where the payload could be easily fixed to a grid of screw holes, which can be seen in figure \ref[TF-G2_hangar].
+
+\medskip
+\clabel[TF-G2_hangar]{TF-G2 without rain cover}
+\picw=15cm \cinspic ./img/TF-G2_hangar.png
+\caption/f A development version of TF-G2 autogyro, waterproof fabric cover removed. The 3D-printed parts could be seen according to the grid of screw holes used for mounting of the experimental equipment.
+\medskip
+
+The avionics design is largely identical to the avionics used in already described stratospheric balloon flights, with differences primarily in the power supply, because the autogyro includes components for propulsion, such as an electric motor and its electronic speed controller (\glref{ESC}). To ensure robust pre-flight control, the ESC provides status information, including energy drawn from batteries via the UAVCAN bus. Another distinction is the use of special sensors, like an airspeed sensor, a half-duplex telemetry system, and specific sensors used directly for atmospheric measurements.
+
+\secc Harsh-weather Airspeed sensing
+
+In the case of autogyros, similar to airplanes, it is required to measure the indicated airspeed (\glref{IAS}) to safely perform takeoffs and in-flight maneuvers. Even though autogyros cannot be stalled in the traditional sense because their lift is generated by the rotor's rotational speed rather than directly by airspeed, they exhibit unique behavior. At insufficient forward airspeed, a gyrocopter begins to settle until it potentially impacts the ground — a scenario that can be considered a survivable landing. Conversely, when the airspeed is excessively high, the rotor can easily exceed its critical \glref{RPM}, leading to potential rotor disintegration. To mitigate these risks, the TF-G2 autogyro is equipped with an \glref{IAS}  sensor to accurately monitor and control airspeed, thus ensuring operational safety under varying flight conditions.
+
+Initially, a conventional Pitot tube was used for that purpose, but it proved very sensitive to clogging by snow, ice, or mud after complicated landings, necessitating disassembly and thorough cleaning. Thus, I proposed a solution named TFSLOT01, utilizing the Venturi effect.  To describe the application of Bernoulli’s principle for measuring airspeed, we define the following variables:
+
+\begitems
+* $\Delta p$ -- Measured pressure difference
+* $\rho$ -- Air density
+* $v_\infty$ -- Free air velocity e.g. measured airspeed
+* $v$ -- The velocity of air running through the sensor
+* $A_D$ -- Cross-section area at the position of the outer pressure port
+* $A_d$ -- Cross-section area at the position of internal pressure port
+\enditems
+
+In the context of small velocities, where the TFSLOT01 sensor operates, the air velocity and pressure must satisfy Bernoulli’s principle:
+
+$$ {1 \over 2}\rho v_\infty^{2} + p_\infty = {1 \over 2}\rho v^{2} + p \eqmark[Bernoulli]$$
+
+Then the velocities are in relation to cross sections in the plane of pressure measurement ports
+
+$$ {v \over v_\infty} = {A_D \over A_d} \eqmark[cross_section_areas]$$
+
+
+Therefore equations for pressure difference and airspeed velocity could be derived, which correspond to the \glref{IAS}.
+
+$$
+\Delta p = {1 \over 2}\rho{v_\infty}^{2}\left[\left({v \over v_\infty}\right)^2 - 1\right] \Rightarrow v_\infty = \sqrt{{2\Delta p \over \rho\left[\left({A_D \over A_d}\right)^2 - 1\right]}}
+\eqmark[air_velocity]
+$$
+
+It should be noted that the sensor utilizing the described principle is theoretically more sensitive (e.g., has a higher measurable pressure difference at the same airspeed) than the Pitot-static tube (at the same air density) in the geometric configuration where the following equation is valid
+
+$$ {A_D \over A_d} > \sqrt{2} \eqmark[IAS_sensitivity]$$
+
+The advantage of the higher sensitivity results in increased drag, but it should be negligible at low airspeeds. Therefore, the best use case of the sensor is the integration of the sensing device into the relatively massive fuselage or other suitable airframe structure. In the case of the TF-G2 autogyro, it is resolved by integration of the TFSLOT01 sensor directly to the rotor head, just below the rotor hub, as can be seen in Fig.~\ref[TF-G2_hangar]. Fig.~\ref[TFSLOT01] shows details of the TFSLOT01 sensor.
+
+\medskip
+\clabel[TFSLOT01]{TFSLOT01 airspeed sensor design}
+\picw=15cm \cinspic ./img/TFSLOT01.jpg
+\caption/f The photograph showcases a close-up of TFSLOT01, where the front part features the entry aperture $A_D$. The narrow aperture $A_d$ is slightly deeper into the structure. In the rear of the photo is visible the I2C cable, used to connect the sensor to the flight controller.
+\medskip
+
+\secc Noise-resistant Telemetry system
+
+
+The telemetry system used in the \iid TF-G2 autogyro is a significantly improved variant of the technology previously tested on the stratospheric balloon's telemetry link. Unlike the one-way radio communication utilized in the balloon experiments, the TF-G2 employs a bidirectional half-duplex, Adaptive time division multiplexing (TDM) radio system with Frequency-hopping spread spectrum (FHSS) and Adaptive Frequency Agility (AFA). The modem still operates at a frequency of 433~MHz, but with a highly improved RF front-end to ensure a more reliable communication link due to the demanding environmental conditions of the TF-G2 flight. 
+
+The modem firmware is based on modified SiK firmware, which newly incorporates integration to the hardware capable of supporting antenna diversity, specifically a 2x2 MIMO configuration. This arrangement allows for the connection of two external antennas, each of which can be utilized for both transmitting and receiving signals. The optimal antenna is automatically selected based on the RSSI metric on the received packet preamble before each transmission of the next packet. This dual-antenna setup significantly improves signal resilience against lightning interference, and multipath fading and is also robust against mechanical damage to one of the antennas — a critical improvement over the previous single-antenna modems used on balloon flights, where the damage happens (see Table 1 in appendix \ref[FIK_flights]). It is also quite a common failure mode of the antenna on UAVs, caused by prolonged exposure to vibrations during flights.
+
+\medskip
+\clabel[TFSIK01]{TFSIK dual-antenna telemetry modem}
+\picw=15cm \cinspic ./img/TFSIK01.jpg
+\caption/f TFSIK PCB without electromagnetic shielding and 3D printed housing. The RF input and output with impedance matching network, RF switch, band-pass filter, and LNA are on the left of the photo.
+\medskip
+
+
+Furthermore, the improved system benefits from the versatility in antenna configurations at the ground station side, where a combination of the two antennas (directional and omnidirectional antennas) ensures optimal communication over varying distances. This dual-antenna approach at the ground station seamlessly switches between short-range and long-range communication modes without user intervention, offering a reliable link irrespective of the TF-G2's distance from the ground station.
+
+\secc Takeoff technique suitable for stormy weather
+
+Since the unmanned autogyro TF-G2 (like other autogyros) requires the rotor to be spun up to a flight RPM value to allow its operation during the flight, it is necessary to inject rotational energy into the rotor before takeoff (in the case of TF-G2 the required energy range is something between 100 to 200 J, depending on the actual weight and rotor configuration). One of the simplest ways to achieve this spin-up is by ensuring airflow through the rotor, which is first pre-spun to a minimum RPM by directly applying a rotation force to the rotor. Subsequently, these rotations increase to flight speed through forward motion. The required minimum forward speed needed to increase RPM to flight value is in the range of a few meters per second. In the case of those conditions, the autogyro becomes airborne within a few tens of meters; after that, the internal autopilot can automatically climb to a stable flight.
+
+To ensure this procedure is feasible during approaching thunderstorms, it was necessary to develop a range of supportive devices, such as a launch platform and a visualization of the gyrocopter's status on the car roof. The takeoff from the car roof platform is an advantage for safety and time-saving.
+
+The resulting design of the takeoff platform is visible in the video and image in Figure \ref[autogyro_takeoff_platform], where the autogyro is secured in an inclined launch position, allowing for an increase in the airflow through the rotor. In this position, the gyrocopter's rotor is locked by a mechanism contained in the platform until takeoff. At the beginning of this assisted takeoff, the platform unlocks the rotor, which is then spun to minimum speed by weights connected to the rotor by pulleys. At this minimum RPM speed, aerodynamic forces enable further rotor acceleration due to the incoming airflow.
+
+However, since the launch platform is mounted on the roof of the vehicle, the crew in the vehicle (pilot and driver) cannot directly see the procedure. Therefore, the vehicle's crew must receive adequate and high-quality data to semi-automatically carry out the launch procedure. The TF-G2's autopilot is programmed to automatically transition between the different phases of takeoff once predefined criteria are met. Therefore, the crew only needs to monitor key decision variables such as IAS and rotor RPM, to be able to respond adequately to a non-standard situation. These values are therefore required to be displayed with low latency and in a format that enables the car driver to determine whether to speed up, slow down, or maintain the current speed. This is facilitated by a set of displays, as seen in Figure \ref[takeoff_display], which have been added to the measurement vehicle.
+
+Additionally, the overall status is visible through an analog camera, which provides both the driver and the operator a view of the autogyro, mounted in the takeoff platform. However, this display is limited by the camera's frame rate and the resolution of the analog camera (a digital camera cannot be used due to typically high latency in the image encoder and decoder). The driver and operator also have access to auditory and visual signals indicating the platform and takeoff status via a shared handheld controller, which can be used to abort the takeoff procedure in the event of an unforeseen issue.
+
+\medskip
+\clabel[takeoff_display]{UAV control panel}
+\picw=15cm \cinspic ./img/takeoff_display.png
+\caption/f Measuring CAR2 was equipped with special instruments required to operate the unmanned autogyro TF-G2.  In the center is an autogyro status display with rotor RPM and IAS indicators, the bottom is video from the roof camera and on the right, there is a UAV operator’s laptop.
+\medskip
+
+The takeoff platform device is removably integrated into the assembly of magnetic VLF receiving antennas, as seen in Figure \ref[autogyro_takeoff_platform]. This platform is connected to the ground control station mounted inside the trunk of the car and is controlled by the autogyro's autopilot states via previously described TFSIK01 telemetry modems. The platform's firmware responds to commands sent by the TF-G2 using the commands on the MAVLink 2 protocol.
+
+The mentioned handheld controller for the driver and operator is directly connected to the microcontroller managing the platform, allowing the platform's internal state to be overridden despite commands from the TF-G2. That takeoff solution is designed primarily to achieve overall safety before and during the thunderstorm measurement attempt.
+
+% Replaced with video
+%\medskip
+%\clabel[autogyro_takeoff_platform]{Autogyro takeoff platform}
+%\picw=15cm \cinspic ./img/autogyro_takeoff_platform.png
+%\caption/f Measuring CAR2 was equipped with a roof platform used to carry the TF-G2 autogyro to the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during actual takeoff and housing the weights used to prerotate the rotor to minimum RPMs.
+%\medskip
+
+\midinsert
+\clabel[autogyro_takeoff_platform]{Video -- TF-G2 autogyro car platform takeoff}
+\render[TF-G2_autogyro_takeoff.mp4][
+name=bigvideo,
+controls=true,
+repeat=0,
+%aactions=\renditionautoplay,
+]{\picwidth=\hsize \inspic{./img/autogyro_takeoff_platform.png}}
+\caption/f Measuring CAR2 equipped with a roof platform used to carry and take off the TF-G2 autogyro at the thunderstorm site. The rotor fixing is the black arm on the left. The gray tubes are oriented vertically during takeoff, and weights inside are used to prerotate the rotor to minimum RPMs. The embedded video file: {\em TF-G2_autogyro_takeoff.mp4} shows the takeoff process. Please click on the Figure to play the video, alternatively, the file could be extracted from the PDF or replayed on the web \hbox{\url{https://youtu.be/-Ga4DO3h_1c}}.
+\endinsert
+
+\secc Airborne sensors
+
+The key innovation in the TF-G2's design is the tight integration of specialized sensors for measuring electric fields and ionizing radiation. These sensors are mounted in a way to minimize interference from the airframe by maximizing the benefits of the autogyro construction. The placement of an electric field mill is directly under the rotor, exploiting the UAV rotor's characteristic of being unpowered, thus avoiding significant electromagnetic interaction with the measured values. See the figure \ref[E_mill_rotor]. The only additional requirement on the airframe is that the rotary disk of EFM is electrically connected to the measuring electronics. That is achieved through a conductive connection of the rotor's bearing.
+
+For the detection of ionizing radiation, the UAV has been equipped with a semiconductor detector, AIRDOS03 (UAVDOS), previously tested during balloon flights. It is situated in the UAV's fuselage under a waterproof fabric cover and connected to the TF-ATMON system via serial link, similarly as described in section \ref[balloon_flights]. The avionics system manages sensor readout, synchronizing data collection with the TF-G2's flight path and with data from other sensors (EFM, humidity, etc.), see Fig. \ref[E_mill_data] for an example of that data. That onboard data processing, together with the telemetry link, enables real-time preliminary analysis, aiding in the assessment of collected data during the flight.
+
+\medskip
+\clabel[E_mill_rotor]{EFM mounted on autogyro's rotor head}
+\picw=15cm \cinspic ./img/E_mill_rotor.png
+\caption/f Close-up view of electric field mill THUNDERMILL01 mounted into the autogyro rotor head. The sensing electrodes are below the rotating grounded disk. Part of one sensing electrode is visible on the left side of the E-mill’s rotor disk opening.
+\medskip
+
+\medskip
+\clabel[E_mill_data]{Example of data measured by EFM mounted on autogyro}
+\picw=15cm \cinspic ./img/E_mill_data.png
+\caption/f Electric field measurement data along with environmental humidity and temperature, aligned with flight parameters during a flight in fair weather.
+\medskip
+
+\app[meteo_instruments] Used Meteorological Instruments
+
+To accurately assess the meteorological situation during thunderstorms, the measurement vehicles are also equipped with a set of standard meteorological instruments. These allow for the real-time monitoring of environmental parameters used for improved understanding of condition evolution. Below is an expanded overview of additional instruments, incorporating details from the provided references.
+
+\secc Precipitation Distinguishing Disdrometer
+
+The implementation of the disdrometer was necessitated by the need for high-time resolution measurement of precipitation patterns and their evolution. Precipitation is a key meteorological parameter for understanding the correlations between ionizing radiation and storm activity, because hydrometeors play a significant role in washing radon decay products out of the atmosphere, consequently creating a temporary increase in radiation background levels on the ground \ref[Radon_precipitation]. High-rate precipitation data are necessary for distinguishing these events from occurrences of TGE.
+
+\medskip
+\clabel[Radon_precipitation]{Radon progeny washout}
+\picw=15cm \cinspic ./img/Precipitation_radon.png
+\caption/f  The graph demonstrates the impact of rainfall on ionizing radiation flux on the ground. The top panel shows the detections from the LIGHTNING01 module (described in section \ref[LIGHTNING01A_trigger]), and distance to lightning strikes (Blitzortung.org), while the subsequent panels display counts per second for different scintillation detectors (AIRDOS-N inside the car, RT-56 on the car roof). The final panel indicates precipitation intensity (5T precipitation). Notably, there is a clear increase in radiation counts following periods of rainfall, highlighting the washout effect of radon progeny from the atmosphere.
+\medskip
+
+Traditional, widely used methods of precipitation measurement have their limitations. For instance, the commonly used tipping bucket rain gauge only provides data resolution dependent on precipitation intensity and has a relatively narrow effective range where the collection bucket can tip and accurately measure rainfall.
+
+\medskip
+\clabel[tipping_bucket_limitation]{Example of tipping bucket rain-gauge data}
+\picw=15cm \cinspic ./img/tipping_bucket_limitation.png
+\caption/f  This graph illustrates the limitations of using a tipping bucket rain gauge. While there is a slight increase in radiation detected (around 11:00), the lack of detailed information on precipitation type and better temporal resolution makes it difficult to attribute this increase to a specific phenomenon.
+\medskip
+
+Furthermore, the tipping bucket rain gauge does not differentiate between different types of precipitation (rain, snow, hail, graupel, etc.) as can be seen in Figure \ref[tipping_bucket_limitation]. The different hydrometeor types have an impact on the efficiency of radionuclide washout and also the electrification of storm clouds. The tipping bucket rain gauge has a significant advantage in precise volume measurement of the precipitation, but it is a variable that is not useful for the proposed thunderstorm observation because rain intensity and hydrometeor type are more important. In contrast, the disdrometer---another type of instrument---is capable of identifying precipitation types but generally lacks precision in measuring volume. In the case of mobile measurement using cars, there is also a requirement to avoid optical principles, which most commercial disdrometers are based on, which are unsuitable for vehicle roof mounting due to their sensitivity to movement and vibration.
+
+In response to these challenges, the DISDROMETER01\urlnote{https://github.com/UniversalScientificTechnologies/DISDROMETER01} was specifically designed for installation on a flat vehicle moving platform, enabling high-precision, real-time data collection during storm events. This instrument leverages SDR receiver technology previously utilized in the Bolidozor meteor detection network. It employs a piezoelectric element (see Figure \ref[DISDROMETER01]) capable of sensing raindrop size distribution and intensity. The sensing element responds to different hydrometeors with different waveforms, as is shown in Fig.~\ref[DISDROMETER01_hyrometeors].
+
+\medskip
+\clabel[DISDROMETER01]{DISDROMETER01 internals}
+\picw=15cm \cinspic ./img/DISDROMETER01.png
+\caption/f  Photograph of a DISDROMETER01 mounted on the roof of a car, featuring an open box that contains the piezo element, the primary sensing component of the device.
+\medskip
+
+Technically, the disdrometer captures sound waves generated by the impact of precipitation particles on the plastic enclosure \ref[DISDROMETER01], providing insights into the characteristics of rainfall over time.
+
+
+\medskip
+\clabel[DISDROMETER01_hyrometeors]{Hail and raindrop captured by DISDROMETER01}
+\picw=10cm \cinspic ./img/DISDROMETER01_hydrometeors.png
+\caption/f  The graphs show the difference in signal responses between various types of precipitation, specifically illustrating the difference between rain and hail. The top image is a detailed view of the impact of a single hailstone, and below is a single raindrop.
+\medskip
+
+
+\secc Storm-resistant Anemometer
+
+Given the necessity of knowing both the direction and speed of the wind during storm measurements, especially for launching unmanned aerial vehicles from the car rooftops and for overall safety in measurement, it was essential to equip the measurement vehicles with an anemometer capable of assessing these parameters in storm conditions.
+
+The development of the alternative anemometer was initiated in response to the failure of a standard cup anemometer during its first deployment on a highway drive. This unexpected failure highlighted the need for a device capable of enduring high-speed conditions (at least 130 km/h) in adverse weather, including wind and hail, without significant maintenance. Although the issue might have potentially been addressed by acquiring a high-quality professional anemometer, a more application-suitable design, with less aerodynamic drag, was sought, given the intended use case. This pursuit coincided with efforts to develop a replacement for the Pitot tube for UAV applications (described in detail in section \ref[autogyro_thunderstorm]). Logical progression led to the use of similar technology for the anemometer mounted on a vehicle.
+
+\medskip
+\clabel[WINDGAUGE03]{ WINDGAUGE03 anemometer mounted on the car roof}
+\picw=15cm \cinspic ./img/WINDGAUGE03.png
+\caption/f  A photograph showing the installation of the WINDGAUGE03 anemometer on the car roof alongside a windsock.
+\medskip
+
+The new anemometer's design benefits from the inclusion of a circuit board that not only accommodates a differential pressure sensor but also a magnetometer. This enables the measurement of absolute wind direction without the need for directional calibration against the actual vehicle's orientation, an advantage over conventional weather station setups that typically require fixed positioning relative to the north. Although the later integration of the RTK GNSS receiver in measurement car infrastructure (depicted in figure \ref[RTK_moving_baseline]) partially reduces this requirement by eliminating the need for direction correction, the WINDGAUGE03 anemometer has been used further due to its resistance to adverse weather conditions.
+
+
+\medskip
+\clabel[WINDGAUGE03_measurement]{Example of data measured by the designed anemometer}
+\picw=15cm \cinspic ./img/WINDGAUGE03_measurement.png
+\caption/f The graph illustrates data measured by the new anemometer WINDGAUGE03 at the edge of a storm. The top panel shows lightning strike data from Blitzortung.org, the middle panel presents wind direction measurements, and the bottom panel displays wind speed data from the anemometer.
+\medskip
+
+
+\secc Thermometer and Barometer
+
+Temperature data is used in multiple ways; one of the most common is for eliminating possible temperature-dependent variations that might influence the sensors mounted on the car platform.  For that purpose, the MLAB ALTIMET01A module was used, which combines temperature and pressure sensing capabilities, providing an overview of the atmospheric conditions.
+
+\medskip
+\clabel[temperature_pressure]{Example graph of temperature and pressure evolution during thunderstorm}
+\picw=15cm \cinspic ./img/temperature_pressure.png
+\caption/f  The graphs illustrate the changes in temperature and pressure during the passage of a thunderstorm. As is evident, both variables fluctuate throughout the atmospheric event, often in a significant manner.
+\medskip
 
 
 \bibchap
@@ -427,6 +718,27 @@ repeat=0,
 ]{\picwidth=\hsize \inspic{./img/Init_CG_2021-06-09_10-48-35.png}}
 \caption/f   The video shows a rare capture of the beginning of a CG lightning, which is visible as a slight brightening in the other videos, but is otherwise out of the field of view, so its structure is not visible. The subsequent CG return stroke can be observed in the video a few hundred milliseconds later.
 \endinsert
+
+\app[AMT_cars] In situ ground-based mobile measurement of lightning events above central Europe
+
+\vfil\break
+{\footline={} \headline={} \picw=\pdfpagewidth  % bez hlavičky a bez čísla stran, zařadit na plnou šířku
+ \fornum 1..14 \do{ \picparams={page#1}
+    \vbox to0pt{\vskip-25mm \centerline{\inspic articles/amt-16-547-2023.pdf }\vss}
+    \vfil\break}
+}
+
+\app[RPD_TF-ATMON] Measurement of the Regener-Pfotzer Maximum Using Different Types of Ionising Radiation Detectors and a New Telemetry System TF-ATMON
+
+
+\app[Silva_Gabreta-GEODOS] Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS
+
+\vfil\break
+{\footline={} \headline={} \picw=\pdfpagewidth  % bez hlavičky a bez čísla stran, zařadit na plnou šířku
+ \fornum 1..16 \do{ \picparams={page#1}
+    \vbox to0pt{\vskip-25mm \centerline{\inspic articles/Silva_Gabreta-GEODOS.pdf }\vss}
+    \vfil\break}
+}
 
 
 \bye

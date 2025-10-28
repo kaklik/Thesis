@@ -1,9 +1,9 @@
 
-To be able to record the different processes occurring during thunderstorms, the three cars were equipped with specialized measuring equipment. The aim is to verify the hypotheses  considering the relation between thunderstorms and ionizing radiation stated in section \ref[ionizing_radiation_detectors]. These cars were able to move to locations with predicted storm activity and thus flexibly react to specific storm developments, and perform ground measurements directly at the lightning site.
+To be able to record the different processes occurring during thunderstorms, the three cars were equipped with specialized measuring equipment. The aim is to verify the hypotheses considering the relation between thunderstorms and ionizing radiation stated in section \ref[ionizing_radiation_detectors]. These cars were able to move to locations with predicted storm activity and thus flexibly react to specific storm developments, and perform ground measurements directly at the lightning site.
 
-To determine the necessary parameters of lightning activity (lightning events’ timestamps, lightning type, and location), the measuring cars, see Fig. \ref[CRREAT_cars] (CAR0 and CAR1), were equipped with high-speed all-sky camera and radio receivers. The cars were used to transport and power the instruments in proximity to thunderstorms, and the car cabin also served as partial protection for the instrument operator.
+To determine the necessary parameters of lightning activity (lightning events’ timestamps, lightning type, and location), the measuring cars, see Fig.~\ref[CRREAT_cars] (CAR0 and CAR1), were equipped with a high-speed all-sky camera and radio receivers. The cars were used to transport and power the instruments in proximity to thunderstorms, and the car cabin also served as partial protection for the instrument operator.
 
-The equipment of cars is not uniform as it is gradually improved and also the purpose of each car slightly differs.
+The equipment of cars is not uniform, as it is gradually improved, and also the purpose of each car slightly differs.
 
 \medskip
 \clabel[CRREAT_cars]{CRREAT measurement cars with instruments mounted on the roof platform}
@@ -11,21 +11,46 @@ The equipment of cars is not uniform as it is gradually improved and also the pu
 \caption/f The CRREAT measurement cars with instruments mounted on platforms, the overview of differences is shown in diagrams \ref[CRREAT_CAR0_diagram], \ref[CRREAT_CAR1_diagram], and  \ref[CRREAT_CAR2_diagram].
 \medskip
 
+The following section describes the main instruments. The supplementary instruments are described in the appendices \ref[meteo_instruments] and \ref[UHF_signal_receiver].
+
 \sec[High_speed_camera] High-speed all-sky Cameras
 
-The two cars were equipped with high-speed all-sky cameras. Their purpose is to capture the lightning event evolution in parallel with recording from the other instruments, especially radio receivers.
+The two cars were equipped with high-speed all-sky cameras. Their purpose is to capture the evolution of lightning events in parallel with recordings from other instruments, especially radio receivers.
 
-Chronos 1.4 camera  CR14-1.0-16M \cite[chronos_datasheet] was mounted in a waterproof SolidBox 69200. The box is covered with a plexiglass dome with the manufacturer designation Duradom 200mm depicted in Fig \ref[high_speed_allsky_camera].
+Chronos 1.4 camera  CR14-1.0-16M \cite[chronos_datasheet] was mounted in a waterproof SolidBox 69200. The box is covered with a plexiglass dome with the manufacturer designation Duradom 200mm depicted in Fig.~\ref[high_speed_allsky_camera].
 
 \medskip
 \clabel[high_speed_allsky_camera]{High-speed all-sky camera}
 \picw=15cm \cinspic ./img/high-speed_camera.png
-\caption/f The camera has a wide-angle CS camera lens and is equipped with an IR blocking filter mounted in front of the LUX1310 CMOS sensor \urlnote{https://www.luxima.com/product_briefs/PDF/LUX1310_brief_v3.1.pdf}. The IR filter is mandatory, to avoid the adverse effect of sunlight coming into the camera lenses.
+\caption/f The camera has a wide-angle CS camera lens and is equipped with an IR blocking filter mounted in front of the LUX1310 CMOS sensor \urlnote{https://luxima.com/wp-content/uploads/2025/09/LUX1310_brief_v3.3.pdf}. The IR filter is mandatory to avoid the adverse effect of sunlight coming into the camera lenses.
 \medskip
 
-The video resolution of the camera was set to 928x928 pixels with 1612.33 FPS and a constant shutter in the range of 4.9  to 34 $\mu$s during daytime thunderstorms and a maximum time of 614.6 $\mu$s  for nighttime thunderstorms. The shutter time was set by the instrument operator depending on current weather conditions and the available brightness dynamics of the high-speed camera.  The video-saving length of the camera was set to 2 or 3 seconds. The video save format was initially H.264 resulting in MPEG-4 (.mp4) video, which sacrifices a bit of the quality for better compression. Lately, I found a method to record the 12-bit raw data from the camera without significantly increasing the data recording time.
+The video resolution of the camera was set to 928x928 pixels with 1612.33 FPS and a constant shutter in the range of 4.9  to 34 $\mu$s during daytime thunderstorms and a maximum time of 614.6 $\mu$s  for nighttime thunderstorms. The shutter time was set by the instrument operator depending on current weather conditions and the available brightness dynamics of the high-speed camera.  The video-saving length of the camera was set to 2 or 3 seconds. The video save format was initially H.264, resulting in MPEG-4 (.mp4) video, which sacrifices a bit of the quality for better compression. Lately, I found a method to record the 12-bit raw data from the camera without significantly increasing the data recording time.
 
 The camera lenses used were  FE185C057HA-1 \cite[camera_lenses]. The high-speed camera is therefore mainly sensitive to visible light. That spectral baseband was selected to minimize the absorption of light generated by lightning in the atmosphere.
+
+\midinsert
+\clabel[highspeed_camera_params]{Technical parameters of high-speed all-sky camera}
+\ctable{lc}{
+\hfil Parameter & Specification \crl \tskip4pt
+Camera model & Chronos 1.4 CR14-1.0-16M \cr
+Sensor type & LUXIMA LUX1310 CMOS \cr
+Resolution & 928×928 pixels \cr
+Angle of view (AoV) & 185.0° x 185.0° \cr
+Frame rate & 1612.33 FPS \cr
+Shutter time (day) & 4.9 to 34~µs \cr
+Shutter time (night) & Up to 614.6~µs \cr
+Video recording duration & 2–3 seconds \cr
+Video saving time & at least 49.8 seconds \cr
+Video format & H.264 (MPEG-4), later 12-bit RAW \cr
+Lens model & FE185C057HA-1 \cr
+Spectral range & Visible light (IR blocked) \cr
+Dome type & Duradom 200mm (2~mm thick PMMA) \cr
+Mounting enclosure & SolidBox 69200 (IP 55) \cr
+}
+\caption/t Technical parameters of high-speed all-sky camera system used on mobile platforms.
+\endinsert
+
 
 \sec[radio_receivers] Radiofrequency receivers
 
@@ -35,12 +60,12 @@ Radio receiver implementation has several iterations, from the initial overview 
 The observational band is chosen according to the segment of interest in the lightning discharge. Broadly, the following bands that can be used for observing lightning discharges can be distinguished:
 
 \begitems
-\item - VLF - Probably the most utilized from the view of the number of stations globally existing. The band is suitable for observing radiation generated by the main lightning channel. It is not well suited for measuring inter-cloud discharges.
+\item - VLF - The most utilized by the number of stations globally installed. The band is suitable for observing radiation generated by the main lightning channel. It is not well-suited for measuring inter-cloud discharges.
 \item - VHF - This band allows the reception of signals generated by initial breakdowns and some subsequent channels. On the contrary, it is not very sensitive to the main lightning channel \cite[https://doi.org/10.1029/JC086iC08p07451, rs13224658, 9226420].
 \item - UHF - The band almost exclusively contains information about the initial breakdowns in the early phases of lightning development. The main lightning channel in this band is difficult to observe except at short distances.
 \enditems
 
-That fact also favors the combination of VLF and UHF, because the primary interest was set to detection of lightning and then observing the lightning initiation point in coincidence with ionizing radiation.
+That fact also favors the combination of VLF and UHF, because the primary interest was set to the detection of lightning and then observing the lightning initiation point in coincidence with ionizing radiation.
 
 \secc[Recording_trigger_implementation] Recording trigger implementation
 
@@ -62,10 +87,10 @@ For the observation,  the VLF receiver system was used simultaneously for detect
 \medskip
 \clabel[RSMS_control]{Lightnig signal receiver's control software}
 \picw=15cm \cinspic ./img/RSMS_control_interface.png
-\caption/f Screenshot of the web-based interface to the VLF receiver used to set up the trigger and recording parameters.
+\caption/f Screenshot of the web-based user interface to the VLF receiver used to set up the trigger and recording parameters.
 \medskip
 
-\secc[VLF_receiver] VLF signal receiver
+\secc[VLF_receiver] SDR-based VLF signal receiver
 
 \medskip
 \clabel[VLF_antenna]{VLF antenna array construction}
@@ -73,42 +98,78 @@ For the observation,  the VLF receiver system was used simultaneously for detect
 \caption/f A detailed view on aluminum construction that holds orthogonal magnetic loop antennas.  The individual edges are isolated by 3D-printed corners.
 \medskip
 
-The VLF signal receiver is based on a magnetic loop antenna and initially on a storage oscilloscope with a control computer for data readout. For one lightning event, that setup could record 800 ms of 8-bit samples with a sampling rate of 250 MS/s taking several minutes of recording time. From that concept which uses the antenna  mounted flat on the plywood as depicted in Fig. \ref[loop_antenna]. In the dedicated receiver, the  antenna array design was introduced, although it is based on the use of the same  VLFANT01 module, with the 10 m length, STP cable coiled into loops. The antenna loops were attached orthogonally to the structure made from 40~mm aluminum profiles mounted on the car roof. See  Fig. \ref[VLF_antenna] for details. 
-The small-signal input reflection of the three orthogonal loops (“Top”, “Side”, “Rear”) was measured in range of 10 MHz using a calibrated VNA. The first reflection minima occur at 1.149~MHz (Top), 2.124~MHz (Side), and 2.319~MHz (Rear), confirming that the magnetic loops are operated well below their self-resonance for VLF lightning pulse reception. Accordingly, the practically useful signal region is taken from ≈100 kHz up to the first minimum for each loop. See Fig. \ref[figur_VLF_S11] for the combined $S_{11}$ plot with annotated minima.
+The VLF signal receiver is based on a magnetic loop antenna and initially on a storage oscilloscope with a control computer for data readout. For one lightning event, that setup could record 800 ms of 8-bit samples with a sampling rate of 250 MS/s, taking several minutes of recording time. From that concept, which uses the antenna mounted flat on the plywood as depicted in Fig. \ref[loop_antenna]. In the dedicated receiver, the antenna array design was introduced, although it is based on the use of the same  VLFANT01 module, with a 10~m length, STP cable coiled into loops. The antenna loops were attached orthogonally to the structure made from 40~mm aluminum profiles mounted on the car roof. See  Fig. \ref[VLF_antenna] for details. 
+The small-signal input reflection of the three orthogonal loops (“Top”, “Side”, “Rear”) was measured in the range of 10 MHz using a calibrated VNA. The first reflection minima occur at 1.149~MHz (Top), 2.124~MHz (Side), and 2.319~MHz (Rear), confirming that the magnetic loops are operated well below their self-resonance for VLF lightning pulse reception. Accordingly, the practically useful signal region is taken from ≈100 kHz up to the first minimum for each loop. See Fig. \ref[figur_VLF_S11] for the combined $S_{11}$ plot with annotated minima.
 
 \medskip
 \clabel[figur_VLF_S11]{VLF antenna frequency dependence of the input reflection coefficient |S₁₁|}
 \picw=15cm \cinspic ./img/MagLoop_S11_0to10MHz.png
-\caption/f Input reflection magnitude |$S_{11}$| (50~Ω reference) for three magnetic loop antenna array measured with a VNA. Vertical dashed lines mark the reflection dips: Top — 1.149~MHz, Side — 2.124~MHz, Rear — 2.319~MHz. These frequencies indicate the onset of self-resonant behavior; for broadband lightning pulse reception, the practically useful bandwidth is typically below the first marked minimum for each loop. Therefore bellow 1~MHz for all three loops. 
+\caption/f Input reflection magnitude |$S_{11}$| (50~Ω reference) for three magnetic loop antenna array measured with a VNA. Vertical dashed lines mark the reflection dips: Top — 1.149~MHz, Side — 2.124~MHz, Rear — 2.319~MHz. These frequencies indicate the onset of self-resonant behavior; for broadband lightning pulse reception, the practically useful bandwidth is typically below the first marked minimum for each loop. Therefore, below 1~MHz for all three loops. 
 \medskip
 
-The oscilloscope was replaced with very similar hardware as the UHF signal receiver described in section \ref[UHF_signal_receiver]. The main difference is that the VLF antenna is directly coupled to the ADC inputs.
+The oscilloscope was replaced with very similar hardware as the UHF signal receiver described in the appendix \ref[UHF_signal_receiver]. The main difference is that the VLF antenna is directly coupled to the ADC inputs.
+
+\medskip
+\clabel[VLF_receiver_block_schematics]{VLF receiver block schematics}
+\picw=15cm \cinspic ./img/RSMS02_receiver.png
+\caption/f  Block schematics of VLF receiver. The VLF receiver has the STP
+antenna connected directly to the ADC input, which contains an anti-alias filter.
+\medskip
+
 
 An example of the captured lightning signal can be seen in Fig. \ref[figur_VLFdata].
 
 \medskip
 \clabel[figur_VLFdata]{An example of VLF lightning signal}
 \picw=15cm \cinspic ./img/VLF_signals.png
-\caption/f Data visualization obtained from VLF antennas placed on three measuring cars (each car has a set of three orthogonal antennas). The amplitude and quality of the signal differ significantly. In the first rows, clear interference in the signal on CAR1 caused by switching power supplies is visible. The mutual trigger delay, caused by triggering different signal signatures, is also noticeable, complicating the capture of the entire lightning discharge.
+\caption/f An example of a signal from VLF antennas placed on three measuring cars (each car has a set of three orthogonal antennas). The amplitude and quality of the signal differ significantly. In the first rows, clear interference in the signal on CAR1 caused by switching power supplies is visible. The mutual trigger delay, caused by triggering different signal signatures, is also noticeable, complicating the capture of the entire lightning event in a single recording.
 \medskip
 
+The use of this dedicated receiver decreases the data recording interval to about twenty seconds and allows recording of the 1.45-second-long signal fragment with 12-bit  ADC resolution.  This increase in parameters was a significant step from the original oscilloscope-based experiments.
 
-The use of this dedicated receiver decreases the data recording interval to about twenty seconds and allows recording of the 1.45-second long signal fragment with 12-bit  ADC resolution.  This increase in parameters was a significant step from the original oscilloscope-based experiments.
+\midinsert
+\clabel[rsms02_params]{Technical parameters of the VLF receiver RSMS02.}
+\ctable{lc}{
+\hfil Parameter & Specification \crl \tskip4pt
+Sampling rate (per channel) & 10~MSPS \cr
+ADC resolution & 12-bit \cr
+Number of channels & 3 (orthogonal loops) \cr
+Measured components & Magnetic field (X, Y, Z) \cr
+Timing source & PPS (external GNSS receiver) \cr
+Pre-trigger capture & Supported \cr
+Trigger output & TTL compatible \cr
+On-board computer & Zynq XC7Z01 SoC + Epiphany E16G301 \cr
+Operating system & Linux (Ubuntu) \cr
+User interface & Web + command-line \cr
+RAM / Storage & 1~GB / microSD (typ. 16~GB) \cr
+Network interface & 1~Gbit Ethernet \cr
+Power input & 9–14.8~V~DC \cr
+Preview latency & ≈~2~s \cr
+SINAD & ≈~63~dB \cr
+Input impedance & ≈~5~kΩ \cr
+Input referred noise & ≈~5.5~nV/$\sqrt{Hz}$ \cr
+VGA gain range & −5~dB to +31~dB \cr
+Gain step size & 0.125 or 1~dB \cr
+}
+\caption/t Key technical parameters of the VLF SDR receiver RSMS02. Detailed specification is available in documentation \urlnote{https://docs.ust.cz/RSMS02/}.
+\endinsert
+
+
 
 \sec[ionizing_radiation_detectors] EMI-resistant Ionizing radiation detectors
 
-During the research, scintillation, and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kákona_Ambrožová_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200~keV to 40~MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15~s integration of events is provided.
+During the research, scintillation, and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors\urlnote{https://docs.dos.ust.cz/airdos/} in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kákona_Ambrožová_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200~keV to 40~MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15~s integration of events is provided.
 
-Newly derived scintillation detectors GEODOS01 and GEODOS02 had scintillation crystals with a diameter of approximately 18~mm and a length of 30~mm. In addition to these newly developed detectors, the commercial RT-56 detectors were also operated on vehicles for a short period. However, due to their internal and unknown autocalibration, which is unsuitable for mobile measurements, they were subsequently moved to static observation sites. The identical construction of GEODOS01 detectors was then also used at static observatories, similar to the RT-56 detectors. All these described types of detectors at static locations detected ionizing radiation related to thunderstorm activity. Specifically, the observation sites were Poledník and the Lomnický Štít observatory.
+Newly derived scintillation detectors GEODOS01 and GEODOS02\urlnote{https://docs.dos.ust.cz/geodos/} had scintillation crystals with a diameter of approximately 18~mm and a length of 30~mm. In addition to these newly developed detectors, the commercial RT-56 detectors were also operated on vehicles for a short period. However, due to their internal and unknown autocalibration, which is unsuitable for mobile measurements, they were subsequently moved to static observation sites. The identical construction of GEODOS01 detectors was then also used at static observatories, similar to the RT-56 detectors. All these described types of detectors at static locations detected ionizing radiation related to thunderstorm activity. Specifically, the observation sites were Poledník and the Lomnický Štít observatory.
 
-Unfortunately, the mobile deployment of these detectors in the measuring cars does not provide any significant detections of ionizing radiation, therefore the system was widened by the use of  SPACEDOS with another silicon PIN diode to increase sensitivity.  The G-M tube described in subsequent balloon experiments was also used for a short time, but none of these sensors were able to indisputably detect ionizing radiation associated with storm activity during mobile measurements. The causes of this situation will be discussed in chapter \ref[results].
+Unfortunately, the mobile deployment of these detectors in the measuring cars does not provide any significant detections of ionizing radiation, therefore the system was widened by the use of  SPACEDOS with another silicon PIN diode to increase sensitivity.  The G-M tube described in subsequent balloon experiments was also used for a short time, but none of these sensors were able to indisputably detect ionizing radiation associated with storm activity during mobile measurements. The causes of this situation will be discussed in Chapter~\ref[results].
 
-To ensure that the detectors were not influenced by electromagnetic interference (EMI) from lightning or associated current impulses, the GEODOS01 detector was tested using a lightning current generator. During this experiment, the detector was placed at a distance of approximately 3~m from the high-current discharge setup (Fig. \ref[geodos01_emi_test]), and 85~kA standard 10/350~µs waveforms were generated. No deviations or transient increases in the detected count rate were observed, confirming that the detector and its electronics are immune to electromagnetic interference produced by nearby lightning discharges, as is shown in Fig. \ref[geodos01_emi_test_data].
+To ensure that the detectors were not influenced by electromagnetic interference (EMI) from lightning or associated current impulses, the GEODOS01 detector was tested using a lightning current generator. During this experiment, the detector was placed at a distance of approximately 3~m from the high-current discharge setup (Fig.~\ref[geodos01_emi_test]), and 85~kA standard 10/350~µs waveforms were generated. No deviations or transient increases in the detected count rate were observed, confirming that the detector and its electronics are immune to electromagnetic interference produced by nearby lightning discharges, as is shown in Fig.~\ref[geodos01_emi_test_data].
 
 \medskip
 \clabel[geodos01_emi_test_data]{GEODOS01 EMI immunity test recorded data}
 \picw=15cm \cinspic ./img/GEODOS_EMI_test_data.png
-\caption/f Recorded total count rate of the GEODOS01 detector during EMI immunity test.
+\caption/f Recorded total count rate of the GEODOS01 detector during EMI immunity test. Exposition time is 10 seconds. 
 \medskip
 
 The test confirmed that the detector’s signal chain and shielding design are sufficiently resistant to strong transient electromagnetic fields produced during lightning discharges. While the applied 85 kA, 10/350 µs current impulses are a standardized, technical approximation of a lightning stroke and cannot reproduce the full variability of natural lightning (source geometry, spectral content, rise times, and radiated field distribution), they represent the most rigorous and practically achievable laboratory proxy.
@@ -119,7 +180,7 @@ The test confirmed that the detector’s signal chain and shielding design are s
 \caption/f Test of the GEODOS01 detector using a lightning current generator. The detector was positioned 3 m from the high-current discharge, and no EMI-induced artifacts were observed in the recorded signal.
 \medskip
 
-Towards the end of the research, GEODOS01 design was reassessed, leading to the design of another ionizing radiation detector. In this latest design, a larger NaI(Tl) crystal was optically coupled with a USTSIPM01 module, whose electrical signal output is connected via a balun transformer \urlnote{https://www.mlab.cz/module/SATABAL01/} to a spare ADC channel of the previously described VLF receiver. The result is a device capable of recording individual ionizing radiation interactions in the NaI(Tl) crystal, timely coupled to the lightning. The maximum recording length is identical to the length of the recorded VLF signal fragment.
+Towards the end of the research, the GEODOS01 design was reassessed, leading to the design of another ionizing radiation detector. In this latest design, a larger NaI(Tl) crystal was optically coupled with a USTSIPM01 module, whose electrical signal output is connected via a balun transformer \urlnote{https://www.mlab.cz/module/SATABAL01/} to a spare ADC channel of the previously described VLF receiver. The result is a device capable of recording individual ionizing radiation interactions in the NaI(Tl) crystal, timely coupled to the lightning. The maximum recording length is identical to the length of the recorded VLF signal fragment.
 
 The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulting from cosmic radiation outside of storm activity. Unfortunately, this approach was implemented towards the end of the measurement season, during which cars were available. Consequently, there is very little experimental data, therefore this potential improvement of sensitivity was not adequately examined.
 
@@ -131,11 +192,11 @@ The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulti
 
 \sec[Electric_field_mills] High Time Resolution Electric Field Sensors
 
-Electric field sensors were planned to be used as devices capable of indicating the potential for lightning discharges in clouds. For this purpose, Boltek detectors were initially acquired and Boltek detectors were used for ground-based measurements. Despite their widespread use, these detectors presented significant limitations for mobile measurements due to their bulkiness and less optimal design for mobile deployment. Seeking a more adaptable solution, the more compact Kleinwächter EFM 115 was transitioned to. This Electric Field Mill (EFM) offered an improved form factor for mobile applications, directly connecting its analog signal output to a data logger equipped with a GPS for accurate timestamping \urlnote{https://github.com/mlab-modules/FIELDMILL01}, with a logging time resolution of 110 ms.
+Electric field sensors were planned to be used as devices capable of indicating the potential for lightning discharges in clouds. For this purpose, Boltek detectors were initially acquired and used for ground-based measurements. Despite their widespread use, these detectors presented significant limitations for mobile measurements due to their bulkiness and less optimal design for mobile deployment. Seeking a more adaptable solution, the more compact Kleinwächter EFM 115 was transitioned to. This Electric Field Mill (EFM) offered an improved form factor for mobile applications, directly connecting its analog signal output to a data logger equipped with a GPS for accurate timestamping\urlnote{https://github.com/mlab-modules/FIELDMILL01}, with a time resolution of 110 ms, limited by Kleinwächter internal design.
 
 However, challenges persisted with the Kleinwächter EFM 115, as its mechanical and weather durability did not meet the demands of mobile fieldwork, and time resolution was not adequate to observation of lightning events, as I published in \mycite[j1]. This situation resulted in the necessity for an alternative solution, prompting the development of a new design for electric field mills. The new design also required increased versatility because these custom mills were engineered to integrate into stationary setups, mobile measurement vehicles, and even atmospheric monitoring via Unmanned Aerial Vehicles (UAVs).
 
-For the construction of the new electric field mill (THUNDERMILL01), the initial design was first tested in a laboratory and then installed on the roof of a measuring car, as shown in Figure \ref[THUNDERMILL01_on_car]. At that time, the mill was housed in a tin-plated can turned upside down to protect it from external weather influences. This solution proved ineffective, as the metal can rusted through in approximately two months. Subsequent units intended for stationary placement at the Lomnický Štít observatory were therefore made with a stainless steel casing, as shown in Figure \ref[LS_THUNDERMILL]. The measured values are compared with the Boltek sensor, as illustrated in the graph in Figure \ref[THUNDERMILL_LS_boltek]. The results from that research are published in \mycite[c4].
+For the construction of the new electric field mill THUNDERMILL01\urlnote{https://docs.ust.cz/THUNDERMILL/}, the initial design was first tested in a laboratory and then installed on the roof of a measuring car, as shown in Figure \ref[THUNDERMILL01_on_car]. At that time, the mill was housed in a tin-plated can turned upside down to protect it from external weather influences. This solution proved ineffective, as the metal can rusted through in approximately two months. Subsequent units intended for stationary placement at the Lomnický Štít observatory were therefore made with a stainless steel casing, as shown in Figure \ref[LS_THUNDERMILL]. The measured values are compared with the Boltek sensor, as illustrated in the graph in Figure \ref[THUNDERMILL_LS_boltek]. The results from that research are published in \mycite[c4].
 
 \medskip
 \clabel[THUNDERMILL01_on_car]{EFM mounted on the CRREAT car's roof}
@@ -149,7 +210,7 @@ For the construction of the new electric field mill (THUNDERMILL01), the initial
 \caption/f  Installation of THUNDERMILL01 at Lomnicky Štít Observatory, the electric field mill is installed here in both down and up orientations. This experiment aimed to measure the charge of the hydrometeors to explain how the charge in the cloud is generated.
 \medskip
 
-After testing on the car roof, there was a requirement to deploy the same electric field mill to the rotor head of the TF-G2 autogyro to measure the distribution of the electric field directly in the atmosphere. This placement can be seen in Figure \ref[E_mill_rotor] in section \ref[autogyro_thunderstorm], where the UAV instrumentation is described in more detail.
+After testing on the car roof, there was a requirement to deploy the same electric field mill to the rotor head of the TF-G2 autogyro to measure the distribution of the electric field directly in the atmosphere. This placement can be seen in Fig.~\ref[E_mill_rotor] in Section~\ref[autogyro_thunderstorm], where the UAV instrumentation is described in more detail.
 
 \midinsert
 \clabel[THUNDERMILL_LS_boltek]{Comparison of Boltek and THUNDERMILL01}
@@ -157,77 +218,68 @@ After testing on the car roof, there was a requirement to deploy the same electr
 \caption/f  The graph shows a comparison of the UP and DOWN configurations of THUNDERMILL01 at the Lomnický Štít observatory. Additionally, it includes a comparison with the particle flux of ionizing radiation detected by the SEVAN detector, also located at Lomnický Štít. The electric field measurements are displayed for Boltek and THUNDERMILL instruments for comparison.
 \endinsert
 
-\sec[meteo_instruments] Meteorological instruments
+\secc[THUNDERMILL01_paramaters] THUNDERMILL01 Technical Parameters
 
-To accurately assess the meteorological situation during thunderstorms, the measurement vehicles are equipped also with a set of standard meteorological instruments. These allow for the real-time monitoring of environmental parameters used for improved understanding of condition evolution. Below is an expanded overview of additional instruments, incorporating details from the provided references.
+An overview of the primary technical specifications of the THUNDERMILL01 electric field mill is provided in the table below. For a full set of up-to-date specifications, refer to the online documentation\urlnote{https://docs.ust.cz/THUNDERMILL/}. The system is composed of a rugged sensor head and a terminal unit. The terminal unit integrates a Linux-based operating system with data visualization tools, real-time analysis, and remote communication capabilities.
 
-\secc Precipitation Distinguishing Disdrometer
+\midinsert \clabel[thundermill01_params]{Key parameters of THUNDERMILL01}
+\ctable{lc}{
+\hfil Parameter & Specification \crl \tskip4pt
+Measurement range & ±100~kV/m \cr
+Resolution & 10~V/m \cr
+Accuracy & ±5\,\% \cr
+Time resolution & 521~µs \cr
+Raw data & Full waveform capture \cr
+Processed output & Electric field intensity \cr
+}
+\caption/t Key technical parameters of THUNDERMILL01 electric field mill.
+\endinsert
 
-The implementation of the disdrometer was necessitated by the need for high-time resolution measurement of precipitation patterns and their evolution. Precipitation is a key meteorological parameter for understanding the correlations between ionizing radiation and storm activity, because hydrometeors play a significant role in washing radon decay products out of the atmosphere, consequently creating a temporary increase in radiation background levels on the ground \ref[Radon_precipitation]. High-rate precipitation data are necessary for distinguishing these events from occurrences of TGE.
+\sec[Electric_field_mills] In-situ measuring instruments
 
-\medskip
-\clabel[Radon_precipitation]{Radon progeny washout}
-\picw=15cm \cinspic ./img/Precipitation_radon.png
-\caption/f  The graph demonstrates the impact of rainfall on ionizing radiation flux on the ground. The top panel shows the detections from the LIGHTNING01 module (described in section \ref[LIGHTNING01A_trigger]), and distance to lightning strikes (Blitzortung.org), while the subsequent panels display counts per second for different scintillation detectors (AIRDOS-N inside car, RT-56 on the car roof). The final panel indicates precipitation intensity (5T precipitation). Notably, there is a clear increase in radiation counts following periods of rainfall, highlighting the washout effect of radon progeny from the atmosphere.
-\medskip
+After initial processing of storm activity records with the above-described instruments, it became apparent that some observations are difficult to explain solely with the data obtained so far. For instance, the finding of the extensive spatial and temporal scale of lightning discharges described in section \ref[triggered_recording] raised questions about the distribution of charges within storm clouds that the lightning connects. Similarly, ambiguities arose regarding ionizing radiation. The uncertainty lies in whether ground measurements missed ionizing radiation because the detectors were too far from the radiation source or because the radiation was emitted in a direction undetectable by ground-based detectors situated directly under the storm cell. To resolve these issues, spatial data on charge distribution and the radiation field are necessary, prompting the proposal of additional supportive experiments, which allow direct in-situ measurements in the atmosphere.
 
-Traditional, widely used methods of precipitation measurement have their limitations. For instance, the commonly used tipping bucket rain gauge only provides data resolution dependent on precipitation intensity and has a relatively narrow effective range where the collection bucket can tip and accurately measure rainfall.
+\secc[stratospheric_balloons] Stratospheric balloons
 
-\medskip
-\clabel[tipping_bucket_limitation]{Example of tipping bucket rain-gauge data}
-\picw=15cm \cinspic ./img/tipping_bucket_limitation.png
-\caption/f  This graph illustrates the limitations of using a tipping bucket rain gauge. While there is a slight increase in radiation detected (around 11:00), the lack of detailed information on precipitation type and better temporal resolution makes it difficult to attribute this increase to a specific phenomenon.
-\medskip
+Since the composition of the radiation field varies with altitude \cite[10.1093/oxfordjournals.rpd.a081837] various radiation detector types should be used to measure the vertical profile of cosmic radiation in the atmosphere. It is generally known that an altitude of about 20 km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum \cite[REGENER1935, Regener1934IntensityOT, REGENER1933]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level \cite[Bazilevskaya1998].
 
+Due to that physical phenomenon, stratospheric balloons are a useful tool for obtaining data about cosmic radiation in the atmosphere,  especially around and above the Regener-Pfotzer maximum region. However, the radiation-measuring instruments need to be supplemented by other sensors measuring temperature, pressure, humidity, altitude, acceleration, etc.  All these sensors should be continuously monitored during the launch and the flight of the balloon to verify their proper function and their values have to be recorded for further processing of all obtained data.
 
-Furthermore, the tipping bucket rain gauge does not differentiate between different types of precipitation (rain, snow, hail, graupel, etc.) as can be seen in Figure \ref[tipping_bucket_limitation]. The different hydrometeor types have an impact on the efficiency of radionuclide washout and also the electrification of storm clouds. The tipping bucket rain gauge has a significant advantage in precise volume measurement of the precipitation, but it is a variable that is not useful for the proposed thunderstorm observation because rain intensity and hydrometeor type are more important. In contrast, the disdrometer---another type of instrument---is capable of identifying precipitation types but generally lacks precision in measuring volume. In the case of mobile measurement using cars, there is also a requirement to avoid optical principles, which most commercial disdrometers are based on, which are unsuitable for vehicle roof mounting due to their sensitivity to movement and vibration.
+Therefore I proposed the development of the TF-ATMON\urlnote{https://www.thunderfly.cz/tf-atmon.html}. This system enables on-ground monitoring of sensors and recording of data during the flight and at the same time real-time tracking of the balloon. Resulting methodology was firstly used in full scale on stratospheric balloon flight FIK-6 \ref[FIK-6_setup]  and then improved in FIK-9 flight.
 
-In response to these challenges, the DISDROMETER01\urlnote{https://github.com/UniversalScientificTechnologies/DISDROMETER01}, was specifically designed for installation on a flat vehicle moving platform, enabling high-precision, real-time data collection during storm events. This instrument leverages SDR receiver technology previously utilized in the Bolidozor meteor detection network. It employs a piezoelectric element (see Figure \ref[DISDROMETER01]) capable of  sensing of raindrop size distribution and intensity. The sensing element responds to different hydrometeors with different waveforms as is shown in Fig. \ref[DISDROMETER01_hyrometeors].
+I have participated in the launch of multiple stratospheric balloons \mycite[j3], the overview of flights is summarized in Table 1 in appendix \ref[FIK_flights]. At the beginning (until the FIK6 flight), the construction of balloon gondolas was designed for specific instruments used for a particular flight. Balloon avionics was therefore built around the chosen detectors from scratch.
 
-\medskip
-\clabel[DISDROMETER01]{DISDROMETER01 internals}
-\picw=15cm \cinspic ./img/DISDROMETER01.png
-\caption/f  Photograph of a DISDROMETER01 mounted on the roof of a car, featuring an open box that contains the piezo element, the primary sensing component of the device.
-\medskip
+This concept led to a situation where every new flight meant a significant amount of work although many components were recycled every year and used for the next one. The reason was the need to adapt the avionics to the updated version of the detectors.
 
-Technically the disdrometer captures sound waves generated by the impact of precipitation particles on the plastic enclosure \ref[DISDROMETER01], providing insights into the characteristics of rainfall during time.
+Due to a relatively high value of payload and measurement relied only on board data recording it was necessary to ensure the recovery of the gondola after every flight. Therefore the main criteria for the construction of the balloon experiment were as follows:
 
+\begitems
+* Reliable transmission of information about the geographical location of the gondola
+* Good resistance to impact
+* Ensuring the function in temperatures far below zero
+\enditems
 
-\medskip
-\clabel[DISDROMETER01_hyrometeors]{Hail and raindrop captured by DISDROMETER01}
-\picw=10cm \cinspic ./img/DISDROMETER01_hydrometeors.png
-\caption/f  The graphs show the difference in signal responses between various types of precipitation, specifically illustrating the difference between rain and hail. The top image is a detailed view of the impact of a single hailstone and below a single raindrop.
-\medskip
+Despite the generally successful nature of all fights and the fact that the gondolas were always found, different technologies were tried to eliminate the partial shortcomings that emerged during the previous balloon flights. For example, the initially used GSM-based telemetry system was replaced by a significantly more robust IoT LoRa transmitter, making it possible to transmit the data necessary for tracing the gondola directly to TheThingsNetwork\urlnote{https://www.thethingsnetwork.org/}. This step enables a high reliability of finding the gondola and at the same time a basic recording of the experiment data transmitted to the ground. For the case of more advanced detectors, it was also necessary that the 3D flight trajectory, including the orientation, be recorded synchronously with the supplementary quantities. That is also ensured with the incorporation of the TF-ATMON system, which relies on PX4 autopilot firmware running on Pixhawk hardware equipped with IMU sensors. As can be seen from Table 1 in appendix \ref[FIK_flights], flights conducted since FIK-5 implemented avionics using UAV technology. It is realized by the use of the Pixhawk-based autopilot hardware with PX4 firmware. Telemetry was implemented by a very reliable combination of the LoRa modem and the SiK modem.
 
+Apart from technologies used directly in balloon gondolas, many supplementary tools on the ground have undergone intensive development. For example, to find the balloon, it was necessary to have an accurate real-time map of its position together with a prediction of the next stage of the flight and the location of touchdown. For the case of the flights, since the FIK-5 used the HabHub \urlnote{https://tracker.habhub.org/} (lately the SondeHub\urlnote{https://amateur.sondehub.org/}) was used to track and predict the movement of stratospheric balloons in real-time. In fact, in the beginning, the HabHub was used to manually run the prediction of flight, but the real-time calculation of trajectory predictions introduced in FIK-3 based on live telemetry data significantly decreased the time required for gondola recovery.
 
-\secc Storm-resistant Anemometer
+\secc[autogyro_thunderstorm] Thunderstorm-proof Autogyro
 
-Given the necessity of knowing both the direction and speed of the wind during storm measurements, especially for launching unmanned aerial vehicles from the car rooftops and for overall safety in measurement, it was essential to equip the measurement vehicles with an anemometer capable of assessing these parameters in storm conditions.
+Despite widespread efforts, which could be found in the literature \cite[https://doi.org/10.1029/2006JD007242,TELEXTheThunderstormElectrificationandLightningExperiment,  ScientificInsightsfromFourGenerationsofLagrangianSmartBalloonsinAtmosphericResearch, ABalloon_precipitation] to deploy measurement balloons into thunderstorms with various sensors, these attempts were often unsafe, and the results are sporadic because the balloon flight path is uncontrolled or control is very limited\urlnote{https://windbornesystems.com/}. Therefore that technique seems to be outdated in comparison with the current \glref{UAV} technology. This fact led to the exploration of using \glref{UAV}s instead. Moreover, due to the spatial extent of lightning structures (see Section~\ref[results] for details), it's required to experiment with multiple coordinated locations simultaneously, which is practically unattainable with uncontrolled balloons.  Therefore better understanding of the phenomena can very likely be achieved by using specially equipped \glref{UAS}, which enables measurement directly in or near the thunderstorms.
 
-The development of the alternative anemometer was initiated in response to the failure of a standard cup anemometer during its first deployment on a highway drive. This unexpected failure highlighted the need for a device capable of enduring high-speed conditions (at least 130 km/h) in adverse weather, including wind and hail, without significant maintenance. Although the issue might have potentially been addressed by acquiring a high-quality professional anemometer, a more application-suitable design, with less aerodynamic drag was sought, given the intended use case. This pursuit coincided with efforts to develop a replacement for the Pitot tube for UAV applications (described in detail in section \ref[autogyro_thunderstorm]). Logical progression led to the use of similar technology for the anemometer mounted on a vehicle.
-
-\medskip
-\clabel[WINDGAUGE03]{ WINDGAUGE03 anemometer mounted on the car roof}
-\picw=15cm \cinspic ./img/WINDGAUGE03.png
-\caption/f  A photograph showing the installation of the WINDGAUGE03 anemometer on the car roof alongside a windsock.
-\medskip
-
-The new anemometer's design benefits from the inclusion of a circuit board that not only accommodates a differential pressure sensor but also a magnetometer. This enables the measurement of absolute wind direction without the need for directional calibration against the actual vehicle's orientation, an advantage over conventional weather station setups that typically require fixed positioning relative to the north. Although the later integration of the RTK GNSS receiver in measurement car infrastructure (depicted in figure \ref[RTK_moving_baseline]) partially reduces this requirement by eliminating the need for direction correction, the WINDGAUGE03 anemometer has been used further due to its resistance to adverse weather conditions.
-
+\glref{UAS} offers additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of lifting condensation level (\glref{LCL}), for example. The obvious requirement is to use a new unmanned airframe using TF-ATMON, described in Section~\ref[balloon_flights], and employ the integrated flight controller to take control over the measurement procedure in the atmosphere.
 
 \medskip
-\clabel[WINDGAUGE03_measurement]{Example of data measured by the designed anemometer}
-\picw=15cm \cinspic ./img/WINDGAUGE03_measurement.png
-\caption/f The graph illustrates data measured by the new anemometer WINDGAUGE03 at the edge of a storm. The top panel shows lightning strike data from Blitzortung.org, the middle panel presents wind direction measurements, and the bottom panel displays wind speed data from the anemometer.
+\clabel[TF-G2_fly_clouds]{TF-G2 during flight}
+\picw=15cm \cinspic ./img/TF-G2_fly_clouds.jpg
+\caption/f TF-G2 autogyro under the clouds, during one of many test flights.
 \medskip
 
+The described idea resulted in the attempt to use an unmanned autogyro to carry measuring instruments to the vicinity of thunderstorms shown in Fig.~\ref[TF-G2_fly_clouds]. The main goal of this experiment was to measure and locate the ionizing radiation together with the electric field and resolve the uncertainty of the source and direction of ionizing radiation produced in thunderstorms.
 
-\secc Thermometer and Barometer
+For the investigation of thunderstorm activity, an autogyro presents several key advantages over other types of UAVs, such as multicopters or fixed-wing aircraft, primarily due to its unique aerodynamic properties and operational capabilities. Autogyros, or gyroplanes, leverage the autorotation of their main rotor to stay airborne, which allows for safe flight at low speeds and in turbulent atmospheric conditions often encountered near thunderstorms.
 
-Temperature data is used in multiple ways, one of the most common is for eliminating possible temperature-dependent variations that might influence the sensors mounted on the car platform.  For that purpose the MLAB ALTIMET01A module was used, which combines temperature and pressure sensing capabilities, providing an overview of the atmospheric conditions.
+Compared to multicopters, autogyros are more efficient in terms of energy consumption for longer flight tracks, as they do not require power and control to spin multiple rotors for lift, relying instead on forward motion or wind. This efficiency is advantageous for conducting high-altitude atmospheric research missions that demand sustained presence in targeted areas to gather comprehensive data.
 
-\medskip
-\clabel[temperature_pressure]{Example graph of temperature and pressure evolution during thunderstorm}
-\picw=15cm \cinspic ./img/temperature_pressure.png
-\caption/f  The graphs illustrate the changes in temperature and pressure during the passage of a thunderstorm. As evident, both variables fluctuate throughout the atmospheric event, often in a significant manner.
-\medskip
+Moreover, unlike fixed-wing aircraft that require higher speeds and runways for safety, autogyros can perform take-offs and landings in confined spaces, making them ideal for deployment in varied terrains and closer proximity to storm activities. Their inherent stability, even in gusty conditions, allows for more reliable data collection of meteorological parameters.
+

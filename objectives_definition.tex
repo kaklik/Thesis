@@ -1,0 +1,57 @@
+\label[ch:goals]
+
+As a doctoral researcher, I had the privilege to be part of the {\bf Research Center of Cosmic Rays and Radiation Events in the Atmosphere (CRREAT)}. The CRREAT programme set the following high-level aims:
+i. To deepen the knowledge about the relation between atmospheric phenomena and ionising radiation.
+ii. To clarify phenomena causing variations of secondary cosmic particles in the atmosphere.
+
+In line with my expertise, the dissertation formulated the following objectives intended to contribute directly to the CRREAT aims. To connect measurements of ionising radiation with high-energy atmospheric phenomena, it was necessary to:
+
+\nonum\sec 1. Implementation of Lightning-Detection Apparatus
+Thunderstorms are known to be associated with ionising radiation, specifically {\bf terrestrial gamma-ray enhancements (TGE)} and {\bf terrestrial gamma-ray flashes (TGF)} \cite[Chilingarian_2013, Fishman_Bhat_Mallozzi_Horack_Koshut_Kouveliotou_Pendleton_Meegan_Wilson_Paciesas_et al._1994]. Lightning activity is a defining feature of thunderstorms; however, where and when exactly ionising radiation is produced within storms is not well constrained. Therefore, reliable lightning detection with appropriate spatio-temporal fidelity was a prerequisite.
+
+At the outset I anticipated deploying a commercial solution (see Appendix \ref[app:divisek]). Field experience showed it to be insufficient, which led to a sequence of experimental approaches described in Chapter \ref[ch:trigger]. I developed a set of optical and radio techniques for lightning detection (contributing to CRREAT Aim i), implemented across {\bf mobile measurement vehicles, fixed stations, meteorological balloons, and UAVs}. Methods and field performance were reported in \cite[AMT2023] and \cite[IEEEAero2023]; the related concept of an {\bf angular-sensitive electric field mill (EFM)} that supports static and quasi-dynamic sensing is presented in \cite[JPCS2025].
+
+\nonum\sec 2. Enhance Understanding of Spatial and Temporal Characteristics of Lightning Discharges
+To characterise the lightning context of radiation events, I combined data from established detection networks \cite[Blitzortung.org, Betz2009] with the detectors and techniques developed for Objective 3. Using these resources, I conducted statistical analyses of lightning flash duration and spatio-temporal grouping.
+
+Contrary to expectations based on literature values—average $\approx300$\,ms \cite[rakov_uman_2003] and median $\approx350$\,ms \cite[López_Pineda_Montanyà_Velde_Fabró_Romero_2017]—I found that the {\bf median flash duration in Central Europe is 542\,ms} (see Chapter \ref[ch:flashdur]; dataset summary in Appendix \ref[app:data]). This result has immediate implications for the design of instruments observing lightning-related transients (including ionising radiation), such as {\bf acquisition window length and trigger logic}. The dynamic observations are complemented by {\bf static/quasi-dynamic} approaches, particularly the new {\bf EFM} concept \cite[JPCS2025]. The spatio-temporal characterisation and statistics are documented in \cite[AMT2023], and similar re-assessments of flash-grouping methods have since been reported by other groups \cite[https://doi.org/10.1002/2016JD025159, 9226420].
+
+\nonum\sec 3. Enhancement of Measurement Techniques with In-Situ Atmospheric Monitoring
+To increase the probability of detecting radiation phenomena in storms and to probe high-energy processes {\it in situ}, I deployed {\bf mobile measurement vehicles}, {\bf meteorological balloons}, and {\bf UAV platforms}, and I operated {\bf remote ground-based instruments} at logistically demanding sites (mountain ridges, tall structures) lacking supporting infrastructure.
+
+For balloon and UAV operations I designed and implemented the {\bf TF-ATMON} telemetry system and associated payloads. These platforms produced datasets enabling dosimetric analyses, including {\bf measurements of the Regener–Pfotzer maximum} and {\bf latitudinal dependence} studies, as reported in \cite[RPD2022, 10.1093/rpd/ncac299]; the telemetry architecture is summarised in \cite[AE2017].
+
+\nonum\sec Ionising-Radiation Observations in Thunderstorms (across Objectives 1–3)
+Using GEODOS and other detectors, we observed {\bf short (tens of milliseconds) enhancements} of ionising radiation that did not fit classical TGE/TGF categories, as well as {\bf radiation increases coincident with regional lightning activity yet spatially displaced by tens of kilometres} from the nearest detected discharge. These findings are reported in \cite[SilvaGabreta2024], with contemporaneous independent observations by other groups \cite[2019JD031940, 2021JD036130]. Together, they underline the necessity of multi-instrument, in-situ approaches developed and applied in this work. A broader synthesis of the methods and observations appears in CRREAT review articles \cite[Lembit1, Lembit2, Ploc1].
+
+\nonum\sec Author’s Contribution to the Cited Publications
+
+{\bf Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS — Silva Gabreta 30, 2024.} \cite[SilvaGabreta2024]
+Co-designed GEODOS. Processed and interpreted long time series from multiple sites. (Appendix \ref[app:geodos])
+
+{\bf Measurement of the Regener–Pfotzer maximum using different types of ionising radiation detectors and a new telemetry system TF-ATMON — Radiat. Prot. Dosim. 198(9–11): 712–719, 2022.} \cite[RPD2022]
+Lead author. Approximated data for RP-maximum determination. Organised and conducted balloon flights. Conceived TF-ATMON and realised the measurement electronics. (Appendix \ref[app:rpmax])
+
+{\bf Latitudinal effect on the position of Regener–Pfotzer maximum investigated by balloon flight HEMERA 2019 in Sweden and balloon flights FIK in Czechia — Radiat. Prot. Dosim. 199(15–16): 2041–2046, 2023.} \cite[10.1093/rpd/ncac299]
+Conducted balloon flights. Built data-acquisition electronics. Evaluated telemetry datasets. (Appendix \ref[app:lat])
+
+{\bf In situ ground-based mobile measurement of lightning events above Central Europe — Atmos. Meas. Tech. 16(2): 547–561, 2023.} \cite[AMT2023]
+Lead author. Conceived the mobile measurement concept; designed/built instruments; executed field campaigns; processed long time series. (Appendix \ref[app:amt2023])
+
+{\bf Measurements of Ionizing Radiation Generated in Thunderstorms — IEEE Aerospace Conference, 1–10, 2023.} \cite[IEEEAero2023]
+Integrated mobile, balloon and GEODOS observations; contributed an imaging method using high-speed cameras and VLF antennas. (Appendix \ref[app:ieee])
+
+{\bf Measurements with Angular Sensitive Electric Field Mill in Thunderstorms — J. Phys.: Conf. Ser. 2985(1): 012014, 2025.} \cite[JPCS2025]
+Co-developed mechanical/electrical design of the angular-sensitive EFM; analysis inspired by earlier evaluation of commercial EFM-100 data. (Appendix \ref[app:jpcs])
+
+{\bf Telemetry system for research stratospheric balloon — Int. Conf. on Applied Electronics (AE), 1–4, 2017.} \cite[AE2017]
+Organised and executed the balloon flight; built supporting instruments.
+
+{\bf Addressing challenges of high-energy atmospheric physics in Europe — Radiat. Effects Defects Solids 179(11–12): 1511–1515, 2024.} \cite[REDS2024]
+CRREAT overview; contributed GEODOS, CARDOS, and mobile-vehicle measurements.
+
+{\bf How can we simulate ionizing radiation at aviation altitudes from TGFs? — EPJ Web of Conferences 292, 09001, 2024.} \cite[EPJWeb2024]
+Contributed measurements with high-speed cameras, VLF antennas, and GEODOS (simulation-focused paper).
+
+% --- Appendix labels used:
+% app:divisek, ch:trigger, ch:flashdur, app:data, app:geodos, app:rpmax, app:lat, app:amt2023, app:ieee, app:jpcs.
