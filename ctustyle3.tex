@@ -656,6 +656,8 @@
 
 \addto \_chapx {\_tnum=0 \_fnum=0 \_dnum=0 \_resetABCDE }
 \def   \_secx  {\_seccx \_seccnum=0 }
+% change equation numbering to (chapter.number):
+\def \_thednum    {(\_thechapnum.\_the\_dnum)}
 
 \_def \_printnumberedpar #1#2{\_par
    \_noindent\_wlabel #1%  \bf instead \_bf:

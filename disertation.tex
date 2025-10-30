@@ -1,4 +1,5 @@
 \input ctustyle3
+
 \worktype [D/EN]
 \faculty {F3}
 \department {Department of Radioelectronics}
@@ -138,9 +139,9 @@ That is why I need to design and operate the multiple measurement systems carrie
 
 \input introduction.tex
 
-\chap[triggered_recording] Lightning triggered recording
+%\chap[triggered_recording] Lightning triggered recording
 
-\input triggered_recording.tex
+%\input triggered_recording.tex
 
 \chap[instrumentation] Proposed Instrumentation
 
@@ -169,6 +170,109 @@ That is why I need to design and operate the multiple measurement systems carrie
 \picw=8cm \cinspic ./img/RSMS_receiver.png
 \caption/f Block schematics of UHF receiver with active antenna array elements.
 \medskip
+
+\app[FPGA_trigger] Lightning trigger implementation in FPGA
+
+From the selected channel (signal "data_sel"), the corresponding sample is chosen based on the "chanselect" register, and its sign is used to calculate the absolute value, which is compared with the "threshold" value. If the sample is greater than the threshold, the 16-bit "counter" is incremented; otherwise, it is reset. Once the number of consecutive samples above the threshold reaches the set "duration", a "detect_unshaped" signal is generated, which then passes through the pulse shaper – a logic with the "shapecounter" that keeps the output trigger "detect" active for the duration of shapeon and ensures a dead time shapeoff before the next activation.
+
+\begtt\catcode`\_=12
+module threshold_detector #
+	(
+		parameter integer CHANWIDTH = 16,
+		parameter integer NO_CHANNELS = 8
+	)
+	(
+		input  wire clk,
+		input  wire resetn,
+
+
+		input  wire [CHANWIDTH*NO_CHANNELS-1:0] data,
+		input  wire data_valid,
+		input  wire [7:0] chanselect,
+		input  wire en,
+		input  wire [CHANWIDTH-1:0] threshold,
+		input  wire [15:0] duration,
+		input  wire [15:0] shapeon,
+		input  wire [15:0] shapeoff,
+
+
+		output wire detect
+	);
+
+
+	reg [15:0] counter;
+	reg [7:0] chanselect_r;
+	reg [CHANWIDTH-1:0] data_sel;
+	always @(posedge clk)
+	begin
+		chanselect_r <= chanselect;
+		data_sel <= data[chanselect_r*CHANWIDTH+:CHANWIDTH];
+	end
+
+
+	wire detect_unshaped;
+	wire data_sel_sign = data_sel[CHANWIDTH-1];
+	always @(posedge clk)
+	begin
+		if (!resetn)
+		begin
+			counter <= 0;
+		end
+		else begin
+			if (en && data_valid)
+			begin
+				if ((data_sel_sign ? -data_sel : data_sel) > threshold)
+					counter <= counter + 1;
+				else
+					counter <= 0;
+			end
+		end
+	end
+	assign detect_unshaped = en && (counter >= duration);
+
+
+	reg [15:0] shapecounter;
+	reg detect_r;
+	reg shaping;
+	assign detect = detect_r;
+
+
+	always @(posedge clk)
+	begin
+		if (!resetn)
+		begin
+			shapecounter <= 0;
+			shaping <= 0;
+		end
+		else begin
+			if (!shaping)
+			begin
+				shapecounter <= 0;
+
+
+				if (detect_unshaped)
+					shaping <= 1;
+			end
+
+
+			if (shaping)
+			begin
+				if (shapecounter >= shapeoff)
+				begin
+					shaping <= 0;
+					shapecounter <= 0;
+				end
+				else begin
+					shapecounter <= shapecounter + 1;
+				end
+			end
+		end
+
+
+		detect_r <= shaping && (shapecounter < shapeon);
+	end
+endmodule
+\endtt
 
 \app[LIGHTNING01A_trigger] Off-the-shelf lightning detection
 
@@ -209,7 +313,7 @@ The proposed system, powered by one LS33600 cell, can operate continuously for f
 \caption/f The examined deployment on the roof of a car. The module LIGHTNING01A \cite[LIGHTNING01A] with antenna is located in the upper right corner of the box. Module with battery is DATALOGGER01A \cite[DATALOGGER01A]. GPS receiver \cite[GPS01B] is located in the upper left corner with a connected black GPS antenna. Rest module beside LIGHTNING01A is ALTIMET01A \cite[ALTIMET01A].\clabel[DIVISEK01_Deployment]{AS3935 based detector mounted on the car roof}
 \medskip
 
-\sec Blitzortung network
+\sec Blitzortung network data
 
 The second investigated option of triggering was the use of the Blitzortung.org network. Blitzortung.org is a World-Wide Low-Cost Community-Based TDOA Lightning Detection and Lightning Location Network \cite[Blitzortung, Blitzortung.org]. Blitzortung.org collects signals that are received by a combination of multiple magnetic loop antennas and electric monopoles deployed at network stations \cite[Blitzortung.org]. The configuration, implementation, and sensitivity of stations are not uniform. There are multiple causes for these differences. The network members have different hardware versions, and different quality of maintenance, and the antennas are mounted at different locations with different orientations \urlnote{https://www.blitzortung.org/en/station_list}.
 
@@ -281,6 +385,59 @@ Additionally, for applications like ionizing radiation measurements, the sensiti
 
 Only a slight directional sensitivity of the antenna was observed. This could theoretically be compensated by pointing the AS3935’s antenna (or the whole measurement car) towards the thunderclouds; however, for close lightning within a 5 km radius, this effect is negligible.
 
+
+\app [lightning_trigger_experiments] Auxiliary experiments of trigger generation
+
+\secc [oscilloscope_trigger] Initial experiments with recording trigger generated by oscilloscope
+
+To make the required lightning trigger implementation, a full-featured, fast desktop oscilloscope equipped with big memory and multiple sophisticated trigger settings based on signal characteristics was utilized. Initially, a simple VLF antenna made of a UTP cable loop, originally developed for the Ionozor project\urlnote{https://ionozor.cz}, was connected to one of the oscilloscope channels. The antenna design was based on the use of a VLFANT01 module, with a 10~m length, STP cable coiled into four loops (STP antenna). The STP antenna loops were placed horizontally directly on the plywood base mounted on the car roof. See  Fig.~\ref[loop_antenna] for details.
+
+The oscilloscope was mounted on the back seat of the car by an ISOFIX base and directly powered by a stack of Li-pol batteries totaling 96 V. That solution was selected to completely avoid the possibility of noise generated from the onboard 230 V switching power supply in the testing car.
+
+Subsequently, various trigger settings on the oscilloscope during thunderstorms were tested. The most effective setting turned out to be one that activated the recording (oscilloscope trigger output) based on a combination of threshold level and pulse length. This result is logically justified by the fact that a lightning discharge is a high-energy event involving charge transfer over a significant duration. Therefore, confirming the hypothesis stated in the previous section.
+
+\medskip
+\clabel[mounted_oscilloscope]{Isofix mount of the triggering oscilloscope in the CAR1}
+\picw=15cm \cinspic ./img/oscilloscope.png
+\caption/f Oscilloscope mounted on ISOFIX and used for lightning-triggered signal recording on board of CAR1.
+\medskip
+
+In a basic explanation, the height of the observed electromagnetic pulse corresponds to the rate of change in the magnetic field, and the duration corresponds to the charge amount being transferred. That trigger setup proved itself immune enough that the oscilloscope could also be later powered by 230 V power generated from 12 V car onboard power by switching the power supply, despite the fact that the signal recording itself was heavily affected by interference from that power supply.
+
+Another advantage of that oscilloscope-based setup was that this trigger setting ultimately allowed for the recording of the full length of the lightning discharge signal for up to a few seconds.  However, the price for such a possibility was an extremely long storage-writing time corresponding to many minutes when it was not possible to capture another lightning event.
+
+The information gathered from these experiments and from the recorded signals led to revisiting the assumptions summarised in the introductory section. According to the structure of the signal, it was clear that the event was neither temporally nor spatially limited, as described by assumptions based on the literature. To confirm this hypothesis, however, it was necessary to obtain additional supporting data, which led to the need to use an additional range of instruments and to mitigate the significant dead time introduced by oscilloscope recording.
+
+\medskip
+\clabel[loop_antenna]{STP based loop antenna prototype}
+\picw=15cm \cinspic ./img/VLF_antenna.jpg
+\caption/f The one of the initial variants of STP loop VLF antenna mounted on the measuring car CAR1 has a resonant frequency of ~100 kHz. Its signal was directly sampled by an oscilloscope placed inside the car.
+\medskip
+
+\secc [manual_trigger] Introducing manual trigger method
+
+Although the trigger solution experimentally implemented with an oscilloscope proved effective, it had several drawbacks. One of the main limitations was the necessity to manually set the two parameters -- pulse level and pulse length for each storm, and sometimes even for each phase of the storm. This characteristic resulted in missing some visible lightning events that the operator in the car was able to see, but the oscilloscope did not yet trigger. Therefore, it appeared that a suitable solution would be to add a button for manual trigger operation for all devices, regardless of oscilloscope state.  That was achieved by adding a button to the car's gear lever, as is depicted in the photo \ref[Manual_button]. This manual approach not only allows the triggering of instruments before the oscilloscope is set, but it is also a comfortable solution for the driver to trigger while driving in a storm, where the driver often sees lightning in the storm, but configuring the oscilloscope while driving is not possible, as it would also have to dynamically change with the approaching storm.
+
+Experimentally, a solution was also tested where multiple observers sat in the vehicle, each visually monitoring their sector of the sky for the occurrence of lightning. Each observer operated his or her own manual trigger. The result of that experiment showed that the increase in sensitivity with multiple observers was not proportional to the increased manpower required.
+
+However, the described vision-based manual approach had multiple effects on the recorded data. One of them was the significantly decreased sensitivity of the human-generated trigger during daytime storms. There are even daytime storms where a person is unable to detect the occurrence of lightning discharges, but the trigger from the oscilloscope is recorded. Another effect, or perhaps more accurately a characteristic, is that such a manual trigger is selective, and lightning detected by this method contains a higher proportion of return strokes.
+
+\medskip
+\clabel[Manual_button]{Manual triggering button mounted on manual gear lever}
+\picw=10cm \cinspic ./img/manual_trigger_button.png
+\caption/f Manual triggering button mounted on the manual gear lever suitable to be operated by the car driver during a thunderstorm.
+\medskip
+
+\secc[manual_trigger] Results from testing of triggering methods
+
+The triggered recording method research has concluded that the most suitable solution is an algorithmic approach based on comparing the pulse height to a threshold and measuring its minimum duration before a trigger is executed. Additionally, a manual trigger is required to cover edge cases where the algorithmic trigger is not yet well-calibrated, but there is clear evidence of lightning. 
+
+The newly proposed method is based on partial signal integration, allowing for energy approximation of the pulse. This approach has been implemented in practice using the VLF SDR receiver\ref[Recording_trigger_implementation].
+
+The method of lightning detection using the signal energy has been implemented by the pulse energy obtained from VLF antennas. This method is currently the best-known solution from perspective of our research. It has been shown that the VLF antenna provides dB/dt, and this signal is evaluated by the Time over Threshold (ToT) method.
+
+
+
 \app[UHF_signal_receiver] UHF receiver with QFH array
 
 The construction of the UHF receiver is designed in a way that enables a phase processing of the signal from the antenna array with the aim of future detailed mapping of the lightning \urlnote{https://github.com/UniversalScientificTechnologies/RSMS01}. However, in the case of this experiment, only the scalar envelope of the radio signal is considered.
@@ -305,8 +462,7 @@ The UHF radio receiver is triggered by an external trigger (coming from the VLF 
 
 The antenna array is mounted on an electrically non-conductive 18 mm thick plywood board attached to the roof of the measuring car by crossbars, located a few centimeters above the car’s metal roof \ref[CRREAT_CAR0]. Each element of the antenna array is based on the quadrifilar helix design. The Quadrifilar Helix Antenna (QFH) consists of two loops. 
 
-Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity. The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth shown in f
-g. \ref[input_RF_filter]. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, as is shown in Fig.~\ref[QFH_antenna_radiation_pattern], which is exactly the situation of lightning detection. That technical feature, at the same time, allows the direct processing of the signal from the antenna as quadrature I/Q data.
+Each loop end is connected in a manner that ensures a 90-degree phase difference between the loops, allowing it to receive signals from all directions without the need for orientation adjustments. This phase relationship is essential for achieving circular polarization, which is required for linear polarization orientation insensitivity. The loops are arranged in a helical pattern to ensure that the received signal maintains a constant phase across the antenna's bandwidth, shown in Fig. \ref[input_RF_filter]. This design effectively enhances its performance for applications requiring consistent omnidirectional coverage, as is shown in Fig.~\ref[QFH_antenna_radiation_pattern], which is exactly the situation of lightning detection. That technical feature, at the same time, allows the direct processing of the signal from the antenna as quadrature I/Q data.
 
 The phase difference of the QFH antenna is extensively exploited in the UHF receiver construction because the actual antenna realization used two loops, which are mechanically joined together on the loop midpoint (to achieve better mechanical rigidity), and loop ends connected to the active analog front-end PCB of the antenna (QFHMIX01) on the other side. QFHMIX PCB is mounted in a metal enclosure made from aluminum alloy. The antenna half-loops pass through the enclosure wall by waterproof cable glands. Each joint of the half-loop and QFHMIX01 PCB is considered to be a 40-50 Ω port. Therefore, two single ports with 180° phase shift can be considered as one differential line of approximately 100 Ω. In this case, the QHA antenna has two loops with 100 Ω differential output ports with a phase shift of 90°.
 
@@ -358,6 +514,29 @@ For verification of antenna radiation pattern, the newly designed unmanned gyrop
 \medskip
 
 It is worth noting that most of the available RF components were chosen to ensure that the design can operate across a wide range of frequencies without significant modifications. Specifically, to retune to a substantially different frequency, it is necessary to replace the conductive structure of the antenna loops and retune the input RF filters in the QFHMIX01. This approach allows for the easy assembly of a system that can operate anywhere in the range of 40 MHz to 1 GHz. Additionally, these changes can be implemented on existing manufactured units, allowing the same equipment to be used in subsequent experiments without substantial investments.
+
+\midinsert
+\clabel[rsms01_params]{Technical parameters of the UHF receiver RSMS01}
+\ctable{lc}{
+\hfil Parameter &  Specification \crl \tskip4pt
+Captured band & 10~MHz contiguous segment around \~400~MHz \cr
+Typical center frequency & 370–406~MHz (configurable per site) \cr
+Sampling rate & 2x 10~MS/s (per I/Q stream) \cr
+ADC resolution & 12-bit \cr
+Antenna array & 4× QFH (Quadrifilar Helix), circular polarization \cr
+Front-end configuration & BPF → LNA → BPF → LNA → Mixer + LPF \cr
+Signal transport & Differential I/Q over CAT6 (100~Ω) \cr
+Timing system & PPS from external GNSS receiver \cr
+On-board computer & Zynq XC7Z01 SoC + Epiphany E16G301 \cr
+Trigger system & External VLF-based (RSMS02) \cr
+Max. recording length & ~1.45~s per trigger (with pre/post buffer) \cr
+Mounting & Vehicle roof platform or building \cr
+Noise figure (RF front-end) & ≈~4.8~dB \cr
+Total analog gain & ≈~32~dB \cr
+}
+\caption/t Technical parameters of the mobile UHF lightning receiver RSMS01. Detailed specification is available in RSMS01 documentation\urlnote{https://docs.ust.cz/RSMS01/}
+\endinsert
+
 
 \app The design of a stratospheric sensing balloon
 
@@ -670,13 +849,14 @@ Temperature data is used in multiple ways; one of the most common is for elimina
 
 \bib[c4] = {C4} M. Kákona, J. Kákona, R. Dvořák, I. Ambrožová, O. Velychko, J. Šlegl, M. Sommer, V. Hanousek, and O. Ploc, “Measurements with Angular Sensitive Electric Field Mill in Thunderstorms,” presented at the AtmoHEAD 2024 International Conference, Ischia, Italy, 2024, [Accepted for publication].
 
-\secc Other Publications in Journals with Impact Factor
+\bib[j5] = {J5} I. Ambrožová, M. Kákona, H. Kyznarová, P. Novák, J. Kákona, J. Šlegl, M. Tesař, O. Velychko, and O. Ploc, “Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS,” Silva Gabreta, vol. 30, pp. 63–71, 2024. [Online]. Available: \url{https://www.npsumava.cz/wp-content/uploads/2024/11/ambrozova_web.pdf}
 
 \bib[j3] = {J3} I. Ambrožová, M. Kákona, R. Dvořák, J. Kákona, M. Lužová, M. Povišer, M. Sommer, O. Velychko, and O. Ploc, “Latitudinal effect on the position of Regener–Pfotzer maximum investigated by balloon flight HEMERA 2019 in Sweden and balloon flights FIK in Czechia,” Radiation Protection Dosimetry, vol. 199, no. 15-16, pp. 2041–2046, Oct. 2023. [Online]. Available: \url{https://doi.org/10.1093/rpd/ncac299}
 
-\bib[j4] = {J4} M. Kákona, J. Šlegl, D. Kyselová, M. Sommer, J. Kákona, M. Lužová, V. Štěpán, O. Ploc, S. Kodaira, J. Chroust, D. John, I. Ambrožová, and P. Krist, “AIRDOS — open-source PIN diode airborne dosimeter,” Journal of Instrumentation, vol. 16, no. 03, pp. T03006, Mar. 2021. [Online]. Available: \url{https://dx.doi.org/10.1088/1748-0221/16/03/T03006}
 
-\bib[j5] = {J5} I. Ambrožová, M. Kákona, H. Kyznarová, P. Novák, J. Kákona, J. Šlegl, M. Tesař, O. Velychko, and O. Ploc, “Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS,” Silva Gabreta, vol. 30, pp. 63–71, 2024. [Online]. Available: \url{https://www.npsumava.cz/wp-content/uploads/2024/11/ambrozova_web.pdf}
+\secc Other Publications in Journals with Impact Factor
+
+\bib[j4] = {J4} M. Kákona, J. Šlegl, D. Kyselová, M. Sommer, J. Kákona, M. Lužová, V. Štěpán, O. Ploc, S. Kodaira, J. Chroust, D. John, I. Ambrožová, and P. Krist, “AIRDOS — open-source PIN diode airborne dosimeter,” Journal of Instrumentation, vol. 16, no. 03, pp. T03006, Mar. 2021. [Online]. Available: \url{https://dx.doi.org/10.1088/1748-0221/16/03/T03006}
 
 \secc Other International Conference Proceedings
 

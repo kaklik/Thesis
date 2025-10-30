@@ -1,4 +1,6 @@
-Because recording and then processing the large amount of data captured continuously over thunderstorm development is technically difficult (the technical difficulties are detailed in Chapter \ref[instrumentation], specifically in Sections~\ref[High_speed_camera] and \ref[radio_receivers]), it is needed to have the ability to record only a lightning event with knowing the precise time and with a low rate of false detections. That requirement is enhanced by the fact that data recording is triggered by every false detection, which takes several minutes. This interval creates a “blind” dead time during which the instrumentation is unable to capture another lightning event. To solve that issue, multiple iterations of a mobile measurement system and detectors, which are triggered by electromagnetic emissions produced by lightning, have been used.
+\sec Triggering subsystem
+
+Because recording and then processing the large amount of data captured continuously over thunderstorm development is technically difficult (the technical difficulties are detailed in Sections~\ref[High_speed_camera] and \ref[radio_receivers]), it is needed to have the ability to record only a lightning event with knowing the precise time, and with a low rate of false detections. That requirement is enhanced by the fact that data recording is triggered by every false detection, which takes several minutes. This interval creates a “blind” dead time during which the instrumentation is unable to capture another lightning event. To solve that issue, multiple iterations of a mobile measurement system and detectors, which are triggered by electromagnetic emissions produced by lightning, have been used.
 
 The radio-wave detection method is considered to be the most suitable for the intended application, due to its detection range and relative insensitivity to meteorological conditions (hail, snow, rain, and sunlight) at the time of the lightning discharge.
 
@@ -52,11 +54,11 @@ $$
 %* $A_{th}$: Amplitude threshold above which the signal is considered a lightning signal.
 %\enditems
 
-That network solution is not suitable for detecting lightning in generic electromagnetically noisy environments and requires station placement in electromagnetically quiet areas. A conference paper \cite[5689931] employs an adaptive signal detection algorithm, using a short-time energy detection and Constant false alarm rate (CFAR) for real-time VHF intracloud lightning signal detection. This adaptive approach is promising to enhance the performance of lightning detection systems in stand-alone ground-based setups by dynamically adjusting to varying signal characteristics, but unfortunately, the statistics of the noise background need to be known. Consequently, this cannot be used for mobile measurements, and as a result, such an approach cannot be directly used for the planned research. Therefore, it is necessary to consider other possibilities for lightning event detection. My research began by evaluating the standard commercial technology solutions as described in the appendix \ref[LIGHTNING01A_trigger].
+That network solution is not suitable for detecting lightning in generic electromagnetically noisy environments and requires station placement in electromagnetically quiet areas. A conference paper \cite[5689931] employs an adaptive signal detection algorithm, using a short-time energy detection and Constant false alarm rate (CFAR) to adjust the detection parameters for real-time VHF intracloud lightning signal detection. This adaptive approach is promising to automate setup of lightning detection systems in stand-alone ground-based stations by dynamically adjusting to varying lightning signal characteristics, but unfortunately, the statistics of the noise background need to be known. Consequently, this cannot be used for mobile measurements, and as a result, such an approach cannot be directly used for the planned research. Therefore, it is necessary to consider other possibilities for lightning event detection. 
 
-In conclusion, I found that a lightning trigger based on the currently widely used lightning detection chip AS3935 has limited usability for purposes of lightning recognition and is not able to detect significant amounts of discharges. Further search is therefore necessary to find a more reliable way of lightning detection and triggering during thunderstorms. 
+My research began by evaluating the standard commercial technology solutions as described in the appendix \ref[LIGHTNING01A_trigger]. In conclusion, I found that a lightning trigger based on the currently widely used lightning detection chip AS3935 has limited usability for purposes of lightning recognition and is not able to detect significant amounts of discharges. Moreover, it introduces an undocumented delay, which, due to the proprietary nature of the solution, cannot be easily characterized or compensated for. Further search is therefore necessary to find a more reliable way of lightning detection and triggering during thunderstorms. 
 \vskip0.5\baselineskip
-\noindent{\bf Proposed method.}  Count the number of consecutive samples in the time interval starting at time $t_1$ which exceed the amplitude threshold, and decide for the lightning event if this count equals or exceeds a predefined number $N_{min}$: 
+\noindent{\bf Proposed method:}  Count the number of consecutive samples in the time interval starting at time $t_1$ which exceed the amplitude threshold, and decide for the lightning event if this count equals or exceeds a predefined number $N_{min}$: 
 \label[eq:proposed_det]
 $$
 \forall i, 0\le i < N_{min} \colon |s(t_1 + i\Delta t)| > A_{th}  \ \Leftrightarrow \ {\rm lightning\ detected.} 
@@ -80,52 +82,5 @@ Let us put this into perspective by comparison with Equations \ref[eq:signal_ene
  
 This combined approach is expected to have the benefits of both detector implementations, reducing the likelihood of false positives in noisy environments and improving the reliability of lightning detection without the need for computationally intensive integration to calculate signal energy. This hypothesis has been tested by the experiments whose description will follow.
 
-In summary, the fundamental difference from commonly used methods lies in the fact that the new approach does not rely on simple thresholding or searching for a dominant pulse. Instead, it calculates the approximation of signal energy within a time window. This dynamic energy-based method enables more robust lightning detection in noisy environments and is further detailed and applied in Section~\ref[VLF_LMA].
-
-\sec[oscilloscope_trigger] Initial experiments with recording trigger generated by oscilloscope
-
-To make the required lightning trigger implementation, a full-featured, fast desktop oscilloscope equipped with deep memory and multiple sophisticated trigger settings based on signal characteristics was utilized. Initially, a simple VLF antenna made of a UTP cable loop, originally developed for the Ionozor project \cite[Ionozor], was connected to one of the oscilloscope channels. The antenna design was based on the use of a VLFANT01 module, with a 10~m length, STP cable coiled into four loops (STP antenna). The STP antenna loops were placed horizontally directly on the plywood base mounted on the car roof. See  Fig.~\ref[loop_antenna] for details.
-
-The oscilloscope was mounted on the back seat of the car by an ISOFIX base and directly powered by a stack of Li-pol batteries totaling 96 V. That solution was selected to completely avoid the possibility of noise generated from the onboard 230 V switching power supply in the testing car.
-
-Subsequently, various trigger settings on the oscilloscope during thunderstorms were tested. The most effective setting turned out to be one that activated the recording (oscilloscope trigger output) based on a combination of threshold level and pulse length. This result is logically justified by the fact that a lightning discharge is a high-energy event involving charge transfer over a significant duration. Therefore, confirming the hypothesis stated in the previous section.
-
-\medskip
-\clabel[mounted_oscilloscope]{Isofix mount of the triggering oscilloscope in the CAR1}
-\picw=15cm \cinspic ./img/oscilloscope.png
-\caption/f Oscilloscope mounted on ISOFIX and used for lightning-triggered signal recording on board of CAR1.
-\medskip
-
-In a basic explanation, the height of the observed electromagnetic pulse corresponds to the rate of change in the magnetic field, and the duration corresponds to the charge amount being transferred. That trigger setup proved itself immune enough that the oscilloscope could also be later powered by 230 V power generated from 12 V car onboard power by switching the power supply, despite the fact that the signal recording itself was heavily affected by interference from that power supply.
-
-Another advantage of that oscilloscope-based setup was that this trigger setting ultimately allowed for the recording of the full length of the lightning discharge signal for up to a few seconds.  However, the price for such a possibility was an extremely long storage-writing time corresponding to many minutes when it was not possible to capture another lightning event.
-
-The information gathered from these experiments and from the recorded signals led to revisiting the assumptions summarised in the introductory section. According to the structure of the signal, it was clear that the event was neither temporally nor spatially limited, as described by assumptions based on the literature. To confirm this hypothesis, however, it was necessary to obtain additional supporting data, which led to the need to use an additional range of instruments and to mitigate the significant dead time introduced by oscilloscope recording.
-
-\medskip
-\clabel[loop_antenna]{STP based loop antenna prototype}
-\picw=15cm \cinspic ./img/VLF_antenna.jpg
-\caption/f The one of the initial variants of STP loop VLF antenna mounted on the measuring car CAR1 has a resonant frequency of ~100 kHz. Its signal was directly sampled by an oscilloscope placed inside the car.
-\medskip
-
-\sec[manual_trigger] Introducing manual trigger method
-
-Although the trigger solution experimentally implemented with an oscilloscope proved effective, it had several drawbacks. One of the main limitations was the necessity to manually set the two parameters -- pulse level and pulse length for each storm, and sometimes even for each phase of the storm. This characteristic resulted in missing some visible lightning events that the operator in the car was able to see, but the oscilloscope did not yet trigger. Therefore, it appeared that a suitable solution would be to add a button for manual trigger operation for all devices, regardless of oscilloscope state.  That was achieved by adding a button to the car's gear lever, as is depicted in the photo \ref[Manual_button]. This manual approach not only allows the triggering of instruments before the oscilloscope is set, but it is also a comfortable solution for the driver to trigger while driving in a storm, where the driver often sees lightning in the storm, but configuring the oscilloscope while driving is not possible, as it would also have to dynamically change with the approaching storm.
-
-Experimentally, a solution was also tested where multiple observers sat in the vehicle, each visually monitoring their sector of the sky for the occurrence of lightning. Each observer operated his or her own manual trigger. The result of that experiment showed that the increase in sensitivity with multiple observers was not proportional to the increased manpower required.
-
-However, the described vision-based manual approach had multiple effects on the recorded data. One of them was the significantly decreased sensitivity of the human-generated trigger during daytime storms. There are even daytime storms where a person is unable to detect the occurrence of lightning discharges, but the trigger from the oscilloscope is recorded. Another effect, or perhaps more accurately a characteristic, is that such a manual trigger is selective, and lightning detected by this method contains a higher proportion of return strokes.
-
-\medskip
-\clabel[Manual_button]{Manual triggering button mounted on manual gear lever}
-\picw=10cm \cinspic ./img/manual_trigger_button.png
-\caption/f Manual triggering button mounted on the manual gear lever suitable to be operated by the car driver during a thunderstorm.
-\medskip
-
-\sec[manual_trigger] Results from testing of triggering methods
-
-The triggered recording method research has concluded that the most suitable solution is an algorithmic approach based on comparing the pulse height to a threshold and measuring its minimum duration before a trigger is executed. Additionally, a manual trigger is required to cover edge cases where the algorithmic trigger is not yet well-calibrated, but there is clear evidence of lightning. 
-
-In Section~\ref[oscilloscope_trigger], the focus is on the experiment that served as a foundational step for verifying the new method described in this chapter. The newly proposed method is based on partial signal integration, allowing for energy approximation of the pulse. This approach has been implemented in practice using the VLF SDR receiver, as detailed in Section~\ref[Recording_trigger_implementation].
-
-The method of lightning detection using the signal energy has been implemented by the pulse energy obtained from VLF antennas. This method is currently the best-known solution. It has been shown that the VLF antenna provides dB/dt, and this signal is evaluated by the Time over Threshold (ToT) method.
+In summary, the fundamental difference from commonly used methods lies in the fact that the new approach does not rely on simple thresholding or searching for a dominant pulse. Instead, it calculates the approximation of signal energy within a time window. This dynamic energy-based method enables more robust lightning detection in noisy environments and is further detailed and applied in Section~\ref[Recording_trigger_implementation].
+A more detailed description of the auxiliary experiments that verified this method is in Appendix \ref[lightning_trigger_experiments].

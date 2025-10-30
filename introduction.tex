@@ -1,85 +1,45 @@
-\sec Objectives Formulation
+\sec[objectives] Definition of Objectives
 
-The objectives of this dissertation adopt a physical, episode-based definition of a lightning event (first detected activity to last detected activity across modalities), rather than an algorithmic GLM/LIS cluster definition. This directly addresses the underestimation bias in satellite-only durations and extents. Therefore, clarify unresolved phenomena related to thunderstorms, particularly the initiation and development of lightning, reviewed in Section~\ref[problem_definition]. 
+From a top-level perspective, the overall goal of this thesis is to advance the understanding of lightning phenomena and associated atmospheric radiation. Current understanding of lightning phenomena, particularly its spatial and temporal dynamics and its relationship with high-energy atmospheric radiation, is based on observational methods that may oversimplify its complexity. Existing Lightning Mapping Array networks often reduce lightning to localized impulse clusters, potentially missing information about its full extent, phases, and energy transfer mechanisms. A more detailed, high-resolution, and multi-instrument approach is required to unravel these complexities, leading to improved lightning forecasting, safety protocols, and a deeper comprehension of atmospheric electricity.
 
-While technical standards, such as IEC 62305, have been developed based on applied observations using the mentioned instruments, their focus is on defining parameters for protecting technical devices against lightning currents. These standards simplify the modeling of lightning currents to address the needs of anthropogenic terrestrial objects, which are inherently influenced by artificial factors.
+The objectives of this dissertation adopt a physical, episode-based definition of a lightning event (first detected activity to last detected activity across modalities), rather than an algorithmic GLM (Geostationary Lightning Mapper) or  LIS (Lightning Imaging Sensor) cluster definition. This directly addresses the underestimation bias. Therefore, helping to clarify unresolved phenomena related to thunderstorms, particularly the initiation and development of lightning, is reviewed in Section~\ref[problem_definition]. 
 
-In contrast, the scope of this dissertation is firmly rooted in fundamental research, aiming to study lightning discharges in their natural state. The focus is on understanding the intrinsic properties of lightning phenomena without interference from man-made structures, thereby contributing to a deeper scientific understanding of these processes.
+While technical standards, such as IEC 62305, have been developed based on existing observations, their focus is on defining parameters for protecting technical devices against lightning currents. These standards simplify the modeling of lightning currents to address the needs of anthropogenic terrestrial objects, which are inherently influenced by artificial factors. In contrast, the scope of this dissertation is firmly rooted in fundamental research, aiming to study lightning discharges in their natural state. The focus is on understanding the intrinsic properties of lightning phenomena without interference from man-made structures.
 
 This research aims to utilize new tools for the scientific observation of lightning events within thunderstorms. The focus will be on understanding the relationship between ionizing radiation and lightning. The specific tasks to be undertaken are as follows:
 
 \begitems \style n
-* {\bf Implementation of Lightning Detection Apparatus}: Design and deploy a mobile experimental apparatus capable of scientific-grade radio detection and localization of lightning events and ionizing radiation, considering the expected spatial scales. Collect data using ionizing radiation detectors, radio receivers, high-speed cameras, and ground-based electric field measurements.
-* {\bf Enhance understanding of Spatial and Temporal Characteristics of Lightning Discharges}: Enhance visualization methods and improve measurement apparatuses for detecting lightning and ionizing radiation (as described in Section~\ref[problem_definition]). Study the propagation of lightning, emitted radio signals, and associated electric fields, and reflect the physical principles of lightning development and radio emissions.
-* {\bf Enhancement of Measurement Techniques with in-situ atmospheric monitoring}: Integrate new instruments, such as stratospheric balloons and unmanned aerial vehicles (UAVs), for in-situ measurements of electric fields and ionizing radiation. Employ new electric field mills and semiconductor-based ionizing radiation detectors integrated into UAVs to explore potential insights into lightning initiation and the locations of ionizing radiation generation within clouds.
+* {\bf Implementation of Lightning Detection Apparatus}: Design and deploy a mobile experimental apparatus capable of scientific-grade detection and localization of lightning events and ionizing radiation.
+* {\bf Enhance understanding of Spatial and Temporal Characteristics of Lightning Discharges}: Enhance visualization methods and compare observations across different radiation domains to achieve a better understanding of the spatial and temporal development of lightning.
+* {\bf Enhancement of Measurement Techniques with in-situ atmospheric monitoring}: Integrate new instruments into aerial vehicles for in-situ atmospheric measurements.
 \enditems
 
 The results of this research are expected to provide a deeper understanding of lightning initiation and propagation. At the same time, it offers improved detection and observation techniques that can inform future studies about the relation to ionizing radiation with direct practical applications in meteorology and atmospheric physics.
 
 These three objectives define the scope of this dissertation and are evaluated in Section~\ref[fulfilment] and Section~\ref[contributions].
 
+\sec[problem_definition] Problem Statement
 
-\sec[goals] Thesis Goals
+The field of lightning research faces several challenges, not least the lack of consensus, for example, regarding the principles of so-called “active lightning rods”\cite[VanBrunt_NISTIR5621_1995]. Corresponding technical standards remain inconsistent, reflecting broader disagreements and ongoing debates rather than an established consensus. Research in this area is therefore both relevant and necessary.
 
-From a top-level perspective, the overall goal of this thesis is to advance the understanding of lightning phenomena and associated atmospheric radiation. 
-Current understanding of lightning phenomena, particularly its spatial and temporal dynamics and its relationship with high-energy atmospheric radiation, is based on observational methods that may oversimplify its complexity. Existing detection networks often reduce lightning to localized impulse clusters, potentially missing crucial information about its full extent, initiation phases, and energy transfer mechanisms. A more detailed, high-resolution, and multi-instrument approach is required to unravel these complexities, leading to improved lightning forecasting, safety protocols, and a deeper comprehension of atmospheric electricity.
+Studying lightning is inherently challenging due to reliance on technical approximations in commonly used methods, such as artificial lightning current generators or tests initiated by grounded rocket launches. Measurements conducted on artificial structures, such as telecommunications towers, often result in lightning discharges with characteristics that differ significantly from natural lightning phenomena\cite[10792013]. This highlights the importance of in situ measurements aimed at capturing the intrinsic behavior of natural lightning discharges.
 
-The field of lightning research faces several challenges, not least the lack of consensus, even within Europe, regarding the principles of so-called “active lightning rods.” Corresponding technical standards remain inconsistent, reflecting broader disagreements and ongoing debates rather than an established consensus. Research in this area is therefore both relevant and necessary.
-
-Studying lightning is inherently challenging due to reliance on technical approximations in commonly used methods, such as artificial lightning current generators or tests initiated by grounded rocket launches. Measurements conducted on artificial structures, such as telecommunications towers, often result in lightning discharges with characteristics that differ significantly from natural lightning phenomena. This highlights the importance of in situ measurements aimed at capturing the intrinsic behavior of natural lightning discharges.
-
-Building on these observations, the following scientific assumptions, extracted from the literature review, provide the foundation for this research. While they represent the current understanding in the field, this dissertation critically examines and tests these assumptions to refine the knowledge of thunderstorm phenomena:
+Building on this information, the following scientific assumptions, extracted from the literature review, provide the foundation for this research. While they represent the current understanding in the field, this dissertation critically examines and tests these assumptions to refine the knowledge of thunderstorm phenomena:
 
 \begitems
-* Research in phenomena in thunderstorms, such as ionizing radiation production, has often focused on the peaks of electric fields associated with the initiation of lightning [Kolmašová, et. al., 2015]
-* Lightning discharges are generally considered to be short-duration events  typically ranging from tens of microseconds [Kolmašová, et. al., 2015], to up to 350 milliseconds [Rakov \& Uman, 2003; López et al., 2017]
-* The spatial extent of lightning discharges is believed to be limited to approximately 15 kilometers from the initiation point [Thottappillil et al., 1992; López et al., 2017]
-* It is commonly accepted that ionizing radiation is generated before or during lightning events, primarily in a vertical direction parallel to the electric field intensity vector  [Enoto et.al., 2017]
-* Much of the existing research on lightning discharges focuses on the return-stroke phase, a key phase of cloud-to-ground discharges [Uman, 1969; Berger et al., 1975; Dwyer et.al. 2012]
+* Research on high-energy atmospheric phenomena in thunderstorms has traditionally emphasized the strongest local electric fields present during lightning initiation, where relativistic runaway electron avalanches are believed to develop and produce bursts of ionizing radiation. \cite[Dwyer2003, DwyerUman2014, Gurevich_Milikh_Roussel-Dupre_1992]
+* Lightning is often treated as a transient phenomenon consisting of brief, impulsive processes. Individual return strokes in negative cloud-to-ground flashes exhibit sub- to few-hundred–microsecond-scale current surges and associated electromagnetic radiation\cite[Uman1969, rakov_uman_2003]. In many operational and remote-sensing frameworks, a lightning event is further assumed to last no more than a few hundred milliseconds, typically 300 ms, before it is considered to have ended. \cite[rakov_uman_2003]
+* Classical models and engineering standards typically assume that an individual lightning discharge occupies a limited spatial region on the order of only a few to several tens of kilometers in horizontal extent. \cite[Thottappillil1992, rakov_uman_2003] This view treats lightning as a relatively localized source rather than a storm-scale structure.
+* Bursts and enhancements of ionizing radiation in thunderstorms (including terrestrial gamma-ray flashes (TGFs) and ground-level gamma-ray enhancements) have been observed in close temporal association with lightning leader development and strong local electric fields\cite[Dwyer2012,Photonuclear_reactions_triggered].
+These emissions are often interpreted as bremsstrahlung from relativistic electrons accelerated in the high-field regions of developing lightning channels.
+* Historically, lightning research has emphasized the high-current return stroke of negative cloud-to-ground flashes, which produces the dominant electromagnetic pulse and is directly relevant to lightning protection engineering. \cite[Uman1969, Berger1975,rakov_uman_2003] This return-stroke–centric view underlies most classical models of lightning current and many lightning protection standards.
 \enditems
-
-Considering what has just been said, we define three main goals of this thesis as described in the following three subsections. 
-
-\secc Characterize the true spatial extent and temporal duration of individual lightning events, challenging existing models and detection paradigms
-
-  Conventional wisdom often estimates lightning events to be short-lived (tens to hundreds of milliseconds) and spatially confined. If these assumptions are incorrect, current theories of lightning physics and safety are fundamentally flawed. Optical and radio observations are needed to accurately measure the start, progression, and end of lightning events, to reveal actual durations and geographical footprints. This re-evaluation is critical for developing more accurate physical models.
-
-Unfortunately, existing lightning observation systems are often geographically fixed or lack the comprehensive suite of sensors needed to capture both the optical and electromagnetic signatures of lightning simultaneously with associated high-energy radiation. To overcome limitations in spatial coverage and sensor diversity, a mobile platform equipped with advanced optical (high-speed cameras), radio frequency (VLF/UHF SDR-based receivers), and ionizing radiation detectors is essential. This integrated approach will allow for correlated data acquisition across different physical domains.
-
-\def\odcomm#1{{\Red #1}}
-\def\odchange#1{{\Green #1}}
-
-\secc Investigate lightning and its potential role as an atmospheric ionizing radiation source, particularly through advanced in-situ electric field measurements.
-
-The mechanisms triggering lightning and the potential involvement of high-energy phenomena like relativistic runaway electron avalanches (RREA) are still not fully understood. 
-
-Atmospheric electromagnetic phenomena have been identified as mandatory physical properties influencing atmospheric radiation processes. These phenomena, including lightning, sprites, and other events, are also a significant part of  the formation of cloud structures and significantly impact the movement and characteristics of atmospherically relevant subsystems \cite[npg-20-293-2013].
-
-The evolution of radio transmission has been one of the earliest methods of regular observation of atmospheric electricity (e.g. sferics). It has rapidly revealed the existence of atmospheric charge structures, such as the ionosphere and its variations, which form the atmospheric waveguide allowing the propagation of radio waves produced by lightning over long distances. Research has also delved into the dynamics of geomagnetic pulsation regimes and their interaction with the Earth's magnetosphere, reflecting the interactions resulting from powerful solar flares \cite[Parkhomov2021GeomagneticPB].
-
-In parallel, ongoing meteorological research, the integration of advanced technologies from aviation, starting from balloons, led to the discovery of cosmic radiation \cite[Hess:1912srp, REGENER1935]. The balloon observations were combined with radio transmission to be automated in the form of radiosondes \cite[8561fc97-ffa1-39dd-ae09-da46857c3d48, https://doi.org/10.1029/2006JD008187]. That technology has been improved and used for decades, until the most recent stage of  evolution in  Unmanned Aerial Vehicles (UAVs) \cite[CHANG2020126867].
-
-A significant contribution of radio engineering in meteorology comes from the invention of the radars, which are used for remote sensing of atmospheric structures.  Remote radio sensing and in-situ measuring methods are also combined to obtain multiple perspective views on electric phenomena \cite[Fabry_2015, https://doi.org/10.1029/2018JA025622, bb278c67c86b4412b264b47fd73da169].
-
-The increasing requirements on lightning safety during the Space Race significantly enhanced the technology of ground-based equipment such as electric field mills and radio-based lightning detection and mapping systems \cite[LeVine1978TheTS, Amman1970, 5173582]. The state of art of this radio-based technology utilizes large area EFM arrays for observation in the form of non-intrusive methods to determine atmospheric electric fields and also mapping of lightning evolution and structure. Notable examples of these systems are New Mexico Tech's Lightning Mapping Array (LMA) \cite[https://doi.org/10.1002/2016JD025159],  FALMA \cite[https://doi.org/10.1002/2018GL077628], community-based network Blitzortung.org \cite[Blitzortung.org] and also LOFAR radio telescope  \cite[https://doi.org/10.1002/2017JD028132].
-
-Ground-based electric field measurements have shown limited correlation with lightning discharges, suggesting that critical processes occur at altitudes or locations inaccessible from the ground. We propose to utilize innovative electric field mills (potentially on UAVs) and dedicated ionizing radiation detectors to perform in-situ measurements, aiming to capture the subtle lightning and directly observe any correlation with ionizing radiation events in their immediate environment.
-
-
-\secc  To develop a data processing algorithm capable of visualizing non-point-like structures of lightning discharges
-
-  Displaying lightning as single points on maps, as is common in many lightning detection networks, intuitively misrepresents a phenomenon that is inherentla spatially extended. This oversimplification hinders scientific analysis and public understanding. New algorithms are required to transform raw data (e.g., VLF signals) into visual representations that more accurately depict the three-dimensional, dynamic, and branching nature of lightning channels, thereby improving both scientific interpretation and practical applications like mapping.
-
- As examples, there could be mentioned the Vaisala lightning sensors \cite[vaisala],  WWLLN \cite[https://doi.org/10.1029/2021RS007293], and LINET \cite[Betz2009].
 
 Besides mapping lightning using TDoA, several attempts have been made to map lightning using radio interferometry \cite[Purier2020NewAT,Chilingarian_interferometer,rs15071923]. From all these systems, only preliminary data are currently available, mostly involving just one interferometric station. Recently, the InLMA system \cite[rs15071923] has been utilizing multiple interferometric stations simultaneously. 
 
 Based on the data obtained using the instrumentation developed and described in this dissertation, it can be concluded that these commercial detection networks do not provide fully reliable or relevant data. Videos of lightning discharges included in this work clearly demonstrate that the geometric positions reported by these networks often do not match the actual lightning events captured by our cameras in numerous cases.
 
-
-
-\sec[problem_definition] Problem Statement
-
+Unfortunately, existing lightning observation systems are often geographically fixed or lack the comprehensive suite of sensors needed to capture both the optical and electromagnetic signatures of lightning simultaneously with associated high-energy radiation. To overcome limitations in spatial coverage and sensor diversity, a mobile platform equipped with advanced optical (high-speed cameras), radio frequency (VLF/UHF SDR-based receivers), and ionizing radiation detectors is essential. This integrated approach will allow for correlated data acquisition across different physical domains.
 
 The activity of storms is associated with many phenomena whose nature is not yet fully understood or clarified. This includes the process of thundercloud electrification and the subsequent electric discharges, which are the most prominent manifestation of \ii thunderstorm thunderstorms. As a result, weather forecasting and nowcasting of storm activity and related dangers are often very unreliable.
 
@@ -99,10 +59,9 @@ Research into specific phenomena like \ii ball/lightning ball lightning, sprite 
 
 While the general mechanics of lightning—its initiation and propagation—have been linked to specific atmospheric conditions such as the presence of graupel, ice, and hail, highlighting the relationship between lightning types and the microphysical characteristics of the convective regions, many aspects, including the differential occurrence rates and damaging potential of positive versus negative discharges, still invite further investigation \cite[ribaud:hal-01386421].
 
+Intracloud lightning discharges should have characteristic radio pulses, which consist of a uniform burst pattern. These bursts are described as a distinctive waveform characterized by a fast, large amplitude pulse followed by a smaller, slowly varying overshoot. The full width at half maximum of these pulses measures 0.75 $\mu$s, with inter-pulse intervals of 5 $\mu$s \cite[https://doi.org/10.1029/JC080i027p03801].
 
-Intracloud lightning discharges are known for their characteristic radio pulses, which consist of a uniform burst pattern. These bursts are described as a distinctive waveform characterized by a fast, large amplitude pulse followed by a smaller, slowly varying overshoot. The full width at half maximum of these pulses measures 0.75 $\mu$s, with inter-pulse intervals of 5 $\mu$s \cite[https://doi.org/10.1029/JC080i027p03801].
-
-The \ii compact/intracloud/discharge compact intracloud lightning discharge (CID), a particular type of intracloud lightning, is described as a bouncing-wave phenomenon. This involves multiple reflections occurring at both ends of the radiating channel, contributing to its fine structure and accompanying high-frequency (HF) and very high-frequency (VHF) radiation bursts \cite[5184875].
+The \ii compact/intracloud/discharge Compact Intracloud lightning Discharge (CID), a particular type of intracloud lightning, is described as a bouncing-wave phenomenon. This involves multiple reflections occurring at both ends of the radiating channel, contributing to its fine structure and accompanying high-frequency (HF) and very high-frequency (VHF) radiation bursts \cite[5184875].
 
 An interesting characteristic of radio frequency emissions during thunderstorms is their nature compared to weaker emissions. The strongest pulses typically occur in isolation or at the beginning of leader progression. These pulses are sometimes associated with rapid electric charge relaxation and are not necessarily accompanied by visible light emissions. In instances where these pulses initiate, they are followed by an upward-progressing leader \cite[https://doi.org/10.1029/2003JD003936].
 
@@ -110,7 +69,7 @@ The study of lightning-induced \ii radio/pulses radio pulses has been also expan
 
 For \ii cloud-to-ground/flash cloud-to-ground (CG) flashes, the structure typically includes a sudden start with a stepped leader, in contrast to \ii cloud-to-cloud/flash cloud-to-cloud (CC) flashes that initially showcase a slower train of noise pulses. These RF radiation patterns from lightning display a distinct structure based on the type of lightning flash, differentiating between the abruptness of CG flashes and the gradual initialization of CC flashes \cite[LeVine1978TheTS].
 
-AAlthough satellite lightning imagers have established unprecedented extremes in the duration of these records, a notable absence of population-level spatiotemporal statistics defines the whole electrical episode. Early RF studies proposed how such statistics might be obtained but did not deliver robust distributions, while modern GLM/LIS products, by design, apply clustering that can fragment long, sparse episodes. As a result, widely quoted “hundreds-of-milliseconds” flash durations often reflect processing choices, not physics. This dissertation closes that gap by measuring median and distributional duration and size using a physical episode definition, thereby providing the actionable parameters needed for radiation studies and for constraining lightning initiation models.
+Although satellite lightning imagers have established unprecedented extremes in the duration of these records, a notable absence of population-level spatiotemporal statistics defines the whole electrical episode. Early RF studies proposed how such statistics might be obtained but did not deliver robust distributions, while modern GLM/LIS products, by design, apply clustering that can fragment long, sparse episodes. As a result, widely quoted “hundreds-of-milliseconds” flash durations often reflect processing choices, not physics. This dissertation closes that gap by measuring median and distributional duration and size using a physical episode definition, thereby providing the actionable parameters needed for radiation studies and for constraining lightning initiation models.
 
 %\sec[lightning_signals] Key radio signatures of lightning events
 
@@ -131,13 +90,27 @@ AAlthough satellite lightning imagers have established unprecedented extremes in
 \sec[literature_review] Literature Review: Spatiotemporal Scales of Lightning Discharges
 Understanding the characteristic spatial extent and temporal duration of lightning discharges is foundational for multiple adjacent research threads, including atmospheric ionizing radiation, lightning initiation physics, and hazard modeling. Yet, despite decades of study, the field still lacks consensus statistics (e.g., medians and interquartile ranges) for whole-flash size and duration. Instead, two threads dominate the literature: (i) early RF/field-change studies that characterized intra-flash structure qualitatively, and (ii) modern satellite optical measurements that excel at mapping extremes but whose flash-clustering algorithms complicate population-level timing and size metrics.
 
-\secc Classic RF and field-change studies
+The mechanisms triggering lightning and the potential involvement of high-energy phenomena like relativistic runaway electron avalanches (RREA) are still not fully understood. 
+
+Atmospheric electromagnetic phenomena have been identified as mandatory physical properties influencing atmospheric radiation processes. These phenomena, including lightning, sprites, and other events, are also a significant part of the formation of cloud structures and significantly impact the movement and characteristics of atmospherically relevant subsystems \cite[npg-20-293-2013].
+
+The evolution of radio transmission has been one of the earliest methods of regular observation of atmospheric electricity (e.g. sferics). It has rapidly revealed the existence of atmospheric charge structures, such as the ionosphere and its variations, which form the atmospheric waveguide allowing the propagation of radio waves produced by lightning over long distances. Research has also delved into the dynamics of geomagnetic pulsation regimes and their interaction with the Earth's magnetosphere, reflecting the interactions resulting from powerful solar flares \cite[Parkhomov2021GeomagneticPB].
+
+In parallel, ongoing meteorological research, the integration of advanced technologies from aviation, starting from balloons, led to the discovery of cosmic radiation \cite[Hess:1912srp, REGENER1935]. The balloon observations were combined with radio transmission to be automated in the form of radiosondes \cite[8561fc97-ffa1-39dd-ae09-da46857c3d48, https://doi.org/10.1029/2006JD008187]. That technology has been improved and used for decades, until the most recent stage of  evolution in  Unmanned Aerial Vehicles (UAVs) \cite[CHANG2020126867].
+
+A significant contribution of radio engineering in meteorology comes from the invention of radars, which are used for remote sensing of atmospheric structures.  Remote radio sensing and in-situ measuring methods are also combined to obtain multiple perspective views on electric phenomena \cite[Fabry_2015, https://doi.org/10.1029/2018JA025622, bb278c67c86b4412b264b47fd73da169].
+
+The increasing requirements on lightning safety during the Space Race significantly enhanced the technology of ground-based equipment such as electric field mills and radio-based lightning detection and mapping systems \cite[LeVine1978TheTS, Amman1970, 5173582]. The state of art of this radio-based technology utilizes large area EFM arrays for observation in the form of non-intrusive methods to determine atmospheric electric fields and also mapping of lightning evolution and structure. Notable examples of these systems are New Mexico Tech's Lightning Mapping Array (LMA) \cite[https://doi.org/10.1002/2016JD025159],  FALMA \cite[https://doi.org/10.1002/2018GL077628], community-based network Blitzortung.org \cite[Blitzortung.org] and also LOFAR radio telescope  \cite[https://doi.org/10.1002/2017JD028132].
+
+\secc Classic RF and E-field studies
+
+As example instruments, there could be mentioned the Vaisala lightning sensors \cite[vaisala],  WWLLN \cite[https://doi.org/10.1029/2021RS007293], and LINET \cite[Betz2009].
 
 Le Vine’s NASA Technical Memorandum reported that lightning RF emission (3–300 MHz) appears as trains of discrete pulses whose time histories differ systematically between cloud-to-ground and intracloud flashes; “mixed” cases reflect breakdown phases preceding stepped leaders. The work emphasized frequency-independent patterns across the monitored band and highlighted the feasibility of studying flash duration and intra-flash pulse statistics—but did not deliver population-scale timing distributions.
 
 While the NASA Technical Memorandum by Le Vine remains a foundational, phenomenological description of RF emissions from lightning, it is also a 1970s-era study and should be interpreted accordingly.
 
-\secc Space-based optical mapping 
+\secc Satellite-based optical mapping 
 
 Modern satellite imagers (OTD, LIS, and especially GOES-R GLM) revolutionized lightning mapping with hemispheric views at high frame rates. However, what the instrument calls a “flash” is a product of clustering choices in the ground system: GLM defines a flash as a set of optical groups separated by ≤ 330 ms in time and ≤ 16.5 km in space; exceed either threshold and the activity is split into multiple flashes. These thresholds are engineering parameters, not physical boundaries of a single electrical event. Similar hierarchical clustering exists for LIS/OTD. 
 
@@ -148,13 +121,13 @@ Despite the existence of these advanced devices, the phenomena described in sect
 
 
 
-\secc Known records but not statistics
+\secc Known records without statistics
 
 Spaceborne imagers have detected spectacular “megaflashes” that stretch our intuition: the distance record now stands at 829 km (22 Oct 2017, Great Plains; duration ~7.4 s), surpassing the 768 km 2020 event; the duration record remains 17.1 s (18 Jun 2020, Uruguay–Argentina). These records reflect what satellites can see over immense mesoscale convective systems and are invaluable for bounding physics and hazards. 
 
 However, extremes are not design points. Instrumentation and derived models for radiation studies need central tendencies (median duration/area/length) and distributional spread—quantities that the literature seldom reports consistently. This gap is partly historical (classic RF campaigns weren’t scaled for population statistics) and partly methodological (GLM/LIS clustering truncates long, sparse episodes and fragments sprawling flashes).
 
-In the literature is quite common to see statements that “typical flashes last up to ~350 ms.” In practice, such values often conflate physical duration with an algorithmic timeout: GLM’s 330 ms inter-group limit is a clustering parameter, not a physical limit on flash lifetimes, and can bias published “duration” toward sub-second values. Comprehensive reviews of lightning physics emphasize that key aspects remain poorly constrained, reinforcing the need for observational definitions aligned with physical episodes rather than processing thresholds. 
+In the literature is quite common to see statements that “typical flashes last 300~ms.” In practice, such values often conflate the physical duration with an algorithmic timeout: GLM’s 330 ms inter-group limit is a clustering parameter, not a physical limit on flash lifetimes, and can bias published “duration” toward sub-second values. Comprehensive reviews of lightning physics emphasize that key aspects remain poorly constrained, reinforcing the need for observational definitions aligned with physical episodes rather than processing thresholds. 
 
 For atmospheric ionizing radiation (e.g., glows, TGFs, photonuclear signatures) and for initiation/leader physics, the true time duration the discharge event remains unclear. Recent optical and multi-sensor studies show subcomponents (e.g., continuing currents) with characteristic timescales from tens to hundreds of milliseconds, but these are sub-flash features within longer electrical episodes. 
 
@@ -166,7 +139,7 @@ On the basis of applied observations conducted using existing instruments, the I
 Based on the theoretical framework and assumptions outlined in Section~\ref[literature_review], I proposed the research methodology. This methodology includes the use of measuring vehicles and unmanned aerial vehicles (UAVs) to improve the detection of radiation phenomena associated with thunderstorms. The primary objective is to position detection devices as close to or beneath the storm core as possible, thereby increasing the likelihood of capturing relevant radiation events. That approach is based on the following key components:
 
 \begitems
-* {\bf Utilization of Measuring Vehicles:}
+* {\bf Utilization of Ground Measuring Vehicles:}
 I use measuring vehicles equipped with specialized instruments for detecting radio signals and ionizing radiation. These vehicles also serve as mobile platforms, providing the necessary ground support for the UAVs. They are at the same time equipped with a range of auxiliary devices to capture the interrelationships between the measured data. For example, scintillation detectors for ionizing radiation must account for the influence of temperature changes on sensitivity, and disdrometers are used to measure the intensity and type of precipitation that can wash radon products from the atmosphere, causing increased radiation levels, which could easily be inappropriately interpreted as TGE.
 * {\bf Deployment of UAVs for Radiation and Electric Field Detection:}
 Multiple UAVs are equipped with electric field mills (EFMs) and detectors for ionizing radiation and are tasked with locating and identifying sources of ionizing radiation in the atmosphere. This method leverages the strong presumption that the intensity of generated ionizing radiation diminishes with increasing distance from its source. The UAVs provide data on ionizing radiation that is difficult to obtain from ground-based measurements alone. Therefore, UAVs are supposed to observe thunderstorms cooperatively with measuring cars.
@@ -177,7 +150,7 @@ The flowchart depicted in Fig. \ref[workflow] illustrates a high-level workflow 
 \medskip
 \label[workflow]
 \picw=15cm \cinspic ./img/workflow.pdf
-\caption/f Simplified workflow for detecting and analyzing lightning radio signals and ionizing radiation using measurement cars and UAVs.
+\caption/f Simplified workflow for detecting and analyzing lightning radio signals and ionizing radiation using measurement cars and UAVs. Red scratch indicates a simple, but not realizable branch of the research. 
 \medskip
 
 To address the general unavailability or limitations of commercially available instruments, as well as issues with data quality due to closed design and lack of transparency in internal data filtering processes, I developed several bespoke instruments. These custom-made tools were essential to ensure reliable measurements. Notably, the following instruments were developed to meet the specific needs of this research:
