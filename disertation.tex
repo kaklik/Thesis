@@ -169,7 +169,6 @@ That is why I need to design and operate the multiple measurement systems carrie
 \caption/f Block schematics of UHF receiver with active antenna array elements.
 \medskip
 
-
 \app[FPGA_trigger] Lightning trigger implementation in FPGA
 
 From the selected channel (signal "data_sel"), the corresponding sample is chosen based on the "chanselect" register, and its sign is used to calculate the absolute value, which is compared with the "threshold" value. If the sample is greater than the threshold, the 16-bit "counter" is incremented; otherwise, it is reset. Once the number of consecutive samples above the threshold reaches the set "duration", a "detect_unshaped" signal is generated, which then passes through the pulse shaper – a logic with the "shapecounter" that keeps the output trigger "detect" active for the duration of shapeon and ensures a dead time shapeoff before the next activation.
@@ -942,7 +941,6 @@ repeat=0,
     \vfil\break
  }}
 \pgstyle{} % restore default page style
-
 
 
 \app[RPD_TF-ATMON] Measurement of the Regener-Pfotzer Maximum Using Different Types of Ionising Radiation Detectors and a New Telemetry System TF-ATMON
