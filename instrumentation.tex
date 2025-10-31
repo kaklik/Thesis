@@ -88,7 +88,22 @@ For the observation,  the VLF receiver system was used simultaneously for the de
 \caption/f Screenshot of the web-based user interface to the VLF receiver used to set up the trigger and recording parameters.
 \medskip
 
-Specific implementation of a trigger is in VHDL Attached in Apendix \ref[FPGA_trigger].
+Specific implementation of a trigger is in VHDL attached in Appendix \ref[FPGA_trigger]. Trigger configuration options are detailed in Table \ref[rsms02_trigger].
+
+\midinsert
+\clabel[rsms02_trigger]{Trigger configuration options for RSMS02}
+\ctable{lc}{
+\hfil Parameter &  Description \crl \tskip4pt
+Trigger detectors & 2 independent channels (Trigger 0 and Trigger 1) \cr
+Enable bits & Separate enable for each trigger (bit 16 / bit 20) \cr
+Channel selection & Selectable ADC channel (0–7) per trigger \cr
+Threshold & 16-bit unsigned value, compared against abs(sample) \cr
+Duration & Minimum number of consecutive samples above threshold \cr
+Shape-on time & Duration of trigger pulse (0–65535 cycles) \cr
+}
+\caption/t Programmable trigger parameters for RSMS02.
+\endinsert
+
 
 \secc[VLF_receiver] SDR-based VLF signal receiver
 
@@ -115,7 +130,6 @@ The oscilloscope was replaced with very similar hardware as the UHF signal recei
 \caption/f  Block schematics of VLF receiver. The VLF receiver has the STP
 antenna connected directly to the ADC input, which contains an anti-alias filter.
 \medskip
-
 
 An example of the captured lightning signal can be seen in Fig. \ref[figur_VLFdata].
 
@@ -159,7 +173,7 @@ Gain step size & 0.125 or 1~dB \cr
 
 \sec[ionizing_radiation_detectors] EMI-resistant ionizing radiation detectors
 
-During the research, scintillation, and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors\urlnote{https://docs.dos.ust.cz/airdos/} in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kákona_Ambrožová_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200~keV to 40~MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15~s integration of events is provided.
+During the research, scintillation, and silicon semiconductor ionizing radiation detectors were primarily used. The scintillation detectors comprised a combination of NaI(Tl) scintillator and Silicon Photomultiplier (SiPM) sensors to eliminate the potential influence of magnetic effects from lightning discharges on the detectors. The detector's design was derived from the existing AIRDOS detectors\urlnote{https://docs.dos.ust.cz/airdos/} in the case of semiconductor detectors and AIRDOS-C \cite[Velychko_Kakona_Ambrozova_Ploc_2021]  for scintillation detectors. These detectors were an almost instant solution to cover a broad deposited energy range from 200~keV to 40~MeV with a time resolution down to 100 µs for high-energy events (>1MeV), ensuring detailed temporal and spectral analysis of ionizing particles. For lower energies, only 15~s integration of events is provided.
 
 Newly derived scintillation detectors GEODOS01 and GEODOS02\urlnote{https://docs.dos.ust.cz/geodos/GEODOS02/} had scintillation crystals with a diameter of approximately 18~mm and a length of 30~mm. In addition to these newly developed detectors, the commercial RT-56 detectors were also operated on vehicles for a short period. However, due to their internal and unknown autocalibration, which is unsuitable for mobile measurements, they were subsequently moved to static observation sites. The identical construction of GEODOS01 detectors was then also used at static observatories, similar to the RT-56 detectors. All these described types of detectors at static locations detected ionizing radiation related to thunderstorm activity. Specifically, the observation sites were Poledník and the Lomnický Štít observatory.
 
@@ -170,7 +184,7 @@ To ensure that the detectors were not influenced by electromagnetic interference
 \medskip
 \clabel[geodos01_emi_test_data]{GEODOS01 EMI immunity test recorded data}
 \picw=15cm \cinspic ./img/GEODOS_EMI_test_data.png
-\caption/f Recorded total count rate of the GEODOS01 detector during EMI immunity test. Exposition time is 10 seconds. 
+\caption/f Recorded total count rate of the GEODOS01 detector during EMI immunity test. Integration time is 10 seconds. 
 \medskip
 
 The test confirmed that the detector’s signal chain and shielding design are sufficiently resistant to strong transient electromagnetic fields produced during lightning discharges. While the applied 85 kA, 10/350 µs current impulses are a standardized, technical approximation of a lightning stroke and cannot reproduce the full variability of natural lightning (source geometry, spectral content, rise times, and radiated field distribution), they represent the most rigorous and practically achievable laboratory proxy.
@@ -197,22 +211,22 @@ The screenshot in Figure \ref[scintillator_pulse] shows an example pulse resulti
 \hfil Parameter & Specification \crl \tskip4pt
 Detection element & NaI(Tl) scintillator with SiPM \cr
 Scintillator size & 10~mm diameter, 20~mm length \cr
-Energy range & 0.3–18~MeV (default), extendable up to 40~MeV \cr
-Energy resolution & ~0.2~MeV (default setup) \cr
+Energy range & 0.3–18~MeV (for charged particles) \cr
+Energy resolution & ~70~keV \cr
 Event recording & Energy + timestamp per event above threshold \cr
 Timestamp energy threshold & 1~MeV \cr
 Event time accuracy & 500~ns \cr
-Time resolution & 20~µs \cr
+Time resolution & 60~µs \cr
 Record periodicity & 10~s \cr
-Charging temperature & 0°C to +45°C \cr
-Operating temperature & –20°C to +35°C \cr
+Charging temperature & -12°C to +45°C \cr
+Operating temperature & –20°C to +45°C \cr
 }
 \caption/t Technical parameters of the GEODOS02 scintillation detector. Detailed specification is available in documentation \urlnote{https://docs.dos.ust.cz/geodos/GEODOS02/}
 \endinsert
 
 \sec[Electric_field_mills] High Time Resolution Electric Field Sensors
 
-Electric field sensors were planned to be used as devices capable of indicating the potential for lightning discharges in clouds. For this purpose, Boltek detectors were initially acquired and used for ground-based measurements. Despite their widespread use, these detectors presented significant limitations for mobile measurements due to their bulkiness and less optimal design for mobile deployment. Seeking a more adaptable solution, the more compact Kleinwächter EFM 115 was transitioned to. This Electric Field Mill (EFM) offered an improved form factor for mobile applications, directly connecting its analog signal output to a data logger equipped with a GPS for accurate timestamping\urlnote{https://github.com/mlab-modules/FIELDMILL01}, with a time resolution of 110 ms, limited by Kleinwächter internal design.
+Electric field sensors were planned to be used as devices capable of indicating the potential for lightning discharges in clouds. For this purpose, Boltek detectors were initially acquired and used for ground-based measurements. Despite their widespread use, these detectors presented significant limitations for mobile measurements due to their bulkiness and less optimal design for mobile deployment. Seeking a more adaptable solution, the more compact Kleinwächter EFM 115 was transitioned to. This Electric Field Mill (EFM) offered an improved form factor for mobile applications, directly connecting its analog signal output to a data logger equipped with a GPS for accurate timestamping\urlnote{https://github.com/mlab-modules/FIELDMILL01}, with a time resolution of 110 ms, limited by Kleinwächter's internal design.
 
 However, challenges persisted with the Kleinwächter EFM 115, as its mechanical and weather durability did not meet the demands of mobile fieldwork, and time resolution was not adequate to observation of lightning events, as I published in \mycite[j1]. This situation resulted in the necessity for an alternative solution, prompting the development of a new design for electric field mills. The new design also required increased versatility because these custom mills were engineered to integrate into stationary setups, mobile measurement vehicles, and even atmospheric monitoring via Unmanned Aerial Vehicles (UAVs).
 
@@ -253,51 +267,73 @@ Processed output & Electric field intensity \cr
 \caption/t Key technical parameters of THUNDERMILL01 electric field mill.
 \endinsert
 
-\sec[Electric_field_mills] In-situ measuring instruments
+\sec[in-situ_instruments] Airborne instruments
 
 After initial processing of storm activity records with the above-described instruments, it became apparent that some observations are difficult to explain solely with the data obtained so far. For instance, the finding of the extensive spatial and temporal scale of lightning discharges described in section \ref[triggered_recording] raised questions about the distribution of charges within storm clouds that the lightning connects. Similarly, ambiguities arose regarding ionizing radiation. The uncertainty lies in whether ground measurements missed ionizing radiation because the detectors were too far from the radiation source or because the radiation was emitted in a direction undetectable by ground-based detectors situated directly under the storm cell. To resolve these issues, spatial data on charge distribution and the radiation field are necessary, prompting the proposal of additional supportive experiments, which allow direct in-situ measurements in the atmosphere.
 
 \secc[stratospheric_balloons] Stratospheric balloons
 
-Since the composition of the radiation field varies with altitude \cite[10.1093/oxfordjournals.rpd.a081837] various radiation detector types should be used to measure the vertical profile of cosmic radiation in the atmosphere. It is generally known that an altitude of about 20 km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum \cite[REGENER1935, Regener1934IntensityOT, REGENER1933]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle and it is generally located at 15-27 km above sea level \cite[Bazilevskaya1998].
+Since the composition of the radiation field varies with altitude \cite[10.1093/oxfordjournals.rpd.a081837] and at an altitude of about 15-27~km, the intensity of secondary cosmic radiation reaches its maximum, called the Pfotzer-Regener maximum \cite[REGENER1935, Regener1934IntensityOT, REGENER1933]. The maximum varies with geomagnetic vertical cutoff rigidity and with solar cycle \cite[Bazilevskaya1998].
 
-Due to that physical phenomenon, stratospheric balloons are a useful tool for obtaining data about cosmic radiation in the atmosphere,  especially around and above the Regener-Pfotzer maximum region. However, the radiation-measuring instruments need to be supplemented by other sensors measuring temperature, pressure, humidity, altitude, acceleration, etc.  All these sensors should be continuously monitored during the launch and the flight of the balloon to verify their proper function and their values have to be recorded for further processing of all obtained data.
+Due to that physical phenomenon, stratospheric balloons are a useful tool for obtaining data about cosmic radiation in the atmosphere, and testing atmospheric measurement instrumentation. However, to effectively solve that task, radiation measurement instruments need to be supplemented by other sensors measuring temperature, pressure, humidity, altitude, acceleration, etc.  All these sensors should be continuously monitored during the launch and the flight of the balloon to verify their proper function, and their values have to be recorded for further processing of all obtained data. As I have participated in the launch of multiple stratospheric balloons, the overview of flights is summarized in Table 1 in appendix \ref[FIK_flights] with published results \mycite[j3].  
 
-Therefore I proposed the development of the TF-ATMON\urlnote{https://www.thunderfly.cz/tf-atmon.html}. This system enables on-ground monitoring of sensors and recording of data during the flight and at the same time real-time tracking of the balloon. Resulting methodology was firstly used in full scale on stratospheric balloon flight FIK-6 \ref[FIK-6_setup]  and then improved in FIK-9 flight.
+The flight was performed by the construction of balloon gondolas designed for specific instruments used for a particular flight. Balloon avionics was therefore built around the chosen detectors from scratch. That approach proves to be ineffective and drives me to the design of an atmospheric sensing framework - the TF-ATMON\urlnote{https://www.thunderfly.cz/tf-atmon.html}. This system enables on-ground monitoring of sensors and recording of data during the flight and at the same time, real-time tracking of the unmanned aircraft. The resulting methodology was first used in full scale on stratospheric balloon flight FIK-6 \ref[FIK-6_setup] and then improved in FIK-9 flight to the TF-B1 airframe described in the Appendix \ref[stratospheric_balloon_TF-B1]. The resulting equipment was repeatedly used as an essential tool for instrument testing, especially ionizing radiation detectors. The main technical parameters of the TF‑B1 stratospheric balloon platform are summarized in Table \ref[tfb1_params].
 
-I have participated in the launch of multiple stratospheric balloons \mycite[j3], the overview of flights is summarized in Table 1 in appendix \ref[FIK_flights]. At the beginning (until the FIK6 flight), the construction of balloon gondolas was designed for specific instruments used for a particular flight. Balloon avionics was therefore built around the chosen detectors from scratch.
+\midinsert
+\clabel[tfb1_params]{Technical parameters of the TF-B1 stratospheric balloon platform}
+\ctable{lc}{
+\hfil Parameter &  Specification \crl \tskip4pt
+Maximum altitude & approx. 30~km \cr
+Payload capacity & up to 2~kg \cr
+Flight duration & 2–4~hours \cr
+Ascent rate & 5–6~m/s \cr
+Descent system & Parachute recovery \cr
+Launch method & Free balloon with tether release \cr
+Recovery & GNSS-based tracking beacon \cr
+Operating temperature range & –60\,°C to +40\,°C \cr
+Power supply & Li-ion battery pack (7.2~V nominal) \cr
+Telemetry & TFSIK01 (primary), TFLORA01 (backup) \cr
+Positioning & TFGPS01 GNSS receiver \cr
+Data logging & Onboard SD + real-time telemetry \cr
+Avionics structure & Modular bay inside EPP/foam gondola \cr
+Payload interface & UART (TFUNIPAYLOAD01) \cr
+}
+\caption/t Technical parameters of the TF-B1 high-altitude balloon platform.
+\endinsert
 
-This concept led to a situation where every new flight meant a significant amount of work although many components were recycled every year and used for the next one. The reason was the need to adapt the avionics to the updated version of the detectors.
-
-Due to a relatively high value of payload and measurement relied only on board data recording it was necessary to ensure the recovery of the gondola after every flight. Therefore the main criteria for the construction of the balloon experiment were as follows:
-
-\begitems
-* Reliable transmission of information about the geographical location of the gondola
-* Good resistance to impact
-* Ensuring the function in temperatures far below zero
-\enditems
-
-Despite the generally successful nature of all fights and the fact that the gondolas were always found, different technologies were tried to eliminate the partial shortcomings that emerged during the previous balloon flights. For example, the initially used GSM-based telemetry system was replaced by a significantly more robust IoT LoRa transmitter, making it possible to transmit the data necessary for tracing the gondola directly to TheThingsNetwork\urlnote{https://www.thethingsnetwork.org/}. This step enables a high reliability of finding the gondola and at the same time a basic recording of the experiment data transmitted to the ground. For the case of more advanced detectors, it was also necessary that the 3D flight trajectory, including the orientation, be recorded synchronously with the supplementary quantities. That is also ensured with the incorporation of the TF-ATMON system, which relies on PX4 autopilot firmware running on Pixhawk hardware equipped with IMU sensors. As can be seen from Table 1 in appendix \ref[FIK_flights], flights conducted since FIK-5 implemented avionics using UAV technology. It is realized by the use of the Pixhawk-based autopilot hardware with PX4 firmware. Telemetry was implemented by a very reliable combination of the LoRa modem and the SiK modem.
-
-Apart from technologies used directly in balloon gondolas, many supplementary tools on the ground have undergone intensive development. For example, to find the balloon, it was necessary to have an accurate real-time map of its position together with a prediction of the next stage of the flight and the location of touchdown. For the case of the flights, since the FIK-5 used the HabHub \urlnote{https://tracker.habhub.org/} (lately the SondeHub\urlnote{https://amateur.sondehub.org/}) was used to track and predict the movement of stratospheric balloons in real-time. In fact, in the beginning, the HabHub was used to manually run the prediction of flight, but the real-time calculation of trajectory predictions introduced in FIK-3 based on live telemetry data significantly decreased the time required for gondola recovery.
 
 \secc[autogyro_thunderstorm] Thunderstorm-proof Autogyro
 
-Despite widespread efforts, which could be found in the literature \cite[https://doi.org/10.1029/2006JD007242,TELEXTheThunderstormElectrificationandLightningExperiment,  ScientificInsightsfromFourGenerationsofLagrangianSmartBalloonsinAtmosphericResearch, ABalloon_precipitation] to deploy measurement balloons into thunderstorms with various sensors, these attempts were often unsafe, and the results are sporadic because the balloon flight path is uncontrolled or control is very limited\urlnote{https://windbornesystems.com/}. Therefore that technique seems to be outdated in comparison with the current \glref{UAV} technology. This fact led to the exploration of using \glref{UAV}s instead. Moreover, due to the spatial extent of lightning structures (see Section~\ref[results] for details), it's required to experiment with multiple coordinated locations simultaneously, which is practically unattainable with uncontrolled balloons.  Therefore better understanding of the phenomena can very likely be achieved by using specially equipped \glref{UAS}, which enables measurement directly in or near the thunderstorms.
+Despite widespread efforts, which could be found in the literature \cite[https://doi.org/10.1029/2006JD007242,TELEXTheThunderstormElectrificationandLightningExperiment,  ScientificInsightsfromFourGenerationsofLagrangianSmartBalloonsinAtmosphericResearch, ABalloon_precipitation] to deploy measurement balloons into thunderstorms with various sensors, these attempts were often unsafe, and the results are sporadic because the balloon flight path is uncontrolled or control is very limited. Therefore, that technique seems to be outdated in comparison with the current \glref{UAV} technology. This fact led to the exploration of using UAVs instead. Moreover, due to the spatial extent of lightning structures (see Section~\ref[results] for details), it's required to experiment with multiple coordinated locations simultaneously, which is practically unattainable with uncontrolled balloons.  Therefore better understanding of the phenomena can very likely be achieved by using specially equipped \glref{UAS}, which enables measurement directly in or near the thunderstorms.
 
-\glref{UAS} offers additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of lifting condensation level (\glref{LCL}), for example. The obvious requirement is to use a new unmanned airframe using TF-ATMON, described in Section~\ref[balloon_flights], and employ the integrated flight controller to take control over the measurement procedure in the atmosphere.
+\glref{UAS} offers additional advantages, such as the ability to measure in specific atmospheric layers, where it is required to be actively held, which is useful for determining key parameters that influence cloud electrification, like radon and aerosol concentrations on the entry of lifting condensation level (\glref{LCL}), for example. The obvious requirement is to use an optimized unmanned airframe, which could exploit TF-ATMON, tested on stratospheric balloons as described in Section~\ref[balloon_flights], and employ the integrated flight controller to take control over the measurement procedure in the atmosphere.
 
 \medskip
 \clabel[TF-G2_fly_clouds]{TF-G2 during flight}
 \picw=15cm \cinspic ./img/TF-G2_fly_clouds.jpg
-\caption/f TF-G2 autogyro under the clouds, during one of many test flights.
+\caption/f TF-G2 autogyro under the clouds, during one of the few hundred test flights.
 \medskip
 
-The described idea resulted in the attempt to use an unmanned autogyro to carry measuring instruments to the vicinity of thunderstorms shown in Fig.~\ref[TF-G2_fly_clouds]. The main goal of this experiment was to measure and locate the ionizing radiation together with the electric field and resolve the uncertainty of the source and direction of ionizing radiation produced in thunderstorms.
+The described idea resulted in the design of a unique unmanned autogyro TF-G2 (described in more detail in Appendix \ref[unmanned_autogyro]) capable of carrying measuring instruments to the vicinity of thunderstorms, shown in Fig.~\ref[TF-G2_fly_clouds]. The main goal of this experimental attempt was to measure and locate the ionizing radiation together with the electric field and resolve the uncertainty of the source and direction of ionizing radiation produced in thunderstorms.
 
 For the investigation of thunderstorm activity, an autogyro presents several key advantages over other types of UAVs, such as multicopters or fixed-wing aircraft, primarily due to its unique aerodynamic properties and operational capabilities. Autogyros, or gyroplanes, leverage the autorotation of their main rotor to stay airborne, which allows for safe flight at low speeds and in turbulent atmospheric conditions often encountered near thunderstorms.
 
-Compared to multicopters, autogyros are more efficient in terms of energy consumption for longer flight tracks, as they do not require power and control to spin multiple rotors for lift, relying instead on forward motion or wind. This efficiency is advantageous for conducting high-altitude atmospheric research missions that demand sustained presence in targeted areas to gather comprehensive data.
+Compared to multicopters, autogyros are more efficient in terms of energy consumption for longer flight tracks. This efficiency is advantageous for conducting high-altitude atmospheric research missions that demand sustained presence in targeted areas to gather comprehensive data. Moreover, unlike fixed-wing aircraft that require higher speeds and runways for safety, autogyros can perform take-offs and landings in confined spaces, making them ideal for deployment in varied terrains and closer proximity to storm activities. Their inherent stability, even in gusty conditions, allows for more reliable data collection of meteorological parameters. Technical parameters of the TF‑G2 autogyro are listed in Table \ref[tfg2_params].
 
-Moreover, unlike fixed-wing aircraft that require higher speeds and runways for safety, autogyros can perform take-offs and landings in confined spaces, making them ideal for deployment in varied terrains and closer proximity to storm activities. Their inherent stability, even in gusty conditions, allows for more reliable data collection of meteorological parameters.
-
+\midinsert
+\clabel[tfg2_params]{Technical parameters of the TF‑G2 unmanned autogyro}
+\ctable{lc}{
+\hfil Parameter &  Specification \crl \tskip4pt
+Maximum takeoff weight & 1.5~kg \cr
+Payload capacity & up to 100~g \cr
+Rotor diameter & 0.8–1.05~m \cr
+Airspeed flight range & 7–25~m/s \cr
+Gust resistance & up to 10~m/s² \cr
+Launch methods & Hand or car-roof takeoff \cr
+Recovery mode & Passive autorotation \cr
+Sensor support & THUNDERMILL01, AIRDOS03, TFHT01, TFPM02 \cr
+Environmental sensing & Temp., humidity, PM$_{0.5–10}$, ionizing radiation, E-field \cr
+Telemetry system  & TF‑ATMON compatible \cr
+}
+\caption/t Technical parameters of the designed TF‑G2 unmanned autogyro for atmospheric research.
+\endinsert
