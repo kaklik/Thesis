@@ -23,7 +23,7 @@ This continuous-time formulation can be easily adapted to the discrete-time case
    \label[eq:signal_energy_det_discrete]
 $$ \sum_{0\le i < N } |s(t_1 + i\Delta t)|^2 \Delta t > E_{th}\ \Leftrightarrow\ {\rm lightning\  detected}, \eqmark
 $$
-where the time interval starts at time $t_1$ and ends at time $t_2 = (N-1)\Delta t$. 
+where the time interval starts at time $t_1$ and ends at time $t_2 = t_1 + (N-1)\Delta t$. 
 
 
 %This formula expresses that a lightning signal is detected when its energy exceeds a predefined threshold value.
@@ -63,7 +63,7 @@ My research began by evaluating the standard commercial technology solutions as 
 $$
 \forall i, 0\le i < N_{min} \colon |s(t_1 + i\Delta t)| > A_{th}  \ \Leftrightarrow \ {\rm lightning\ detected.} 
 $$
-Let us put this into perspective by comparison with Equations \ref[eq:signal_energy_det_discrete] and \ref[eq:signal_amplitude_det]. 
+Let us put this into perspective by comparison with Equations \ref[eq:signal_energy_det_discrete] and \ref[eq:signal_amplitude_det]: 
  %Let $\chi(x)$ denote an indicator function which is 1 when the argument $x$ is true  (and is 0 otherwise). Requiring at least $N_{min}$ consecutive samples which are higher in amplitude than $A_{th}$ implies 
  %
  $$ \sum_{0 \le i < N_{min}} |s(t_1 + i\Delta t)|^2 \Delta t  \ge 
