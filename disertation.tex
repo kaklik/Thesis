@@ -12,13 +12,13 @@
 \date {Oct 2025}
 \supervisor{doc. Dr. Ing. Pavel Kovář\nl Consultant: doc. Ing. Jan Mikeš, Ph.D.}
 
-\abstractEN {This dissertation investigates lightning and related ionizing radiation phenomena using newly developed radio, optical, and ionizing radiation instruments. A set of devices was created, including a software-defined receiver for VLF and UHF bands designed for lightning detection and mapping, EMI-resistant ionizing radiation detectors, a synchronized triggering system, and the storm-resistant unmanned autogyro TF-G2 equipped with the TF-ATMON telemetry system.
-By combining ground-based, airborne, and stratospheric measurements, the research enables simultaneous observation of optical, electromagnetic, and radiation manifestations of thunderstorm activity. The collected data show that lightning discharges often last longer and cover a larger area than traditional models and standards assume. The median duration of discharges derived from correlated optical and radio data exceeds half a second (524 ms), challenging the commonly used values for lightning event duration.
-The study demonstrates that an integrated multi-domain approach improves the understanding of storm electrodynamics and establishes a basis for further research on the relationship between lightning and ionizing radiation. The developed instruments also represent a practical contribution to modern atmospheric measurements.}
 
-\abstractCZ {Tato disertační práce se zabývá výzkumem blesků a souvisejících jevů ionizujícího záření pomocí nově vyvinutých rádiových, optických a radiačních přístrojů. Byla vytvořena sada zařízení zahrnující softwarově definovaný přijímač pro pásma VLF a UHF určený k detekci a mapování blesků, elektromagneticky odolné detektory ionizujícího záření, synchronizovaný systém pro spouštění záznamu a bouřkám odolný bezpilotní vírník TF-G2 s telemetrickým systémem TF-ATMON.
-Kombinací pozemních, leteckých a stratosférických měření umožňuje výzkum současné pozorování optických, elektromagnetických a radiačních projevů bouřkové činnosti. Naměřená data ukazují, že bleskové výboje často trvají déle a zasahují větší oblast, než předpokládají tradiční modely a normy. Medián trvání výbojů odvozený z korelovaných optických a rádiových dat přesahuje půl sekundy (524 ms), což zpochybňuje dosud běžně používané hodnoty délky trvání bleskové události.
-Práce dokládá, že integrovaný multidoménový přístup zlepšuje porozumění elektrodynamice bouří a vytváří základ pro další výzkum vztahu mezi blesky a ionizujícím zářením. Vyvinuté přístroje zároveň představují praktický přínos pro moderní atmosférická měření.}
+
+\abstractEN {This dissertation investigates lightning and related ionizing radiation phenomena using originally developed radio, optical, and ionizing radiation detectors. By combining ground-based, airborne, and stratospheric measurements, the research enables simultaneous observation of optical, electromagnetic, and radiation manifestations of thunderstorm activity. The collected data show that lightning discharges often last longer and cover a larger area than is traditionally assumed. The scientific contribution is twofold: (1) Design of the experiments aiming at studying causal relations between lighting properties and ionizing radiation; (2) Observed predominant horizontal planarity of the lighting. This observation can also explain the newly detected radiation phenomenon that was observed with the described instruments. We did not find a similar connection in the literature.
+}
+
+\abstractCZ{Tato disertační práce zkoumá atmosférické bleskové výboje a souvisící jevy ionizujícího záření s využitím původně vyvinutých rádiových, optických a radičních detektorů. Kombinací pozemních, leteckých a stratosférických měření umožňuje výzkum simultánní pozorování optických, elektromagnetických a radiačních projevů bouřkové aktivity. Shromážděná data ukazují, že výboje blesku často trvají déle a pokrývají větší plochu, než bývá tradičně předpokládáno. Vědecký přínos je dvojí: (1) Návrh experimentů zaměřených na studium kauzálních vztahů mezi vlastnostmi blesků a ionizujícím zářením; (2) Převážně horizontální pozorovaná planarita blesků. Takové pozorování může vysvětlit zde popsanými přístroji nově pozorovaný radiační jev. Podobná souvislost nebyla v literatuře nalezena.
+}
 
 \keywordsEN{Atmospheric electromagnetic events, Radio receiver, Software defined receiver, UAV-Based atmospheric measurements, Unmanned aerial vehicle, Unmanned aerial systems, Telemetry, Storm electrodynamics, Ground-based atmospheric observations, Mobile sensing platforms, Triggered recording systems, autogyro, TF-G2, TF-ATMON}
 \keywordsCZ{Atmosférické elektromagnetické jevy, Rádiový přijímač, Softwarově definovaný přijímač, Měření atmosféry pomocí UAV, Bezpilotní letoun, Bezpilotní systémy, Telemetrie, Elektrodynamika bouří, Pozemní atmosférická pozorování, Mobilní senzorové platformy, Systémy pro spouštění záznamu, Vírník, TF-G2, TF-ATMON}
@@ -26,7 +26,7 @@ Práce dokládá, že integrovaný multidoménový přístup zlepšuje porozumě
 \declaration {
    I declare that I have written the submitted thesis independently and that I have cited all used information sources in accordance with the methodological guideline on adhering to ethical principles in the preparation of university theses.
 
-   In Prague on October 31, 2025
+   In Banská Štiavnica on October 31, 2025
    \signature % makes dots
 }
 
@@ -158,12 +158,6 @@ That is why I need to design and operate the multiple measurement systems carrie
 \chap[results] Results, Fulfillment of Objectives, and Scientific Contributions
 
 \input results.tex
-
-\app Index
-\makeindex
-
-\app Dictionary
-\makeglos
 
 \app[FIK_flights] Balloon Flights Overview
 \vbox to0pt{\vskip-25mm\centerline{\inspic ./img/FIK_flights.pdf }\vss}
@@ -303,11 +297,11 @@ A block diagram of the interconnections is shown in Fig~\ref[DIVISEK01_block_dia
 \clabel[DIVISEK01_schematics]{AS3935 based detector schematics diagram}
 \medskip
 
-\medskip
-\picw=15cm \cinspic ./img/lightning_detector_block_diagram.png
+\midinsert
+\picw=10cm \cinspic ./img/lightning_detector_block_diagram.png
 \caption/f Schematic block diagram of the examined lightning detector. Detailed schematics of modules are available at \cite[DATALOGGER01A, GPS01B, LIGHTNING01A, ALTIMET01A].
 \clabel[DIVISEK01_block_diagram]{AS3935 based detector block diagram}
-\medskip
+\endinsert
 
 The time response of the lightning detector was tested in the laboratory before field measurements using a power signal generator with a wire loop of 60 mm diameter. The wire loop was placed at a distance of 30 mm from the antenna. The interrupt output was captured by an oscilloscope. Response time to a rectangular signal was 93 ms (±1 ms). The rectangular signal pulse was classified by the internal algorithm as a disturbance  (“DIVIS4” output in the log file). The response time to the received signal was found not to be constant for each signal. Some pulses were classified as lightning (“DIVIS8” in the log file) by the proprietary algorithm, where the response time was only a few milliseconds. Due to the time delay introduced by the algorithm, the device could be potentially used for triggering other measuring devices by using a pretrigger recording buffer of maximal algorithm latency plus lightning duration. For a lightning event duration of less than 900 ms, a one-second pre-trigger buffer was found to be suitable.
 
@@ -318,7 +312,7 @@ The proposed system, powered by one LS33600 cell, can operate continuously for f
 \caption/f The examined deployment on the roof of a car. The module LIGHTNING01A \cite[LIGHTNING01A] with antenna is located in the upper right corner of the box. Module with battery is DATALOGGER01A \cite[DATALOGGER01A]. The GPS receiver \cite[GPS01B] is located in the upper left corner with a connected black GPS antenna. Rest module beside LIGHTNING01A is ALTIMET01A \cite[ALTIMET01A].\clabel[DIVISEK01_Deployment]{AS3935 based detector mounted on the car roof}
 \medskip
 
-\sec Blitzortung network data
+\secc Blitzortung network data
 
 The second investigated option of triggering was the use of the Blitzortung.org network. Blitzortung.org is a World-Wide Low-Cost Community-Based TDOA Lightning Detection and Lightning Location Network \cite[Blitzortung, Blitzortung.org]. Blitzortung.org collects signals that are received by a combination of multiple magnetic loop antennas and electric monopoles deployed at network stations \cite[Blitzortung.org]. The configuration, implementation, and sensitivity of stations are not uniform. There are multiple causes for these differences. The network members have different hardware versions, and different quality of maintenance, and the antennas are mounted at different locations with different orientations \urlnote{https://www.blitzortung.org/en/station_list}.
 
@@ -328,7 +322,7 @@ The Blitzortung.org controller outputs a 256-byte signal fragment covering the p
 
 To use Blitzortung.org as a recording trigger, both the processed data from the server and the use of the station itself were investigated. The usage of the Blitzortung station hardware was relatively quickly abandoned because the station is not constructed to trigger lightning signals in proximity to the thunderstorm. Therefore the station usually reaches something like an “overage” which is called an “interference mode” in Blitzortung.org terminology \urlnote{https://info.lightningmaps.org/doku.php?id=en:hardware:red:operation:interference}. The practical result is that the station is not able to generate relevant triggers for lightning. Instead, it triggers very frequently. Sometimes the opposite situation arises -- the Blitzortung.org station can detect lightning far away but is not able to trigger lightning in the near vicinity. The situation is probably dependent on the storm's development and the terrain. However, in both cases, the station trigger output is not usable for triggering other devices. There is a possibility that the situation could be resolved by changing the Blitzortung station firmware, unfortunately, the firmware is closed source, similar to the exact implementation of location algorithms used on the servers.
 
-\sec Comparison of different triggering methods
+\secc Comparison of different triggering methods
 
 During the triggering method development, the devices were regularly tested by a car measurement campaign. There could be shown an example of data captured during a thunderstorm near the village of Borkovice, Czechia (car position 49.1949915 N, 14.639835 E, at altitude 427~m a.s.l.) on August 3, 2019, as shown in figure \ref[lightning_times].
 
@@ -550,7 +544,7 @@ The schematic diagram of the avionics hardware is summarized in the figure \ref[
 
 \medskip
 \clabel[avionics_schematics]{FIK flight avionics}
-\picw=15cm \cinspic ./img/avionics_block_schematics.pdf
+\picw=17cm \cinspic ./img/avionics_block_schematics.pdf
 \caption/f The schematic diagram of the new avionics concept (TF-B1) used in FIK flights.
 \medskip
 
@@ -589,7 +583,7 @@ The TF-ATMON reliably recorded temperature, air pressure, humidity, and radiatio
 
 \medskip
 \clabel[FIK-6_RAW_data]{FIK-6 flight recorded data}
-\picw=14cm \cinspic ./img/FIK-6_RAW_data.png
+\picw=14.5cm \cinspic ./img/FIK-6_RAW_data.png
 \caption/f Raw data measured during the flight. From top to bottom: temperature of the scintillator, atmospheric pressure, gondola internal temperature,  gondola internal relative humidity, scintillator - counts of radiation events per 10 s, the silicon detector, and the G-M counter, barometric altitude, and altitude from GNSS. The barometric altitude was calculated using the ISA 1976 \cite[us_standard_atmosphere_1976].
 \medskip
 
@@ -693,7 +687,7 @@ The modem firmware is based on modified SiK firmware, which newly incorporates i
 \medskip
 \clabel[TFSIK01]{TFSIK dual-antenna telemetry modem}
 \picw=15cm \cinspic ./img/TFSIK01.jpg
-\caption/f TFSIK PCB without electromagnetic shielding and 3D printed housing. The RF input and output with impedance matching network, RF switch, band-pass filter, and LNA are on the left of the photo.
+\caption/f TFSIK01 PCB without electromagnetic shielding and 3D printed housing. The RF input and output with impedance matching network, RF switch, bandpass filter, and LNA are on the left side.
 \medskip
 
 
@@ -859,25 +853,30 @@ Thus, HabHub technology, previously tested in balloon flights (Described in Appe
 
 \specialbibs
 
-
 \secc Publications in Journals with Impact Factor Relevant to the Thesis
 
 \bib[j1] = {J1} J. Kákona, J. Mikeš, I. Ambrožová, O. Ploc, O. Velychko, L. Sihver, and M. Kákona, “In situ ground-based mobile measurement of lightning events above central Europe,” Atmos. Meas. Tech., vol. 16, pp. 547–561, 2023. [Online]. Available: \url{https://doi.org/10.5194/amt-16-547-2023}
 
 \bib[j2] = {J2} J. Kákona, M. Lužová, M. Kákona, M. Sommer, M. Povišer, O. Ploc, R. Dvořák, and I. Ambrožová, “Measurement of the Regener–Pfotzer maximum using different types of ionising radiation detectors and a new telemetry system TF-ATMON,” Radiation Protection Dosimetry, vol. 198, no. 9-11, pp. 712–719, Aug. 2022. [Online]. Available: \url{https://doi.org/10.1093/rpd/ncac124}
 
-\secc International Conference Proceedings Relevant to the Thesis
-
-\bib[c4] = {C4} M. Kákona, J. Kákona, R. Dvořák, I. Ambrožová, O. Velychko, J. Šlegl, M. Sommer, V. Hanousek, and O. Ploc, “Measurements with Angular Sensitive Electric Field Mill in Thunderstorms,” presented at the AtmoHEAD 2024 International Conference, Ischia, Italy, 2024, [Accepted for publication].
-
 \bib[j5] = {J5} I. Ambrožová, M. Kákona, H. Kyznarová, P. Novák, J. Kákona, J. Šlegl, M. Tesař, O. Velychko, and O. Ploc, “Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS,” Silva Gabreta, vol. 30, pp. 63–71, 2024. [Online]. Available: \url{https://www.npsumava.cz/wp-content/uploads/2024/11/ambrozova_web.pdf}
 
 \bib[j3] = {J3} I. Ambrožová, M. Kákona, R. Dvořák, J. Kákona, M. Lužová, M. Povišer, M. Sommer, O. Velychko, and O. Ploc, “Latitudinal effect on the position of Regener–Pfotzer maximum investigated by balloon flight HEMERA 2019 in Sweden and balloon flights FIK in Czechia,” Radiation Protection Dosimetry, vol. 199, no. 15-16, pp. 2041–2046, Oct. 2023. [Online]. Available: \url{https://doi.org/10.1093/rpd/ncac299}
+
+\secc International Conference Proceedings Relevant to the Thesis
+
+\bib[c4] = {C4} M. Kákona, J. Kákona, R. Dvořák, I. Ambrožová, O. Velychko, J. Šlegl, M. Sommer, V. Hanousek, and O. Ploc, “Measurements with Angular Sensitive Electric Field Mill in Thunderstorms,” presented at the AtmoHEAD 2024 International Conference, Ischia, Italy, 2024, [Accepted for publication].
 
 
 \secc Other Publications in Journals with Impact Factor
 
 \bib[j4] = {J4} M. Kákona, J. Šlegl, D. Kyselová, M. Sommer, J. Kákona, M. Lužová, V. Štěpán, O. Ploc, S. Kodaira, J. Chroust, D. John, I. Ambrožová, and P. Krist, “AIRDOS — open-source PIN diode airborne dosimeter,” Journal of Instrumentation, vol. 16, no. 03, pp. T03006, Mar. 2021. [Online]. Available: \url{https://dx.doi.org/10.1088/1748-0221/16/03/T03006}
+
+\bib[j6] = {J6} O. Ploc, M. Kákona, M. Sommer, J. Šlegl, J. Kákona, O. Velychko, M. Lužová, and I. Ambrožová, 
+“Addressing challenges of high-energy atmospheric physics in Europe,” 
+\textit{Radiation Effects and Defects in Solids}, vol. 179, no. 11–12, pp. 1511–1515, 2024. 
+[Online]. Available: \url{https://doi.org/10.1080/10420150.2024.2434498}
+
 
 \secc Other International Conference Proceedings
 
@@ -886,6 +885,13 @@ Thus, HabHub technology, previously tested in balloon flights (Described in Appe
 \bib[c3] = {C3} O. Hanuš, J. Mikeš, and J. Kákona, “Autonomous groundwater monitoring station with wireless communication,” in 23rd IMEKO TC4 Symposium Electrical \& Electronic Measurement, vol. 23, IMEKO TC4 Technical Committee on Measurement of Electrical Quantities, 2019.
 
 \bib[c1] = {C1} J. Mikeš, O. Hanuš, and J. Kákona, “Methodology for monitoring lightning stroke of an object by means of a smart sensoric,” in Proceedings of the International Conference on Lightning \& Static Electricity (ICOLSE 2017), The Institute of Electrical Engineers of Japan, 2017.
+
+\bib[c5] = {C5} L. Sihver, O. Ploc, K. Turek, M. Kákona, J. Kákona, J. Šlegl, I. Ambrožová, M. Lužová, O. Velychko, M. Sommer, and R. Langer, 
+“Measurements of Ionizing Radiation Generated in Thunderstorms,” 
+in \textit{Proc. 2023 IEEE Aerospace Conference}, pp. 1–10, 2023. 
+[Online]. Available: \url{https://doi.org/10.1109/AERO55745.2023.10115668}
+
+
 
 \app[attached_files] Attached video files
 
@@ -922,31 +928,59 @@ repeat=0,
 
 \app[AMT_cars] In situ ground-based mobile measurement of lightning events above central Europe
 
+
 \vfil\break
-{\footline={} \headline={} \picw=\pdfpagewidth  % bez hlavičky a bez čísla stran, zařadit na plnou šířku
- \fornum 1..14 \do{ \picparams={page#1}
+\pgstyle
+   {\def\headline{}% disable header
+    \def\footline{\hss\folio\hss}% centered page number
+   }
+{\picw=\pdfpagewidth
+ \fornum 1..14 \do{
+    \picparams={page#1}
     \vbox to0pt{\vskip-25mm \centerline{\inspic articles/amt-16-547-2023.pdf }\vss}
-    \vfil\break}
-}
+    \vfil\break
+ }}
+\pgstyle{} % restore default page style
+
+
 
 \app[RPD_TF-ATMON] Measurement of the Regener-Pfotzer Maximum Using Different Types of Ionising Radiation Detectors and a New Telemetry System TF-ATMON
 
 \vfil\break
-{\footline={} \headline={} \picw=\pdfpagewidth  % bez hlavičky a bez čísla stran, zařadit na plnou šířku
- \fornum 1..8 \do{ \picparams={page#1}
+\pgstyle
+   {\def\headline{}% disable header
+    \def\footline{\hss\folio\hss}% centered page number
+   }
+{\picw=\pdfpagewidth
+ \fornum 1..8 \do{
+    \picparams={page#1}
     \vbox to0pt{\vskip-25mm \centerline{\inspic articles/ncac1245.pdf }\vss}
-    \vfil\break}
-}
+    \vfil\break
+ }}
+\pgstyle{} % restore default page style
+
 
 
 \app[Silva_Gabreta-GEODOS] Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS
 
 \vfil\break
-{\footline={} \headline={} \picw=\pdfpagewidth  % bez hlavičky a bez čísla stran, zařadit na plnou šířku
- \fornum 1..16 \do{ \picparams={page#1}
+\pgstyle
+   {\def\headline{}% disable header
+    \def\footline{\hss\folio\hss}% centered page number
+   }
+{\picw=0.8\pdfpagewidth
+ \fornum 1..16 \do{
+    \picparams={page#1}
     \vbox to0pt{\vskip-25mm \centerline{\inspic articles/Silva_Gabreta-GEODOS.pdf }\vss}
-    \vfil\break}
-}
+    \vfil\break
+ }}
+\pgstyle{} % restore default page style
 
+
+%\app Index
+%\makeindex
+
+\app Dictionary
+\makeglos
 
 \bye
