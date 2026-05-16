@@ -1,15 +1,98 @@
-= CTUstyle3 
+= Detection of Electromagnetic Phenomena in the Atmosphere
 
-== Macros for student's theses at CTU in Prague, using OpTeX
+*Integrating Advanced Instrumentation and UAVs for Enhanced Atmospheric Research*
 
-This is version of CTUstyle (see http://petr.olsak.net/ctustyle-e.html)
-for usage in OpTeX. It is derived from CTUstyle2 (new design).
+Dissertation thesis by **Jakub Kákona** +
+Czech Technical University in Prague, Faculty of Electrical Engineering (F3) +
+Department of Radioelectronics +
+Study programmes: P2612 — Electrical Engineering and Information Technology; P0716D06 — Aeronautical and Space Engineering +
+Supervisor: doc. Dr. Ing. Pavel Kovář; Consultant: doc. Ing. Jan Mikeš, Ph.D. +
+Submitted: October 2025
 
-This package can serve as an example of OpTeX's macro package.
+== Abstract
 
-See ctustyle-doc.pdf for information of how to use CTUstyle 
-(sorry, this is in Czech language only, only abstract is in English).
+This dissertation investigates lightning and related ionizing radiation phenomena using originally developed radio, optical, and ionizing radiation detectors. By combining ground-based, airborne, and stratospheric measurements, the research enables simultaneous observation of optical, electromagnetic, and radiation manifestations of thunderstorm activity.
 
-You can see TUGboat article too https://www.tug.org/TUGboat/tb36-2/tb113olsak.pdf
+The collected data show that lightning discharges often last longer and cover a larger area than is traditionally assumed — the observed median flash duration in Central Europe is **542 ms**, significantly exceeding the literature value of ~300 ms. The scientific contribution is twofold:
 
-For using \slides with CTUstyle design, see slides.pdf file.
+. Design of experiments studying causal relations between lightning properties and ionizing radiation.
+. Observed predominant horizontal planarity of lightning, which may help to explain a newly detected radiation phenomenon not previously reported in the literature.
+
+== Repository structure
+
+----
+disertation.tex          # main source file (OpTeX / CTUstyle3)
+introduction.tex         # introduction and objectives
+objectives_definition.tex
+instrumentation.tex      # detector and platform design
+experiments.tex          # field campaigns and measurements
+triggered_recording.tex  # triggered recording systems
+VLF-map.tex              # VLF lightning mapping
+results.tex              # results and discussion
+references.bib           # bibliography
+glosdata.tex             # glossary
+slides.tex               # defence presentation
+img/                     # figures and embedded media files
+articles/                # PDF copies of published articles
+pdfextra/                # OpTeX PDF extensions (git submodule)
+----
+
+== Key instrumentation developed
+
+* **GEODOS01/02** — standalone ground-level ionizing radiation detector for long-term unattended operation +
+  https://docs.dos.ust.cz/geodos/GEODOS02/
+* **AIRDOS03** — compact airborne radiation dosimeter +
+  https://docs.dos.ust.cz/airdos/
+* **TF-ATMON** — telemetry system for meteorological balloons and UAVs +
+  https://www.thunderfly.cz/tf-atmon.html
+* **THUNDERMILL01** — Angular-sensitive Electric Field Mill (EFM) for static and quasi-dynamic atmospheric electric field sensing +
+  https://docs.ust.cz/THUNDERMILL/
+* **TF-G2** — unmanned autogyro platform for atmospheric research +
+  https://docs.thunderfly.cz/instruments/TF-G2
+* Mobile ground measurement vehicles with VLF radio antennas, high-speed cameras, and radiation detectors
+
+== Measurement platforms
+
+* Mobile ground vehicles (in-field deployment close to active thunderstorms)
+* Fixed mountain-ridge and tall-structure stations
+* Meteorological and stratospheric balloons (Regener–Pfotzer maximum, latitudinal studies)
+* UAVs — including the TF-G2 autogyro (TF-ATMON payload)
+
+== Selected publications
+
+* Kákona et al., _In situ ground-based mobile measurement of lightning events above Central Europe_, Atmos. Meas. Tech. 16(2): 547–561, 2023. +
+  https://doi.org/10.5194/amt-16-547-2023
+* Kákona et al., _Measurement of the Regener–Pfotzer maximum using different types of ionising radiation detectors and a new telemetry system TF-ATMON_, Radiat. Prot. Dosim. 198(9–11): 712–719, 2022. +
+  https://doi.org/10.1093/rpd/ncac124
+* Ambrožová, Kákona M., Dvořák, Kákona J. et al., _Latitudinal effect on the position of Regener–Pfotzer maximum investigated by balloon flight HEMERA 2019 in Sweden and balloon flights FIK in Czechia_, Radiat. Prot. Dosim. 199(15–16): 2041–2046, 2023. +
+  https://doi.org/10.1093/rpd/ncac299
+* Kákona et al., _Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS_, Silva Gabreta 30, 2024. +
+  https://www.npsumava.cz/wp-content/uploads/2024/12/ambrozova_web.pdf
+* Sihver, Ploc, Turek, Kákona M., Kákona J. et al., _Measurements of Ionizing Radiation Generated in Thunderstorms_, IEEE Aerospace Conference, 1–10, 2023. +
+  https://doi.org/10.1109/AERO55745.2023.10115668
+* Kákona et al., _Measurements with Angular Sensitive Electric Field Mill in Thunderstorms_, J. Phys.: Conf. Ser. 2985(1): 012014, 2025. +
+  https://doi.org/10.1088/1742-6596/2985/1/012014
+* Puričer, Kovář, Mikeš, Kákona J., _Telemetry system for research stratospheric balloon_, Int. Conf. on Applied Electronics (AE): 171–174, 2017. +
+  https://doi.org/10.23919/AE.2017.8053608
+* Ploc, Kákona M., Sommer, Šlegl, Kákona J. et al., _Addressing challenges of high-energy atmospheric physics in Europe_, Radiat. Effects Defects Solids 179(11–12): 1511–1515, 2024. +
+  https://doi.org/10.1080/10420150.2024.2434498
+
+== Building the document
+
+The dissertation is typeset with https://petr.olsak.net/optex.html[OpTeX] (LuaTeX) using the https://petr.olsak.net/ctustyle-e.html[CTUstyle3] template.
+
+After cloning, initialise the `pdfextra` submodule:
+
+[source,bash]
+----
+git submodule update --init
+----
+
+Build with `latexmk`:
+
+[source,bash]
+----
+latexmk disertation.tex
+----
+
+The `latexmkrc` file configures `latexmk` to call `luatex` with the OpTeX format.--
