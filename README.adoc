@@ -39,16 +39,11 @@ pdfextra/                # OpTeX PDF extensions (git submodule)
 
 == Key instrumentation developed
 
-* **GEODOS01/02** — standalone ground-level ionizing radiation detector for long-term unattended operation +
-  https://docs.dos.ust.cz/geodos/GEODOS02/
-* **AIRDOS03** — compact airborne radiation dosimeter +
-  https://docs.dos.ust.cz/airdos/
-* **TF-ATMON** — telemetry system for meteorological balloons and UAVs +
-  https://www.thunderfly.cz/tf-atmon.html
-* **THUNDERMILL01** — Angular-sensitive Electric Field Mill (EFM) for static and quasi-dynamic atmospheric electric field sensing +
-  https://docs.ust.cz/THUNDERMILL/
-* **TF-G2** — unmanned autogyro platform for atmospheric research +
-  https://docs.thunderfly.cz/instruments/TF-G2
+* https://docs.dos.ust.cz/geodos/GEODOS02/[**GEODOS01/02**] — standalone ground-level ionizing radiation detector for long-term unattended operation
+* https://docs.dos.ust.cz/airdos/[**AIRDOS03**] — compact airborne radiation dosimeter
+* https://www.thunderfly.cz/tf-atmon.html[**TF-ATMON**] — telemetry system for meteorological balloons and UAVs
+* https://docs.ust.cz/THUNDERMILL/[**THUNDERMILL01**] — Angular-sensitive Electric Field Mill (EFM) for static and quasi-dynamic atmospheric electric field sensing
+* https://docs.thunderfly.cz/instruments/TF-G2[**TF-G2**] — unmanned autogyro platform for atmospheric research
 * Mobile ground measurement vehicles with VLF radio antennas, high-speed cameras, and radiation detectors
 
 == Measurement platforms
@@ -60,22 +55,14 @@ pdfextra/                # OpTeX PDF extensions (git submodule)
 
 == Selected publications
 
-* Kákona et al., _In situ ground-based mobile measurement of lightning events above Central Europe_, Atmos. Meas. Tech. 16(2): 547–561, 2023. +
-  https://doi.org/10.5194/amt-16-547-2023
-* Kákona et al., _Measurement of the Regener–Pfotzer maximum using different types of ionising radiation detectors and a new telemetry system TF-ATMON_, Radiat. Prot. Dosim. 198(9–11): 712–719, 2022. +
-  https://doi.org/10.1093/rpd/ncac124
-* Ambrožová, Kákona M., Dvořák, Kákona J. et al., _Latitudinal effect on the position of Regener–Pfotzer maximum investigated by balloon flight HEMERA 2019 in Sweden and balloon flights FIK in Czechia_, Radiat. Prot. Dosim. 199(15–16): 2041–2046, 2023. +
-  https://doi.org/10.1093/rpd/ncac299
-* Kákona et al., _Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS_, Silva Gabreta 30, 2024. +
-  https://www.npsumava.cz/wp-content/uploads/2024/12/ambrozova_web.pdf
-* Sihver, Ploc, Turek, Kákona M., Kákona J. et al., _Measurements of Ionizing Radiation Generated in Thunderstorms_, IEEE Aerospace Conference, 1–10, 2023. +
-  https://doi.org/10.1109/AERO55745.2023.10115668
-* Kákona et al., _Measurements with Angular Sensitive Electric Field Mill in Thunderstorms_, J. Phys.: Conf. Ser. 2985(1): 012014, 2025. +
-  https://doi.org/10.1088/1742-6596/2985/1/012014
-* Puričer, Kovář, Mikeš, Kákona J., _Telemetry system for research stratospheric balloon_, Int. Conf. on Applied Electronics (AE): 171–174, 2017. +
-  https://doi.org/10.23919/AE.2017.8053608
-* Ploc, Kákona M., Sommer, Šlegl, Kákona J. et al., _Addressing challenges of high-energy atmospheric physics in Europe_, Radiat. Effects Defects Solids 179(11–12): 1511–1515, 2024. +
-  https://doi.org/10.1080/10420150.2024.2434498
+* Kákona et al., https://doi.org/10.5194/amt-16-547-2023[_In situ ground-based mobile measurement of lightning events above Central Europe_], Atmos. Meas. Tech. 16(2): 547–561, 2023.
+* Kákona et al., https://doi.org/10.1093/rpd/ncac124[_Measurement of the Regener–Pfotzer maximum using different types of ionising radiation detectors and a new telemetry system TF-ATMON_], Radiat. Prot. Dosim. 198(9–11): 712–719, 2022.
+* Ambrožová, Kákona M., Dvořák, Kákona J. et al., https://doi.org/10.1093/rpd/ncac299[_Latitudinal effect on the position of Regener–Pfotzer maximum investigated by balloon flight HEMERA 2019 in Sweden and balloon flights FIK in Czechia_], Radiat. Prot. Dosim. 199(15–16): 2041–2046, 2023.
+* Kákona et al., https://www.npsumava.cz/wp-content/uploads/2024/12/ambrozova_web.pdf[_Monitoring of ionizing radiation from thunderstorms in Bohemian Forest using standalone device GEODOS_], Silva Gabreta 30, 2024.
+* Sihver, Ploc, Turek, Kákona M., Kákona J. et al., https://doi.org/10.1109/AERO55745.2023.10115668[_Measurements of Ionizing Radiation Generated in Thunderstorms_], IEEE Aerospace Conference, 1–10, 2023.
+* Kákona et al., https://doi.org/10.1088/1742-6596/2985/1/012014[_Measurements with Angular Sensitive Electric Field Mill in Thunderstorms_], J. Phys.: Conf. Ser. 2985(1): 012014, 2025.
+* Puričer, Kovář, Mikeš, Kákona J., https://doi.org/10.23919/AE.2017.8053608[_Telemetry system for research stratospheric balloon_], Int. Conf. on Applied Electronics (AE): 171–174, 2017.
+* Ploc, Kákona M., Sommer, Šlegl, Kákona J. et al., https://doi.org/10.1080/10420150.2024.2434498[_Addressing challenges of high-energy atmospheric physics in Europe_], Radiat. Effects Defects Solids 179(11–12): 1511–1515, 2024.
 
 == Building the document
 
