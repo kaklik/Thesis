@@ -41,7 +41,7 @@ pdfextra/                # OpTeX PDF extensions (git submodule)
 
 * https://docs.dos.ust.cz/geodos/GEODOS02/[**GEODOS01/02**] — standalone ground-level ionizing radiation detector for long-term unattended operation
 * https://docs.dos.ust.cz/airdos/[**AIRDOS03**] — compact airborne radiation dosimeter
-* https://www.thunderfly.cz/tf-atmon.html[**TF-ATMON**] — telemetry system for meteorological balloons and UAVs
+* https://docs.thunderfly.cz/instruments/TF-ATMON/[**TF-ATMON**] — telemetry system for meteorological balloons and UAVs
 * https://docs.ust.cz/THUNDERMILL/[**THUNDERMILL01**] — Angular-sensitive Electric Field Mill (EFM) for static and quasi-dynamic atmospheric electric field sensing
 * https://docs.thunderfly.cz/instruments/TF-G2[**TF-G2**] — unmanned autogyro platform for atmospheric research
 * Mobile ground measurement vehicles with VLF radio antennas, high-speed cameras, and radiation detectors
